@@ -44,5 +44,11 @@ module BluePages
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    config.generators do |generators|
+      generators.test_framework       :rspec, :fixture => true
+      #generators.fixture_replacement  :fabrication
+      generators.stylesheet_engine    :sass
+    end
   end
 end
