@@ -19,6 +19,10 @@ class Subdivision < ActiveRecord::Base
     res << " (#{abbr})" if abbr
     res
   end
+
+  def display_name
+    title
+  end
 end
 # == Schema Information
 #
