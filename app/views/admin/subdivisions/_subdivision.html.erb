@@ -1,3 +1,8 @@
-<% @subdivision.children.each do |child| %>
-  <li><%= link_to child.title_with_abbr, admin_subdivision_path(child) %></li>
-<% end %>
+<ul id="sortable">
+  <% @subdivision.children.order('position asc').each do |child| %>
+    <%= content_tag(:li,
+                    link_to(child.title_with_abbr, admin_subdivision_path(child)),
+                    :'data-id' => child.id,
+                    :class => 'subdivision') %>
+  <% end %>
+</ul>

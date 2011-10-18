@@ -118,7 +118,6 @@ module ActiveAdmin
         # Returns an array of links to use in a breadcrumb
         path ||= request.fullpath
         parts = path.gsub(/^\//, '').split('/')
-        #parts.pop if %w{ create update }.include?(params[:action])
         crumbs = []
         parts.each_with_index do |part, index|
           name = ""

@@ -1,6 +1,7 @@
 ActiveAdmin.register Subdivision do
   filter :title
   filter :updated_at
+  config.sort_order = 'position asc'
 
   index do
     column :title do |subdivision|
@@ -30,5 +31,13 @@ ActiveAdmin.register Subdivision do
     link_to(I18n.t('active_admin.delete_model', :model => active_admin_config.resource_name),
             resource_path(resource),
             :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'))
+  end
+
+  collection_action :sort, :method => :post do
+    params[:ids].each_with_index do |id, index|
+      subdivision = Subdivision.find(id)
+      subdivision.update_attribute(:position, index.to_i+1)
+    end
+    head 200
   end
 end

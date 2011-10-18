@@ -3,9 +3,9 @@
 ActiveAdmin::Dashboards.build do
 
   section 'Подразделения' do
-    ul do
-      Subdivision.roots.collect do |subdivision|
-        li link_to(subdivision.title_with_abbr, admin_subdivision_path(subdivision))
+    ul :id => 'sortable' do
+      Subdivision.roots.order('position').collect do |subdivision|
+        li link_to(subdivision.title_with_abbr, admin_subdivision_path(subdivision)), :class => 'subdivision', :"data-id" => subdivision.id
       end
     end
   end
