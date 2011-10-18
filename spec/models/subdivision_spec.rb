@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 describe Subdivision do
+  it { should have_one(:address) }
   it { should validate_presence_of :title }
 
   it { should allow_value('Название на русском языкё').for(:title) }
