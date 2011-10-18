@@ -50,5 +50,8 @@ module BluePages
       #generators.fixture_replacement  :fabrication
       generators.stylesheet_engine    :sass
     end
+
+    config.sass.preferred_syntax = :sass if config.respond_to? :sass
+
   end
 end

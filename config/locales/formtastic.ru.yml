@@ -1,6 +1,6 @@
 ru:
   formtastic:
-    required: обязательное поле
+    required: Обязательное поле
 
     actions:
       create: Создать

@@ -10,3 +10,4 @@ log/*.log.lck
 tmp/
 solr/data/
 solr/pids/
+.rake_tasks~
