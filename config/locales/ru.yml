@@ -1,0 +1,14 @@
+ru:
+  activerecord:
+    attributes:
+      subdivision:
+        abbr: Аббревиатура
+        created_at: Создано
+        updated_at: Обновлено
+        title: Название
+
+    models:
+      admin: Главная
+      admin_user: Пользователи
+      subdivision: Подразделения
+

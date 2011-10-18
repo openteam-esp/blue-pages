@@ -1,0 +1,7 @@
+ru:
+  formtastic:
+    required: обязательное поле
+
+    actions:
+      create: Создать
+      update: Сохранить

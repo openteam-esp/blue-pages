@@ -10,6 +10,12 @@ class Subdivision < ActiveRecord::Base
       "#{abbr} #{title}"
     end
   end
+
+  def title_with_abbr
+    res = title
+    res << " (#{abbr})" if abbr
+    res
+  end
 end
 
 
