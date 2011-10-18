@@ -7,3 +7,15 @@ one:
 two:
   title: MyString
   abbr: MyString
+# == Schema Information
+#
+# Table name: subdivisions
+#
+#  id         :integer         not null, primary key
+#  title      :string(255)
+#  abbr       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  ancestry   :string(255)
+#
+

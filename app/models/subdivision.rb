@@ -5,3 +5,17 @@ class Subdivision < ActiveRecord::Base
 
   has_ancestry
 end
+
+
+# == Schema Information
+#
+# Table name: subdivisions
+#
+#  id         :integer         not null, primary key
+#  title      :string(255)
+#  abbr       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  ancestry   :string(255)
+#
+

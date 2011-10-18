@@ -13,3 +13,15 @@ describe Subdivision do
   it { should_not allow_value('English title').for(:title) }
   it { should_not allow_value('Название с цифрами 123').for(:title) }
 end
+# == Schema Information
+#
+# Table name: subdivisions
+#
+#  id         :integer         not null, primary key
+#  title      :string(255)
+#  abbr       :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  ancestry   :string(255)
+#
+
