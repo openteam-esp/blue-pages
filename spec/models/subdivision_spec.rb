@@ -4,9 +4,12 @@ require 'spec_helper'
 
 describe Subdivision do
   it { should have_one(:address) }
+  it { should have_one(:phone) }
+
   it { should validate_presence_of :title }
 
-  it { should allow_value('Название на русском языкё').for(:title) }
+  it { should allow_value('Название на русском языке').for(:title) }
+  it { should allow_value('Название на русском языке с буквой ё').for(:title) }
   it { should allow_value('Название со скобками ()').for(:title) }
   it { should allow_value('Название со дефисом -').for(:title) }
   it { should allow_value('Название с «"кавычками"»').for(:title) }

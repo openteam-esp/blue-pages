@@ -2,6 +2,7 @@
 
 class Subdivision < ActiveRecord::Base
   has_one :address, :as => :addressable
+  has_one :phone,   :as => :phoneable
 
   validates :title, :presence => true, :format => { :with => /^[а-яё\s\-\(\)«"»]+$/i }
 
