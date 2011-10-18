@@ -28,4 +28,3 @@ end
 #  updated_at :datetime
 #  ancestry   :string(255)
 #
-

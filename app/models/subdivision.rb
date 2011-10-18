@@ -20,8 +20,6 @@ class Subdivision < ActiveRecord::Base
     res
   end
 end
-
-
 # == Schema Information
 #
 # Table name: subdivisions
@@ -33,4 +31,3 @@ end
 #  updated_at :datetime
 #  ancestry   :string(255)
 #
-

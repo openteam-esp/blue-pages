@@ -31,7 +31,7 @@ end
 group :test do
   gem 'rspec-rails',                              :require => false
   gem 'shoulda-matchers',                         :require => false
-  gem 'sqlite3',                                  :require => false
   gem 'spork',                  '>= 0.9.0.rc9',   :require => false
+  gem 'sqlite3',                                  :require => false
   gem 'sunspot_matchers',                         :require => false
 end
