@@ -2,6 +2,9 @@ source 'http://rubygems.org'
 
 gem 'ancestry'
 gem 'forgery',                                    :require => false
+gem 'formtastic'
+gem 'has_searcher'
+gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'rack' ,                    '1.3.3',          :require => false
 gem 'rails'
@@ -21,6 +24,7 @@ group :production do
 end
 
 group :development do
+  gem 'annotate',               '~> 2.4.1.beta1', :require => false
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
