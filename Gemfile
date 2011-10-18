@@ -1,5 +1,6 @@
 source 'http://rubygems.org'
 
+gem 'ancestry'
 gem 'forgery',                                    :require => false
 gem 'jquery-rails'
 gem 'rack' ,                    '1.3.3',          :require => false
@@ -19,6 +20,7 @@ group :production do
 end
 
 group :development do
+  gem 'hirb',                                     :require => false
   gem 'itslog'
 end
 
