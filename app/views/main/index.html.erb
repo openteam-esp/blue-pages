@@ -9,7 +9,7 @@
 <%= content_tag :div, :class => "subdivisions" do %>
   <% @subdivisions.each do | subdivision | %>
     <div class="item">
-      <%= link_to subdivision.title, "#" %>
+      <%= link_to subdivision.title, subdivision %>
     </div>
   <% end %>
 <% end if @subdivisions.any? %>
