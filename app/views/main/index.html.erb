@@ -1,1 +1,10 @@
 <h1>Aloha!</h1>
+
+<%= semantic_search_form_for :subdivision, :url => subdivisions_path do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :keywords, :as => :string %>
+  <% end %>
+  <%= form.buttons do %>
+    <%= form.commit_button t('search') %>
+  <% end %>
+<% end %>

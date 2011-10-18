@@ -4,6 +4,12 @@ class Subdivision < ActiveRecord::Base
   validates :title, :presence => true, :format => { :with => /^[а-яё\s\-\(\)«"»]+$/i }
 
   has_ancestry
+
+  searchable do
+    text :abbr_and_title do
+      "#{abbr} #{title}"
+    end
+  end
 end
 
 
