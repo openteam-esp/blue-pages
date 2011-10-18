@@ -6,4 +6,6 @@
  *= require reset
  *= require text
  *= require buttons
+ *= require layout
+ *= require header
 */
