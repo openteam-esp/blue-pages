@@ -3,5 +3,6 @@ bin
 config/database.yml
 db/*.sqlite3
 log/*.log
+*.swp
 tmp/
 .sass-cache/
