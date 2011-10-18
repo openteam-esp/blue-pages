@@ -6,6 +6,7 @@ gem 'jquery-rails'
 gem 'rack' ,                    '1.3.3',          :require => false
 gem 'rails'
 gem 'ryba',                                       :require => false
+gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do
   gem 'coffee-rails',           '~> 3.1.1'
@@ -22,6 +23,7 @@ end
 group :development do
   gem 'hirb',                                     :require => false
   gem 'itslog'
+  gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
 end
 
 group :test do

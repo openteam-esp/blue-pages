@@ -9,15 +9,23 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
   require 'shoulda-matchers'
+  require 'sunspot_matchers'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
+    config.include SunspotMatchers
+
     config.mock_with :rspec
 
     config.use_transactional_fixtures = true
 
     config.infer_base_class_for_anonymous_controllers = false
+
+    config.before(:all) do
+      Dir[Rails.root.join("spec/support/matchers/*.rb")].each {|f| require f}
+      Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
+    end
   end
 end
 

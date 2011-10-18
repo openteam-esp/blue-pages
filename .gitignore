@@ -1,8 +1,11 @@
-.bundle
-bin
+*.swp
+.bundle/
+.sass-cache/
+bin/
 config/database.yml
+config/sunspot.yml
 db/*.sqlite3
 log/*.log
-*.swp
 tmp/
-.sass-cache/
+solr/data/
+solr/pids/
