@@ -5,7 +5,7 @@ class MainController < ApplicationController
   layout "public/main"
 
   def index
-    @subdivisions = Subdivision.all
+    @subdivisions = Subdivision.roots.order('position')
   end
 
 end

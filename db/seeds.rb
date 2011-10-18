@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-AdminUser.create!(:email => 'demo@demo.de', :password => '123123', :password_confirmation => '123123')
+AdminUser.create!(:email => 'demo@demo.de', :password => '123123', :password_confirmation => '123123') if AdminUser.find_by_email('demo@demo.de').blank?
 
 governor = Subdivision.find_or_create_by_title('Губернатор')
   deputy = governor.children.find_or_create_by_title 'Заместитель губернатора Томской области по особо важным проектам'

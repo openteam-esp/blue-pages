@@ -27,4 +27,5 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  ancestry   :string(255)
+#  position   :integer
 #
