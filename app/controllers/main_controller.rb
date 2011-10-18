@@ -1,5 +1,5 @@
 class MainController < ApplicationController
-  inherited_resource
+  inherit_resources
 
   def index
   end
