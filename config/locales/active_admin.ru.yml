@@ -38,3 +38,5 @@ ru:
     blank_slate:
       content: "Пока нет %{resource_name}."
       link: "Создать"
+
+    new_subdivision: Добавить подразделение

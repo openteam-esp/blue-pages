@@ -14,8 +14,21 @@ ActiveAdmin.register Subdivision do
     render 'subdivision'
   end
 
-  form do |f|
-    f.inputs :title, :abbr
-    f.buttons
+  form :partial => 'form'
+
+  config.clear_action_items!
+
+  action_item(:only => [:index, :show]) do
+    link_to t('active_admin.new_subdivision'), new_admin_subdivision_path(:parent_id => params[:id])
+  end
+
+  action_item :only => :show do
+    link_to(I18n.t('active_admin.edit_model', :model => active_admin_config.resource_name), edit_resource_path(resource))
+  end
+
+  action_item :only => :show do
+    link_to(I18n.t('active_admin.delete_model', :model => active_admin_config.resource_name),
+            resource_path(resource),
+            :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'))
   end
 end
