@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BluePages</title>
+  <title><%= t("blue_pages_system") %></title>
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -15,8 +15,7 @@
   <% end %>
   <%= yield :right_sidebar %>
   <div class="main_container">
-    <%#= yield :main %>
-    <%= yield %>
+    <%= yield :main %>
   </div>
   <%= yield :sidebar %>
   <div class='footer'>

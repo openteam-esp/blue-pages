@@ -1,0 +1,11 @@
+<% content_for :header do %>
+  <h1><%= link_to t("blue_pages_system"), root_path %></h1>
+<% end %>
+
+<%= content_for :content do %>
+  <div class='content_wrapper'>
+    <%= yield %>
+  </div>
+<% end %>
+
+<%= render :template => 'layouts/layer' %>

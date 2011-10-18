@@ -1,11 +1,9 @@
-<h1>Aloha!</h1>
-
-<%= semantic_search_form_for :subdivision, :url => subdivisions_path do |form| %>
+<%= semantic_search_form_for :subdivision, :url => "#" do |form| %>
   <%= form.inputs do %>
-    <%= form.input :keywords, :as => :string %>
+    <%= form.input :keywords, :as => :string, :label => false %>
   <% end %>
   <%= form.buttons do %>
-    <%= form.commit_button t('search') %>
+    <%= form.commit_button t('search'), :button_html => { :class => "button" } %>
   <% end %>
 <% end %>
 <%= content_tag :div, :class => "subdivisions" do %>

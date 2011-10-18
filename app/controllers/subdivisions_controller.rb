@@ -1,5 +1,7 @@
 class SubdivisionsController < ApplicationController
+
   protected
+
   def collection
     get_collection_ivar || set_collection_ivar(search_and_paginate_collection)
   end
@@ -19,4 +21,5 @@ class SubdivisionsController < ApplicationController
       :per_page   => 10
     }.merge(options)
   end
+
 end
