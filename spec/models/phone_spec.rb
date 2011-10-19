@@ -1,9 +1,11 @@
-class Phone < ActiveRecord::Base
-  belongs_to :phoneable, :polymorphic => true
+# encoding: utf-8
 
-  validates_presence_of :code, :number, :kind
+require 'spec_helper'
 
-  has_enums
+describe Phone do
+  it { should validate_presence_of :code }
+  it { should validate_presence_of :number }
+  it { should validate_presence_of :kind }
 end
 
 # == Schema Information

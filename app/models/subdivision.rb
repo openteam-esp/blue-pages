@@ -6,9 +6,11 @@ class Subdivision < ActiveRecord::Base
 
   validates :title, :presence => true, :format => { :with => /^[а-яё\s\-\(\)«"»]+$/i }
 
-  accepts_nested_attributes_for :building
+  accepts_nested_attributes_for :building,
+                                :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) }
+
   accepts_nested_attributes_for :phones,
-                                :reject_if => ->(attr) { attr[:code].blank? && attr[:number].blank? && attr[:kind].blank? },
+                                :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) },
                                 :allow_destroy => true
 
   default_scope order('position')

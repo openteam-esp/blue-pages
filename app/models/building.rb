@@ -1,5 +1,8 @@
 class Building < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
+
+  validates :region, :district, :locality, :street, :house, :building, :presence => true
+  validates :postcode, :numericality => true, :length => { :within => 6..6 }, :presence => true
 end
 
 # == Schema Information
