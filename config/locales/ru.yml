@@ -1,16 +1,26 @@
 ru:
   activerecord:
     attributes:
+      building:
+        postcode:     Почтовый индекс
+        region:       Регион
+        district:     Район
+        locality:     Населённый пункт
+        street:       Улица
+        house:        Дом
+        building:     Строение
+
       subdivision:
-        abbr: Аббревиатура
-        created_at: Создано
-        updated_at: Обновлено
-        title: Название
+        title:        Название
+        abbr:         Аббревиатура
+        created_at:   Создано
+        updated_at:   Обновлено
 
     models:
-      admin: Главная
-      admin_user: Пользователи
-      subdivision: Подразделения
+      admin:          Главная
+      admin_user:     Пользователи
+      subdivision:    Подразделения
+      building:       Здание
 
-  blue_pages_system: Телефонный справочник
-  search: Поиск
+  blue_pages_system:  Телефонный справочник
+  search:             Поиск

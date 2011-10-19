@@ -4,5 +4,15 @@
     <%= form.input :abbr %>
     <%= form.input :parent_id, :input_html => { :value => params[:parent_id] }, :as => :hidden if params[:parent_id] %>
   <% end %>
+  <% @subdivision.build_building unless @subdivision.building %>
+  <%= form.inputs :for => :building do | building_form | %>
+    <%= building_form.input :postcode %>
+    <%= building_form.input :region %>
+    <%= building_form.input :district %>
+    <%= building_form.input :locality %>
+    <%= building_form.input :street %>
+    <%= building_form.input :house %>
+    <%= building_form.input :building %>
+  <% end %>
   <%= form.buttons %>
 <% end %>

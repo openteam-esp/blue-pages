@@ -1,0 +1,6 @@
+<dl>
+  <% %w[postcode region district locality street house building].each do | attribute | %>
+    <dt><%= Building.human_attribute_name(attribute) %></dt>
+    <dd><%= building.send(attribute) %></dd>
+  <% end %>
+</dl>
