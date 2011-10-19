@@ -2,9 +2,35 @@
 @import "active_admin/mixins"
 @import "active_admin/base"
 @import 'buttons'
+@import 'compass/css3'
 
 // To customize the Active Admin interfaces, add your
 // styles here:
+
+#header ul#tabs > li a
+  +border-radius
+
+#title_bar
+  .breadcrumb
+    line-height: 16px
+    margin-bottom: 10px
+  h2
+    line-height: 28px
+  #titlebar_left
+    width: 85%
+  #titlebar_right
+    width: 15%
+  .action_items
+    .action_item
+      margin-left: 10px
+    a
+      +border-radius
+      font-weight: normal
+      padding: 5px 7px 4px 8px
+
+#active_admin_content
+  +clearfix
+  padding: 25px 30px 15px 30px
 
 div.subdivisions
   +clearfix
@@ -24,4 +50,8 @@ div.subdivisions
         &.off
           color: gray
 
-
+#footer
+  clear: none
+  padding: 2px 30px
+  position: fixed
+  bottom: 0
