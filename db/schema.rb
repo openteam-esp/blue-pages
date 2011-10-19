@@ -11,11 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(:version => 20111019043444) do
-=======
 ActiveRecord::Schema.define(:version => 20111019071936) do
->>>>>>> #8530. Модель сотрудника и его должность
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -63,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20111019071936) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
   create_table "items", :force => true do |t|
     t.string   "title"
     t.integer  "subdivision_id"
