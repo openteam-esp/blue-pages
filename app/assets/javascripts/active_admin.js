@@ -4,14 +4,16 @@
 
 
 function serializeSubdivisions() {
-  var subdivisionIds = $.makeArray (
+  var subdivisionIds = $.makeArray(
     $("#sortable .subdivision").map(function() {
       return $(this).data("id");
-    });
+    })
   );
   var csrf_token = $('head meta[name="csrf-token"]').attr('content');
-  return { "ids" : subdivisionIds,
-    "authenticity_token" : csrf_token };
+  return {
+    "ids": subdivisionIds,
+    "authenticity_token" : csrf_token
+  };
 };
 
 $(function() {
