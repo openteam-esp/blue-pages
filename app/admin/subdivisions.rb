@@ -1,7 +1,7 @@
 ActiveAdmin.register Subdivision do
   filter :title
   filter :updated_at
-  config.sort_order = 'position asc'
+  config.sort_order = 'position'
 
   index do
     column :title do |subdivision|
@@ -12,16 +12,12 @@ ActiveAdmin.register Subdivision do
   end
 
   show :title => proc { subdivision.title } do
-    render 'subdivision'
+    render 'subdivision', :subdivisions => subdivision.children.order('position')
   end
 
   form :partial => 'form'
 
   config.clear_action_items!
-
-  action_item(:only => [:index, :show]) do
-    link_to t('active_admin.new_subdivision'), new_admin_subdivision_path(:parent_id => params[:id])
-  end
 
   action_item :only => :show do
     link_to(I18n.t('active_admin.edit_model', :model => active_admin_config.resource_name), edit_resource_path(resource))

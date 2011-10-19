@@ -22,6 +22,7 @@ ru:
     filter: "Фильтровать"
     clear_filters: "Очистить"
     search_field: "%{field}"
+    sort: Упорядочить
     equal_to: "="
     greater_than: ">"
     less_than: "<"

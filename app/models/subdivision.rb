@@ -16,7 +16,7 @@ class Subdivision < ActiveRecord::Base
 
   def title_with_abbr
     res = title
-    res << " (#{abbr})" if abbr
+    res << " (#{abbr})" if abbr.present?
     res
   end
 

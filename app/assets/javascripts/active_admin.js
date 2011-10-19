@@ -15,16 +15,31 @@ function serializeSubdivisions(){
 };
 
 $(function(){
-  $('#sortable').sortable({
-    update: function(){
-              $.ajax({
-                url: "/admin/subdivisions/sort",
-              type: 'post',
-              data: serializeSubdivisions(),
-              complete: function(){
-                $(".paginated_collection").effect("highlight");
-              }
-              });
-            }
+
+  $('.sort_link').click(function(){
+    var it_off = $(this).hasClass('off');
+
+    if (it_off) {
+      $(this).removeClass('off').addClass('on');
+
+      $('#sortable').sortable({
+        update: function(){
+                  $.ajax({
+                    url: "/admin/subdivisions/sort",
+                    type: 'post',
+                    data: serializeSubdivisions(),
+                    complete: function(){
+                      $(".paginated_collection").effect("highlight");
+                    }
+                  });
+                }
+      });
+    } else {
+      $(this).removeClass('on').addClass('off');
+      $('#sortable').unbind();
+    };
+    return false;
   });
+
+
 });

@@ -1,8 +1,19 @@
-<ul id="sortable">
-  <% @subdivision.children.order('position asc').each do |child| %>
-    <%= content_tag(:li,
-                    link_to(child.title_with_abbr, admin_subdivision_path(child)),
-                    :'data-id' => child.id,
-                    :class => 'subdivision') %>
-  <% end %>
-</ul>
+<div class="subdivisions">
+  <div class="top">
+    <div class="actions">
+      <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+      <%= link_to t('active_admin.new_subdivision'), new_admin_subdivision_path(:parent_id => params[:id]), :class => 'button' %>
+    </div>
+    <h4>Подразделения</h4>
+  </div>
+
+
+  <ul id="sortable">
+    <% subdivisions.each do |child| %>
+      <%= content_tag(:li,
+                      link_to(child.title_with_abbr, admin_subdivision_path(child)),
+                      :'data-id' => child.id,
+                      :class => 'subdivision') %>
+                  <% end %>
+  </ul>
+</div>
