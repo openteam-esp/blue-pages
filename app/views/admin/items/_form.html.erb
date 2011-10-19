@@ -1,0 +1,18 @@
+<%= semantic_form_for [:admin, @subdivision, @item] do |form| %>
+  <%= form.inputs "Должность" do %>
+    <%= form.input :title %>
+  <% end %>
+  <%= form.inputs "Сотрудник", :for => @item.person || @item.build_person do |person_form| %>
+    <%= person_form.input :surname %>
+    <%= person_form.input :name %>
+    <%= person_form.input :patronymic %>
+    <%= person_form.input :birthdate %>
+  <% end %>
+  <%= form.buttons do %>
+    <%= form.commit_button %>
+    <li class='cancel'>
+      <%= link_to t(:cancel), [:admin, @subdivision] %>
+    </li>
+  <% end %>
+
+<% end %>

@@ -1,0 +1,23 @@
+<div class="items">
+  <div class="top">
+    <div class="actions">
+      <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+      <%= link_to t('active_admin.new_item'), new_admin_subdivision_item_path(@subdivision), :class => 'button icon add' %>
+    </div>
+    <h4>Сотрудники</h4>
+  </div>
+
+
+  <% if items.empty? %>
+    <h5>Нет сотрудников</h5>
+  <% else %>
+    <ul id="sortable">
+      <% items.each do |item| %>
+        <li class='item' <%= "data-id=#{item.id}" %>>
+          <%= item.title %>
+          <%= item.person %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

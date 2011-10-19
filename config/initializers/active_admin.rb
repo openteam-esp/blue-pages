@@ -146,4 +146,20 @@ module ActiveAdmin
       end
     end
   end
+
+  module Views
+    module Pages
+      class New < Base
+        def title
+          I18n.t("active_admin.new_#{active_admin_config.underscored_resource_name}")
+        end
+      end
+      class Edit < Base
+        def title
+          I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}")
+        end
+      end
+    end
+  end
+
 end

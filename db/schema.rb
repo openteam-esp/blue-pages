@@ -11,7 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(:version => 20111019043444) do
+=======
+ActiveRecord::Schema.define(:version => 20111019071936) do
+>>>>>>> #8530. Модель сотрудника и его должность
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -59,6 +63,26 @@ ActiveRecord::Schema.define(:version => 20111019043444) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+  create_table "items", :force => true do |t|
+    t.string   "title"
+    t.integer  "subdivision_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "items", ["subdivision_id"], :name => "index_items_on_subdivision_id"
+
+  create_table "people", :force => true do |t|
+    t.string   "surname"
+    t.string   "name"
+    t.string   "patronymic"
+    t.date     "birthdate"
+    t.integer  "item_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "people", ["item_id"], :name => "index_people_on_item_id"
 
   create_table "phones", :force => true do |t|
     t.string   "code"

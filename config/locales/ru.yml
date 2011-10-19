@@ -1,6 +1,24 @@
 ru:
   activerecord:
     attributes:
+      item:
+        created_at: Создано
+        subdivision: Подразделение
+        title: Название
+        updated_at: Обновлено
+
+      person:
+        birthdate: День рождения
+        name: Имя
+        patronymic: Отчество
+        surname: Фамилия
+
+      subdivision:
+        abbr: Аббревиатура
+        created_at: Создано
+        title: Название
+        updated_at: Обновлено
+
       building:
         postcode:         Почтовый индекс
         region:           Регион
@@ -21,18 +39,14 @@ ru:
           phone_and_fax:  Тел./факс
 
 
-      subdivision:
-        title:            Название
-        abbr:             Аббревиатура
-        created_at:       Создано
-        updated_at:       Обновлено
-
     models:
       admin:              Главная
       admin_user:         Пользователи
-      subdivision:        Подразделения
       building:           Здание
+      item:               Сотрудники
       phone:              Телефон
+      subdivision:        Подразделения
 
   blue_pages_system:      Телефонный справочник
+  cancel:                 Отменить
   search:                 Поиск
