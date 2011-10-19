@@ -24,6 +24,7 @@
     .action_item
       margin-left: 10px
     a
+      color: #333
       +border-radius
       font-weight: normal
       padding: 5px 7px 4px 8px
@@ -36,19 +37,28 @@ div.subdivisions
   +clearfix
 
   .top
-    h4
 
     .actions
       float: right
 
       .button
-        padding: 2px 3px 2px 8px
-
+        font-size: 1em
+        &:hover,
+        &:focus,
+        &:active
+          color: #000
+          +single-text-shadow(#eee, 1px, 1px, 1px)
+          background-color: #ececec
+          +background-image(linear-gradient(color-stops(#f4f4f4, #ececec)))
+          border: 1px solid #d4d4d4
+          &:before
+            background-position: 0 -216px
         &.on
-          color: yellow
-
-        &.off
-          color: gray
+          border-color: #d4d4d4
+          background-color: #ececec
+          +background-image(linear-gradient(color-stops(#ececec, #f4f4f4)))
+          +box-shadow(none)
+          +single-box-shadow(#000, 0, 1px, 2px, false, true)
 
 #footer
   clear: none
