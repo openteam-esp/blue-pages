@@ -8,18 +8,20 @@
 /* ------------------------------------------------------------------------------------------------------------- BUTTON
  */
 
+@import "compass/css3"
+
 button.button,
 input.button,
 a.button
   position: relative
   overflow: visible
   display: inline-block
-  padding: 0.5em 1em
+  padding: 5px 7px 4px 8px
   border: 1px solid #d4d4d4
   margin: 0
   text-decoration: none
-  text-shadow: 1px 1px 0 #fff
-  font-family: Arial, Verdana, sans-serif
+  +single-text-shadow(#fff, 1px, 1px, 0)
+  font-family: Helvetica, Arial, Verdana, sans-serif
   font-size: 11px
   font-weight: normal
   color: #333
@@ -27,18 +29,11 @@ a.button
   cursor: pointer
   outline: none
   background-color: #ececec
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f4f4f4), to(#ececec))
-  background-image: -moz-linear-gradient(#f4f4f4, #ececec)
-  background-image: -o-linear-gradient(#f4f4f4, #ececec)
-  background-image: linear-gradient(#f4f4f4, #ececec)
-  -webkit-background-clip: padding
-  -moz-background-clip: padding
-  -o-background-clip: padding-box
+  +background-image(linear-gradient(color-stops(#f4f4f4, #ececec)))
+  +background-clip(padding-box)
   /*background-clip: padding-box;
   /* commented out due to Opera 11.10 bug
-  -webkit-border-radius: 0.2em
-  -moz-border-radius: 0.2em
-  border-radius: 0.2em
+  +border-radius
   /* IE hacks
   zoom: 1
   *display: inline
@@ -46,21 +41,15 @@ a.button
     border-color: #3072b3
     border-bottom-color: #2a65a0
     text-decoration: none
-    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.3)
+    +single-text-shadow(rgba(0, 0, 0, 0.3), -1px, -1px, 0)
     color: #fff
     background-color: #3C8DDE
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#599bdc), to(#3072b3))
-    background-image: -moz-linear-gradient(#599bdc, #3072b3)
-    background-image: -o-linear-gradient(#599bdc, #3072b3)
-    background-image: linear-gradient(#599bdc, #3072b3)
+    +background-image(linear-gradient(color-stops(#599bdc, #3072b3)))
   &:active, &.active
     border-color: #2a65a0
     border-bottom-color: #3884CF
     background-color: #3072b3
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3072b3), to(#599bdc))
-    background-image: -moz-linear-gradient(#3072b3, #599bdc)
-    background-image: -o-linear-gradient(#3072b3, #599bdc)
-    background-image: linear-gradient(#3072b3, #599bdc)
+    +background-image(linear-gradient(color-stops(#3072b3, #599bdc)))
   &::-moz-focus-inner
     padding: 0
     border: 0
@@ -239,38 +228,20 @@ a.button
       border-bottom-color: #a0302a
       color: #fff
       background-color: #dc5f59
-      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dc5f59), to(#b33630))
-      background-image: -moz-linear-gradient(#dc5f59, #b33630)
-      background-image: -o-linear-gradient(#dc5f59, #b33630)
-      background-image: linear-gradient(#dc5f59, #b33630)
+      +background-image(linear-gradient(color-stops(#dc5f59, #b33630)))
     &:active
-      border-color: #b53f3a
-      border-bottom-color: #a0302a
       color: #fff
-      background-color: #dc5f59
-      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#dc5f59), to(#b33630))
-      background-image: -moz-linear-gradient(#dc5f59, #b33630)
-      background-image: -o-linear-gradient(#dc5f59, #b33630)
-      background-image: linear-gradient(#dc5f59, #b33630)
       border-color: #a0302a
       border-bottom-color: #bf4843
       background-color: #b33630
-      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b33630), to(#dc5f59))
-      background-image: -moz-linear-gradient(#b33630, #dc5f59)
-      background-image: -o-linear-gradient(#b33630, #dc5f59)
-      background-image: linear-gradient(#b33630, #dc5f59)
+      +background-image(linear-gradient(color-stops(#b33630, #dc5f59)))
     &.active
       border-color: #a0302a
       border-bottom-color: #bf4843
       background-color: #b33630
-      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#b33630), to(#dc5f59))
-      background-image: -moz-linear-gradient(#b33630, #dc5f59)
-      background-image: -o-linear-gradient(#b33630, #dc5f59)
-      background-image: linear-gradient(#b33630, #dc5f59)
+      +background-image(linear-gradient(color-stops(#b33630, #dc5f59)))
   &.pill
-    -webkit-border-radius: 50em
-    -moz-border-radius: 50em
-    border-radius: 50em
+    +border-radius(50em)
   &.disable
     opacity: 0.5
   &.big
@@ -303,27 +274,17 @@ a.button
     float: left
     margin-left: -1px
   > .button:not(:first-child):not(:last-child), li:not(:first-child):not(:last-child) .button
-    -webkit-border-radius: 0
-    -moz-border-radius: 0
-    border-radius: 0
+    +border-radius(0)
   > .button:first-child, li:first-child .button
     margin-left: 0
-    -webkit-border-top-right-radius: 0
-    -webkit-border-bottom-right-radius: 0
-    -moz-border-radius-topright: 0
-    -moz-border-radius-bottomright: 0
-    border-top-right-radius: 0
-    border-bottom-right-radius: 0
+    +border-top-right-radius(0)
+    +border-bottom-right-radius(0)
   > .button:last-child, li:last-child > .button
-    -webkit-border-top-left-radius: 0
-    -webkit-border-bottom-left-radius: 0
-    -moz-border-radius-topleft: 0
-    -moz-border-radius-bottomleft: 0
-    border-top-left-radius: 0
-    border-bottom-left-radius: 0
+    +border-top-left-radius(0)
+    +border-bottom-left-radius(0)
   &.minor-group .button
     border: 1px solid #d4d4d4
-    text-shadow: none
+    +single-text-shadow(none)
     background-image: none
     background-color: #fff
     &:hover, &:focus
