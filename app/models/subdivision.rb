@@ -1,12 +1,12 @@
 # encoding: utf-8
 
 class Subdivision < ActiveRecord::Base
-  has_many :addresses, :as => :addressable
-  has_one :phone,   :as => :phoneable
+  has_many :buildings, :as => :addressable
+  has_one :phone,      :as => :phoneable
 
   validates :title, :presence => true, :format => { :with => /^[а-яё\s\-\(\)«"»]+$/i }
 
-  accepts_nested_attributes_for :addresses
+  accepts_nested_attributes_for :buildings
 
   has_ancestry
 
@@ -26,6 +26,7 @@ class Subdivision < ActiveRecord::Base
     title
   end
 end
+
 # == Schema Information
 #
 # Table name: subdivisions
@@ -36,4 +37,6 @@ end
 #  created_at :datetime
 #  updated_at :datetime
 #  ancestry   :string(255)
+#  position   :integer
 #
+

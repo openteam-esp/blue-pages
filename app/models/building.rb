@@ -1,9 +1,10 @@
-class Address < ActiveRecord::Base
+class Building < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
 end
+
 # == Schema Information
 #
-# Table name: addresses
+# Table name: buildings
 #
 #  id               :integer         not null, primary key
 #  postcode         :string(255)
@@ -13,9 +14,9 @@ end
 #  street           :string(255)
 #  house            :string(255)
 #  building         :string(255)
-#  flat             :string(255)
 #  addressable_id   :integer
 #  addressable_type :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
 #
+

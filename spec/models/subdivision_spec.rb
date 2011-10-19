@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Subdivision do
-  it { should have_many(:addresses) }
+  it { should have_many(:buildings) }
   it { should have_one(:phone) }
 
   it { should validate_presence_of :title }
@@ -17,6 +17,7 @@ describe Subdivision do
   it { should_not allow_value('English title').for(:title) }
   it { should_not allow_value('Название с цифрами 123').for(:title) }
 end
+
 # == Schema Information
 #
 # Table name: subdivisions
@@ -29,3 +30,4 @@ end
 #  ancestry   :string(255)
 #  position   :integer
 #
+
