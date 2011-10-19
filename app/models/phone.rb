@@ -1,5 +1,8 @@
 class Phone < ActiveRecord::Base
   belongs_to :phoneable, :polymorphic => true
+
+  has_enums
+
 end
 
 # == Schema Information

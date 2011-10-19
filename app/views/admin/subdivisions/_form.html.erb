@@ -14,5 +14,12 @@
     <%= building_form.input :house %>
     <%= building_form.input :building %>
   <% end %>
+  <% @subdivision.phones.build %>
+  <%= form.inputs :for => :phones do | phone_form | %>
+    <%= phone_form.input :code %>
+    <%= phone_form.input :number %>
+    <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
+    <%= phone_form.input :_destroy, :as => :boolean if phone_form.object.persisted? %>
+  <% end %>
   <%= form.buttons %>
 <% end %>

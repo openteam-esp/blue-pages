@@ -4,6 +4,10 @@
       <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
       <%= link_to t('active_admin.new_subdivision'), new_admin_subdivision_path, :class => 'button' %>
     </div>
+    <div class="phones">
+      <h4>Телефоны</h4>
+      <%= render @subdivision.phones %>
+    </div>
     <h4>Подразделения</h4>
   </div>
 

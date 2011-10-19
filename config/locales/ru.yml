@@ -2,25 +2,37 @@ ru:
   activerecord:
     attributes:
       building:
-        postcode:     Почтовый индекс
-        region:       Регион
-        district:     Район
-        locality:     Населённый пункт
-        street:       Улица
-        house:        Дом
-        building:     Строение
+        postcode:         Почтовый индекс
+        region:           Регион
+        district:         Район
+        locality:         Населённый пункт
+        street:           Улица
+        house:            Дом
+        building:         Строение
+
+      phone:
+        code:             Код
+        number:           Телефон
+        kind:             Тип
+        _destroy:         Удалить
+        kind_enum:
+          fax:            Факс
+          phone:          Телефон
+          phone_and_fax:  Тел./факс
+
 
       subdivision:
-        title:        Название
-        abbr:         Аббревиатура
-        created_at:   Создано
-        updated_at:   Обновлено
+        title:            Название
+        abbr:             Аббревиатура
+        created_at:       Создано
+        updated_at:       Обновлено
 
     models:
-      admin:          Главная
-      admin_user:     Пользователи
-      subdivision:    Подразделения
-      building:       Здание
+      admin:              Главная
+      admin_user:         Пользователи
+      subdivision:        Подразделения
+      building:           Здание
+      phone:              Телефон
 
-  blue_pages_system:  Телефонный справочник
-  search:             Поиск
+  blue_pages_system:      Телефонный справочник
+  search:                 Поиск

@@ -2,11 +2,14 @@
 
 class Subdivision < ActiveRecord::Base
   has_one :building,  :as => :addressable
-  has_one :phone,     :as => :phoneable
+  has_many :phones,   :as => :phoneable
 
   validates :title, :presence => true, :format => { :with => /^[а-яё\s\-\(\)«"»]+$/i }
 
   accepts_nested_attributes_for :building
+  accepts_nested_attributes_for :phones,
+                                :reject_if => ->(phone) { phone.values_at(:code, :phone, :kind).map(&:blank?).any? },
+                                :allow_destroy => true
 
   default_scope order('position')
 

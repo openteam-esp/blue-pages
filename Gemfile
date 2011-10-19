@@ -4,6 +4,7 @@ gem 'activeadmin',                                :git => 'git://github.com/greg
 gem 'ancestry'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
+gem 'has_enum'
 gem 'has_searcher'
 gem 'inherited_resources',      '< 1.3.0'
 gem 'jquery-rails'

@@ -1,0 +1,8 @@
+<dl>
+  <% %w[code number].each do | attribute | %>
+    <dt><%= Phone.human_attribute_name(attribute) %></dt>
+    <dd><%= phone.send(attribute) %></dd>
+  <% end %>
+  <dt><%= Phone.human_attribute_name(:kind) %></dt>
+  <dd><%= phone.human_kind %></dd>
+</dl>
