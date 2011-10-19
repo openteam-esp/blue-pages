@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe Subdivision do
-  it { should have_one(:address) }
+  it { should have_many(:addresses) }
   it { should have_one(:phone) }
 
   it { should validate_presence_of :title }
