@@ -8,7 +8,7 @@ class Subdivision < ActiveRecord::Base
 
   accepts_nested_attributes_for :building
   accepts_nested_attributes_for :phones,
-                                :reject_if => ->(phone) { phone.values_at(:code, :phone, :kind).map(&:blank?).any? },
+                                :reject_if => ->(attr) { attr[:code].blank? && attr[:number].blank? && attr[:kind].blank? },
                                 :allow_destroy => true
 
   default_scope order('position')

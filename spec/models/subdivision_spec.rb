@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe Subdivision do
   it { should have_one(:building) }
-  it { should have_one(:phone) }
+  it { should have_many(:phones) }
 
   it { should validate_presence_of :title }
 
