@@ -8,6 +8,8 @@ class Subdivision < ActiveRecord::Base
 
   accepts_nested_attributes_for :building
 
+  default_scope order('position')
+
   has_ancestry
 
   searchable do

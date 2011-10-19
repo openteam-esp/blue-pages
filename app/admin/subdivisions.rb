@@ -12,7 +12,7 @@ ActiveAdmin.register Subdivision do
   end
 
   show :title => proc { subdivision.title } do
-    render 'subdivisions', :subdivisions => subdivision.children.order('position')
+    render 'show' #, :subdivision => subdivision
   end
 
   form :partial => 'form'
