@@ -15,7 +15,9 @@
       <% items.each do |item| %>
         <li class='item' <%= "data-id=#{item.id}" %>>
           <%= item.title %>
-          <%= item.person %>
+          <div>
+            <%= item.person %>
+          </div>
         </li>
       <% end %>
     </ul>
