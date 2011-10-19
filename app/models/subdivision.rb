@@ -3,6 +3,7 @@
 class Subdivision < ActiveRecord::Base
   has_one :building,  :as => :addressable
   has_many :phones,   :as => :phoneable
+  has_many :items
 
   validates :title, :presence => true, :format => { :with => /^[а-яё\s\-\(\)«"»]+$/i }
 
