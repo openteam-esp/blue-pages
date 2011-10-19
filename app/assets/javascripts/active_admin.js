@@ -27,12 +27,27 @@ $(function() {
         axis: 'y',
         handle: 'span',
         update: function() {
+          var block = this;
           $.ajax({
             url: "/admin/subdivisions/sort",
             type: 'post',
             data: serializeSubdivisions(),
-            complete: function() {
-              $(".paginated_collection").effect("highlight");
+            success: function(data, textStatus, jqXHR) {
+              $(block).effect("highlight");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              console.log(jqXHR.responseText);
+              $("<div />").attr("id", "ajax_error").appendTo("body").hide()
+                .html(jqXHR.responseText);
+              $("#ajax_error meta").remove();
+              $("#ajax_error style").remove();
+              $("#ajax_error").dialog({
+                title: errorThrown,
+                width: "70%",
+                height: 500,
+                modal: true,
+                resizable: false
+              });
             }
           });
         }
