@@ -1,8 +1,16 @@
+# encoding: utf-8
+
 class Building < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
 
   validates :region, :district, :locality, :street, :house, :presence => true
   validates :postcode, :numericality => true, :length => { :within => 6..6 }, :presence => true
+
+  default_values :postcode => '634***',
+                 :region => 'Томская область',
+                 :district => 'г. Томск',
+                 :locality => 'г. Томск'
+
 end
 
 # == Schema Information

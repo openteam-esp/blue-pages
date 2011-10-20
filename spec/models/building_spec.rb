@@ -13,6 +13,13 @@ describe Building do
   it { should allow_value('123456').for(:postcode) }
   it { should_not allow_value('12345').for(:postcode) }
   it { should_not allow_value('123ab').for(:postcode) }
+
+  describe 'default values' do
+    it { subject.postcode.should == '634***' }
+    it { subject.region.should == 'Томская область' }
+    it { subject.district.should == 'г. Томск' }
+    it { subject.locality.should == 'г. Томск' }
+  end
 end
 
 # == Schema Information
