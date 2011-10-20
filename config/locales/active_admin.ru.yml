@@ -1,7 +1,12 @@
 ru:
   active_admin:
+    new_subdivision: Добавление подразделения
+    edit_subdivision: Изменение подразделения
+    delete_subdivision: Удаление подразделения
     new_item: Добавление сотрудника
-    edit_item: Редактирование сотрудника
+    edit_item: Изменение сотрудника
+    delete_item: Удаление сотрудника
+
     dashboard: Панель управления
     dashboard_welcome:
       welcome: "Добро пожаловать в Active Admin. Это стандартная страница управления сайтом."
@@ -42,5 +47,3 @@ ru:
       content: "Пока нет %{resource_name}."
       link: "Создать"
 
-    new_subdivision: Добавить подразделение
-    new_item: Добавить сотрудника

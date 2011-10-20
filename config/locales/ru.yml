@@ -3,8 +3,9 @@ ru:
     attributes:
       item:
         created_at: Создано
+        person: Сотрудник
         subdivision: Подразделение
-        title: Название
+        title: Должность
         updated_at: Обновлено
 
       person:
