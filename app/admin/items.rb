@@ -2,6 +2,7 @@
 
 ActiveAdmin.register Item do
   menu :parent => "Подразделения"
+  config.sort_order = 'position'
   belongs_to :subdivision, :optional => true
 
   form :partial => 'form'
@@ -36,6 +37,14 @@ ActiveAdmin.register Item do
     link_to(I18n.t("active_admin.delete_#{active_admin_config.underscored_resource_name}"),
             resource_path,
             :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => 'button icon trash danger')
+  end
+
+  collection_action :sort, :method => :post do
+    params[:ids].each_with_index do |id, index|
+      item = Item.find(id)
+      item.update_attribute(:position, index.to_i+1)
+    end
+    head 200
   end
 
   controller do
