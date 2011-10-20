@@ -30,6 +30,8 @@ class Subdivision < ActiveRecord::Base
 
   has_ancestry
 
+  alias :subdivisions :children
+
   normalize_attribute :url do | value |
     value = "http://#{value}" unless value.blank? || value.starts_with?('http')
     value

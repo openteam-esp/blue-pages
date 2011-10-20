@@ -1,4 +1,5 @@
 ActiveAdmin.register Subdivision do
+  belongs_to :parent_subdivision, :optional => true, :class_name => 'Subdivision'
   filter :title
   filter :updated_at
   config.sort_order = 'position'
@@ -40,5 +41,13 @@ ActiveAdmin.register Subdivision do
       subdivision.update_attribute(:position, index.to_i+1)
     end
     head 200
+  end
+
+  controller do
+
+    def collection_path
+      return admin_parent_subdivision_subdivisions_path(@parent_subdivision) if @parent_subdivision
+      admin_subdivisions_path
+    end
   end
 end

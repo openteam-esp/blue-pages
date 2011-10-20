@@ -6,6 +6,11 @@ ActiveAdmin.register Item do
 
   form :partial => 'form'
 
+  filter :subdivision
+  filter :title
+  #filter :person, :as => :string
+  filter :updated_at
+
   index do
     column :subdivision
     column :title do |item|

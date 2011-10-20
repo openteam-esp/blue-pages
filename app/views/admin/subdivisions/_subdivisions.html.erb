@@ -2,7 +2,7 @@
   <div class="top">
     <div class="actions">
       <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
-      <%= link_to t('active_admin.new_subdivision'), new_admin_subdivision_path(:parent_id => params[:id]), :class => 'button icon add' %>
+      <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
     </div>
     <h4>Подразделения</h4>
   </div>

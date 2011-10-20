@@ -1,8 +1,8 @@
-<%= semantic_form_for [:admin, @subdivision] do |form| %>
+<%= semantic_form_for @subdivision, :url => @subdivision.new_record? ? collection_path : resource_path do |form| %>
+  <% p @subdivision.errors %>
   <%= form.inputs do %>
     <%= form.input :title %>
     <%= form.input :abbr %>
-    <%= form.input :parent_id, :input_html => { :value => params[:parent_id] }, :as => :hidden if params[:parent_id] %>
     <%= form.input :url, :as => :string %>
   <% end %>
   <% @subdivision.build_building unless @subdivision.building %>
