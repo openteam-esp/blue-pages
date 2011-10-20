@@ -13,10 +13,14 @@
   <% else %>
     <ul id="sortable">
       <% subdivisions.each do |child| %>
-        <%= content_tag(:li,
-                        link_to(child.title_with_abbr, admin_subdivision_path(child)),
-                        :'data-id' => child.id,
-                        :class => 'subdivision') %>
+        <li data-id='<%= child.id %>' class='subdivision'>
+          <span>хвать</span>
+          <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
+        </li>
+        <%#<%= content_tag(:li,%>
+                        <%#link_to(child.title_with_abbr, admin_subdivision_path(child)),%>
+                        <%#:'data-id' => child.id,%>
+                        <%#:class => 'subdivision') %>
       <% end %>
     </ul>
   <% end %>

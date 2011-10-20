@@ -14,6 +14,8 @@ body
 #header ul#tabs > li a
   +border-radius
 
+$titlebar_right_width: 375px
+
 #title_bar
   .breadcrumb
     line-height: 16px
@@ -21,9 +23,9 @@ body
   h2
     line-height: 28px
   #titlebar_left
-    width: 85%
+    margin-right: $titlebar_right_width
   #titlebar_right
-    width: 15%
+    width: $titlebar_right_width
   .action_items
     .action_item
       margin-left: 10px
