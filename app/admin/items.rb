@@ -6,10 +6,12 @@ ActiveAdmin.register Item do
   form :partial => 'form'
 
   controller do
-    def create
-      create! do |format|
-        format.html { redirect_to admin_subdivision_path(@subdivision) }
-      end
+    def smart_resource_url
+      admin_subdivision_path(@subdivision)
+    end
+
+    def collection_url
+      admin_subdivision_path(@subdivision)
     end
   end
 end
