@@ -36,6 +36,7 @@ end
 #  subdivision_id :integer
 #  created_at     :datetime
 #  updated_at     :datetime
+#  position       :integer
 #  office         :string(255)
 #
 

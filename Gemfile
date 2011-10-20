@@ -4,6 +4,7 @@ gem 'activeadmin',                                :git => 'git://github.com/greg
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'default_value_for'
+gem 'email_validator'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
 gem 'has_enum'

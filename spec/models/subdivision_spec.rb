@@ -3,8 +3,10 @@
 require 'spec_helper'
 
 describe Subdivision do
-  it { should have_one(:building) }
   it { should have_many(:phones) }
+  it { should have_many(:emails) }
+
+  it { should have_one(:building) }
 
   it { should validate_presence_of :title }
 

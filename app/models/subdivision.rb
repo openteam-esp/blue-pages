@@ -1,8 +1,9 @@
 # encoding: utf-8
 
 class Subdivision < ActiveRecord::Base
-  has_many :phones,   :as => :phoneable
+  has_many :emails,   :as => :emailable
   has_many :items
+  has_many :phones,   :as => :phoneable
 
   has_one :building,  :as => :addressable
 
@@ -22,6 +23,10 @@ class Subdivision < ActiveRecord::Base
 
   accepts_nested_attributes_for :building,
                                 :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) }
+
+  accepts_nested_attributes_for :emails,
+                                :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) },
+                                :allow_destroy => true
 
   accepts_nested_attributes_for :phones,
                                 :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) },
