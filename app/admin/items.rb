@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 ActiveAdmin.register Item do
+  menu :parent => "Подразделения"
   belongs_to :subdivision, :optional => true
 
   form :partial => 'form'
