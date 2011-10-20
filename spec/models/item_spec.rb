@@ -3,12 +3,14 @@
 require 'spec_helper'
 
 describe Item do
+  let(:subdivision) { Fabricate(:subdivision) }
+  let(:item) { subdivision.items.build(:title => 'Заместитель') }
+
   it { should have_one(:building) }
 
-  describe 'default values' do
-    let(:subdivision) { Fabricate(:subdivision) }
-    let(:item) { subdivision.items.build }
+  it { subdivision; expect { item.save! }.to_not change{ Building.count } }
 
+  describe 'default values' do
     it { item.building_postcode.should == subdivision.building_postcode }
     it { item.building_region.should == subdivision.building_region }
     it { item.building_district.should == subdivision.building_district }
@@ -18,7 +20,7 @@ describe Item do
     it { item.building_building.should == subdivision.building_building }
 
     it "building attributes" do
-      item.update_attributes(:building_attributes => {:street => 'Новая'})
+      item.update_attributes!(:building_attributes => item.building_attributes.merge(:street => 'Новая'))
       item.building_street.should == 'Новая'
       subdivision.reload.building_street.should == 'пл. Ленина'
     end

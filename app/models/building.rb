@@ -11,6 +11,15 @@ class Building < ActiveRecord::Base
                  :district => 'г. Томск',
                  :locality => 'г. Томск'
 
+  SIGNIFICANT_ATTRIBUTES = %w[postcode region district locality street house building]
+
+  def significant_values
+    attributes.values_at *SIGNIFICANT_ATTRIBUTES
+  end
+
+  def ==(other)
+    self.significant_values == other.significant_values
+  end
 end
 
 # == Schema Information

@@ -8,10 +8,12 @@ class Item < ActiveRecord::Base
 
   after_initialize :set_building_attributes
 
+  after_save :building_destroy, :if => ->(item) { item.building == item.subdivision.building }
+
   accepts_nested_attributes_for :building
   accepts_nested_attributes_for :person, :reject_if => :all_blank
 
-  delegate :postcode, :region, :district, :locality, :street, :house, :building, :to => :building, :prefix => true, :allow_nil => true
+  delegate :destroy, :attributes, :postcode, :region, :district, :locality, :street, :house, :building, :to => :building, :prefix => true, :allow_nil => true
 
   def display_name
     title
@@ -21,6 +23,7 @@ class Item < ActiveRecord::Base
     def set_building_attributes
       build_building subdivision.building_attributes if subdivision && !building
     end
+
 end
 
 # == Schema Information
