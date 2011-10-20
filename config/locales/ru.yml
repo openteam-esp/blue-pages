@@ -1,6 +1,9 @@
 ru:
   activerecord:
     attributes:
+      email:
+        address:          Адрес
+
       item:
         created_at:       Создано
         office:           Кабинет
@@ -46,6 +49,7 @@ ru:
       admin:              Главная
       admin_user:         Пользователи
       building:           Здание
+      email:              Электронная почта
       item:               Сотрудники
       phone:              Телефон
       subdivision:        Подразделения
