@@ -2,6 +2,7 @@ source 'http://rubygems.org'
 
 gem 'activeadmin',                                :git => 'git://github.com/gregbell/active_admin.git'
 gem 'ancestry'
+gem 'attribute_normalizer'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
 gem 'has_enum'

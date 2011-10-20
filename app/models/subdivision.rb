@@ -7,15 +7,17 @@ class Subdivision < ActiveRecord::Base
 
   validates :title, :presence => true, :format => {:with => /^[а-яё\s\-\(\)«"»]+$/i}
 
-  validates_format_of :url, :with => %r{^
-                                          (http|https)://                                 # scheme
-                                          (
-                                           [a-z0-9]+([-.][a-z0-9]+)*\.[a-z]{2,5} |        # latin domain
-                                           [а-яё0-9]+([-.][а-яё0-9]+)*\.рф                # cyrillic domain
-                                          )
-                                          (/[[:alnum:] -]+)*                              # path
-                                          (\?.*)?                                         # query params
-                                        $}ix
+  validates_format_of :url,
+                      :allow_blank => true,
+                      :with => %r{^
+                                  (http|https)://                                 # scheme
+                                  (
+                                   [a-z0-9]+([-.][a-z0-9]+)*\.[a-z]{2,5} |        # latin domain
+                                   [а-яё0-9]+([-.][а-яё0-9]+)*\.рф                # cyrillic domain
+                                  )
+                                  (/[[:alnum:] -]+)*                              # path
+                                  (\?.*)?                                         # query params
+                                $}ix
 
   accepts_nested_attributes_for :building,
                                 :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) }
@@ -27,6 +29,11 @@ class Subdivision < ActiveRecord::Base
   default_scope order('position')
 
   has_ancestry
+
+  normalize_attribute :url do | value |
+    value = "http://#{value}" unless value.blank? || value.starts_with?('http')
+    value
+  end
 
   searchable do
     text :abbr_and_title do

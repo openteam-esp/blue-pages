@@ -19,11 +19,12 @@ describe Subdivision do
 
 
   describe "#url" do
+    it { should normalize_attribute(:url).from('www.ru').to('http://www.ru') }
     it { should allow_value('http://super-puper-mega-site.com').for(:url) }
     it { should allow_value('http://super-puper-mega-site.com/ololo').for(:url) }
     it { should allow_value('http://site.com/путь/к файлу?param=%dd').for(:url) }
     it { should allow_value('http://чётко.рф/ваще').for(:url) }
-    it { should_not allow_value('www.site.com').for(:url) }
+    it { should allow_value('www.site.com').for(:url) }
     it { should_not allow_value('http://super-puper-mega-site.com%').for(:url) }
     it { should_not allow_value('http://super-puper-mega-site.com_').for(:url) }
     it { should_not allow_value('http://site').for(:url) }
