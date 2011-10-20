@@ -9,7 +9,6 @@ describe Building do
   it { should validate_presence_of :locality }
   it { should validate_presence_of :street }
   it { should validate_presence_of :house }
-  it { should validate_presence_of :building }
 
   it { should allow_value('123456').for(:postcode) }
   it { should_not allow_value('12345').for(:postcode) }
