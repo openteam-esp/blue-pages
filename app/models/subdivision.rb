@@ -18,6 +18,7 @@ class Subdivision < ActiveRecord::Base
                                    [а-яё0-9]+([-.][а-яё0-9]+)*\.рф                # cyrillic domain
                                   )
                                   (/[[:alnum:] -]+)*                              # path
+                                  /?
                                   (\?.*)?                                         # query params
                                 $}ix
 
