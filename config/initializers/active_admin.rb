@@ -117,9 +117,12 @@ module ActiveAdmin
       def breadcrumb_links(path=nil)
         # Returns an array of links to use in a breadcrumb
         path ||= request.fullpath.dup
-        path.gsub!(/new\?parent_id=(\d+)/, '\1/new')
+        path.gsub!(/parent_subdivision/, 'subdivision')
+        path += "/new" if params[:action] == 'create'
+        path += "/edit" if params[:action] == 'update'
         parts = path.gsub(/^\//, '').split('/')
-        last = parts.pop if parts.last =~ /(new|edit)/
+        last = "#{parts.pop}_#{parts[-1].singularize}" if parts.last =~ /new/
+        last = "#{parts.pop}_#{parts[-2].singularize}" if parts.last =~ /edit/
         crumbs = []
         parts.each_with_index do |part, index|
           name = ""
@@ -141,7 +144,7 @@ module ActiveAdmin
             crumbs << link_to( name, "/" + parts[0..index].join('/'))
           end
         end
-        crumbs << link_to(I18n.t("active_admin.#{last}_model"), request.fullpath) if last
+        crumbs << link_to(I18n.t("active_admin.#{last}"), request.fullpath) if last
         crumbs
       end
     end

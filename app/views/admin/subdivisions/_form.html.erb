@@ -1,5 +1,4 @@
 <%= semantic_form_for @subdivision, :url => @subdivision.new_record? ? collection_path : resource_path do |form| %>
-  <% p @subdivision.errors %>
   <%= form.inputs do %>
     <%= form.input :title %>
     <%= form.input :abbr %>
@@ -22,5 +21,10 @@
     <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
     <%= phone_form.input :_destroy, :as => :boolean if phone_form.object.persisted? %>
   <% end %>
-  <%= form.buttons %>
+  <%= form.buttons do %>
+    <%= form.commit_button %>
+    <li class='cancel'>
+      <%= link_to t("active_admin.cancel"), @subdivision.new_record? ? collection_path : resource_path %>
+    </li>
+  <% end %>
 <% end %>

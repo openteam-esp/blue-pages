@@ -45,6 +45,12 @@ ActiveAdmin.register Subdivision do
 
   controller do
 
+    def index
+      index! do
+        redirect_to admin_subdivision_path(@parent_subdivision) and return if @parent_subdivision
+      end
+    end
+
     def collection_path
       return admin_parent_subdivision_subdivisions_path(@parent_subdivision) if @parent_subdivision
       admin_subdivisions_path
