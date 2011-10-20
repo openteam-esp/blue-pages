@@ -3,6 +3,7 @@ ru:
     attributes:
       item:
         created_at:       Создано
+        office:           Кабинет
         person:           Сотрудник
         subdivision:      Подразделение
         title:            Должность

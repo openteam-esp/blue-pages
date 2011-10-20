@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(:version => 20111020073313) do
     t.string   "street"
     t.string   "house"
     t.string   "building"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
   end
 
   create_table "items", :force => true do |t|
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(:version => 20111020073313) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.string   "office"
   end
 
   add_index "items", ["subdivision_id"], :name => "index_items_on_subdivision_id"

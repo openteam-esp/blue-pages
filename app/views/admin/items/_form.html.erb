@@ -1,6 +1,7 @@
 <%= semantic_form_for [:admin, @subdivision, @item] do |form| %>
   <%= form.inputs "Должность" do %>
     <%= form.input :title %>
+    <%= form.input :office %>
   <% end %>
 
   <%= form.inputs "Сотрудник", :for => [:person, @item.person || @item.build_person] do |person_form| %>
