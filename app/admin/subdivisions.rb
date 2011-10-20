@@ -14,9 +14,6 @@ ActiveAdmin.register Subdivision do
 
   show :title => proc { subdivision.title } do
     div do
-      render 'admin/subdivisions/show'
-    end
-    div do
       render 'admin/items/items', :items => subdivision.items
     end
     div do
