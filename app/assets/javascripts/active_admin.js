@@ -1,6 +1,7 @@
 //= require active_admin/base
 //= require jquery
 //= require jquery-ui
+//= require nested_form
 
 
 function serializeSubdivisions() {
@@ -58,5 +59,4 @@ $(function() {
     };
     return false;
   });
-
 });

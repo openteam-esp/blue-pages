@@ -11,6 +11,7 @@ gem 'has_enum'
 gem 'has_searcher'
 gem 'inherited_resources',      '< 1.3.0'
 gem 'jquery-rails'
+gem 'nested_form',                                :git => 'git://github.com/ryanb/nested_form.git'
 gem 'rack' ,                    '1.3.3',          :require => false
 gem 'rails'
 gem 'ryba',                                       :require => false

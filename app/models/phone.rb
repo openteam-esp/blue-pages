@@ -4,6 +4,10 @@ class Phone < ActiveRecord::Base
   validates_presence_of :code, :number, :kind
 
   has_enums
+
+  def to_s
+    "#{human_kind}: (#{code}) #{number}"
+  end
 end
 
 # == Schema Information

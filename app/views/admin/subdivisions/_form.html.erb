@@ -1,4 +1,4 @@
-<%= semantic_form_for @subdivision, :url => @subdivision.new_record? ? collection_path : resource_path do |form| %>
+<%= semantic_nested_form_for @subdivision, :url => @subdivision.new_record? ? collection_path : resource_path do |form| %>
   <%= form.inputs do %>
     <%= form.input :title %>
     <%= form.input :abbr %>
@@ -14,13 +14,19 @@
     <%= building_form.input :house %>
     <%= building_form.input :building %>
   <% end %>
-  <% @subdivision.phones.build %>
-  <%= form.inputs :for => :phones do | phone_form | %>
-    <%= phone_form.input :code %>
-    <%= phone_form.input :number %>
-    <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
-    <%= phone_form.input :_destroy, :as => :boolean if phone_form.object.persisted? %>
+
+  <% form.fields_for :phones do |phone_form| %>
+    <%= phone_form.inputs do %>
+      <%= phone_form.input :code %>
+      <%= phone_form.input :number %>
+      <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
+      <%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %>
+    <% end %>
   <% end %>
+  <div class="phones_fieldset">
+    <%= form.link_to_add t('active_admin.new_phone'), :phones, :class => 'button icon add' %>
+  </div>
+
   <%= form.buttons do %>
     <%= form.commit_button %>
     <li class='cancel'>

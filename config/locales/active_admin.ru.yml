@@ -6,6 +6,8 @@ ru:
     new_item: Добавление сотрудника
     edit_item: Изменение сотрудника
     delete_item: Удаление сотрудника
+    new_phone: Добавить телефон
+    delete_phone: Удалить телефон
 
     dashboard: Панель управления
     dashboard_welcome:

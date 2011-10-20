@@ -4,6 +4,33 @@
       <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
       <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
     </div>
+    <% if @subdivision.building %>
+      <div class="building">
+        <h4>Адрес</h4>
+        <%= render @subdivision.building %>
+      </div>
+    <% end %>
+
+    <% if @subdivision.phones.any? %>
+      <div class="phones">
+        <h4>Телефоны</h4>
+        <ul>
+          <%= render @subdivision.phones %>
+        </ul>
+      </div>
+    <% end %>
+
+    <% if @subdivision.url %>
+      <div class="url">
+        <h4>Сайт</h4>
+        <ul>
+          <li>
+            <%= link_to @subdivision.url, @subdivision.url %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+
     <h4>Подразделения</h4>
   </div>
 
@@ -17,10 +44,6 @@
           <span>хвать</span>
           <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
         </li>
-        <%#<%= content_tag(:li,%>
-                        <%#link_to(child.title_with_abbr, admin_subdivision_path(child)),%>
-                        <%#:'data-id' => child.id,%>
-                        <%#:class => 'subdivision') %>
       <% end %>
     </ul>
   <% end %>
