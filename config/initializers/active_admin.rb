@@ -117,6 +117,7 @@ module ActiveAdmin
       def breadcrumb_links(path=nil)
         # Returns an array of links to use in a breadcrumb
         path ||= request.fullpath.dup
+        path.gsub!(/^(.*)\?.*/, '\1')
         path.gsub!(/parent_subdivision/, 'subdivision')
         path += "/new" if params[:action] == 'create'
         path += "/edit" if params[:action] == 'update'
