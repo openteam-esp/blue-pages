@@ -6,3 +6,18 @@ class Person < ActiveRecord::Base
     "#{surname} #{name} #{patronymic}"
   end
 end
+
+# == Schema Information
+#
+# Table name: people
+#
+#  id         :integer         not null, primary key
+#  surname    :string(255)
+#  name       :string(255)
+#  patronymic :string(255)
+#  birthdate  :date
+#  item_id    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+

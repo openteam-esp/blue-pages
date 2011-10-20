@@ -43,5 +43,6 @@ end
 #  updated_at :datetime
 #  ancestry   :string(255)
 #  position   :integer
+#  url        :text
 #
 

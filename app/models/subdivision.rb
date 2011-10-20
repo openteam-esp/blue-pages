@@ -7,7 +7,6 @@ class Subdivision < ActiveRecord::Base
 
   validates :title, :presence => true, :format => {:with => /^[а-яё\s\-\(\)«"»]+$/i}
 
- # validates :url, :url_checker
   validates_format_of :url, :with => %r{^
                                           (http|https)://                                 # scheme
                                           (
@@ -57,5 +56,6 @@ end
 #  updated_at :datetime
 #  ancestry   :string(255)
 #  position   :integer
+#  url        :text
 #
 
