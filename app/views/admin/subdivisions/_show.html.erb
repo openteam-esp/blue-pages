@@ -1,35 +1,14 @@
-<div class="subdivisions">
-  <div class="top">
-    <div class="actions">
-      <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
-      <%= link_to t('active_admin.new_subdivision'), new_admin_subdivision_path(:parent_id => params[:id]), :class => 'button' %>
-    </div>
-    <div class="building">
-      <h4>Адрес</h4>
-      <%= render subdivision.building if subdivision.building %>
-    </div>
-    <div class="phones">
-      <h4>Телефоны</h4>
-      <%= render subdivision.phones %>
-    </div>
-    <div class="url">
-      <h4>Сайт</h4>
-      <%= subdivision.url %>
-    </div>
-    <h4>Подразделения</h4>
+<div class="subdivision">
+  <div class="building">
+    <h4>Адрес</h4>
+    <%= render subdivision.building if subdivision.building %>
   </div>
-
-
-  <% if subdivision.children.empty? %>
-    <h5>Нет подразделений</h5>
-  <% else %>
-    <ul id="sortable">
-      <% subdivision.children.each do |child| %>
-        <li data-id='<%= child.id %>' class='subdivision'>
-          <span>хвать</span>
-          <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
+  <div class="phones">
+    <h4>Телефоны</h4>
+    <%= render subdivision.phones %>
+  </div>
+  <div class="url">
+    <h4>Сайт</h4>
+    <%= subdivision.url %>
+  </div>
 </div>
