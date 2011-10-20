@@ -6,7 +6,6 @@ describe Item do
   it { should have_one(:building) }
 
   describe 'default values' do
-    #let(:subdivision) { Fabricate(:subdivision, :building_attributes => Fabricate.build(:building)) }
     let(:subdivision) { Fabricate(:subdivision) }
     let(:item) { subdivision.items.build }
 
@@ -17,6 +16,12 @@ describe Item do
     it { item.building_street.should == subdivision.building_street }
     it { item.building_house.should == subdivision.building_house }
     it { item.building_building.should == subdivision.building_building }
+
+    it "building attributes" do
+      item.update_attributes(:building_attributes => {:street => 'Новая'})
+      item.building_street.should == 'Новая'
+      subdivision.reload.building_street.should == 'пл. Ленина'
+    end
   end
 end
 
