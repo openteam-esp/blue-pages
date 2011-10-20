@@ -32,6 +32,7 @@ group :development do
 end
 
 group :test do
+  gem 'fabrication'
   gem 'rspec-rails',                              :require => false
   gem 'shoulda-matchers',                         :require => false
   gem 'spork',                  '>= 0.9.0.rc9',   :require => false

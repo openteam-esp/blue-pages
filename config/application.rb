@@ -47,7 +47,7 @@ module BluePages
 
     config.generators do |generators|
       generators.test_framework       :rspec, :fixture => true
-      #generators.fixture_replacement  :fabrication
+      generators.fixture_replacement  :fabrication
       generators.stylesheet_engine    :sass
     end
 

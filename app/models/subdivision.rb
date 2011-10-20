@@ -1,9 +1,10 @@
 # encoding: utf-8
 
 class Subdivision < ActiveRecord::Base
-  has_one :building,  :as => :addressable
   has_many :phones,   :as => :phoneable
   has_many :items
+
+  has_one :building,  :as => :addressable
 
   validates :title, :presence => true, :format => {:with => /^[а-яё\s\-\(\)«"»]+$/i}
 
@@ -27,6 +28,8 @@ class Subdivision < ActiveRecord::Base
                                 :allow_destroy => true
 
   default_scope order('position')
+
+  delegate :attributes, :postcode, :region, :district, :locality, :street, :house, :building, :to => :building, :prefix => true, :allow_nil => true
 
   has_ancestry
 
