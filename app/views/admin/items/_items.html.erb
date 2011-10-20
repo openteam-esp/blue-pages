@@ -15,7 +15,15 @@
       <% items.each do |item| %>
         <li class='item' <%= "data-id=#{item.id}" %>>
           <%= item.title %>
-          <%= link_to t('active_admin.delete'), admin_subdivision_item_path(@subdivision, item), :method => :delete, :class => 'button icon trash' %>
+          <%= link_to t('active_admin.edit'),
+                      edit_admin_subdivision_item_path(@subdivision, item),
+                      :class => 'button icon edit' %>
+
+          <%= link_to t('active_admin.delete'),
+                      admin_subdivision_item_path(@subdivision, item),
+                      :method => :delete,
+                      :class => 'button icon trash danger' %>
+
           <div>
             <%= item.person %>
           </div>
