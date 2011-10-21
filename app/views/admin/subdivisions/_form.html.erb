@@ -4,6 +4,7 @@
     <%= form.input :abbr %>
     <%= form.input :url, :as => :string %>
   <% end %>
+
   <% @subdivision.build_building unless @subdivision.building %>
   <%= form.inputs :for => :building do | building_form | %>
     <%= building_form.input :postcode %>
@@ -28,7 +29,7 @@
     <%= form.link_to_add t('active_admin.new_phone'), :phones, :class => 'button icon add' %>
   </div>
 
-  <% form.fields_for :emails do |email_form| %>
+  <%= form.fields_for :emails do |email_form| %>
     <%= email_form.inputs do %>
       <%= email_form.input :address %>
       <%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %>

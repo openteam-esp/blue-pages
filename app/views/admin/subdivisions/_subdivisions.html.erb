@@ -20,6 +20,15 @@
       </div>
     <% end %>
 
+    <% if @subdivision.emails.any? %>
+      <div class="emails">
+        <h4>Адреса электронной почты</h4>
+        <ul>
+          <%= render @subdivision.emails %>
+        </ul>
+      </div>
+    <% end %>
+
     <% if @subdivision.url %>
       <div class="url">
         <h4>Сайт</h4>
