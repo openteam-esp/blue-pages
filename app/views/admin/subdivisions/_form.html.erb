@@ -18,9 +18,9 @@
 
   <%= form.semantic_fields_for :phones do |phone_form| %>
     <%= phone_form.inputs do %>
-      <%= phone_form.input :code %>
+      <%= phone_form.input :code, :wrapper_html => {:class => phone_form.object.kind_internal? ? 'hidden' : 'blank'} %>
       <%= phone_form.input :number %>
-      <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
+      <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind), :input_html => { :class => 'phone_kind'} %>
       <li><%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %></li>
     <% end %>
   <% end %>

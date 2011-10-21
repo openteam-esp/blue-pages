@@ -3,6 +3,9 @@ class Email < ActiveRecord::Base
 
   validates :address, :presence => true, :email => true
 
+  def to_s
+    address
+  end
 end
 
 # == Schema Information

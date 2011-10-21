@@ -19,6 +19,16 @@ function serializeSubdivisions() {
 
 $(function() {
 
+  $('.phone_kind').live('change', function(){
+    var phone_kind = $(this);
+    var phone_code = phone_kind.closest('li').siblings('li[id*="code_input"]');
+    if (phone_kind.val() == 'internal') {
+      phone_code.slideUp('slow');
+    } else {
+      phone_code.slideDown('slow');
+    };
+  });
+
   $('.sort_link').click(function() {
     var it_off = $(this).hasClass('off');
     if (it_off) {
@@ -54,8 +64,8 @@ $(function() {
         }
       });
     } else {
-      $(this).removeClass('on').addClass('off');
       $('#sortable span').hide();
+      $(this).removeClass('on').addClass('off');
     };
     return false;
   });

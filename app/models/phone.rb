@@ -9,7 +9,9 @@ class Phone < ActiveRecord::Base
   has_enums
 
   def to_s
-    "#{human_kind}: (#{code}) #{number}"
+    res = "#{human_kind}: "
+    res << "(#{code}) " unless kind_internal?
+    res << number
   end
 
   private
