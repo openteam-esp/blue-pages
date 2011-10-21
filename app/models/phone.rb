@@ -16,6 +16,7 @@ class Phone < ActiveRecord::Base
     res << "(#{code}) " unless kind_internal?
     res << number
     res << " добавочный #{additional_number}" if additional_number.present?
+    res
   end
 
 
