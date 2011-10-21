@@ -34,6 +34,9 @@ class Item < ActiveRecord::Base
     text :name, :boost => 1.2
     text :patronymic
     text :title, :boost => 1.4
+    text :building
+    text :phones, do phones.join(' ') end
+    text :emails, do emails.join(' ') end
   end
 
   def display_name

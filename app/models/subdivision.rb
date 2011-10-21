@@ -47,8 +47,11 @@ class Subdivision < ActiveRecord::Base
   end
 
   searchable do
-    text :abbr
-    text :title
+    text :abbr, :boost => 1.5
+    text :title, :boost => 1.5
+    text :building
+    text :phones, do phones.join(' ') end
+    text :emails, do emails.join(' ') end
   end
 
   def title_with_abbr
