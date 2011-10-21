@@ -1,0 +1,95 @@
+//= require active_admin/base
+//= require jquery
+//= require jquery-ui
+//= require nested_form
+
+function preload_images(images) {
+  $("<div />")
+    .addClass("images_preload")
+    .appendTo("body")
+    .css({
+          "position": "absolute",
+          "bottom": 0,
+          "left": 0,
+          "visibility": "hidden",
+          "z-index": -9999
+        });
+  $.each(images, function(index, value) {
+      $("<img src=\"" + value + "\" />").appendTo($(".images_preload"));
+    });
+};
+
+function serializeBlock(parent_block) {
+  var ids = $.makeArray(
+    $("." + parent_block + " .sortable li").map(function() {
+      return $(this).data("id");
+    })
+  );
+  var csrf_token = $("head meta[name=\"csrf-token\"]").attr("content");
+  return {
+    "ids": ids,
+    "authenticity_token" : csrf_token
+  };
+};
+
+$(function() {
+  preload_images(
+    [
+      "<%= image_path("sort.png") %>"
+    ]
+  );
+
+  $(".phone_kind").live("change", function(){
+    var phone_kind = $(this);
+    var phone_code = phone_kind.closest("li").siblings("li[id*=\"code_input\"]");
+    if (phone_kind.val() == "internal") {
+      phone_code.slideUp("slow");
+    } else {
+      phone_code.slideDown("slow");
+    };
+  });
+
+  $(".sort_link").click(function() {
+    var it_off = $(this).hasClass("off");
+    var parent_block = $(this).parent().parent().attr("class");
+    if (it_off) {
+      $(this).removeClass("off").addClass("on");
+      $("." + parent_block + " .sortable span").css("display", "inline-block");
+      $("." + parent_block + " .sortable").sortable({
+        axis: "y",
+        handle: "span",
+        update: function() {
+          var block = this;
+          $.ajax({
+            url: "/admin/" + parent_block + "/sort",
+            type: "post",
+            data: serializeBlock(parent_block),
+            success: function(data, textStatus, jqXHR) {
+              $(block).effect("highlight");
+            },
+            error: function(jqXHR, textStatus, errorThrown) {
+              $("<div />")
+                .attr("id", "ajax_error")
+                .appendTo("body")
+                .hide()
+                .html(jqXHR.responseText);
+              $("#ajax_error meta").remove();
+              $("#ajax_error style").remove();
+              $("#ajax_error").dialog({
+                title: errorThrown,
+                width: "70%",
+                height: 500,
+                modal: true,
+                resizable: false
+              });
+            }
+          });
+        }
+      });
+    } else {
+      $("." + parent_block + " .sortable span").hide();
+      $(this).removeClass("on").addClass("off");
+    };
+    return false;
+  });
+});
