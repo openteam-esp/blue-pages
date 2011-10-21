@@ -43,6 +43,7 @@ ru:
           fax:            Факс
           phone:          Телефон
           phone_and_fax:  Тел./факс
+          internal:       Внутренний
 
 
     models:

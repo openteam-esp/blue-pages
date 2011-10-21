@@ -1,13 +1,21 @@
 class Phone < ActiveRecord::Base
   belongs_to :phoneable, :polymorphic => true
 
-  validates_presence_of :code, :number, :kind
+  validates_presence_of :number, :kind
+  validates_presence_of :code, :unless => :kind_internal?
+
+  before_save :reset_code, :if => :kind_internal?
 
   has_enums
 
   def to_s
     "#{human_kind}: (#{code}) #{number}"
   end
+
+  private
+    def reset_code
+      self.code = nil
+    end
 end
 
 # == Schema Information
