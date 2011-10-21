@@ -3,7 +3,7 @@
 ActiveAdmin::Dashboards.build do
 
   section 'Разделы справочника' do
-    div do
+    div :class => "subdivisions" do
       render 'admin/subdivisions/subdivisions', :subdivisions => Subdivision.roots.order('position')
     end
   end

@@ -54,10 +54,10 @@ ActiveRecord::Schema.define(:version => 20111021034224) do
     t.string   "street"
     t.string   "house"
     t.string   "building"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "addressable_id"
     t.string   "addressable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "emails", :force => true do |t|
