@@ -21,7 +21,7 @@
       <%= phone_form.input :code %>
       <%= phone_form.input :number %>
       <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
-      <%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %>
+      <li><%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %></li>
     <% end %>
   <% end %>
 
@@ -32,7 +32,7 @@
   <%= form.fields_for :emails do |email_form| %>
     <%= email_form.inputs do %>
       <%= email_form.input :address %>
-      <%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %>
+      <li><%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %></li>
     <% end %>
   <% end %>
 
