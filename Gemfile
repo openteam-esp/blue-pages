@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'activeadmin',                                :git => 'git://github.com/gregbell/active_admin.git'
+gem 'activeadmin',                                :git => 'git://github.com/gregbell/active_admin'
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'default_value_for'
@@ -11,7 +11,7 @@ gem 'has_enum'
 gem 'has_searcher'
 gem 'inherited_resources',      '< 1.3.0'
 gem 'jquery-rails'
-gem 'nested_form',                                :git => 'git://github.com/ryanb/nested_form.git'
+gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
 gem 'rack' ,                    '1.3.3',          :require => false
 gem 'rails'
 gem 'ryba',                                       :require => false

@@ -1,6 +1,6 @@
 GIT
-  remote: git://github.com/gregbell/active_admin.git
-  revision: 035c0eb8121e9f4b6cfc23dff382e6bd34626a91
+  remote: git://github.com/gregbell/active_admin
+  revision: 9d6e3c8d1b5ac89f97631f777ee352493d1a7211
   specs:
     activeadmin (0.3.2)
       devise (>= 1.1.2)
@@ -13,8 +13,8 @@ GIT
       sass (>= 3.1.0)
 
 GIT
-  remote: git://github.com/ryanb/nested_form.git
-  revision: 57f32788f1952bcd633057b4b56b69b51df17610
+  remote: git://github.com/kfprimm/nested_form
+  revision: 2fc62fbfdd2b88c416f3fe726697c59223e55b8d
   specs:
     nested_form (0.1.1)
 
@@ -62,7 +62,7 @@ GEM
       fssm (>= 0.2.7)
       sass (~> 3.1)
     default_value_for (1.0.6)
-    devise (1.4.8)
+    devise (1.4.9)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
