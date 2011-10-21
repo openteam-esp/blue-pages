@@ -1,5 +1,10 @@
-class SubdivisionSearch < Search
+class MainSearch < Search
   column :keywords, :text
+
+  private
+    def klass
+      [Subdivision, Item]
+    end
 end
 
 # == Schema Information

@@ -47,9 +47,8 @@ class Subdivision < ActiveRecord::Base
   end
 
   searchable do
-    text :abbr_and_title do
-      "#{abbr} #{title}"
-    end
+    text :abbr
+    text :title
   end
 
   def title_with_abbr
@@ -61,6 +60,8 @@ class Subdivision < ActiveRecord::Base
   def display_name
     title
   end
+
+  alias :to_s :display_name
 end
 
 # == Schema Information

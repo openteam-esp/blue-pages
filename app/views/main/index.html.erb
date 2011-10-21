@@ -1,4 +1,4 @@
-<%= semantic_search_form_for :subdivision, :url => "#" do |form| %>
+<%= semantic_search_form_for :main, :url => root_path  do |form| %>
   <%= form.inputs do %>
     <%= form.input :keywords, :as => :string, :label => false %>
   <% end %>
@@ -7,9 +7,9 @@
   <% end %>
 <% end %>
 <%= content_tag :div, :class => "subdivisions" do %>
-  <% @subdivisions.each do | subdivision | %>
+  <% collection.each do | item | %>
     <div class="item">
-      <%= link_to subdivision.title, subdivision %>
+      <%= render item %>
     </div>
   <% end %>
-<% end if @subdivisions.any? %>
+<% end if collection.any? %>

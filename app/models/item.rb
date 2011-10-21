@@ -25,12 +25,22 @@ class Item < ActiveRecord::Base
                                 :allow_destroy => true
 
   delegate :destroy, :attributes, :postcode, :region, :district, :locality, :street, :house, :building, :to => :building, :prefix => true, :allow_nil => true
+  delegate :surname, :name, :patronymic, :to => :person, :allow_nil => true
 
   default_scope order('position')
+
+  searchable do
+    text :surname, :boost => 1.4
+    text :name, :boost => 1.2
+    text :patronymic
+    text :title, :boost => 1.4
+  end
 
   def display_name
     title
   end
+
+  alias :to_s :display_name
 
   private
     def set_building_attributes
