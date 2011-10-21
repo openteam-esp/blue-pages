@@ -6,7 +6,7 @@
         <ul>
           <%= render @subdivision.send(item) %>
         </ul>
-      <% end if @subdivision.send(item) %>
+      <% end unless @subdivision.send(item).blank? %>
     <% end %>
 
     <%= content_tag :div, :class => "url" do %>
