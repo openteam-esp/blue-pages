@@ -1,4 +1,4 @@
-<%= semantic_form_for [:admin, @subdivision, @item] do |form| %>
+<%= semantic_nested_form_for [:admin, @subdivision, @item] do |form| %>
   <%= form.inputs "Должность" do %>
     <%= form.input :title %>
   <% end %>
@@ -20,6 +20,30 @@
     <%= person_form.input :patronymic %>
     <%= person_form.input :birthdate %>
   <% end %>
+
+  <%= form.semantic_fields_for :phones do |phone_form| %>
+    <%= phone_form.inputs do %>
+      <%= phone_form.input :code %>
+      <%= phone_form.input :number %>
+      <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
+      <%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %>
+    <% end %>
+  <% end %>
+
+  <div class="phones_fieldset">
+    <%= form.link_to_add t('active_admin.new_phone'), :phones, :class => 'button icon add' %>
+  </div>
+
+  <%= form.fields_for :emails do |email_form| %>
+    <%= email_form.inputs do %>
+      <%= email_form.input :address %>
+      <%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %>
+    <% end %>
+  <% end %>
+
+  <div class="emails_fieldset">
+    <%= form.link_to_add t('active_admin.new_email'), :emails, :class => 'button icon add' %>
+  </div>
 
   <%= form.buttons do %>
     <%= form.commit_button %>

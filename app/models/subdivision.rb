@@ -1,11 +1,11 @@
 # encoding: utf-8
 
 class Subdivision < ActiveRecord::Base
-  has_many :emails,   :as => :emailable
-  has_many :items
-  has_many :phones,   :as => :phoneable
+  has_many :emails,   :as => :emailable,   :dependent => :destroy
+  has_many :items,                         :dependent => :destroy
+  has_many :phones,   :as => :phoneable,   :dependent => :destroy
 
-  has_one :building,  :as => :addressable
+  has_one :building,  :as => :addressable, :dependent => :destroy
 
   validates :title, :presence => true, :format => {:with => /^[а-яё\s\-\(\)«"»]+$/i}
 
