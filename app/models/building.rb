@@ -20,6 +20,11 @@ class Building < ActiveRecord::Base
   def ==(other)
     self.significant_values == other.significant_values
   end
+
+  def to_s
+    result = significant_values[0..-2].uniq.join(", ")
+    result << "/" + building unless building.blank?
+  end
 end
 
 # == Schema Information

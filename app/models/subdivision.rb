@@ -50,6 +50,7 @@ class Subdivision < ActiveRecord::Base
     text :abbr, :boost => 1.5
     text :title, :boost => 1.5
     text :building
+    text :url
     text :phones, do phones.join(' ') end
     text :emails, do emails.join(' ') end
   end
