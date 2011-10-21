@@ -13,8 +13,8 @@ GIT
       sass (>= 3.1.0)
 
 GIT
-  remote: git://github.com/ryanb/nested_form.git
-  revision: 57f32788f1952bcd633057b4b56b69b51df17610
+  remote: git://github.com/kfprimm/nested_form
+  revision: 2fc62fbfdd2b88c416f3fe726697c59223e55b8d
   specs:
     nested_form (0.1.1)
 
