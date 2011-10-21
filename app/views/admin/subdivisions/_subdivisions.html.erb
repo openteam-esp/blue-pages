@@ -31,10 +31,23 @@
       </div>
     <% end %>
 
-    <h4>Подразделения</h4>
   </div>
 
+  <h4>Сотрудники</h4>
+  <% if items.empty? %>
+    <h5>Нет сотрудников</h5>
+  <% else%>
+    <ul id="sortable">
+      <% items.each do |item|%>
+        <li data-id='<%= item.id %>' class='item'>
+          <span>хвать</span>
+          <%= link_to "#{item.title} #{item.person}", admin_subdivision_item_path(@subdivision, item)%>
+        </li>
+      <% end%>
+    </ul>
+  <% end%>
 
+  <h4>Подразделения</h4>
   <% if subdivisions.empty? %>
     <h5>Нет подразделений</h5>
   <% else %>

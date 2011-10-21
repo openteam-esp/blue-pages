@@ -14,10 +14,8 @@
     <ul id="sortable">
       <% items.each do |item| %>
         <li class='item' <%= "data-id=#{item.id}" %>>
-          <%= link_to item.title, admin_subdivision_item_path(@subdivision, item) %>
-          <div>
-            <%= item.person %>
-          </div>
+          <span>хвать</span>
+          <%= link_to "#{item.title} #{item.person}" , admin_subdivision_item_path(@subdivision, item) %>
         </li>
       <% end %>
     </ul>
