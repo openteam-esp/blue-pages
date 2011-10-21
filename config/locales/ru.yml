@@ -58,3 +58,8 @@ ru:
 
   blue_pages_system:        Телефонный справочник
   search:                   Поиск
+  subdivision:
+    building:               Адрес
+    phones:                 Телефоны
+    emails:                 Адреса электронная почта
+    url:                    Сайт

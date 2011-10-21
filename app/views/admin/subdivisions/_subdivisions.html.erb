@@ -1,72 +1,16 @@
-<div class="subdivisions">
-  <div class="top">
-    <div class="actions">
-      <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
-      <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
-    </div>
-    <% if @subdivision.building %>
-      <div class="building">
-        <h4>Адрес</h4>
-        <%= render @subdivision.building %>
-      </div>
-    <% end %>
-
-    <% if @subdivision.phones.any? %>
-      <div class="phones">
-        <h4>Телефоны</h4>
-        <ul>
-          <%= render @subdivision.phones %>
-        </ul>
-      </div>
-    <% end %>
-
-    <% if @subdivision.emails.any? %>
-      <div class="emails">
-        <h4>Адреса электронной почты</h4>
-        <ul>
-          <%= render @subdivision.emails %>
-        </ul>
-      </div>
-    <% end %>
-
-    <% if @subdivision.url %>
-      <div class="url">
-        <h4>Сайт</h4>
-        <ul>
-          <li>
-            <%= link_to @subdivision.url, @subdivision.url %>
-          </li>
-        </ul>
-      </div>
-    <% end %>
-
+<% if subdivisions.empty? %>
+  <h5>Нет подразделений</h5>
+<% else %>
+  <div class="actions">
+    <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+    <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
   </div>
-
-  <h4>Сотрудники</h4>
-  <% if items.empty? %>
-    <h5>Нет сотрудников</h5>
-  <% else%>
-    <ul id="sortable">
-      <% items.each do |item|%>
-        <li data-id='<%= item.id %>' class='item'>
-          <span>хвать</span>
-          <%= link_to "#{item.title} #{item.person}", admin_subdivision_item_path(@subdivision, item)%>
-        </li>
-      <% end%>
-    </ul>
-  <% end%>
-
-  <h4>Подразделения</h4>
-  <% if subdivisions.empty? %>
-    <h5>Нет подразделений</h5>
-  <% else %>
-    <ul id="sortable">
-      <% subdivisions.each do |child| %>
-        <li data-id='<%= child.id %>' class='subdivision'>
-          <span>хвать</span>
-          <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+  <ul id="sortable">
+    <% subdivisions.each do |child| %>
+      <li data-id='<%= child.id %>' class='subdivision'>
+        <span>хвать</span>
+        <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

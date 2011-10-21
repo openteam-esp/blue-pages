@@ -60,33 +60,32 @@ $titlebar_right_width: 375px
 div.subdivisions, div.items
   +clearfix
 
-  .top
+  .actions
+    float: right
 
-    .actions
-      float: right
+    .button
+      font-size: 1em
+      &:hover,
+      &:focus,
+      &:active
+        color: #000
+        +single-text-shadow(#eee, 1px, 1px, 1px)
+        background-color: #ececec
+        +background-image(linear-gradient(color-stops(#f4f4f4, #ececec)))
+        border: 1px solid #d4d4d4
+        &:before
+          background-position: 0 -216px
+      &.on
+        border-color: #d4d4d4
+        background-color: #ececec
+        +background-image(linear-gradient(color-stops(#ececec, #f4f4f4)))
+        +box-shadow(none)
+        +single-box-shadow(#000, 0, 1px, 2px, false, true)
+      &.add:before
+        background-position: 0 -288px
+      &.trash:before
+        background-position: 0 -288px
 
-      .button
-        font-size: 1em
-        &:hover,
-        &:focus,
-        &:active
-          color: #000
-          +single-text-shadow(#eee, 1px, 1px, 1px)
-          background-color: #ececec
-          +background-image(linear-gradient(color-stops(#f4f4f4, #ececec)))
-          border: 1px solid #d4d4d4
-          &:before
-            background-position: 0 -216px
-        &.on
-          border-color: #d4d4d4
-          background-color: #ececec
-          +background-image(linear-gradient(color-stops(#ececec, #f4f4f4)))
-          +box-shadow(none)
-          +single-box-shadow(#000, 0, 1px, 2px, false, true)
-        &.add:before
-          background-position: 0 -288px
-        &.trash:before
-          background-position: 0 -288px
   #sortable
     li
       margin: 5px 0

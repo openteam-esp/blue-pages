@@ -14,7 +14,7 @@ ActiveAdmin.register Subdivision do
 
   show :title => proc { subdivision.title } do
     div do
-      render 'subdivisions', :subdivisions => subdivision.children.order('position'), :items => subdivision.items
+      render 'show', :items => subdivision.items, :subdivisions => subdivision.children.order('position')
     end
   end
 

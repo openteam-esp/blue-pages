@@ -1,23 +1,16 @@
-<div class="items">
-  <div class="top">
-    <div class="actions">
-      <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
-      <%= link_to t('active_admin.new_item'), new_admin_subdivision_item_path(@subdivision), :class => 'button icon add' %>
-    </div>
-    <h4>Сотрудники</h4>
+<% if items.empty? %>
+  <h5>Нет сотрудников</h5>
+<% else%>
+  <div class="actions">
+    <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+    <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
   </div>
-
-
-  <% if items.empty? %>
-    <h5>Нет сотрудников</h5>
-  <% else %>
-    <ul id="sortable">
-      <% items.each do |item| %>
-        <li class='item' <%= "data-id=#{item.id}" %>>
-          <span>хвать</span>
-          <%= link_to "#{item.title} #{item.person}" , admin_subdivision_item_path(@subdivision, item) %>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-</div>
+  <ul id="sortable">
+    <% items.each do |item|%>
+      <li data-id='<%= item.id %>' class='item'>
+        <span>хвать</span>
+        <%= link_to "#{item.title} #{item.person}", admin_subdivision_item_path(@subdivision, item)%>
+      </li>
+    <% end%>
+  </ul>
+<% end%>
