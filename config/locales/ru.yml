@@ -2,58 +2,59 @@ ru:
   activerecord:
     attributes:
       email:
-        address:          Адрес
+        address:            Адрес
 
       item:
-        created_at:       Создано
-        office:           Кабинет
-        person:           Сотрудник
-        subdivision:      Подразделение
-        title:            Должность
-        updated_at:       Обновлено
+        created_at:         Создано
+        office:             Кабинет
+        person:             Сотрудник
+        subdivision:        Подразделение
+        title:              Должность
+        updated_at:         Обновлено
 
       person:
-        birthdate:        День рождения
-        name:             Имя
-        patronymic:       Отчество
-        surname:          Фамилия
+        birthdate:          День рождения
+        name:               Имя
+        patronymic:         Отчество
+        surname:            Фамилия
 
       subdivision:
-        abbr:             Аббревиатура
-        created_at:       Создано
-        title:            Название
-        updated_at:       Обновлено
-        url:              Сайт
+        abbr:               Аббревиатура
+        created_at:         Создано
+        title:              Название
+        updated_at:         Обновлено
+        url:                Сайт
 
       building:
-        postcode:         Почтовый индекс
-        region:           Регион
-        district:         Район
-        locality:         Населённый пункт
-        street:           Улица
-        house:            Дом
-        building:         Строение
+        postcode:           Почтовый индекс
+        region:             Регион
+        district:           Район
+        locality:           Населённый пункт
+        street:             Улица
+        house:              Дом
+        building:           Строение
 
       phone:
-        code:             Код
-        number:           Телефон
-        kind:             Тип
-        _destroy:         Удалить
+        additional_number:  Добавочный
+        code:               Код
+        number:             Телефон
+        kind:               Тип
+        _destroy:           Удалить
         kind_enum:
-          fax:            Факс
-          phone:          Телефон
-          phone_and_fax:  Тел./факс
-          internal:       Внутренний
+          fax:              Факс
+          phone:            Телефон
+          phone_and_fax:    Тел./факс
+          internal:         Внутренний
 
 
     models:
-      admin:              Главная
-      admin_user:         Пользователи
-      building:           Здание
-      email:              Электронная почта
-      item:               Сотрудники
-      phone:              Телефон
-      subdivision:        Подразделения
+      admin:                Главная
+      admin_user:           Пользователи
+      building:             Здание
+      email:                Электронная почта
+      item:                 Сотрудники
+      phone:                Телефон
+      subdivision:          Подразделения
 
-  blue_pages_system:      Телефонный справочник
-  search:                 Поиск
+  blue_pages_system:        Телефонный справочник
+  search:                   Поиск

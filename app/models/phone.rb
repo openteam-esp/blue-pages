@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Phone < ActiveRecord::Base
   belongs_to :phoneable, :polymorphic => true
 
@@ -12,7 +14,9 @@ class Phone < ActiveRecord::Base
     res = "#{human_kind}: "
     res << "(#{code}) " unless kind_internal?
     res << number
+    res << " добавочный #{additional_number}" if additional_number.present?
   end
+
 
   private
     def reset_code
@@ -24,13 +28,14 @@ end
 #
 # Table name: phones
 #
-#  id             :integer         not null, primary key
-#  code           :string(255)
-#  number         :string(255)
-#  phoneable_id   :integer
-#  phoneable_type :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#  kind           :string(255)
+#  id                :integer         not null, primary key
+#  code              :string(255)
+#  number            :string(255)
+#  phoneable_id      :integer
+#  phoneable_type    :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  kind              :string(255)
+#  additional_number :string(255)
 #
 
