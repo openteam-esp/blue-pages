@@ -3,8 +3,9 @@
 class Phone < ActiveRecord::Base
   belongs_to :phoneable, :polymorphic => true
 
-  validates_presence_of :number, :kind
-  validates_presence_of :code, :unless => :kind_internal?
+  validates :code, :numericality => true, :unless => :kind_internal?
+  validates :kind, :presence => true
+  validates :number, :format => { :with => /^(\d{2,3}-)*\d{2,4}$/}, :presence => true
 
   before_save :reset_code, :if => :kind_internal?
 

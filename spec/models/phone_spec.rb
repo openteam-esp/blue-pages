@@ -25,6 +25,19 @@ describe Phone do
     it { create_phone(:code => '123', :number => '33-33-11', :kind => :phone).code.should_not be_nil }
     it { create_phone(:code => '123', :number => '33-33-11', :kind => :internal).code.should be_nil }
   end
+
+  describe "#code" do
+    it { should_not allow_value("1-123").for(:code) }
+  end
+
+  describe "#number" do
+    it { should_not allow_value("1-123").for(:number) }
+    it { should_not allow_value("11123").for(:number) }
+    it { should_not allow_value("-11-123").for(:number) }
+    it { should_not allow_value("11-123-").for(:number) }
+    it { should allow_value("11-123").for(:number) }
+    it { should allow_value("1234").for(:number) }
+  end
 end
 
 # == Schema Information
