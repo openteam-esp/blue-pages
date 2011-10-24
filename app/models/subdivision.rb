@@ -51,8 +51,8 @@ class Subdivision < ActiveRecord::Base
     text :title, :boost => 1.5
     text :building
     text :url
-    text :phones, do phones.join(' ') end
-    text :emails, do emails.join(' ') end
+    text :phones do phones.join(' ') end
+    text :emails do emails.join(' ') end
   end
 
   def title_with_abbr
