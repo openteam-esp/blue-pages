@@ -1,3 +1,10 @@
-<div>
-  <%= @item.person %>
-</div>
+<h1><%= @item.person %></h1>
+<%= show_for @item.person do |person| %>
+  <%= person.attribute :birthdate %>
+<% end %>
+<%= show_for @item do |item| %>
+  <%= item.association :phones %>
+  <%= item.association :emails do | email | %>
+    <li><%= mail_to email %></li>
+  <% end %>
+<% end %>

@@ -16,6 +16,7 @@ gem 'nested_form',                                :git => 'git://github.com/kfpr
 gem 'rails',                                      :require => false
 gem 'ryba',                                       :require => false
 gem 'sass-rails'
+gem 'show_for'
 gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do

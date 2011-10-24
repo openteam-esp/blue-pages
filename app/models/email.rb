@@ -1,4 +1,5 @@
 class Email < ActiveRecord::Base
+
   belongs_to :emailable, :polymorphic => true
 
   validates :address, :presence => true, :email => true
@@ -6,6 +7,7 @@ class Email < ActiveRecord::Base
   def to_s
     address
   end
+
 end
 
 # == Schema Information

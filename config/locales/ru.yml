@@ -11,6 +11,8 @@ ru:
         subdivision:        Подразделение
         title:              Должность
         updated_at:         Обновлено
+        phones:             Телефоны
+        emails:             Адреса электронной почты
 
       person:
         birthdate:          День рождения
