@@ -20,6 +20,7 @@ gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do
   gem 'compass',                '~> 0.12.alpha'
+  gem 'therubyracer'
   gem 'uglifier'
 end
 
