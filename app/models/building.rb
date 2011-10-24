@@ -24,6 +24,7 @@ class Building < ActiveRecord::Base
   def to_s
     result = significant_values[0..-2].uniq.join(", ")
     result << "/" + building unless building.blank?
+    result
   end
 end
 
