@@ -24,6 +24,7 @@ class Building < ActiveRecord::Base
   def to_s
     result = significant_values[0..-2].uniq.join(", ")
     result << "/" + building unless building.blank?
+    result << ", " + office + " каб." unless office.blank?
     result
   end
 end
@@ -44,5 +45,6 @@ end
 #  addressable_type :string(255)
 #  created_at       :datetime
 #  updated_at       :datetime
+#  office           :string(255)
 #
 
