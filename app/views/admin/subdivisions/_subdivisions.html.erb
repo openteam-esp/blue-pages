@@ -8,8 +8,10 @@
   <ul class="sortable">
     <% subdivisions.each do |child| %>
       <li data-id='<%= child.id %>' class='subdivision'>
-        <span>хвать</span>
-        <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
+        <div class="title">
+          <span>хвать</span>
+          <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
+        </div>
       </li>
     <% end %>
   </ul>
