@@ -4,6 +4,7 @@ gem 'activeadmin',                                :git => 'git://github.com/greg
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'compass',                  '~> 0.12.alpha'
+gem 'configliere'
 gem 'default_value_for'
 gem 'email_validator'
 gem 'forgery',                                    :require => false
@@ -25,6 +26,7 @@ group :assets do
 end
 
 group :production do
+  gem 'hoptoad_notifier'
   gem 'pg',                                       :require => false
 end
 
