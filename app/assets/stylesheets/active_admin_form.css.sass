@@ -1,0 +1,56 @@
+@import "compass/utilities"
+
+form
+  fieldset ol > li label
+    line-height: 26px
+    abbr
+      color: #aa0000
+      margin-left: 3px
+  select
+    border: 1px solid #C9D0D6
+    +border-radius(3px)
+    font-family: Helvetica, Arial, sans-serif
+    outline: none
+    padding: 8px 10px 7px
+    background-color: #fff
+  .inputs
+    input,
+    select,
+    textarea
+      font-size: 1.2em
+      padding: 4px 5px
+    .date
+      width: 130px
+    .string
+      img
+        width: 16px
+        height: 16px
+        cursor: pointer
+        float: right
+        margin: 5px 0 0 4px
+  .phones_fieldset
+    margin-bottom: 20px
+
+  .item_person,
+  .item_address
+    ol
+      +clearfix
+      padding: 10px
+    li
+      width: auto
+      float: left
+      padding: 0
+      margin: 0 10px 10px 0
+      label
+        width: auto
+        float: none
+        line-height: auto
+      input
+        width: auto
+        float: none
+  #item_title_input
+    clear: left
+  #item_title
+    width: 666px
+  #item_building_attributes_street_input
+    clear: left

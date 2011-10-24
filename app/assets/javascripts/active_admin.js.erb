@@ -1,7 +1,10 @@
-//= require active_admin/base
-//= require jquery
-//= require jquery-ui
-//= require nested_form
+/*
+ *= require active_admin/base
+ *= require jquery
+ *= require jquery-ui
+ *= require jquery.ui.datepicker-ru
+ *= require nested_form
+ */
 
 function preload_images(images) {
   $("<div />")
@@ -15,8 +18,22 @@ function preload_images(images) {
           "z-index": -9999
         });
   $.each(images, function(index, value) {
-      $("<img src=\"" + value + "\" />").appendTo($(".images_preload"));
+    $("<img src=\"" + value + "\" />").appendTo($(".images_preload"));
+  });
+};
+
+function init_datepicker() {
+  if ($.fn.datepicker) {
+    $("form input.date").datepicker({
+      changeMonth: true,
+      changeYear: true,
+      yearRange: "c-60:c+10",
+      showOn: "button",
+      buttonText: '',
+      buttonImage: "<%= image_path("ui/calendar.png") %>",
+      buttonImageOnly: true
     });
+  };
 };
 
 function serializeBlock(parent_block) {
@@ -38,6 +55,8 @@ $(function() {
       "<%= image_path("sort.png") %>"
     ]
   );
+
+  init_datepicker();
 
   $(".phone_kind").live("change", function(){
     var phone_kind = $(this);

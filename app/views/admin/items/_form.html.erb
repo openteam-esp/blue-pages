@@ -1,9 +1,18 @@
 <%= semantic_nested_form_for [:admin, @subdivision, @item] do |form| %>
-  <%= form.inputs "Должность" do %>
+
+  <%= form.inputs "Сотрудник", :class => "inputs item_person", :for => [:person, @item.person || @item.build_person] do |person_form| %>
+    <%= person_form.input :surname %>
+    <%= person_form.input :name %>
+    <%= person_form.input :patronymic %>
+    <%= person_form.input :birthdate, :as => :string,
+                          :input_html => {
+                            :class => "date",
+                            :value => @item.person.birthdate ? I18n.l(@item.person.birthdate) : nil
+                          } %>
     <%= form.input :title %>
   <% end %>
 
-  <%= form.inputs "Адрес", :for => :building do |building_form| %>
+  <%= form.inputs "Адрес", :class => "inputs item_address", :for => :building do |building_form| %>
     <%= building_form.input :postcode %>
     <%= building_form.input :region %>
     <%= building_form.input :district %>
@@ -12,13 +21,6 @@
     <%= building_form.input :house %>
     <%= building_form.input :building %>
     <%= form.input :office %>
-  <% end %>
-
-  <%= form.inputs "Сотрудник", :for => [:person, @item.person || @item.build_person] do |person_form| %>
-    <%= person_form.input :surname %>
-    <%= person_form.input :name %>
-    <%= person_form.input :patronymic %>
-    <%= person_form.input :birthdate %>
   <% end %>
 
   <%= form.semantic_fields_for :phones do |phone_form| %>

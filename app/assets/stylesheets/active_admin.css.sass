@@ -1,35 +1,14 @@
 // Active Admin CSS Styles
 @import "active_admin/mixins"
-@import "active_admin/base"
-@import "buttons"
-@import "compass/css3"
-@import "jquery_ui"
+@import "active_admin_base"
 
 // To customize the Active Admin interfaces, add your
 // styles here:
 
-form
-  fieldset ol > li label
-    line-height: 26px
-    abbr
-      color: #880000
-      font-size: 1.3em
-      margin-left: 3px
-  select
-    border: 1px solid #C9D0D6
-    +border-radius(3px)
-    font-family: Helvetica, Arial, sans-serif
-    outline: none
-    padding: 8px 10px 7px
-    background-color: #fff
-  .inputs
-    input,
-    select,
-    textarea
-      font-size: 1.2em
-      padding: 4px 5px
-  .phones_fieldset
-    margin-bottom: 20px
+@import "buttons"
+@import "compass/css3"
+@import "jquery_ui"
+@import "active_admin_form"
 
 body
   font-size: 11px
@@ -100,10 +79,5 @@ div.subdivisions, div.items
 
 #footer
   clear: none
-  width: 100%
   padding: 2px 30px
-  position: fixed
-  +single-box-shadow(rgba(0, 0, 0, 0.37), 0, -1px, 2px)
   border-top: 1px solid #ededed
-  bottom: 0
-  background-color: #fff

@@ -12,7 +12,7 @@
     <%= content_tag :div, :class => "url" do %>
       <h4><%= t("subdivision.url")  %></h4>
       <ul>
-        <li><%= link_to @subdivision.url %></li>
+        <li><%= link_to @subdivision.url, @subdivision.url %></li>
       </ul>
     <% end if @subdivision.url %>
 
