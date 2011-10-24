@@ -15,11 +15,11 @@ gem 'nested_form',                                :git => 'git://github.com/kfpr
 gem 'rack' ,                    '1.3.3',          :require => false
 gem 'rails'
 gem 'ryba',                                       :require => false
+gem 'sass-rails',               '~> 3.1.4'
 gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do
   gem 'compass',                '~> 0.12.alpha'
-  gem 'sass-rails',             '~> 3.1.4'
 end
 
 group :production do
