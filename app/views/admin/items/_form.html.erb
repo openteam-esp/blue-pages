@@ -1,6 +1,6 @@
 <%= semantic_nested_form_for [:admin, @subdivision, @item] do |form| %>
 
-  <%= form.inputs "Сотрудник", :class => "inputs item_person", :for => [:person, @item.person || @item.build_person] do |person_form| %>
+  <%= form.inputs "Сотрудник", :class => "inputs inline_fields", :for => [:person, @item.person || @item.build_person] do |person_form| %>
     <%= person_form.input :surname %>
     <%= person_form.input :name %>
     <%= person_form.input :patronymic %>
@@ -12,7 +12,7 @@
     <%= form.input :title %>
   <% end %>
 
-  <%= form.inputs "Адрес", :class => "inputs item_address", :for => :building do |building_form| %>
+  <%= form.inputs "Адрес", :class => "inputs inline_fields", :for => :building do |building_form| %>
     <%= building_form.input :postcode %>
     <%= building_form.input :region %>
     <%= building_form.input :district %>
@@ -24,7 +24,7 @@
   <% end %>
 
   <%= form.semantic_fields_for :phones do |phone_form| %>
-    <%= phone_form.inputs :class => "inputs item_phone" do %>
+    <%= phone_form.inputs :class => "inputs inline_fields" do %>
       <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
       <%= phone_form.input :code, :input_html => { :class => "code" } %>
       <%= phone_form.input :number %>
@@ -37,7 +37,7 @@
   </div>
 
   <%= form.fields_for :emails do |email_form| %>
-    <%= email_form.inputs :class => "inputs item_email" do %>
+    <%= email_form.inputs :class => "inputs inline_fields" do %>
       <%= email_form.input :address %>
       <li class="destroy_action"><%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %></li>
     <% end %>
