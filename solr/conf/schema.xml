@@ -60,9 +60,33 @@
     <fieldType name="rand" class="solr.RandomSortField" omitNorms="true"/>
     <!-- *** This fieldType is used by Sunspot! *** -->
     <fieldType name="text" class="solr.TextField" omitNorms="false">
-      <analyzer>
-        <tokenizer class="solr.StandardTokenizerFactory"/>
-        <filter class="solr.StandardFilterFactory"/>
+      <analyzer type="query">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+          splitOnCaseChange="1"
+          splitOnNumerics="1"
+          generateWordParts="1"
+          generateNumberParts="0"
+          catenateWords="1"
+          catenateNumbers="1"
+          catenateAll="1"
+          preserveOriginal="1"
+          />
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class='solr.PatternReplaceFilterFactory' pattern='ё' replacement='е' replace='all' />
+      </analyzer>
+      <analyzer type="index">
+        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+          splitOnCaseChange="1"
+          splitOnNumerics="1"
+          generateWordParts="1"
+          generateNumberParts="0"
+          catenateWords="1"
+          catenateNumbers="1"
+          catenateAll="1"
+          preserveOriginal="1"
+          />
         <filter class="solr.LowerCaseFilterFactory"/>
         <filter class='solr.PatternReplaceFilterFactory' pattern='ё' replacement='е' replace='all' />
       </analyzer>
