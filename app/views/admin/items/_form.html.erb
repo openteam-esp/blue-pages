@@ -24,11 +24,11 @@
   <% end %>
 
   <%= form.semantic_fields_for :phones do |phone_form| %>
-    <%= phone_form.inputs do %>
+    <%= phone_form.inputs :class => "inputs item_phone" do %>
       <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind) %>
       <%= phone_form.input :code %>
       <%= phone_form.input :number %>
-      <li><%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %></li>
+      <li class="destroy_action"><%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %></li>
     <% end %>
   <% end %>
 
@@ -37,9 +37,9 @@
   </div>
 
   <%= form.fields_for :emails do |email_form| %>
-    <%= email_form.inputs do %>
+    <%= email_form.inputs :class => "inputs item_email" do %>
       <%= email_form.input :address %>
-      <li><%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %></li>
+      <li class="destroy_action"><%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %></li>
     <% end %>
   <% end %>
 
