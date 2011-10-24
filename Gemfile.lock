@@ -14,7 +14,7 @@ GIT
 
 GIT
   remote: git://github.com/kfprimm/nested_form
-  revision: 2fc62fbfdd2b88c416f3fe726697c59223e55b8d
+  revision: dc5657e0c07cfa73ca48b9f8c24e262db6cfa3e4
   specs:
     nested_form (0.1.1)
 
