@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'activeadmin',                                :git => 'git://github.com/gregbell/active_admin'
 gem 'ancestry'
 gem 'attribute_normalizer'
+gem 'compass',                  '~> 0.12.alpha'
 gem 'default_value_for'
 gem 'email_validator'
 gem 'forgery',                                    :require => false
@@ -12,14 +13,12 @@ gem 'has_searcher'
 gem 'inherited_resources',      '< 1.3.0'
 gem 'jquery-rails'
 gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
-gem 'rack' ,                    '1.3.3',          :require => false
-gem 'rails'
+gem 'rails',                                      :require => false
 gem 'ryba',                                       :require => false
-gem 'sass-rails',               '~> 3.1.4'
+gem 'sass-rails'
 gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do
-  gem 'compass',                '~> 0.12.alpha'
   gem 'therubyracer'
   gem 'uglifier'
 end
