@@ -1,5 +1,5 @@
-en:
+ru:
   show_for:
-    blank: "Not specified"
-    "yes": "Yes"
-    "no": "No"
+    blank: "Не указано"
+    "yes": "Да"
+    "no": "Нет"
