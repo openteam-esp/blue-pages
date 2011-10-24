@@ -7,6 +7,7 @@ config/sunspot.yml
 db/*.sqlite3
 log/*.log
 log/*.log.lck
+public/assets/
 tmp/
 solr/data/
 solr/pids/
