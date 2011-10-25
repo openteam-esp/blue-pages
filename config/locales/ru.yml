@@ -10,6 +10,7 @@ ru:
         subdivision:        Подразделение
         title:              Должность
         building:           Адрес
+        office:             Кабинет
         updated_at:         Обновлено
         phones:             Телефоны
         emails:             Адреса электронной почты
@@ -25,6 +26,10 @@ ru:
         created_at:         Создано
         title:              Название
         updated_at:         Обновлено
+        building:           Адрес
+        office:             Кабинет
+        phones:             Телефоны
+        emails:             Адреса электронной почты
         url:                Сайт
 
       building:
@@ -35,7 +40,6 @@ ru:
         street:             Улица
         house:              Дом
         building:           Строение
-        office:             Кабинет
 
       phone:
         additional_number:  Добавочный

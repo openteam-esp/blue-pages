@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111024094523) do
+ActiveRecord::Schema.define(:version => 20111025021526) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -58,7 +58,6 @@ ActiveRecord::Schema.define(:version => 20111024094523) do
     t.string   "addressable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "office"
   end
 
   create_table "emails", :force => true do |t|
@@ -77,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20111024094523) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.string   "office"
   end
 
   add_index "items", ["subdivision_id"], :name => "index_items_on_subdivision_id"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20111024094523) do
     t.string   "ancestry"
     t.integer  "position"
     t.text     "url"
+    t.string   "office"
   end
 
   add_index "subdivisions", ["ancestry"], :name => "index_subdivisions_on_ancestry"
