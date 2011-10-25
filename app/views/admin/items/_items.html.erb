@@ -1,7 +1,10 @@
-<div class="actions">
-  <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
-  <%= link_to t('active_admin.new_item'), new_admin_subdivision_item_path(@subdivision), :class => 'button icon add' %>
-</div>
+<% if can?(:maange, @subdivision) %>
+  <div class="actions">
+    <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+    <%= link_to t('active_admin.new_item'), new_admin_subdivision_item_path(@subdivision), :class => 'button icon add' %>
+  </div>
+<% end %>
+
 <% if items.empty? %>
   <h5>Нет сотрудников</h5>
 <% else%>
@@ -14,10 +17,10 @@
         </div>
         <div class="details">
           <%= content_tag :p, "Дата рождения: #{l(item.person.birthdate)}" if !item.person.blank? && !item.person.birthdate.blank? %></p>
-          <%= content_tag :p, item.phones.join(', ') if item.phones.any? %></p>
-          <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %></p>
-        </div>
-      </li>
+        <%= content_tag :p, item.phones.join(', ') if item.phones.any? %></p>
+      <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %></p>
+  </div>
+</li>
     <% end%>
   </ul>
 <% end%>

@@ -2,12 +2,12 @@
 
 require 'spec_helper'
 
-describe Ability do
+describe AdminAbility do
   describe 'пользователь' do
     let(:subdivision) { Fabricate(:subdivision) }
     let(:child_subdivision) { subdivision.children.create(Fabricate.attributes_for(:subdivision)) }
     let(:user) { Fabricate(:admin_user) }
-    let(:ability) { Ability.new(user) }
+    let(:ability) { AdminAbility.new(user) }
 
     describe do 'может'
       before do
@@ -15,7 +15,10 @@ describe Ability do
       end
 
       it { ability.should be_able_to(:manage, subdivision) }
+      it { ability.should be_able_to(:manage, subdivision.items.new) }
+
       it { ability.should be_able_to(:manage, child_subdivision) }
+      it { ability.should be_able_to(:manage, child_subdivision.items.new) }
     end
 
     describe 'не может' do

@@ -1,16 +1,18 @@
 # encoding: utf-8
 
 ActiveAdmin.register Item do
-  menu :parent => "Подразделения"
-  config.sort_order = 'position'
   belongs_to :subdivision, :optional => true
 
-  form :partial => 'form'
+  config.clear_action_items!
+
+  config.sort_order = 'position'
 
   filter :subdivision
   filter :title
   #filter :person, :as => :string
   filter :updated_at
+
+  menu :parent => "Подразделения"
 
   index do
     column :subdivision
@@ -27,16 +29,20 @@ ActiveAdmin.register Item do
     render "item"
   end
 
-  config.clear_action_items!
+  form :partial => 'form'
 
   action_item :only => :show do
-    link_to(I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}"), edit_resource_path, :class => 'button icon edit')
+    link_to(I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}"),
+            edit_resource_path,
+            :class => 'button icon edit') if can?(:manage, resource)
   end
 
   action_item :only => :show do
     link_to(I18n.t("active_admin.delete_#{active_admin_config.underscored_resource_name}"),
             resource_path,
-            :method => :delete, :confirm => I18n.t('active_admin.delete_confirmation'), :class => 'button icon trash danger')
+            :method => :delete,
+            :confirm => I18n.t('active_admin.delete_confirmation'),
+            :class => 'button icon trash danger') if can?(:manage, resource)
   end
 
   collection_action :sort, :method => :post do
@@ -48,6 +54,7 @@ ActiveAdmin.register Item do
   end
 
   controller do
+    authorize_resource
 
     def index
       index! do

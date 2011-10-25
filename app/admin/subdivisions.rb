@@ -1,8 +1,12 @@
 ActiveAdmin.register Subdivision do
   belongs_to :parent_subdivision, :optional => true, :class_name => 'Subdivision'
+
+  config.clear_action_items!
+
+  config.sort_order = 'position'
+
   filter :title
   filter :updated_at
-  config.sort_order = 'position'
 
   index do
     column :title do |subdivision|
@@ -19,8 +23,6 @@ ActiveAdmin.register Subdivision do
   end
 
   form :partial => 'form'
-
-  config.clear_action_items!
 
   action_item :only => :show do
     link_to(I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}"),
@@ -45,11 +47,7 @@ ActiveAdmin.register Subdivision do
   end
 
   controller do
-    load_and_authorize_resource
-
-    def current_ability
-      @current_ability ||= Ability.new(current_admin_user)
-    end
+    authorize_resource
 
     def index
       index! do

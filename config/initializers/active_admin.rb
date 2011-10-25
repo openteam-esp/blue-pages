@@ -166,4 +166,10 @@ module ActiveAdmin
     end
   end
 
+  ResourceController.class_eval do
+    protected
+      def current_ability
+        @current_ability ||= AdminAbility.new(current_admin_user)
+      end
+  end
 end

@@ -18,7 +18,7 @@ class Building < ActiveRecord::Base
   end
 
   def ==(other)
-    self.significant_values == other.significant_values
+    other && self.significant_values == other.significant_values
   end
 
   def to_s

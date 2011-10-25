@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 ActiveAdmin::Dashboards.build do
-
   section 'Разделы справочника' do
     div :class => "subdivisions" do
       render 'admin/subdivisions/subdivisions', :subdivisions => Subdivision.roots.order('position')
