@@ -17,7 +17,7 @@ describe Phone do
 
   describe "код города необязателен только для внутреннего телефона" do
     it { phone(:code => '123', :number => '33-33-11', :kind => :phone).should be_valid }
-    it { phone(:number => '33-33-11', :kind => :phone).should_not be_valid }
+    it { phone(:code => '', :number => '33-33-11', :kind => :phone).should_not be_valid }
     it { phone(:number => '33-33-11', :kind => :internal).should be_valid }
   end
 

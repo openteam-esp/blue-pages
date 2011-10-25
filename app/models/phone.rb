@@ -9,6 +9,8 @@ class Phone < ActiveRecord::Base
 
   before_save :reset_code, :if => :kind_internal?
 
+  default_value_for :code, "3822"
+
   has_enums
 
   def to_s
