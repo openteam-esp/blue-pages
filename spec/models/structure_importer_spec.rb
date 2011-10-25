@@ -13,6 +13,7 @@ describe StructureImporter do
     describe "должен импортировать" do
       it { Subdivision.roots.map(&:title).should == ["Губернатор", "Администрация"] }
       it { Subdivision.governor.children.count.should == 11 }
+      it { Subdivision.administration.children.count.should == 48 }
     end
 
   end

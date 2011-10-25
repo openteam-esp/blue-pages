@@ -36,7 +36,7 @@ class StructureImporter
 
   def import_subdivisions
     doc = Nokogiri::HTML(open(Rails.root.join 'spec/fixtures/structure.html'))
-    doc.css('.content-second a').each do |a|
+    doc.css('.content-second a[href*="/ru/rule/structure"]').each do |a|
       title = Sanitize.clean(a.text).squish
       next if title.blank?
       if title =~ /заместитель/i
@@ -44,6 +44,7 @@ class StructureImporter
           subdivision.save!
         end
       else
+        next if title =~ /^губернатор/i
         Subdivision.administration.children.find_or_initialize_by_title(title).tap do | subdivision |
           subdivision.save!
         end
