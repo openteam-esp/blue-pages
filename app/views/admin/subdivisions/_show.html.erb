@@ -1,30 +1,23 @@
 <div class="subdivision">
-  <div class="info">
-    <% %w[building phones emails].each do | item | %>
-      <%= content_tag :div, :class => item do %>
-        <h4><%= t("subdivision.#{item}")  %></h4>
-        <ul>
-          <%= render @subdivision.send(item) %>
-        </ul>
-      <% end unless @subdivision.send(item).blank? %>
+  <%= show_for subdivision do | s | %>
+    <%= s.association :building, :if_blank => "Не указан" %>
+    <%= s.attribute :office, :if_blank => "Не указан" %>
+    <%= s.association :phones, :if_blank => "Не указаны" %>
+    <%= s.association :emails, :if_blank => "Не указаны" do | email | %>
+      <li><%= mail_to email %></li>
     <% end %>
-
-    <%= content_tag :div, :class => "url" do %>
-      <h4><%= t("subdivision.url")  %></h4>
-      <ul>
-        <li><%= link_to @subdivision.url, @subdivision.url %></li>
-      </ul>
-    <% end if @subdivision.url %>
-
-  </div>
+    <%= s.attribute :url do %>
+      <%= subdivision.url ? link_to(subdivision.url, subdivision.url, :target => "_blank") : "Не указан" %>
+    <% end %>
+  <% end %>
 
   <div class="items">
-    <h4>Сотрудники</h4>
+    <h3>Сотрудники</h3>
     <%= render :partial => "admin/items/items", :locals => { :items => items } %>
   </div>
 
   <div class="subdivisions">
-    <h4>Подразделения</h4>
+    <h3>Подразделения</h3>
     <%= render :partial => "admin/subdivisions/subdivisions", :locals => { :subdivisions => subdivisions } %>
   </div>
 </div>
