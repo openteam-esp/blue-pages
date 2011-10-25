@@ -15,9 +15,11 @@ gem 'has_searcher'
 gem 'inherited_resources',      '< 1.3.0'
 gem 'jquery-rails'
 gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
+gem 'nokogiri',                                   :require => false
 gem 'rails',                                      :require => false
 gem 'ryba',                                       :require => false
 gem 'sass-rails'
+gem 'sanitize',                                   :require => false
 gem 'show_for'
 gem 'sunspot_rails',            '~> 1.3.0.rc4'
 

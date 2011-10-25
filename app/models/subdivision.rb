@@ -9,7 +9,7 @@ class Subdivision < ActiveRecord::Base
 
   has_one :building,  :as => :addressable, :dependent => :destroy
 
-  validates :title, :presence => true, :format => {:with => /^[а-яё\s\-\(\)«"»]+$/i}
+  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
   validates_format_of :url,
                       :allow_blank => true,

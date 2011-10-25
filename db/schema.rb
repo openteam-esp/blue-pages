@@ -59,10 +59,11 @@ ActiveRecord::Schema.define(:version => 20111025024240) do
     t.string   "street"
     t.string   "house"
     t.string   "building"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.string   "office"
   end
 
   create_table "emails", :force => true do |t|
@@ -110,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20111025024240) do
   end
 
   create_table "subdivisions", :force => true do |t|
-    t.string   "title"
+    t.text     "title"
     t.string   "abbr"
     t.datetime "created_at"
     t.datetime "updated_at"
