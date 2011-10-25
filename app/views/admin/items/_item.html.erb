@@ -3,6 +3,7 @@
   <%= person.attribute :birthdate %>
 <% end %>
 <%= show_for @item do |item| %>
+  <%= item.association :building %>
   <%= item.association :phones %>
   <%= item.association :emails do | email | %>
     <li><%= mail_to email %></li>

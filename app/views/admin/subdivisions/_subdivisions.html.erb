@@ -1,15 +1,17 @@
+<div class="actions">
+  <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+  <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
+  </div>
 <% if subdivisions.empty? %>
   <h5>Нет подразделений</h5>
 <% else %>
-  <div class="actions">
-    <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
-    <%= link_to t('active_admin.new_subdivision'), @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path, :class => 'button icon add' %>
-  </div>
   <ul class="sortable">
     <% subdivisions.each do |child| %>
       <li data-id='<%= child.id %>' class='subdivision'>
-        <span>хвать</span>
-        <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
+        <div class="title">
+          <span>хвать</span>
+          <%= link_to child.title_with_abbr, admin_subdivision_path(child) %>
+        </div>
       </li>
     <% end %>
   </ul>

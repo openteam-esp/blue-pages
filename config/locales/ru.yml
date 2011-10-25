@@ -6,10 +6,10 @@ ru:
 
       item:
         created_at:         Создано
-        office:             Кабинет
         person:             Сотрудник
         subdivision:        Подразделение
         title:              Должность
+        building:           Адрес
         updated_at:         Обновлено
         phones:             Телефоны
         emails:             Адреса электронной почты
@@ -35,6 +35,7 @@ ru:
         street:             Улица
         house:              Дом
         building:           Строение
+        office:             Кабинет
 
       phone:
         additional_number:  Добавочный
