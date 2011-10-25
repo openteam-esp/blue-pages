@@ -1,6 +1,8 @@
 # encoding: utf-8
 
 class Subdivision < ActiveRecord::Base
+  has_and_belongs_to_many :admin_users
+
   has_many :emails,   :as => :emailable,   :dependent => :destroy
   has_many :items,                         :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
