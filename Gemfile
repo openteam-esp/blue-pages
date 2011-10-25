@@ -3,6 +3,7 @@ source 'http://rubygems.org'
 gem 'activeadmin',                                :git => 'git://github.com/gregbell/active_admin'
 gem 'ancestry'
 gem 'attribute_normalizer'
+gem 'cancan'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
 gem 'default_value_for'
@@ -25,16 +26,16 @@ group :assets do
   gem 'uglifier'
 end
 
-group :production do
-  gem 'hoptoad_notifier'
-  gem 'pg',                                       :require => false
-end
-
 group :development do
   gem 'annotate',               '~> 2.4.1.beta1', :require => false
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
+end
+
+group :production do
+  gem 'hoptoad_notifier'
+  gem 'pg',                                       :require => false
 end
 
 group :test do

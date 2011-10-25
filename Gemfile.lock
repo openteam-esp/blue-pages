@@ -56,6 +56,7 @@ GEM
     attribute_normalizer (1.0.0)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    cancan (1.6.7)
     chunky_png (1.2.5)
     compass (0.12.alpha.0)
       chunky_png (~> 1.2)
@@ -211,6 +212,7 @@ DEPENDENCIES
   ancestry
   annotate (~> 2.4.1.beta1)
   attribute_normalizer
+  cancan
   compass (~> 0.12.alpha)
   configliere
   default_value_for

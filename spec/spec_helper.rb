@@ -8,6 +8,8 @@ Spork.prefork do
 
   require 'rspec/rails'
   require 'rspec/autorun'
+
+  require 'cancan/matchers'
   require 'shoulda-matchers'
   require 'sunspot_matchers'
 
