@@ -48,9 +48,9 @@ ru:
         kind:               Тип
         _destroy:           Удалить
         kind_enum:
-          fax:              Факс
           phone:            Телефон
           phone_and_fax:    Тел./факс
+          fax:              Факс
           internal:         Внутренний
 
 

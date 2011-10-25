@@ -19,7 +19,6 @@ class Phone < ActiveRecord::Base
     res
   end
 
-
   private
     def reset_code
       self.code = nil
