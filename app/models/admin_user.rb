@@ -8,6 +8,10 @@ class AdminUser < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me
 
   has_and_belongs_to_many :subdivisions
+
+  def manageable_subdivisions
+    (subdivisions + subdivisions.map(&:descendants)).flatten
+  end
 end
 
 # == Schema Information

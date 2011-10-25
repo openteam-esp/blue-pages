@@ -3,8 +3,6 @@ ActiveAdmin.register Subdivision do
 
   config.clear_action_items!
 
-  config.sort_order = 'position'
-
   filter :title
   filter :updated_at
 
@@ -18,7 +16,7 @@ ActiveAdmin.register Subdivision do
 
   show :title => proc { subdivision.title } do
     div do
-      render 'show', :items => subdivision.items, :subdivisions => subdivision.children.order('position')
+      render 'show', :items => subdivision.items, :subdivisions => subdivision.children
     end
   end
 
@@ -27,18 +25,19 @@ ActiveAdmin.register Subdivision do
   action_item :only => :show do
     link_to(I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}"),
             edit_resource_path,
-            :class => 'button icon edit') if can?(:manage, resource)
+            :class => 'button icon edit') if can?(:edit, resource)
   end
 
   action_item :only => :show do
     link_to(I18n.t("active_admin.delete_#{active_admin_config.underscored_resource_name}"),
-            resource_path,
+            resource.parent ? admin_parent_subdivision_subdivision_path(resource.parent, resource) : resource_path,
             :method => :delete,
             :confirm => I18n.t('active_admin.delete_confirmation'),
-            :class => 'button icon trash danger') if can?(:manage, resource)
+            :class => 'button icon trash danger') if can?(:destroy, resource)
   end
 
   collection_action :sort, :method => :post do
+    authorize! :manage, parent
     params[:ids].each_with_index do |id, index|
       subdivision = Subdivision.find(id)
       subdivision.update_attribute(:position, index.to_i+1)

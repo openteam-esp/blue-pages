@@ -1,6 +1,8 @@
-<h1><%= @item.person %></h1>
-<%= show_for @item.person do |person| %>
-  <%= person.attribute :birthdate %>
+<% if @item.person %>
+  <h1><%=  @item.person %></h1>
+  <%= show_for @item.person do |person| %>
+    <%= person.attribute :birthdate %>
+  <% end %>
 <% end %>
 <%= show_for @item do |item| %>
   <%= item.association :building %>

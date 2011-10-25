@@ -9,7 +9,6 @@ ActiveAdmin.register Item do
 
   filter :subdivision
   filter :title
-  #filter :person, :as => :string
   filter :updated_at
 
   menu :parent => "Подразделения"
@@ -46,6 +45,8 @@ ActiveAdmin.register Item do
   end
 
   collection_action :sort, :method => :post do
+    authorize! :manage, parent
+
     params[:ids].each_with_index do |id, index|
       item = Item.find(id)
       item.update_attribute(:position, index.to_i+1)

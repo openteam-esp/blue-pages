@@ -1,8 +1,8 @@
-<% if can?(:maange, @subdivision) %>
+<% if can?(:manage, subdivision) %>
   <div class="actions">
-    <%= link_to t('active_admin.sort'), '#', :class => 'sort_link off button icon loop' %>
+    <%= link_to t('active_admin.sort'), sort_admin_parent_subdivision_subdivisions_path(subdivision), :class => 'sort_link off button icon loop' %>
     <%= link_to t('active_admin.new_subdivision'),
-                @subdivision ? new_admin_parent_subdivision_subdivision_path(@subdivision) : new_admin_subdivision_path,
+                new_admin_parent_subdivision_subdivision_path(subdivision),
                 :class => 'button icon add' %>
   </div>
 <% end %>

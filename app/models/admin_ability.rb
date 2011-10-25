@@ -5,7 +5,7 @@ class AdminAbility
     can :read, [Item, Subdivision]
 
     can :manage, Subdivision do |subdivision|
-      subdivision.admin_users.include?(user) || subdivision.ancestors.map(&:admin_users).flatten.include?(user)
+      user.manageable_subdivisions.include?(subdivision)
     end
 
     can :manage, Item do |item|
