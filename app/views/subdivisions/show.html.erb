@@ -1,1 +1,56 @@
+<%= content_tag :div, :class => "actions" do %>
+  <%= link_to t("manage"), admin_subdivision_path(@subdivision), :class => "button icon edit" %>
+<% end %>
 <h1><%= resource.title %></h1>
+<%= show_for @subdivision do | subdivision | %>
+  <%= subdivision.association :building, :if_blank => "Не указан" %>
+  <%= subdivision.attribute :office, :if_blank => "Не указан" %>
+  <%= subdivision.association :phones, :if_blank => "Не указаны" %>
+  <%= subdivision.association :emails, :if_blank => "Не указаны" do | email | %>
+    <li><%= mail_to email %></li>
+  <% end %>
+  <%= subdivision.attribute :url do %>
+    <%= @subdivision.url.blank? ? "Не указан" : link_to(@subdivision.url, @subdivision.url, :target => "_blank") %>
+  <% end %>
+<% end %>
+
+<h2>Сотрудники</h2>
+<% if @subdivision.items.any? %>
+  <table class="subdivision_items">
+    <thead>
+      <tr>
+        <th>Фамилия, Имя, Отчество</th>
+        <th>Должность</th>
+        <th>Кабинет</th>
+        <th>Телефон</th>
+        <th>E-mail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @subdivision.items.each do | item | %>
+        <tr>
+          <td><%= item.person %></td>
+          <td><%= item.title %></td>
+          <td class="center"><%= item.office %></td>
+          <td><%= item.phones.join(", ") %></td>
+          <td><%= item.emails.map{|email| mail_to(email)}.join(', ').html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h3>Нет сотрудников</h3>
+<% end %>
+
+<h2>Подразделения</h2>
+<% if @subdivision.subdivisions.any? %>
+<div class="subdivisions">
+  <% @subdivision.subdivisions.each do | item | %>
+    <div class="item">
+      <%= render item %>
+    </div>
+  <% end %>
+</div>
+<% else %>
+  <h3>Нет подразделений</h3>
+<% end %>

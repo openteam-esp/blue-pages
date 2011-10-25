@@ -7,7 +7,7 @@
       <li><%= mail_to email %></li>
     <% end %>
     <%= s.attribute :url do %>
-      <%= subdivision.url ? link_to(subdivision.url, subdivision.url, :target => "_blank") : "Не указан" %>
+      <%= subdivision.url.blank? ? "Не указан" : link_to(subdivision.url, subdivision.url, :target => "_blank") %>
     <% end %>
   <% end %>
 

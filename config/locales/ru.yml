@@ -48,9 +48,9 @@ ru:
         kind:               Тип
         _destroy:           Удалить
         kind_enum:
-          fax:              Факс
           phone:            Телефон
           phone_and_fax:    Тел./факс
+          fax:              Факс
           internal:         Внутренний
 
 
@@ -64,6 +64,7 @@ ru:
       subdivision:          Подразделения
 
   blue_pages_system:        Телефонный справочник
+  manage:                   Управление
   search:                   Поиск
   subdivision:
     building:               Адрес

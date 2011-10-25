@@ -4,6 +4,14 @@
 
 <%= content_for :content do %>
   <div class='content_wrapper'>
+    <%= semantic_search_form_for :main, :url => root_path  do |form| %>
+      <%= form.inputs do %>
+        <%= form.input :keywords, :as => :string, :label => false %>
+      <% end %>
+      <%= form.buttons do %>
+        <%= form.commit_button t('search'), :button_html => { :class => "button" } %>
+      <% end %>
+    <% end %>
     <%= yield %>
   </div>
 <% end %>
