@@ -52,14 +52,41 @@ class Subdivision
                                :street => street,
                                :house => house,
                                :building => building_no)
+
+    import_items
+  end
+
+  def import_items
+    content_second.css('table tr')[1..-1].each do | tr |
+      tds = tr.css("td").map{|td| td.text.gsub(/[[:space:]]+/, ' ').squish }
+      surname, name, patronymic = tds[0].split
+      items.find_or_initialize_by_title(tds[1]).tap do | item |
+        item.update_attributes :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
+                               :office => tds[2],
+                               :phones_attributes => phones_attributes(tds[3]),
+                               :emails_attributes => tds[4].split(/,? /).map{|address| { :address => address }}
+      end
+
+    end
+  end
+
+  def phones_attributes(phone_string)
+    res = []
+    phone_string.scan(/(тел|факс)\. ((?:(?:[\d-]+)(?:, )?)+)/).each do |kind, numbers|
+      kind = (kind == "тел" ? "phone" : "fax")
+      numbers.split(/, /).each do |number|
+        res << {:kind => kind, :number => number }
+      end
+    end
+    res
   end
 
   def text
-    @text ||= Sanitize.clean(content_second)
+    @text ||= Sanitize.clean(content_second.to_s)
   end
 
   def content_second
-    @content_second ||= Nokogiri::HTML(html).css('.content-second').first.to_s
+    @content_second ||= Nokogiri::HTML(html).css('.content-second').first
   end
 
   def html

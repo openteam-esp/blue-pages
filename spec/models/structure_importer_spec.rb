@@ -28,6 +28,10 @@ describe StructureImporter do
       it { green_tsu_ru.phones(true).map(&:kind).should == %w[phone fax] }
       it { green_tsu_ru.emails(true).map(&:address).should == %w[sec@green.tsu.ru] }
       it { green_tsu_ru.url.should == 'http://green.tsu.ru/' }
+      it { green_tsu_ru.items.count.should == 9 }
+      it { green_tsu_ru.items.second.emails.map(&:address).should == ["sec@green.tsu.ru"] }
+      it { green_tsu_ru.items.second.phones.map(&:number).should == ["56-36-58", "56-36-46"] }
+      it { green_tsu_ru.items.second.phones.map(&:kind).should == ["phone", "fax"] }
     end
 
   end
