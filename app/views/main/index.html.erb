@@ -1,7 +1,12 @@
-<%= content_tag :div, :class => "subdivisions" do %>
-  <% collection.each do | item | %>
-    <div class="item">
-      <%= render item %>
-    </div>
+<% if collection.any? %>
+  <%= content_tag :ol, :class => "subdivisions" do %>
+    <% collection.each do | item | %>
+      <li class="item">
+        <%= render item %>
+      </li>
+    <% end %>
   <% end %>
-<% end if collection.any? %>
+  <%= paginate collection %>
+<% else %>
+  <p>Нет результатов поиска</p>
+<% end %>

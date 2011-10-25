@@ -1,1 +1,5 @@
-<p><%= link_to subdivision, subdivision %></p>
+<%= content_tag :p, link_to(subdivision, subdivision), :class => "title" %>
+<%= content_tag :p, :class => "address" do %>
+  Адрес: <%= subdivision.building %><%= ", #{subdivision.office} кабинет" unless subdivision.office.blank? %>
+<% end if subdivision.building %>
+<%= content_tag :p, subdivision.phones.join(", "), :class => "phones" if subdivision.phones.any? %>

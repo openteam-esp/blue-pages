@@ -10,4 +10,5 @@
  *= require header
  *= require main
  *= require subdivision
+ *= require pagination
  */
