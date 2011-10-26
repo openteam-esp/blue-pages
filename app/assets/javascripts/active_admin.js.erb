@@ -59,12 +59,15 @@ $(function() {
   init_datepicker();
 
   $(".phone_kind").live("change", function(){
-    var phone_kind = $(this);
-    var phone_code = phone_kind.closest("li").siblings("li[id*=\"code_input\"]");
-    if (phone_kind.val() == "internal") {
+    var phone_kind = $(this).val();
+    var phone_code = $(this).closest("li").siblings("li[id*=\"code_input\"]");
+    var phone_additional_number = $(this).closest("li").siblings("li[id*=\"additional_number_input\"]");
+    if ((phone_kind == "internal") || (phone_kind == 'mobile')) {
       phone_code.slideUp("slow");
+      phone_additional_number.slideUp("slow");
     } else {
       phone_code.slideDown("slow");
+      phone_additional_number.slideDown("slow");
     };
   });
 

@@ -49,9 +49,10 @@ ru:
         _destroy:           Удалить
         kind_enum:
           phone:            Телефон
-          phone_and_fax:    Тел./факс
           fax:              Факс
+          phone_and_fax:    Тел./факс
           internal:         Внутренний
+          mobile:           Мобильный
 
 
     models:

@@ -1,6 +1,6 @@
 <%= semantic_nested_form_for @subdivision, :validate => true, :url => @subdivision.new_record? ? collection_path : resource_path do |form| %>
   <%= form.inputs :class => "inputs inline_fields" do %>
-    <%= form.input :title %>
+    <%= form.input :title, :as => :string %>
     <%= form.input :abbr %>
     <%= form.input :url, :as => :string %>
   <% end %>

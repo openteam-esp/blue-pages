@@ -4,10 +4,11 @@ class Phone < ActiveRecord::Base
   belongs_to :phoneable, :polymorphic => true
 
   validates :code, :numericality => true, :unless => :kind_internal?
-  validates :kind, :presence => true
-  validates :number, :format => { :with => /^(\d{2,3}-)*\d{2,4}$/}, :presence => true
+  validates :kind, :number, :presence => true
+  validates :number, :format => { :with => /^\d[\d-]*\d$/}, :unless => :kind_mobile?
+  validates :number, :format => { :with => /^+?\d[\d-]*\d$/}, :if => :kind_mobile?
 
-  before_save :reset_code, :if => :kind_internal?
+  before_save :reset_code_and_additional_number, :if => :kind_internal_or_mobile?
 
   default_value_for :code, "3822"
 
@@ -15,15 +16,20 @@ class Phone < ActiveRecord::Base
 
   def to_s
     res = "#{human_kind}: "
-    res << "(#{code}) " unless kind_internal?
+    res << "(#{code}) " if code.present?
     res << number
     res << " добавочный #{additional_number}" if additional_number.present?
     res
   end
 
+  def kind_internal_or_mobile?
+    kind_internal? || kind_mobile?
+  end
+
   private
-    def reset_code
+    def reset_code_and_additional_number
       self.code = nil
+      self.additional_number = nil
     end
 end
 

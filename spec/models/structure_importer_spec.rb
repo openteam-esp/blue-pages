@@ -32,6 +32,8 @@ describe StructureImporter do
       it { green_tsu_ru.items.second.emails.map(&:address).should == ["sec@green.tsu.ru"] }
       it { green_tsu_ru.items.second.phones.map(&:number).should == ["56-36-58", "56-36-46"] }
       it { green_tsu_ru.items.second.phones.map(&:kind).should == ["phone", "fax"] }
+      it { green_tsu_ru.items(true).last.phones.map(&:kind).should == ["phone", "phone"] }
+      it { green_tsu_ru.items(true).last.phones.map(&:number).should == ["303-359", "8-913-823-25-89"] }
     end
 
   end

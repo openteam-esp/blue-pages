@@ -26,13 +26,23 @@ describe Phone do
     it { create_phone(:code => '123', :number => '33-33-11', :kind => :internal).code.should be_nil }
   end
 
+  describe "если телефон мобильный должен сбросится" do
+    it { phone(:number => '88-99-00') }
+    it "код" do
+      create_phone(:code => '123', :number => '8-900-333-30-11', :kind => :mobile).code.should be_nil
+    end
+    it "добавочни" do
+      create_phone(:number => '8-900-333-30-11', :additional_number => '#22', :kind => :mobile).additional_number.should be_nil
+    end
+  end
+
   describe "#code" do
     it { should_not allow_value("1-123").for(:code) }
   end
 
   describe "#number" do
-    it { should_not allow_value("1-123").for(:number) }
-    it { should_not allow_value("11123").for(:number) }
+    it { should_not allow_value("l1-123").for(:number) }
+    it { should_not allow_value("+7-11123").for(:number) }
     it { should_not allow_value("-11-123").for(:number) }
     it { should_not allow_value("11-123-").for(:number) }
     it { should allow_value("11-123").for(:number) }
