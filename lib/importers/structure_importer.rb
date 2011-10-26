@@ -39,15 +39,15 @@ class Subdivision
     end
     phones(true)
 
-    if address = text.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1)
-      emails.find_or_create_by_address(address)
+    if email_address = text.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1)
+      emails.find_or_create_by_address(email_address)
     end
 
     update_attribute :url, text.match(/(http:[^ ]+)/).try(:[], 1)
 
-    build_building unless building
+    build_address unless address
 
-    building.update_attributes(:postcode => postcode,
+    address.update_attributes(:postcode => postcode,
                                :locality => locality.gsub(/г.Томск/, "г. Томск"),
                                :street => street,
                                :house => house,
@@ -62,12 +62,11 @@ class Subdivision
       tds = tr.css("td").map{|td| td.text.gsub(/[[:space:]]+/, ' ').squish }
       surname, name, patronymic = tds[0].split
       items.find_or_initialize_by_title(tds[1]).tap do | item |
-        item.update_attributes :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
-                               :office => tds[2],
-                               :phones_attributes => phones_attributes(tds[3]),
-                               :emails_attributes => tds[4].split(/,? /).map{|address| { :address => address }}
+        item.update_attributes :person_attributes =>  { :surname => surname, :name => name, :patronymic => patronymic },
+                               :phones_attributes =>  phones_attributes(tds[3]),
+                               :address_attributes => item.address_attributes.merge(:office => tds[2]),
+                               :emails_attributes =>  tds[4].split(/,? /).map{|address| { :address => address }}
       end
-
     end
   end
 
