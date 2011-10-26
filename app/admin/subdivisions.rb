@@ -48,6 +48,12 @@ ActiveAdmin.register Subdivision do
   controller do
     authorize_resource
 
+    def create
+      create! do |success, failure|
+        success.html { redirect_to admin_subdivision_path(@subdivision) }
+      end
+    end
+
     def index
       index! do
         redirect_to admin_subdivision_path(@parent_subdivision) and return if @parent_subdivision
@@ -58,5 +64,6 @@ ActiveAdmin.register Subdivision do
       return admin_parent_subdivision_subdivisions_path(@parent_subdivision) if @parent_subdivision
       admin_subdivisions_path
     end
+
   end
 end
