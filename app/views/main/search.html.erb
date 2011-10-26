@@ -1,0 +1,13 @@
+<% if @results.any? %>
+  <p class="search_result">Результатов: <%= @results.total_count %>, страница <%= @results.current_page %></p>
+  <%= content_tag :ol, :class => "subdivisions", :start => (@results.per_page * (@results.current_page - 1) + 1) do %>
+    <% @results.each do | item | %>
+      <li class="item">
+        <%= render item %>
+      </li>
+    <% end %>
+  <% end %>
+  <%= paginate @results %>
+<% else %>
+  <p>Нет результатов поиска</p>
+<% end %>

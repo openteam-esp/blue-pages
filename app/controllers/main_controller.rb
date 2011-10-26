@@ -1,29 +1,27 @@
 class MainController < ApplicationController
 
-  inherit_resources
-
   layout "public/main"
 
+  def index
+    @roots = Subdivision.roots
+  end
+
+  def search
+    searcher.pagination = paginate_options
+    @results = searcher.results
+  end
+
   protected
-
-  def collection
-    get_collection_ivar || set_collection_ivar(search_and_paginate_collection)
-  end
-
-  def search_and_paginate_collection
-    if params[:utf8]
-      searcher.pagination = paginate_options
-      searcher.results
-    else
-     Subdivision.roots.order('position')
-    end
-  end
 
   def paginate_options(options={})
     {
       :page       => params[:page],
       :per_page   => 10
     }.merge(options)
+  end
+
+  def resource_instance_name
+    :main
   end
 
 end

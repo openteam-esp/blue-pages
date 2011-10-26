@@ -1,13 +1,8 @@
-<% if collection.any? %>
-  <p class="search_result">Результатов: <%= collection.total_count %>, страница <%= collection.current_page %></p>
-  <%= content_tag :ol, :class => "subdivisions", :start => (collection.per_page * (collection.current_page - 1) + 1) do %>
-    <% collection.each do | item | %>
-      <li class="item">
-        <%= render item %>
-      </li>
-    <% end %>
+<% @roots.each do |root| %>
+  <h2><%= root.title %></h2>
+  <ul class="subdivisions">
+  <% root.children.each do |child| %>
+    <li><%= link_to child.title, subdivision_path(child) %></li>
   <% end %>
-  <%= paginate collection %>
-<% else %>
-  <p>Нет результатов поиска</p>
+  </ul>
 <% end %>
