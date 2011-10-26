@@ -19,24 +19,41 @@ describe StructureImporter do
       it { Subdivision.administration.children.count.should == 48 }
     end
 
+    let(:subdivision) { Fabricate :subdivision }
+
     describe "при импорте подразделений" do
-      let(:green_tsu_ru) { Fabricate :subdivision }
       before do
-        green_tsu_ru.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/green_tsu_ru.html"))
-        green_tsu_ru.import
+        subdivision.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/department_natural_resources.html"))
+        subdivision.import
       end
-      it { green_tsu_ru.address.to_s.should == "634034, Томская область, г. Томск, пр. Кирова, 14"}
-      it { green_tsu_ru.phones(true).map(&:kind).should == %w[phone fax] }
-      it { green_tsu_ru.emails(true).map(&:address).should == %w[sec@green.tsu.ru] }
-      it { green_tsu_ru.url.should == 'http://green.tsu.ru/' }
-      it { green_tsu_ru.items.count.should == 9 }
-      it { green_tsu_ru.items.second.emails.map(&:address).should == ["sec@green.tsu.ru"] }
-      it { green_tsu_ru.items.second.phones.map(&:number).should == ["56-36-58", "56-36-46"] }
-      it { green_tsu_ru.items.second.phones.map(&:kind).should == ["phone", "fax"] }
-      it { green_tsu_ru.items(true).last.phones.map(&:kind).should == ["phone", "phone"] }
-      it { green_tsu_ru.items(true).last.phones.map(&:number).should == ["303-359", "8-913-823-25-89"] }
+      it { subdivision.building.to_s.should == "634034, Томская область, г. Томск, пр. Кирова, 14"}
+      it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
+      it { subdivision.emails(true).map(&:address).should == %w[sec@green.tsu.ru] }
+      it { subdivision.url.should == 'http://green.tsu.ru/' }
+      it { subdivision.items.count.should == 9 }
+      it { subdivision.items.second.emails.map(&:address).should == ["sec@green.tsu.ru"] }
+      it { subdivision.items.second.phones.map(&:number).should == ["56-36-58", "56-36-46"] }
+      it { subdivision.items.second.phones.map(&:kind).should == ["phone", "fax"] }
+      it { subdivision.items(true).last.phones.map(&:kind).should == ["phone", "phone"] }
+      it { subdivision.items(true).last.phones.map(&:number).should == ["303-359", "8-913-823-25-89"] }
     end
 
+    describe "импорт вложенных подразделений" do
+      before do
+        subdivision.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/government_archival.html"))
+        subdivision.import
+      end
+      it { subdivision.building.to_s.should == "634009, Томская область, г. Томск, ул. К.Маркса, 26"}
+      it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
+      it { subdivision.phones(true).map(&:number).should == %w[515-723 510-377] }
+      it { subdivision.emails(true).map(&:address).should == %w[oblarch@tomsk.gov.ru] }
+      it { subdivision.url.should == 'http://archupr.tomsk.gov.ru/' }
+      it { subdivision.items.count.should == 7 }
+      it { subdivision.children.count.should == 5 }
+      it { subdivision.items.second.emails.map(&:address).should == ["oblarch@tomsk.gov.ru"] }
+      it { subdivision.items.second.phones.map(&:number).should == ["515-723"] }
+      it { subdivision.items.second.phones.map(&:kind).should == ["phone"] }
+      it { subdivision.items(true).last.phones.map(&:to_s).should == ["Тел./факс: (3822) 511-560"] }
+    end
   end
-
 end
