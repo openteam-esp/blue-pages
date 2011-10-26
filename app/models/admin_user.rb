@@ -15,6 +15,10 @@ class AdminUser < ActiveRecord::Base
     (subdivisions + subdivisions.map(&:descendants)).flatten
   end
 
+  def subdivisions_tree
+    subdivisions.map(&:subtree).map(&:arrange).first || []
+  end
+
   def display_name
     name
   end
