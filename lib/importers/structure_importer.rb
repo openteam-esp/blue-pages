@@ -39,11 +39,11 @@ class Subdivision
     end
     phones(true)
 
-    if address = text.match(/mail:[[:space:]]*([^[:space:],]+)/m)[1]
+    if address = text.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1)
       emails.find_or_create_by_address(address)
     end
 
-    update_attribute :url, text.match(/(http:[^ ]+)/)[1]
+    update_attribute :url, text.match(/(http:[^ ]+)/).try(:[], 1)
 
     build_building unless building
 
@@ -54,6 +54,7 @@ class Subdivision
                                :building => building_no)
 
     import_items
+    puts unless Rails.env.test?
   end
 
   def import_items
@@ -90,6 +91,7 @@ class Subdivision
   end
 
   def html
+    print "."
     @html ||= open(import_url)
   end
 
@@ -103,8 +105,7 @@ class StructureImporter
   end
 
   def import_subdivisions
-    doc = Nokogiri::HTML(open('http://tomsk.gov.ru/ru/rule/structure/'))
-    doc.css('.content-second a[href*="/ru/rule/structure"]').each do |a|
+    Nokogiri::HTML(html).css('.content-second a[href*="/ru/rule/structure"]').each do |a|
       title = Sanitize.clean(a.text).squish
       next if title.blank?
       if title =~ /заместитель/i
@@ -120,6 +121,11 @@ class StructureImporter
         end
       end
     end
+  end
+
+  def html
+    print "."
+    @html ||= open('http://tomsk.gov.ru/ru/rule/structure/')
   end
 
   def import_roots

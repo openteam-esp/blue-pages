@@ -11,6 +11,7 @@ describe StructureImporter do
     describe "должен импортировать структуру" do
       before do
         Subdivision.any_instance.stub(:import)
+        subject.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/structure.html"))
         subject.import
       end
       it { Subdivision.roots.map(&:title).should == ["Губернатор", "Администрация"] }
