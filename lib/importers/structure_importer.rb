@@ -19,20 +19,23 @@ class String
       end
     end
     res
-    #scan(/(телефон|факс|тел\.):? (?:8 )?\(([\d-]+)\) ([\d-]+)/i).each do | kind, code, number |
-      #kind = 'телефон' if kind == 'тел.'
-      #kind = Phone.human_enums[:kind].invert[kind.mb_chars.capitalize.to_s]
-      #phones.find_or_initialize_by_number(number).tap do |phone|
-        #phone.update_attributes(:code => code.gsub(/-/, ""), :kind => kind)
-      #end
-    #end
+  end
 
-  end
   def extract_emails
+    self.split(/,? /).map{|address| { :address => address }}
   end
+
   def extract_url
+    self.match(/(http:[^ ]+)/).try(:[], 1)
   end
+
   def extract_address
+    postcode, locality, street, house, building_no = self.match(/Адрес(?: расположения)?: (?:(\d{6}), (г. ?Томск), (.*?), ([^ ,]+))/).try :[], 1..4
+    {:postcode => postcode,
+    :locality => locality.gsub(/г.Томск/, "г. Томск"),
+    :street => street,
+    :house => house,
+    :building => building_no}
   end
 end
 
@@ -59,24 +62,11 @@ class Subdivision
     end
   end
 
-
   def import
-    postcode, locality, street, house, building_no = subdivision_text.match(/Адрес(?: расположения)?: (?:(\d{6}), (г. ?Томск), (.*?), ([^ ,]+))/).try :[], 1..4
-
-    if email_address = subdivision_text.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1)
-      emails.find_or_create_by_address(email_address)
-    end
-
-    update_attributes :url => subdivision_text.match(/(http:[^ ]+)/).try(:[], 1),
-                      :phones_attributes => subdivision_text.extract_phones
-
-    build_address unless address
-
-    address.update_attributes(:postcode => postcode,
-                               :locality => locality.gsub(/г.Томск/, "г. Томск"),
-                               :street => street,
-                               :house => house,
-                               :building => building_no)
+    update_attributes :url => subdivision_text.extract_url,
+                      :phones_attributes => subdivision_text.extract_phones,
+                      :emails_attributes => subdivision_text.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1).extract_emails,
+                      :building_attributes => subdivision_text.extract_address
 
     import_items
     puts unless Rails.env.test?
@@ -92,7 +82,7 @@ class Subdivision
           item.update_attributes :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
                                  :office => tds[2],
                                  :phones_attributes => tds[3].extract_phones,
-                                 :emails_attributes => tds[4].split(/,? /).map{|address| { :address => address }}
+                                 :emails_attributes => tds[4].extract_emails
         end
       else
         th = tr.css("th").first.text.strip
