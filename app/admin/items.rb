@@ -45,13 +45,15 @@ ActiveAdmin.register Item do
   end
 
   collection_action :sort, :method => :post do
-    authorize! :manage, parent
+    index! do
+      authorize! :manage, @subdivision
 
-    params[:ids].each_with_index do |id, index|
-      item = Item.find(id)
-      item.update_attribute(:position, index.to_i+1)
+      params[:ids].each_with_index do |id, index|
+        item = Item.find(id)
+        item.update_attribute(:position, index.to_i+1)
+      end
+      head 200 and return
     end
-    head 200
   end
 
   controller do
