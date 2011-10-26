@@ -12,15 +12,15 @@
     <%= form.input :title %>
   <% end %>
 
-  <%= form.inputs "Адрес", :class => "inputs inline_fields", :for => :building do |building_form| %>
-    <%= building_form.input :postcode %>
-    <%= building_form.input :region %>
-    <%= building_form.input :district %>
-    <%= building_form.input :locality %>
-    <%= building_form.input :street %>
-    <%= building_form.input :house %>
-    <%= building_form.input :building %>
-    <%= form.input :office %>
+  <%= form.inputs "Адрес", :class => "inputs inline_fields", :for => :address do |address_form| %>
+    <%= address_form.input :postcode %>
+    <%= address_form.input :region %>
+    <%= address_form.input :district %>
+    <%= address_form.input :locality %>
+    <%= address_form.input :street %>
+    <%= address_form.input :house %>
+    <%= address_form.input :building %>
+    <%= address_form.input :office %>
   <% end %>
 
   <%= form.semantic_fields_for :phones do |phone_form| %>

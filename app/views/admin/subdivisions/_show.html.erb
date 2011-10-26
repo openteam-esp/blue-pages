@@ -1,7 +1,6 @@
 <div class="subdivision">
   <%= show_for subdivision do | s | %>
-    <%= s.association :building, :if_blank => "Не указан" %>
-    <%= s.attribute :office, :if_blank => "Не указан" %>
+    <%= s.association :address, :if_blank => "Не указан" %>
     <%= s.association :phones, :if_blank => "Не указаны" %>
     <%= s.association :emails, :if_blank => "Не указаны" do | email | %>
       <li><%= mail_to email %></li>

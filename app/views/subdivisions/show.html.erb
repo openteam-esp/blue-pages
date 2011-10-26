@@ -3,8 +3,7 @@
 <% end %>
 <h1><%= resource.title %></h1>
 <%= show_for @subdivision do | subdivision | %>
-  <%= subdivision.association :building, :if_blank => "Не указан" %>
-  <%= subdivision.attribute :office, :if_blank => "Не указан" %>
+  <%= subdivision.association :address, :if_blank => "Не указан" %>
   <%= subdivision.association :phones, :if_blank => "Не указаны" %>
   <%= subdivision.association :emails, :if_blank => "Не указаны" do | email | %>
     <li><%= mail_to email %></li>

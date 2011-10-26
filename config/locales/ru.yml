@@ -5,15 +5,14 @@ ru:
         address:            Адрес
 
       item:
+        address:            Адрес
         created_at:         Создано
+        emails:             Адреса электронной почты
         person:             Сотрудник
+        phones:             Телефоны
         subdivision:        Подразделение
         title:              Должность
-        building:           Адрес
-        office:             Кабинет
         updated_at:         Обновлено
-        phones:             Телефоны
-        emails:             Адреса электронной почты
 
       person:
         birthdate:          День рождения
@@ -23,42 +22,41 @@ ru:
 
       subdivision:
         abbr:               Аббревиатура
+        address:            Адрес
         created_at:         Создано
+        emails:             Адреса электронной почты
+        phones:             Телефоны
         title:              Название
         updated_at:         Обновлено
-        building:           Адрес
-        office:             Кабинет
-        phones:             Телефоны
-        emails:             Адреса электронной почты
         url:                Сайт
 
-      building:
+      address:
+        building:           Строение
+        district:           Район
+        house:              Дом
+        locality:           Населённый пункт
+        office:             Кабинет
         postcode:           Почтовый индекс
         region:             Регион
-        district:           Район
-        locality:           Населённый пункт
         street:             Улица
-        house:              Дом
-        building:           Строение
 
       phone:
+        _destroy:           Удалить
         additional_number:  Добавочный
         code:               Код
-        number:             Телефон
         kind:               Тип
-        _destroy:           Удалить
+        number:             Телефон
         kind_enum:
-          phone:            Телефон
           fax:              Факс
-          phone_and_fax:    Тел./факс
           internal:         Внутренний
           mobile:           Мобильный
-
+          phone:            Телефон
+          phone_and_fax:    Тел./факс
 
     models:
+      address:              Адрес
       admin:                Главная
       admin_user:           Пользователи
-      building:             Здание
       email:                Электронная почта
       item:                 Сотрудники
       phone:                Телефон
@@ -68,7 +66,7 @@ ru:
   manage:                   Управление
   search:                   Поиск
   subdivision:
-    building:               Адрес
-    phones:                 Телефоны
+    address:               Адрес
     emails:                 Адреса электронная почта
+    phones:                 Телефоны
     url:                    Сайт
