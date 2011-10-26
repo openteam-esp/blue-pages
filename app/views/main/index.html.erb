@@ -1,5 +1,6 @@
 <% if collection.any? %>
-  <%= content_tag :ol, :class => "subdivisions" do %>
+  <p class="search_result">Результатов: <%= collection.total_count %>, страница <%= collection.current_page %></p>
+  <%= content_tag :ol, :class => "subdivisions", :start => (collection.per_page * (collection.current_page - 1) + 1) do %>
     <% collection.each do | item | %>
       <li class="item">
         <%= render item %>

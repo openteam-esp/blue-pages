@@ -1,11 +1,16 @@
 @import "compass/utilities"
 
 form
-  fieldset ol > li label
-    line-height: 26px
-    abbr
-      color: #aa0000
-      margin-left: 3px
+  fieldset ol > li
+    label
+      line-height: 26px
+      abbr
+        color: #aa0000
+        margin-left: 3px
+    p.inline-errors
+      text-transform: none
+      font-weight: normal
+      margin-left: 10px
   select
     border: 1px solid #C9D0D6
     +border-radius(3px)
@@ -66,3 +71,6 @@ form
     width: 200px
   #subdivision_building_attributes_street_input
     clear: left
+  #item_building_attributes_postcode_input
+    p.inline-errors
+      width: 150px
