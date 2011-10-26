@@ -21,11 +21,13 @@ describe StructureImporter do
 
     let(:subdivision) { Fabricate :subdivision }
 
+    def import(subdivision_name)
+      subdivision.html = File.read(Rails.root.join("spec/fixtures/#{subdivision_name}.html"))
+      subdivision.import
+    end
+
     describe "при импорте подразделений" do
-      before do
-        subdivision.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/department_natural_resources.html"))
-        subdivision.import
-      end
+      before { import :department_natural_resources }
       it { subdivision.address.to_s.should == "634034, Томская область, г. Томск, пр. Кирова, 14"}
       it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
       it { subdivision.emails(true).map(&:address).should == %w[sec@green.tsu.ru] }
@@ -39,10 +41,7 @@ describe StructureImporter do
     end
 
     describe "импорт вложенных подразделений" do
-      before do
-        subdivision.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/government_archival.html"))
-        subdivision.import
-      end
+      before { import :government_archival }
       it { subdivision.address.to_s.should == "634009, Томская область, г. Томск, ул. К.Маркса, 26"}
       it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
       it { subdivision.phones(true).map(&:number).should == %w[515-723 510-377] }
@@ -64,6 +63,15 @@ describe StructureImporter do
         it { subsubdivision.address.to_s.should == '634009, Томская область, г. Томск, ул. К.Маркса, 26' }
         it { subsubdivision.items.count.should == 6 }
       end
+    end
+
+    describe 'импорт из странички с нестандартным расположением колонок' do
+      before { import :department_families }
+      it { subdivision.items.first.phones.map(&:to_s).should == ["Телефон: (3822) 71-39-98"] }
+      it { subdivision.items.first.address(true).to_s.should include "г. Томск, ул.Тверская, 74, 301" }
+      it { subdivision.address.to_s.should include "г. Томск, ул.Тверская, 74" }
+      it { subdivision.children.first.items.first.emails.map(&:address).should == %w[sma@family.tomsk.gov.ru] }
+      it { subdivision.children.first.items.first.address(true).office.should == "308" }
     end
   end
 end

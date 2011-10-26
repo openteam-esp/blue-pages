@@ -17,6 +17,7 @@ gem 'jquery-rails'
 gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
 gem 'nokogiri',                                   :require => false
 gem 'rails',                                      :require => false
+gem 'russian'
 gem 'ryba',                                       :require => false
 gem 'sass-rails'
 gem 'sanitize',                                   :require => false
