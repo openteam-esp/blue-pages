@@ -49,7 +49,7 @@ class Item < ActiveRecord::Base
 
   private
     def set_address_attributes
-      self.address_attributes = subdivision.address_attributes.merge(:id => nil) if subdivision && !address
+      self.address_attributes = subdivision.try(:address_attributes).try(:merge, :id => nil) || {}
     end
 end
 

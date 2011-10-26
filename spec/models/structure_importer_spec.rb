@@ -26,7 +26,7 @@ describe StructureImporter do
         subdivision.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/department_natural_resources.html"))
         subdivision.import
       end
-      it { subdivision.building.to_s.should == "634034, Томская область, г. Томск, пр. Кирова, 14"}
+      it { subdivision.address.to_s.should == "634034, Томская область, г. Томск, пр. Кирова, 14"}
       it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
       it { subdivision.emails(true).map(&:address).should == %w[sec@green.tsu.ru] }
       it { subdivision.url.should == 'http://green.tsu.ru/' }
@@ -43,7 +43,7 @@ describe StructureImporter do
         subdivision.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/government_archival.html"))
         subdivision.import
       end
-      it { subdivision.building.to_s.should == "634009, Томская область, г. Томск, ул. К.Маркса, 26"}
+      it { subdivision.address.to_s.should == "634009, Томская область, г. Томск, ул. К.Маркса, 26"}
       it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
       it { subdivision.phones(true).map(&:number).should == %w[515-723 510-377] }
       it { subdivision.emails(true).map(&:address).should == %w[oblarch@tomsk.gov.ru] }
@@ -54,6 +54,16 @@ describe StructureImporter do
       it { subdivision.items.second.phones.map(&:number).should == ["515-723"] }
       it { subdivision.items.second.phones.map(&:kind).should == ["phone"] }
       it { subdivision.items(true).last.phones.map(&:to_s).should == ["Тел./факс: (3822) 511-560"] }
+
+      describe ', вложенное подразделение должно' do
+        let (:subsubdivision) { subdivision.children.second }
+
+        it { subsubdivision.url.should == 'http://www.gato.tomica.ru/' }
+        it { subsubdivision.emails.map(&:address).should == ['awbgat@mail.tomsknet.ru'] }
+        it { subsubdivision.phones.map(&:to_s).should == ['Тел./факс: (3822) 513-025'] }
+        it { subsubdivision.address.to_s.should == '634009, Томская область, г. Томск, ул. К.Маркса, 26' }
+        it { subsubdivision.items.count.should == 6 }
+      end
     end
   end
 end
