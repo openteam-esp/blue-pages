@@ -6,23 +6,21 @@ describe Item do
   let(:subdivision) { Fabricate(:subdivision) }
   let(:item) { subdivision.items.build(:title => 'Заместитель') }
 
-  it { should have_one(:building) }
-
-  it { subdivision; expect { item.save! }.to_not change{ Building.count } }
+  it { should have_one(:address) }
 
   describe 'default values' do
-    it { item.building_postcode.should == subdivision.building_postcode }
-    it { item.building_region.should == subdivision.building_region }
-    it { item.building_district.should == subdivision.building_district }
-    it { item.building_locality.should == subdivision.building_locality }
-    it { item.building_street.should == subdivision.building_street }
-    it { item.building_house.should == subdivision.building_house }
-    it { item.building_building.should == subdivision.building_building }
+    it { item.address_postcode.should == subdivision.address_postcode }
+    it { item.address_region.should == subdivision.address_region }
+    it { item.address_district.should == subdivision.address_district }
+    it { item.address_locality.should == subdivision.address_locality }
+    it { item.address_street.should == subdivision.address_street }
+    it { item.address_house.should == subdivision.address_house }
+    it { item.address_building.should == subdivision.address_building }
 
-    it "building attributes" do
-      item.update_attributes!(:building_attributes => item.building_attributes.merge(:street => 'Новая'))
-      item.building_street.should == 'Новая'
-      subdivision.reload.building_street.should == 'пл. Ленина'
+    it "address attributes" do
+      item.update_attributes!(:address_attributes => item.address_attributes.merge(:street => 'Новая'))
+      item.address_street.should == 'Новая'
+      subdivision.reload.address_street.should == 'пл. Ленина'
     end
   end
 end

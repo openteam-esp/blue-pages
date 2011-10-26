@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-Fabricator(:building) do
+Fabricator(:address) do
   postcode "634020"
   street "пл. Ленина"
   house "2"

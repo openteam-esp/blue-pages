@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe Building do
+describe Address do
   it { should validate_presence_of :postcode }
   it { should validate_presence_of :region }
   it { should validate_presence_of :district }

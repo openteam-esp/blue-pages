@@ -7,7 +7,7 @@ class Subdivision < ActiveRecord::Base
   has_many :items,                         :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
 
-  has_one :building,  :as => :addressable, :dependent => :destroy
+  has_one :address,  :as => :addressable, :dependent => :destroy
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
@@ -24,7 +24,7 @@ class Subdivision < ActiveRecord::Base
                                   (\?.*)?                                         # query params
                                 $}ix
 
-  accepts_nested_attributes_for :building,
+  accepts_nested_attributes_for :address,
                                 :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) }
 
   accepts_nested_attributes_for :emails,
@@ -37,7 +37,10 @@ class Subdivision < ActiveRecord::Base
 
   default_scope order('position')
 
-  delegate :attributes, :postcode, :region, :district, :locality, :street, :house, :building, :to => :building, :prefix => true, :allow_nil => true
+  delegate :attributes, :postcode, :region, :district, :locality, :street, :house, :building,
+           :to => :address,
+           :prefix => true,
+           :allow_nil => true
 
   has_ancestry
 
@@ -51,7 +54,7 @@ class Subdivision < ActiveRecord::Base
   searchable do
     text :abbr, :boost => 1.5
     text :title, :boost => 1.5
-    text :building
+    text :address
     text :url
     text :phones do phones.join(' ') end
     text :emails do emails.join(' ') end

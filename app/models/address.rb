@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class Building < ActiveRecord::Base
+class Address < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
 
   validates :region, :district, :locality, :street, :house, :presence => true

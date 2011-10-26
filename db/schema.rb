@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111025041528) do
+ActiveRecord::Schema.define(:version => 20111026015014) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -27,6 +27,21 @@ ActiveRecord::Schema.define(:version => 20111025041528) do
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
   add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
+
+  create_table "addresses", :force => true do |t|
+    t.string   "postcode"
+    t.string   "region"
+    t.string   "district"
+    t.string   "locality"
+    t.string   "street"
+    t.string   "house"
+    t.string   "building"
+    t.integer  "addressable_id"
+    t.string   "addressable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "office"
+  end
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false
@@ -51,20 +66,6 @@ ActiveRecord::Schema.define(:version => 20111025041528) do
     t.integer "subdivision_id"
   end
 
-  create_table "buildings", :force => true do |t|
-    t.string   "postcode"
-    t.string   "region"
-    t.string   "district"
-    t.string   "locality"
-    t.string   "street"
-    t.string   "house"
-    t.string   "building"
-    t.integer  "addressable_id"
-    t.string   "addressable_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "emails", :force => true do |t|
     t.string   "address"
     t.integer  "emailable_id"
@@ -81,7 +82,6 @@ ActiveRecord::Schema.define(:version => 20111025041528) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
-    t.string   "office"
   end
 
   add_index "items", ["subdivision_id"], :name => "index_items_on_subdivision_id"
@@ -117,7 +117,6 @@ ActiveRecord::Schema.define(:version => 20111025041528) do
     t.string   "ancestry"
     t.integer  "position"
     t.text     "url"
-    t.string   "office"
   end
 
   add_index "subdivisions", ["ancestry"], :name => "index_subdivisions_on_ancestry"

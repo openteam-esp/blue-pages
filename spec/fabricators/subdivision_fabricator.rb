@@ -3,5 +3,5 @@
 Fabricator(:subdivision) do
   title "Департамент по защите окружающей среды"
   abbr "ДПЗОС"
-  building!
+  address_attributes { Fabricate.attributes_for(:address) }
 end
