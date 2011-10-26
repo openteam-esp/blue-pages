@@ -4,13 +4,13 @@ class Item < ActiveRecord::Base
   has_many :emails,   :as => :emailable,   :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
 
-  has_one :address,   :as => :addressable,  :dependent => :destroy
-  has_one :person,                          :dependent => :destroy
+  has_one :address,   :as => :addressable, :dependent => :destroy
+  has_one :person,                         :dependent => :destroy
 
   validates_presence_of :title
 
-  accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :person, :reject_if => :all_blank
+  accepts_nested_attributes_for :address, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
 
   accepts_nested_attributes_for :emails,
                                 :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) },

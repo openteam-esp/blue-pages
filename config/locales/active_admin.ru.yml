@@ -10,6 +10,8 @@ ru:
     delete_phone: Удалить телефон
     new_email: Добавить адрес электронной почты
     delete_email: Удалить адрес электронной почты
+    new_address: Добавить адрес
+    delete_address: Удалить адрес
 
     dashboard: Панель управления
     dashboard_welcome:
