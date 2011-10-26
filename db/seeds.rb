@@ -1,6 +1,9 @@
 # encoding: utf-8
 
-user = AdminUser.create!(:email => 'demo@demo.de', :password => '123123', :password_confirmation => '123123') if AdminUser.find_by_email('demo@demo.de').blank?
+user = AdminUser.create!(:email => 'demo@demo.de',
+                         :name => 'Юзеров Юзер Юзерович',
+                         :password => '123123',
+                         :password_confirmation => '123123') if AdminUser.find_by_email('demo@demo.de').blank?
 
 government = Subdivision.find_or_create_by_title('Органы власти')
 organizations = Subdivision.find_or_create_by_title('Предприятия')

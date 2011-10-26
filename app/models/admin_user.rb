@@ -5,12 +5,18 @@ class AdminUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+
+  validates_presence_of :name, :password, :password_confirmation
 
   has_and_belongs_to_many :subdivisions
 
   def manageable_subdivisions
     (subdivisions + subdivisions.map(&:descendants)).flatten
+  end
+
+  def display_name
+    name
   end
 end
 

@@ -4,6 +4,10 @@ ru:
       email:
         address:            Адрес
 
+      admin_user:
+        name: Имя
+        email:
+
       item:
         address:            Адрес
         created_at:         Создано
@@ -38,6 +42,9 @@ ru:
         office:             Кабинет
         postcode:           Почтовый индекс
         region:             Регион
+        admin_user:
+          name: Имя
+          email:
         street:             Улица
 
       phone:

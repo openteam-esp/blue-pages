@@ -1,4 +1,4 @@
-<% if can?(:manage, subdivision) %>
+<% if subdivision && can?(:manage, subdivision) %>
   <div class="actions">
     <%= link_to t('active_admin.sort'), sort_admin_parent_subdivision_subdivisions_path(subdivision), :class => 'sort_link off button icon loop' %>
     <%= link_to t('active_admin.new_subdivision'),

@@ -1,0 +1,10 @@
+<div class="admin_user">
+  <%= show_for @admin_user do |admin_user| %>
+    <%= admin_user.attribute :email %>
+  <% end %>
+
+  <div class="subdivisions">
+    <h3>Подразделения</h3>
+    <%= render :partial => "admin/subdivisions/subdivisions", :locals => { :subdivision => nil, :subdivisions =>@admin_user.manageable_subdivisions } %>
+  </div>
+</div>

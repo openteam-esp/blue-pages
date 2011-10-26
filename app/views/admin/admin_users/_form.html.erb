@@ -1,0 +1,15 @@
+<%= semantic_form_for @admin_user, :url => @admin_user.new_record? ? admin_admin_users_path : admin_admin_user_path(@admin_user) do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :name %>
+    <%= form.input :email %>
+    <%= form.input :password %>
+    <%= form.input :password_confirmation %>
+  <% end %>
+
+  <%= form.buttons do %>
+    <%= form.commit_button %>
+    <li class='cancel'>
+      <%= link_to t("active_admin.cancel"), @admin_user.new_record? ? admin_admin_users_path : admin_admin_user_path(@admin_user) %>
+    </li>
+  <% end %>
+<% end %>

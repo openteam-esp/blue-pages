@@ -5,6 +5,8 @@ ru:
     delete_subdivision: Удаление подразделения
     new_item: Добавление сотрудника
     edit_item: Изменение сотрудника
+    new_admin_user: Добавление пользователя
+    edit_admin_user: Изменение пользователя
     delete_item: Удаление сотрудника
     new_phone: Добавить телефон
     delete_phone: Удалить телефон

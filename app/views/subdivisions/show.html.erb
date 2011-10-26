@@ -30,7 +30,6 @@
         <tr>
           <td><%= item.person %></td>
           <td><%= item.title %></td>
-          <td class="center"><%= item.office %></td>
           <td><%= item.phones.join(", ") %></td>
           <td><%= item.emails.map{|email| mail_to(email)}.join(', ').html_safe %></td>
         </tr>
