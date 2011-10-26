@@ -6,7 +6,7 @@ ru:
 
       admin_user:
         name: Имя
-        email:
+        subdivisions:       Подразделения
 
       item:
         address:            Адрес

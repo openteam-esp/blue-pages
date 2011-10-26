@@ -4,6 +4,10 @@
     <%= form.input :email %>
     <%= form.input :password %>
     <%= form.input :password_confirmation %>
+    <%= form.input :subdivisions,
+                   :as => :check_boxes,
+                   :collection => current_admin_user.manageable_subdivisions,
+                   :member_label => Proc.new {|c| "#{'&mdash;' * c.depth} #{c.title}".html_safe} %>
   <% end %>
 
   <%= form.buttons do %>
