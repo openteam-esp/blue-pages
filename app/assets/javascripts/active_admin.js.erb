@@ -38,7 +38,7 @@ function init_datepicker() {
 
 function serializeBlock(parent_block) {
   var ids = $.makeArray(
-    $("." + parent_block + " .sortable li").map(function() {
+    $(".sortable li", parent_block).map(function() {
       return $(this).data("id");
     })
   );
@@ -72,18 +72,19 @@ $(function() {
   });
 
   $(".sort_link").click(function() {
-    var it_off = $(this).hasClass("off");
-    var parent_block = $(this).parent().parent().attr("class");
+    var it_off = $(this).hasClass("off"),
+        url = $(this).attr("href"),
+        parent_block = $(this).parent().parent();
     if (it_off) {
       $(this).removeClass("off").addClass("on");
-      $("." + parent_block + " .sortable span").css("display", "inline-block");
-      $("." + parent_block + " .sortable").sortable({
+      $(".sortable span", parent_block).css("display", "inline-block");
+      $(".sortable", parent_block).sortable({
         axis: "y",
         handle: "span",
         update: function() {
           var block = this;
           $.ajax({
-            url: "/admin/" + parent_block + "/sort",
+            url: url,
             type: "post",
             data: serializeBlock(parent_block),
             success: function(data, textStatus, jqXHR) {
@@ -109,7 +110,7 @@ $(function() {
         }
       });
     } else {
-      $("." + parent_block + " .sortable span").hide();
+      $(".sortable span", parent_block).hide();
       $(this).removeClass("on").addClass("off");
     };
     return false;
