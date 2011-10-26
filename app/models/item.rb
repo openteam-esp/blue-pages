@@ -9,8 +9,6 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title
 
-  after_initialize :set_address_attributes
-
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank
 
@@ -47,10 +45,6 @@ class Item < ActiveRecord::Base
 
   alias :to_s :display_name
 
-  private
-    def set_address_attributes
-      self.address_attributes = subdivision.try(:address_attributes).try(:merge, :id => nil) || {}
-    end
 end
 
 # == Schema Information

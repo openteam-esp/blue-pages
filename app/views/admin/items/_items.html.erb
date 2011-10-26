@@ -13,14 +13,14 @@
       <li data-id='<%= item.id %>' class='item'>
         <div class="title">
           <span>хвать</span>
-          <%= link_to "#{item.person}, #{item.title}", admin_subdivision_item_path(@subdivision, item) %>
+          <%= link_to item.title, admin_subdivision_item_path(@subdivision, item) %><%= ", #{item.person}" if item.person %>
         </div>
         <div class="details">
-          <%= content_tag :p, "Дата рождения: #{l(item.person.birthdate)}" if !item.person.blank? && !item.person.birthdate.blank? %></p>
-        <%= content_tag :p, item.phones.join(', ') if item.phones.any? %></p>
-      <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %></p>
-  </div>
-</li>
+          <%= content_tag :p, "Дата рождения: #{l(item.person.birthdate)}" if !item.person.blank? && !item.person.birthdate.blank? %>
+          <%= content_tag :p, item.phones.join(', ') if item.phones.any? %>
+          <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>
+        </div>
+      </li>
     <% end%>
   </ul>
 <% end%>
