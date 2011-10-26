@@ -163,6 +163,14 @@ module ActiveAdmin
           I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}")
         end
       end
+      class Dashboard < Base
+        protected
+          def render_sections(sections)
+            sections.each do |section|
+              render_section(section)
+            end
+          end
+      end
     end
   end
 
