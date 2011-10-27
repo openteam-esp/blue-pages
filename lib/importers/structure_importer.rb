@@ -6,9 +6,13 @@ require 'sanitize'
 require Rails.root.join 'app/models/subdivision'
 
 class String
+  def lines
+    self.split("\n")
+  end
+
   def extract_phones
     res = []
-    self.gsub(/\./, '').scan(/(телефон|тел\/факс|тел|факс):? ((?:(?:(?:(?:8 )?\((?:[\d-]+)\) )?[\d-]+)(?:, )?)+)/i).each do |kind, numbers|
+    self.gsub(/\./, '').scan(/(телефон|тел\/факс|тел|факс):?(?: -)? ((?:(?:(?:(?:8 )?\((?:[ \d-]+)\) )?[\d-]+)(?:, )?)+)/i).each do |kind, numbers|
       kind = kind.mb_chars.capitalize.to_s
       kind = "Телефон" if kind == "Тел"
       kind = "Тел./факс" if kind == "Тел/факс"
@@ -16,7 +20,7 @@ class String
       numbers.split(/, /).each do |code_number|
         code, number = code_number.match(/(?:(?:8 )?\(([\d-]+)\) )?([\d-]+)/)[1..2]
         code ||= '3822'
-        code.gsub! /-/, ''
+        code.gsub! /[^\d]/, ''
         res << {:kind => kind, :number => number, :code => code }
       end
     end
@@ -24,21 +28,37 @@ class String
   end
 
   def extract_emails
-    self.split(/,? /).map{|address| { :address => address }}
+    lines.each do | line |
+      if line =~ /@/
+        return line.split(/,? /).grep(/@/).map{|address| { :address => address }}
+      end
+    end
+    []
   end
 
   def extract_url
-    self.match(/(http:[^\s]+)/).try(:[], 1)
+    lines.each do | line |
+      if line =~ /http/
+        return line.match(/(http:[^\s]+)/).try(:[], 1)
+      end
+    end
+    nil
   end
 
   def extract_address
-    self.gsub!(/Адрес: г.Томск/, "Адрес: 634000, г.Томск")
-    postcode, locality, street, house, building_no = self.match(/(?:Адрес(?: расположения)?: )?(?:(\d{6}), (г. ?Томск), (.*?), ([^ ,\n]+))/).try :[], 1..4
+    postcode, locality, street, house, building_no = nil
+    self.gsub!(/Адрес: г. ?Томск/, "Адрес: 634000, г.Томск")
+    self.split("\n").each do | line |
+      if address_match = line.match(/(?:Адрес(?: расположения)?: )?(?:(\d{6}), (г. ?Томск), (.*?), ([^ ,]+))/)
+        postcode, locality, street, house, building_no = address_match[1..4]
+        break
+      end
+    end
     {:postcode => postcode,
-    :locality => locality.try(:gsub, /г.Томск/, "г. Томск"),
-    :street => street,
-    :house => house,
-    :building => building_no}
+     :locality => locality.try(:gsub, /г.Томск/, "г. Томск"),
+     :street => street,
+     :house => house,
+     :building => building_no}
   end
 end
 
@@ -67,17 +87,29 @@ class Subdivision
   end
 
   def import_info(info)
-    update_attributes! :url => info.extract_url,
-                       :phones_attributes => info.extract_phones,
-                       :emails_attributes => (info.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1).try(:extract_emails) || []),
-                       :address_attributes => info.extract_address
+    update_attributes :url => info.extract_url,
+                      :phones_attributes => info.extract_phones,
+                      :emails_attributes => (info.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1).try(:extract_emails) || []),
+                      :address_attributes => info.extract_address
+    unless valid?
+      p info.extract_phones
+      p info.extract_emails
+      p info.extract_address
+      p self
+      save!
+    end
   end
 
   def import
     begin
+      unless Rails.env.test?
+        puts "================================="
+        puts import_url
+      end
       import_info(subdivision_text)
       import_items
     rescue => e
+      puts e.backtrace.grep(/structure_importer/).first#.join("\n")
       puts "#{e.message} во время импорта #{import_url}"
       throw e
     end
@@ -95,17 +127,25 @@ class Subdivision
           phones = tds[phone_column].to_s.gsub(/ ?- ?/, '-').scan(/([\d-]+)/).flatten.map{|number| {:kind => :phone, :number => number}}
         end
         subdivision.items.find_or_initialize_by_title(tds[1]).tap do | item |
-          item.update_attributes! :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
-                                  :address_attributes => subdivision.address_attributes.merge(:office => tds[office_column], :id => nil),
-                                  :phones_attributes => phones,
-                                  :emails_attributes => tds[email_column].to_s.extract_emails
+          item.update_attributes :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
+                                 :address_attributes => subdivision.address_attributes.merge(:office => tds[office_column], :id => nil),
+                                 :phones_attributes => phones,
+                                 :emails_attributes => tds[email_column].to_s.extract_emails
+          unless item.valid?
+            p phones
+            p tds[email_column].to_s.extract_emails
+            p subdivision.address_attributes.merge(:office => tds[office_column], :id => nil)
+            p item
+            item.save!
+          end
         end
       else
-        content = texts.first
-        title = content.split('\n').first
+        content = texts.first.strip
+        lines = content.split("\n").map{|line| line.gsub(/[[:space:]]/, ' ').squish }
+        title = lines.first.gsub(/“/, '"').gsub(/”/, '"')
         subdivision = children.find_or_initialize_by_title(title).tap do | subdivision |
           subdivision.address_attributes = self.address_attributes.merge(:id => nil)
-          subdivision.import_info(content)
+          subdivision.import_info(lines[1..-1].join("\n"))
         end
       end
     end
@@ -151,7 +191,7 @@ class Subdivision
   end
 
   def html
-    @html ||= open(import_url).tap { print "." }
+    @html ||= open(import_url)
   end
 
 end
@@ -161,13 +201,13 @@ class StructureImporter
   def import
     import_roots
     import_subdivisions
-    puts unless Rails.env.test?
   end
 
   def import_subdivisions
     Nokogiri::HTML(html).css('.content-second a[href*="/ru/rule/structure"]').each do |a|
       title = Sanitize.clean(a.text).squish
-      next if title.blank?
+      href = a.attributes['href'].value
+      next if title.blank? || href =~ /.doc$/
       if title =~ /заместитель/i
         Subdivision.governor.children.find_or_initialize_by_title(title).tap do | subdivision |
           subdivision.save!
@@ -184,7 +224,7 @@ class StructureImporter
   end
 
   def html
-    @html ||= open('http://tomsk.gov.ru/ru/rule/structure/').tap { print "." }
+    @html ||= open('http://tomsk.gov.ru/ru/rule/structure/')
   end
 
   def import_roots

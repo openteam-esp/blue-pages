@@ -21,6 +21,10 @@ describe StructureImporter do
 
     let(:subdivision) { Fabricate :subdivision }
 
+    def child(number=0)
+      subdivision.children[number]
+    end
+
     def import(subdivision_name)
       subdivision.html = File.read(Rails.root.join("spec/fixtures/#{subdivision_name}.html"))
       subdivision.import
@@ -70,8 +74,13 @@ describe StructureImporter do
       it { subdivision.items.first.phones.map(&:to_s).should == ["Телефон: (3822) 71-39-98"] }
       it { subdivision.items.first.address(true).to_s.should include "г. Томск, ул.Тверская, 74, 301" }
       it { subdivision.address.to_s.should include "г. Томск, ул.Тверская, 74" }
-      it { subdivision.children.first.items.first.emails.map(&:address).should == %w[sma@family.tomsk.gov.ru] }
-      it { subdivision.children.first.items.first.address(true).office.should == "308" }
+      it { child.items.first.emails.map(&:address).should == %w[sma@family.tomsk.gov.ru] }
+      it { child.items.first.address(true).office.should == "308" }
+    end
+
+    describe 'департамент эволюции подвзятий' do
+      before { import :department_evolution_undertakings }
+      it { child(8).address.to_s.should == '634021, Томская область, г. Томск, ул. Шевченко, 17'}
     end
   end
 end
