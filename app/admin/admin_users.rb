@@ -18,4 +18,8 @@ ActiveAdmin.register AdminUser do
   end
 
   form :partial => 'form'
+
+  controller do
+    authorize_resource
+  end
 end
