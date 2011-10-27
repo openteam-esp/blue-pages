@@ -7,7 +7,7 @@ class AdminUser < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :subdivision_ids
 
-  validates_presence_of :name, :password, :password_confirmation
+  validates_presence_of :name
 
   has_and_belongs_to_many :subdivisions
 
@@ -16,7 +16,7 @@ class AdminUser < ActiveRecord::Base
   end
 
   def subdivisions_tree
-    subdivisions.map(&:subtree).map(&:arrange).first || []
+    subdivisions.map(&:subtree).map(&:arrange).inject({}) { |a, v| a.merge(v) }
   end
 
   def display_name

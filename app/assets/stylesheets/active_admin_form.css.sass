@@ -75,3 +75,9 @@ form
   #item_address_attributes_postcode_input
     p.inline-errors
       width: 150px
+  &.admin_user
+    fieldset > ol > li.check_boxes fieldset
+      ol.choice_subdivisions
+        @for $i from 0 through 10
+          .depth_#{$i}
+            padding-left: 10px * $i

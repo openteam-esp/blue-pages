@@ -5,6 +5,10 @@
 
   <div class="subdivisions">
     <h3>Подразделения</h3>
-    <%= render_subdivisions_tree @admin_user.subdivisions_tree %>
+    <% if @admin_user.subdivisions.any? %>
+      <%= render_subdivisions_tree @admin_user.subdivisions_tree %>
+    <% else %>
+      <p>Нет подразделений</p>
+    <% end %>
   </div>
 </div>

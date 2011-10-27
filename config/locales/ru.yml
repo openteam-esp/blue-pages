@@ -2,78 +2,81 @@ ru:
   activerecord:
     attributes:
       email:
-        address:            Адрес
+        address:                Адрес
 
       admin_user:
-        name: Имя
-        subdivisions:       Подразделения
+        email:                  Адрес электронной почты
+        name:                   Имя
+        password:               Пароль
+        password_confirmation:  Подтверждение пароля
+        subdivisions:           Подразделения
 
       item:
-        address:            Адрес
-        created_at:         Создано
-        emails:             Адреса электронной почты
-        person:             Сотрудник
-        phones:             Телефоны
-        subdivision:        Подразделение
-        title:              Должность
-        updated_at:         Обновлено
+        address:                Адрес
+        created_at:             Создано
+        emails:                 Адреса электронной почты
+        person:                 Сотрудник
+        phones:                 Телефоны
+        subdivision:            Подразделение
+        title:                  Должность
+        updated_at:             Обновлено
 
       person:
-        birthdate:          День рождения
-        name:               Имя
-        patronymic:         Отчество
-        surname:            Фамилия
+        birthdate:              День рождения
+        name:                   Имя
+        patronymic:             Отчество
+        surname:                Фамилия
 
       subdivision:
-        abbr:               Аббревиатура
-        address:            Адрес
-        created_at:         Создано
-        emails:             Адреса электронной почты
-        phones:             Телефоны
-        title:              Название
-        updated_at:         Обновлено
-        url:                Сайт
+        abbr:                   Аббревиатура
+        address:                Адрес
+        created_at:             Создано
+        emails:                 Адреса электронной почты
+        phones:                 Телефоны
+        title:                  Название
+        updated_at:             Обновлено
+        url:                    Сайт
 
       address:
-        building:           Строение
-        district:           Район
-        house:              Дом
-        locality:           Населённый пункт
-        office:             Кабинет
-        postcode:           Почтовый индекс
-        region:             Регион
+        building:               Строение
+        district:               Район
+        house:                  Дом
+        locality:               Населённый пункт
+        office:                 Кабинет
+        postcode:               Почтовый индекс
+        region:                 Регион
         admin_user:
           name: Имя
           email:
-        street:             Улица
+        street:                 Улица
 
       phone:
-        _destroy:           Удалить
-        additional_number:  Добавочный
-        code:               Код
-        kind:               Тип
-        number:             Телефон
+        _destroy:               Удалить
+        additional_number:      Добавочный
+        code:                   Код
+        kind:                   Тип
+        number:                 Телефон
         kind_enum:
-          fax:              Факс
-          internal:         Внутренний
-          mobile:           Мобильный
-          phone:            Телефон
-          phone_and_fax:    Тел./факс
+          fax:                  Факс
+          internal:             Внутренний
+          mobile:               Мобильный
+          phone:                Телефон
+          phone_and_fax:        Тел./факс
 
     models:
-      address:              Адрес
-      admin:                Главная
-      admin_user:           Пользователи
-      email:                Электронная почта
-      item:                 Сотрудники
-      phone:                Телефон
-      subdivision:          Подразделения
+      address:                  Адрес
+      admin:                    Главная
+      admin_user:               Пользователи
+      email:                    Электронная почта
+      item:                     Сотрудники
+      phone:                    Телефон
+      subdivision:              Подразделения
 
-  blue_pages_system:        Телефонный справочник
-  manage:                   Управление
-  search:                   Поиск
+  blue_pages_system:            Телефонный справочник
+  manage:                       Управление
+  search:                       Поиск
   subdivision:
-    address:               Адрес
-    emails:                 Адреса электронная почта
-    phones:                 Телефоны
-    url:                    Сайт
+    address:                    Адрес
+    emails:                     Адреса электронная почта
+    phones:                     Телефоны
+    url:                        Сайт
