@@ -57,11 +57,11 @@ ru:
         kind:                   Тип
         number:                 Телефон
         kind_enum:
+          phone:                Телефон
           fax:                  Факс
+          phone_and_fax:        Тел./факс
           internal:             Внутренний
           mobile:               Мобильный
-          phone:                Телефон
-          phone_and_fax:        Тел./факс
 
     models:
       address:                  Адрес

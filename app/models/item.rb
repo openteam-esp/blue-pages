@@ -25,7 +25,7 @@ class Item < ActiveRecord::Base
            :prefix => true,
            :allow_nil => true
 
-  delegate :surname, :name, :patronymic, :to => :person, :allow_nil => true
+  delegate :full_name, :surname, :name, :patronymic, :to => :person, :allow_nil => true
 
   default_scope order('position')
 

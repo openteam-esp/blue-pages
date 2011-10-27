@@ -12,9 +12,10 @@ class String
 
   def extract_phones
     res = []
-    self.gsub(/\./, '').scan(/(телефон|тел\/факс|тел|факс):?(?: -)? ((?:(?:(?:(?:8 )?\((?:[ \d-]+)\) )?[\d-]+)(?:, )?)+)/i).each do |kind, numbers|
+    self.gsub(/\./, '').scan(/(телефон|тел\/факс|тел|факс|внутр|внутренний):?(?: -)? ((?:(?:(?:(?:8 )?\((?:[ \d-]+)\) )?[\d-]+)(?:, )?)+)/i).each do |kind, numbers|
       kind = kind.mb_chars.capitalize.to_s
       kind = "Телефон" if kind == "Тел"
+      kind = "Внутренний" if kind == "Внутр"
       kind = "Тел./факс" if kind == "Тел/факс"
       kind = Phone.human_enums[:kind].invert[kind]
       numbers.split(/, /).each do |code_number|
@@ -66,22 +67,16 @@ class Subdivision
   attr_accessor :import_url
   attr_accessor :html
 
-  def self.governor
-    @governor ||= create_governor
-  end
 
-  def self.create_governor
+  def self.governor
     Subdivision.find_or_initialize_by_title('Губернатор').tap do | governor |
-      governor.update_attribute :position, 1
+      governor.update_attributes :position => 1,
+                                 :address_attributes => { :postcode => '634050', :street => 'пл. Ленина', :house => '6' }
     end
   end
 
   def self.administration
-    @administration ||= create_administration
-  end
-
-  def self.create_administration
-      Subdivision.find_or_initialize_by_title('Администрация').tap do | administration |
+    Subdivision.find_or_initialize_by_title('Администрация').tap do | administration |
       administration.update_attribute :position, 2
     end
   end
@@ -91,12 +86,22 @@ class Subdivision
                       :phones_attributes => info.extract_phones,
                       :emails_attributes => (info.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1).try(:extract_emails) || []),
                       :address_attributes => info.extract_address
+
     unless valid?
       p info.extract_phones
       p info.extract_emails
       p info.extract_address
       p self
       save!
+    end
+  end
+
+  def import_assistent
+    items.find_or_initialize_by_title(title).tap do | item |
+      item.update_attributes :person_attributes => { :full_name => page.css('h1:first').first.text.squish },
+                             :phones_attributes => self.phones.map{|phone| phone.attributes.merge(:id => nil) },
+                             :address_attributes => self.address_attributes.merge(:id => nil),
+                             :emails_attributes => self.emails.map{|email| email.attributes.merge(:id => nil) },
     end
   end
 
@@ -107,6 +112,10 @@ class Subdivision
         puts import_url
       end
       import_info(subdivision_text)
+      items.destroy_all
+      if parent == Subdivision.governor
+        import_assistent
+      end
       import_items
     rescue => e
       puts e.backtrace.grep(/structure_importer/).first#.join("\n")
@@ -126,7 +135,7 @@ class Subdivision
         if phones.empty?
           phones = tds[phone_column].to_s.gsub(/ ?- ?/, '-').scan(/([\d-]+)/).flatten.map{|number| {:kind => :phone, :number => number}}
         end
-        subdivision.items.find_or_initialize_by_title(tds[1]).tap do | item |
+        subdivision.items.create(:title => tds[1]).tap do | item |
           item.update_attributes :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
                                  :address_attributes => subdivision.address_attributes.merge(:office => tds[office_column], :id => nil),
                                  :phones_attributes => phones,
@@ -146,6 +155,7 @@ class Subdivision
         subdivision = children.find_or_initialize_by_title(title).tap do | subdivision |
           subdivision.address_attributes = self.address_attributes.merge(:id => nil)
           subdivision.import_info(lines[1..-1].join("\n"))
+          subdivision.items.destroy_all
         end
       end
     end
@@ -199,7 +209,6 @@ end
 class StructureImporter
 
   def import
-    import_roots
     import_subdivisions
   end
 
@@ -225,11 +234,6 @@ class StructureImporter
 
   def html
     @html ||= open('http://tomsk.gov.ru/ru/rule/structure/')
-  end
-
-  def import_roots
-    Subdivision.create_governor
-    Subdivision.create_administration
   end
 
 end
