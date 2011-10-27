@@ -2,10 +2,10 @@ class AdminAbility
   include CanCan::Ability
 
   def initialize(user)
-    can :read, [Item, Subdivision]
+    can :read, [Item, Category]
 
-    can :manage, Subdivision do |subdivision|
-      user.manageable_subdivisions.include?(subdivision)
+    can :manage, Category do |category|
+      user.manageable_categories.include?(category)
     end
 
     can :manage, Item do |item|
@@ -16,7 +16,7 @@ class AdminAbility
     can [:create, :read], AdminUser
 
     can [:destroy, :update], AdminUser do |admin_user|
-      (user.manageable_subdivisions & admin_user.subdivisions).any?
+      (user.manageable_categories & admin_user.categories).any?
     end
   end
 end

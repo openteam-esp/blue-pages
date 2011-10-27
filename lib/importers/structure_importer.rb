@@ -3,6 +3,7 @@
 require 'nokogiri'
 require 'open-uri'
 require 'sanitize'
+require Rails.root.join 'app/models/category'
 require Rails.root.join 'app/models/subdivision'
 
 class String
@@ -63,31 +64,36 @@ class String
   end
 end
 
+class Category
+  def self.government
+    root.children.find_or_create_by_title('Органы власти')
+  end
+
+  def self.administration
+    government.children.find_or_initialize_by_title('Администрация Томской области').tap do | administration |
+      administration.update_attributes! :position => 2
+    end
+  end
+end
+
 class Subdivision
   attr_accessor :import_url
   attr_accessor :html
 
-
   def self.governor
-    Subdivision.find_or_initialize_by_title('Губернатор').tap do | governor |
-      governor.update_attributes :position => 1,
-                                 :address_attributes => { :postcode => '634050', :street => 'пл. Ленина', :house => '6' }
-    end
-  end
-
-  def self.administration
-    Subdivision.find_or_initialize_by_title('Администрация Томской области').tap do | administration |
-      administration.update_attribute :position, 2
+    government.subdivisions.find_or_initialize_by_title('Губернатор').tap do | governor |
+      governor.update_attributes! :position => 1,
+                                  :address_attributes => { :postcode => '634050', :street => 'пл. Ленина', :house => '6' }
     end
   end
 
   def import_info(info)
     update_attributes :url => info.extract_url,
                       :phones_attributes => info.extract_phones,
-                      :emails_attributes => (info.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1).try(:extract_emails) || []),
-                      :address_attributes => info.extract_address
-
+                      :emails_attributes => (info.match(/mail:[[:space:]]*([^[:space:],]+)/m).try(:[], 1).try(:extract_emails) || [])
+    update_attributes :address_attributes => info.extract_address if info.extract_address.values.any?
     unless valid?
+      puts info
       p info.extract_phones
       p info.extract_emails
       p info.extract_address
@@ -222,12 +228,12 @@ class StructureImporter
       when /^губернатор/i
         subdivision = Subdivision.governor
       when /заместитель/i
-        subdivision = Subdivision.governor.children.find_or_initialize_by_title(title)
+        subdivision = Subdivision.governor.subdivisions.find_or_initialize_by_title(title)
         subdivision.update_attributes :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
       else
-        subdivision = Subdivision.administration.children.find_or_initialize_by_title(title)
+        subdivision = Subdivision.administration.subdivisions.find_or_initialize_by_title(title)
+        subdivision.save :validate => false
       end
-      subdivision.save!
       subdivision.import_url = "http://tomsk.gov.ru#{a.attributes['href'].value}"
       subdivision.import
     end

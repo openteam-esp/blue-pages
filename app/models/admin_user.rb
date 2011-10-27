@@ -9,14 +9,14 @@ class AdminUser < ActiveRecord::Base
 
   validates_presence_of :name
 
-  has_and_belongs_to_many :subdivisions
+  has_and_belongs_to_many :categories
 
-  def manageable_subdivisions
-    (subdivisions + subdivisions.map(&:descendants)).flatten
+  def manageable_categories
+    (categories + categories.map(&:descendants)).flatten
   end
 
-  def subdivisions_tree
-    subdivisions.map(&:subtree).map(&:arrange).inject({}) { |a, v| a.merge(v) }
+  def categories_tree
+    categories.map(&:subtree).map(&:arrange).inject({}) { |a, v| a.merge(v) }
   end
 
   def display_name

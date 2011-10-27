@@ -3,19 +3,19 @@
 require 'spec_helper'
 
 describe AdminAbility do
-  # root1_subdivision      (managed by user)
-  #   one_subdivision
-  #   two_subdivision      (managed by anoter_user and one_more_another_user)
-  #     child1_subdivision
-  #     child2_subdivision
-  # root2_subdivision      (managed by one_more_another_user)
+  # root      (managed by user)
+  #   child_1
+  #   child_2      (managed by anoter_user and one_more_another_user)
+  #     child_2_1
+  #     child_2_2
+  # another_root      (managed by one_more_another_user)
 
-  let(:root1_subdivision)     { Fabricate(:subdivision) }
-  let(:one_subdivision)       { root1_subdivision.subdivisions.create Fabricate.attributes_for(:subdivision) }
-  let(:two_subdivision)       { root1_subdivision.subdivisions.create Fabricate.attributes_for(:subdivision) }
-  let(:child1_subdivision)    { two_subdivision.subdivisions.create Fabricate.attributes_for(:subdivision) }
-  let(:child2_subdivision)    { two_subdivision.subdivisions.create Fabricate.attributes_for(:subdivision) }
-  let(:root2_subdivision)     { Fabricate(:subdivision) }
+  let(:root)                  { Fabricate(:category) }
+  let(:child_1)               { root.subdivisions.create Fabricate.attributes_for(:subdivision) }
+  let(:child_2)               { root.subdivisions.create Fabricate.attributes_for(:subdivision) }
+  let(:child_2_1)             { child_2.subdivisions.create Fabricate.attributes_for(:subdivision) }
+  let(:child_2_2)             { child_2.subdivisions.create Fabricate.attributes_for(:subdivision) }
+  let(:another_root)          { Fabricate(:category) }
 
   let(:user)                  { Fabricate(:admin_user) }
   let(:another_user)          { Fabricate(:admin_user) }
@@ -25,33 +25,33 @@ describe AdminAbility do
     AdminAbility.new(user)
   end
 
-  before { user.subdivisions << root1_subdivision }
+  before { user.categories << root }
 
   describe 'управление подразделениями' do
     describe 'пользователь' do
       describe 'может' do
-        it { ability_for(user).should be_able_to(:manage, root1_subdivision) }
+        it { ability_for(user).should be_able_to(:manage, root) }
 
-        it { ability_for(user).should be_able_to(:manage, one_subdivision) }
-        it { ability_for(user).should be_able_to(:manage, one_subdivision.items.new) }
+        it { ability_for(user).should be_able_to(:manage, child_1) }
+        it { ability_for(user).should be_able_to(:manage, child_1.items.new) }
 
-        it { ability_for(user).should be_able_to(:manage, child1_subdivision) }
-        it { ability_for(user).should be_able_to(:manage, child1_subdivision.items.new) }
+        it { ability_for(user).should be_able_to(:manage, child_2_1) }
+        it { ability_for(user).should be_able_to(:manage, child_2_1.items.new) }
       end
 
       describe 'не может' do
-        it { ability_for(user).should_not be_able_to(:manage, root2_subdivision) }
+        it { ability_for(user).should_not be_able_to(:manage, another_root) }
       end
     end
   end
 
   describe 'управление пользователями' do
     before do
-      another_user.subdivisions << two_subdivision
-      one_more_another_user.subdivisions << two_subdivision
-      one_more_another_user.subdivisions << root2_subdivision
-      child1_subdivision
-      child2_subdivision
+      another_user.categories << child_2
+      one_more_another_user.categories << child_2
+      one_more_another_user.categories << another_root
+      child_2_1
+      child_2_2
     end
 
     xit { ability_for(user).should be_able_to(:update, another_user) }

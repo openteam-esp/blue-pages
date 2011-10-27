@@ -38,7 +38,7 @@ end
 
 # == Schema Information
 #
-# Table name: subdivisions
+# Table name: categories
 #
 #  id         :integer         not null, primary key
 #  title      :text
@@ -48,5 +48,6 @@ end
 #  ancestry   :string(255)
 #  position   :integer
 #  url        :text
+#  type       :string(255)
 #
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111026034632) do
+ActiveRecord::Schema.define(:version => 20111027100359) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -62,10 +62,23 @@ ActiveRecord::Schema.define(:version => 20111026034632) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
-  create_table "admin_users_subdivisions", :id => false, :force => true do |t|
+  create_table "admin_users_categories", :id => false, :force => true do |t|
     t.integer "admin_user_id"
-    t.integer "subdivision_id"
+    t.integer "category_id"
   end
+
+  create_table "categories", :force => true do |t|
+    t.text     "title"
+    t.string   "abbr"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ancestry"
+    t.integer  "position"
+    t.text     "url"
+    t.string   "type"
+  end
+
+  add_index "categories", ["ancestry"], :name => "index_subdivisions_on_ancestry"
 
   create_table "emails", :force => true do |t|
     t.string   "address"
@@ -109,17 +122,5 @@ ActiveRecord::Schema.define(:version => 20111026034632) do
     t.string   "kind"
     t.string   "additional_number"
   end
-
-  create_table "subdivisions", :force => true do |t|
-    t.text     "title"
-    t.string   "abbr"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "ancestry"
-    t.integer  "position"
-    t.text     "url"
-  end
-
-  add_index "subdivisions", ["ancestry"], :name => "index_subdivisions_on_ancestry"
 
 end

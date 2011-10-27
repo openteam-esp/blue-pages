@@ -14,9 +14,8 @@ describe StructureImporter do
         subject.should_receive(:html).and_return File.read(Rails.root.join("spec/fixtures/structure.html"))
         subject.import
       end
-      it { Subdivision.roots.map(&:title).should == ["Губернатор", "Администрация Томской области"] }
       it { Subdivision.governor.children.count.should == 11 }
-      it { Subdivision.administration.children.count.should == 47 }
+      it { Category.administration.children.count.should == 47 }
     end
 
 
