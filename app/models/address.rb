@@ -31,7 +31,7 @@ end
 
 # == Schema Information
 #
-# Table name: buildings
+# Table name: addresses
 #
 #  id               :integer         not null, primary key
 #  postcode         :string(255)
