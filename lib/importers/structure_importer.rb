@@ -217,18 +217,18 @@ class StructureImporter
       title = Sanitize.clean(a.text).squish
       href = a.attributes['href'].value
       next if title.blank? || href =~ /.doc$/
-      if title =~ /заместитель/i
-        Subdivision.governor.children.find_or_initialize_by_title(title).tap do | subdivision |
-          subdivision.save!
-        end
+      case title
+      when /^губернатор/i
+        subdivision = Subdivision.governor
+      when /заместитель/i
+        subdivision = Subdivision.governor.children.find_or_initialize_by_title(title)
+        subdivision.update_attributes :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
       else
-        next if title =~ /^губернатор/i
-        Subdivision.administration.children.find_or_initialize_by_title(title).tap do | subdivision |
-          subdivision.save!
-          subdivision.import_url = "http://tomsk.gov.ru#{a.attributes['href'].value}"
-          subdivision.import
-        end
+        subdivision = Subdivision.administration.children.find_or_initialize_by_title(title)
       end
+      subdivision.save!
+      subdivision.import_url = "http://tomsk.gov.ru#{a.attributes['href'].value}"
+      subdivision.import
     end
   end
 
