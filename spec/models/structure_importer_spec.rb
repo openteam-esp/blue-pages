@@ -103,5 +103,14 @@ describe StructureImporter do
       it { item.address(true).to_s.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
       it { subdivision.items.count.should == 4 }
     end
+    describe 'импорт губера' do
+      # TODO убрать address_attributes
+      let(:subdivision) { Subdivision.governor }
+      before { import :governor }
+      it { item.full_name.should == 'Кресс Виктор Мельхиорович' }
+      it { item.phones.map(&:to_s).should == ['Телефон: (3822) 510-813', 'Телефон: (3822) 510-505']}
+      it { item.address(true).to_s.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
+      it { subdivision.items.count.should == 13 }
+    end
   end
 end

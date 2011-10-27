@@ -113,7 +113,7 @@ class Subdivision
       end
       import_info(subdivision_text)
       items.destroy_all
-      if parent == Subdivision.governor
+      if parent == Subdivision.governor || self == Subdivision.governor
         import_assistent
       end
       import_items
