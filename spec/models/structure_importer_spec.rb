@@ -16,7 +16,7 @@ describe StructureImporter do
       end
       it { Subdivision.roots.map(&:title).should == ["Губернатор", "Администрация"] }
       it { Subdivision.governor.children.count.should == 11 }
-      it { Subdivision.administration.children.count.should == 48 }
+      it { Subdivision.administration.children.count.should == 47 }
     end
 
     let(:subdivision) { Fabricate :subdivision }
