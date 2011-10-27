@@ -76,7 +76,7 @@ class Subdivision
   end
 
   def self.administration
-    Subdivision.find_or_initialize_by_title('Администрация').tap do | administration |
+    Subdivision.find_or_initialize_by_title('Администрация Томской области').tap do | administration |
       administration.update_attribute :position, 2
     end
   end
@@ -98,7 +98,8 @@ class Subdivision
 
   def import_assistent
     items.find_or_initialize_by_title(title).tap do | item |
-      item.update_attributes :person_attributes => { :full_name => page.css('h1:first').first.text.squish },
+      full_name = page.css('h1').map{|h1| h1.text.squish }.select(&:present?).first
+      item.update_attributes :person_attributes => { :full_name => full_name },
                              :phones_attributes => self.phones.map{|phone| phone.attributes.merge(:id => nil) },
                              :address_attributes => self.address_attributes.merge(:id => nil),
                              :emails_attributes => self.emails.map{|email| email.attributes.merge(:id => nil) },
@@ -118,7 +119,7 @@ class Subdivision
       end
       import_items
     rescue => e
-      puts e.backtrace.grep(/structure_importer/).first#.join("\n")
+      puts e.backtrace.grep(/structure_importer/).first
       puts "#{e.message} во время импорта #{import_url}"
       throw e
     end
@@ -126,7 +127,7 @@ class Subdivision
 
   def import_items
     subdivision = self
-    items_table.css('tr')[1..-1].each do | tr |
+    [*items_table.css('tr')[1..-1]].each do | tr |
       texts = tr.css("td,th").map &:text
       tds = texts.map{|text| text.gsub(/[[:space:]]+/, ' ').squish }
       if tds.count > 1
