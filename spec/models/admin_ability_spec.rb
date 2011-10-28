@@ -54,12 +54,12 @@ describe AdminAbility do
       child_2_2
     end
 
-    xit { ability_for(user).should be_able_to(:update, another_user) }
-    xit { ability_for(user).should be_able_to(:update, one_more_another_user) }
+    it { ability_for(user).should be_able_to(:update, another_user) }
+    it { ability_for(user).should be_able_to(:update, one_more_another_user) }
 
-    xit { ability_for(another_user).should be_able_to(:update, one_more_another_user) }
-    xit { ability_for(another_user).should_not be_able_to(:update, user) }
+    it { ability_for(another_user).should be_able_to(:update, one_more_another_user) }
+    it { ability_for(another_user).should_not be_able_to(:update, user) }
 
-    xit { ability_for(one_more_another_user).should_not be_able_to(:update, user) }
+    it { ability_for(one_more_another_user).should_not be_able_to(:update, user) }
   end
 end

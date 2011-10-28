@@ -1,7 +1,7 @@
 module ActiveAdmin::ViewHelpers
-  def render_subdivisions_tree(subdivisions)
-    subdivisions.map do |subdivision, child_subdivisions|
-      content_tag(:div, link_to(subdivision.title, admin_subdivision_path(subdivision)), :class => 'subdivision') + (child_subdivisions.empty? ? '' : content_tag(:div, render_subdivisions_tree(child_subdivisions), :class => 'nested_subdivisions'))
+  def render_categories_tree(categories)
+    categories.map do |category, child_categories|
+      content_tag(:div, link_to(category.title, admin_category_path(category)), :class => 'category') + (child_categories.empty? ? '' : content_tag(:div, render_categories_tree(child_categories), :class => 'nested_categories'))
     end.join.html_safe
   end
 end
