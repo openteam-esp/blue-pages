@@ -2,7 +2,7 @@ ActiveAdmin.register AdminUser do
   filter :email
   filter :name
 
-  menu :priority => 4
+  menu :priority => 5
 
   index do
     column :name do |admin_user|

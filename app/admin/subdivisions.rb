@@ -6,7 +6,7 @@ ActiveAdmin.register Subdivision do
   filter :title
   filter :updated_at
 
-  menu false
+  menu :priority => 3
 
   index do
     column :title do |subdivision|

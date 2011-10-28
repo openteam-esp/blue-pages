@@ -4,6 +4,19 @@ ru:
       email:
         address:                Адрес
 
+      address:
+        building:               Строение
+        district:               Район
+        house:                  Дом
+        locality:               Населённый пункт
+        office:                 Кабинет
+        postcode:               Почтовый индекс
+        region:                 Регион
+        admin_user:
+          name: Имя
+          email:
+        street:                 Улица
+
       admin_user:
         email:                  Адрес электронной почты
         name:                   Имя
@@ -12,6 +25,10 @@ ru:
         subdivisions:           Подразделения
         last_sign_in_at:        Последняя авторизация
         last_sign_in_ip:        Последний IP-адрес
+
+      category:
+        title:                  Название
+        updated_at:             Обновлено
 
       item:
         address:                Адрес
@@ -39,19 +56,6 @@ ru:
         updated_at:             Обновлено
         url:                    Сайт
 
-      address:
-        building:               Строение
-        district:               Район
-        house:                  Дом
-        locality:               Населённый пункт
-        office:                 Кабинет
-        postcode:               Почтовый индекс
-        region:                 Регион
-        admin_user:
-          name: Имя
-          email:
-        street:                 Улица
-
       phone:
         _destroy:               Удалить
         additional_number:      Добавочный
@@ -69,7 +73,7 @@ ru:
       address:                  Адрес
       admin:                    Главная
       admin_user:               Пользователи
-      category:                 Категории
+      category:                 Разделы
       email:                    Электронная почта
       item:                     Сотрудники
       phone:                    Телефон

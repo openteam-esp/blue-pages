@@ -11,7 +11,7 @@ ActiveAdmin.register Item do
   filter :title
   filter :updated_at
 
-  menu :priority => 3
+  menu :priority => 4
 
   index do
     column :subdivision
