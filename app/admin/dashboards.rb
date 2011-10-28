@@ -1,13 +1,14 @@
 # encoding: utf-8
 
 ActiveAdmin::Dashboards.build do
-  Subdivision.roots.each do |subdivision|
-    section subdivision.title do
-      div :class => "subdivisions" do
-        render 'admin/subdivisions/subdivisions', :subdivisions => subdivision.children, :subdivision => subdivision
+
+  Category.root.children.each do | category |
+    section category.title do
+      div :class => "category" do
+        render "section", :category => category, :children => category.children
       end
     end
-  end if ActiveRecord::Base.connection.table_exists?(:subdivisions)
+  end if ActiveRecord::Base.connection.table_exists?(:categories)
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just

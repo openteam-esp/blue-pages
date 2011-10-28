@@ -1,22 +1,10 @@
-<% if subdivision && can?(:manage, subdivision) %>
-  <div class="actions">
-    <%= link_to t('active_admin.sort'), sort_admin_parent_subdivision_subdivisions_path(subdivision), :class => 'sort_link off button icon loop' %>
-    <%= link_to t('active_admin.new_subdivision'),
-                new_admin_parent_subdivision_subdivision_path(subdivision),
-                :class => 'button icon add' %>
-  </div>
-<% end %>
-
-<% if subdivisions.empty? %>
+<% if subdivision.children.empty? %>
   <h5>Нет подразделений</h5>
 <% else %>
   <ul class="sortable">
-    <% subdivisions.each do |child| %>
+    <% subdivision.children.each do |child| %>
       <li data-id='<%= child.id %>'>
-        <div class="title">
-          <span>хвать</span>
-          <%= link_to child.title, admin_subdivision_path(child) %>
-        </div>
+        <%= render child %>
       </li>
     <% end %>
   </ul>

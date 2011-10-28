@@ -1,0 +1,13 @@
+<% if item.person %>
+  <h1><%=  item.person %></h1>
+  <%= show_for item.person do |person| %>
+    <%= person.attribute :birthdate %>
+  <% end %>
+<% end %>
+<%= show_for item do |item| %>
+  <%= item.association :address %>
+  <%= item.association :phones, :if_blank => "Не указаны" %>
+  <%= item.association :emails, :if_blank => "Не указаны" do | email | %>
+    <li><%= mail_to email %></li>
+  <% end %>
+<% end %>

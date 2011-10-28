@@ -6,6 +6,8 @@ ActiveAdmin.register Category do
   filter :title
   filter :updated_at
 
+  menu :priority => 2
+
   index do
     column :title do |category|
       link_to category.title, category

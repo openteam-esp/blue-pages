@@ -6,6 +6,8 @@ ActiveAdmin.register Subdivision do
   filter :title
   filter :updated_at
 
+  menu false
+
   index do
     column :title do |subdivision|
       link_to subdivision.title, admin_subdivision_path(subdivision)

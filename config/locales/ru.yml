@@ -10,6 +10,8 @@ ru:
         password:               Пароль
         password_confirmation:  Подтверждение пароля
         subdivisions:           Подразделения
+        last_sign_in_at:        Последняя авторизация
+        last_sign_in_ip:        Последний IP-адрес
 
       item:
         address:                Адрес
@@ -67,6 +69,7 @@ ru:
       address:                  Адрес
       admin:                    Главная
       admin_user:               Пользователи
+      category:                 Категории
       email:                    Электронная почта
       item:                     Сотрудники
       phone:                    Телефон

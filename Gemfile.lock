@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin
-  revision: 18912f8df209846519440d063dfb9f2ed0647e13
+  revision: 7f263d9ca47eceadac5639b48ff83e6d2b5efdc4
   specs:
     activeadmin (0.3.2)
       devise (>= 1.1.2)
@@ -113,7 +113,7 @@ GEM
       activerecord (~> 3.1.0)
       activesupport (~> 3.1.0)
       polyamorous (~> 0.5.0)
-    mime-types (1.17.1)
+    mime-types (1.17.2)
     multi_json (1.0.3)
     nokogiri (1.5.0)
     orm_adapter (0.0.5)

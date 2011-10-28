@@ -1,0 +1,9 @@
+<div class="title">
+  <span>хвать</span>
+  <%= link_to subdivision, [:admin, subdivision] %>
+</div>
+<div class="details">
+  <%= content_tag :p, subdivision.address %>
+  <%= content_tag :p, subdivision.phones.join(", ") if subdivision.phones.any?%>
+  <%= content_tag :p, subdivision.emails.map{|email| mail_to(email)}.join(', ').html_safe if subdivision.emails.any? %>
+</div>

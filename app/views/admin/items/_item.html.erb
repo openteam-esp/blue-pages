@@ -1,13 +1,9 @@
-<% if @item.person %>
-  <h1><%=  @item.person %></h1>
-  <%= show_for @item.person do |person| %>
-    <%= person.attribute :birthdate %>
-  <% end %>
-<% end %>
-<%= show_for @item do |item| %>
-  <%= item.association :address %>
-  <%= item.association :phones, :if_blank => "Не указаны" %>
-  <%= item.association :emails, :if_blank => "Не указаны" do | email | %>
-    <li><%= mail_to email %></li>
-  <% end %>
-<% end %>
+<div class="title">
+  <span>хвать</span>
+  <%= link_to item.title, admin_subdivision_item_path(@subdivision, item) %><%= ", #{item.person}" if item.person %>
+</div>
+<div class="details">
+  <%= content_tag :p, "Дата рождения: #{l(item.person.birthdate)}" if !item.person.blank? && !item.person.birthdate.blank? %>
+  <%= content_tag :p, item.phones.join(', ') if item.phones.any? %>
+  <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>
+</div>

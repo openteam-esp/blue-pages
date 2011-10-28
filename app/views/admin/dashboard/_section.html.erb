@@ -1,8 +1,8 @@
 <% if category && can?(:manage, category) %>
   <div class="actions">
-    <%#= link_to t('active_admin.sort'), sort_admin_parent_category_categories_path(category), :class => 'sort_link off button icon loop' %>
-    <%#= link_to t('active_admin.new_category'),
-                new_admin_parent_category_category_path(category),
+    <%= link_to t('active_admin.sort'), sort_admin_category_categories_path(category), :class => 'sort_link off button icon loop' %>
+    <%= link_to t('active_admin.new_subdivision'),
+                new_admin_category_category_path(category),
                 :class => 'button icon add' %>
   </div>
 <% end %>
@@ -15,7 +15,7 @@
       <li data-id='<%= child.id %>'>
         <div class="title">
           <span>хвать</span>
-          <%= link_to child.title, admin_category_path(child) %>
+          <%= link_to child.title, [:admin, child] %>
         </div>
       </li>
     <% end %>

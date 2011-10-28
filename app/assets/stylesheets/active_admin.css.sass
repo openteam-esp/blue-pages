@@ -10,6 +10,9 @@
 @import "jquery_ui"
 @import "active_admin_form"
 
+.nobr
+  white-space: nowrap
+
 body
   font-size: 11px
 
@@ -36,7 +39,9 @@ $titlebar_right_width: 375px
   +clearfix
   padding: 25px 30px 55px 30px
 
-div.subdivisions, div.items
+div.category,
+div.subdivisions,
+div.items
   +clearfix
 
   ul

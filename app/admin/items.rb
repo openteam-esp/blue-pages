@@ -11,7 +11,7 @@ ActiveAdmin.register Item do
   filter :title
   filter :updated_at
 
-  menu :parent => "Подразделения"
+  menu :priority => 3
 
   index do
     column :subdivision
@@ -19,9 +19,15 @@ ActiveAdmin.register Item do
       link_to item.title, [:admin, item.subdivision, item]
     end
     column :person do |item|
-      item.person.to_s
+      span :class => "nobr" do
+        item.person.to_s
+      end
     end
-    column :updated_at
+    column :updated_at do |item|
+      span :class => "nobr" do
+        l item.updated_at, :format => :long
+      end
+    end
   end
 
   show :title => :title do
