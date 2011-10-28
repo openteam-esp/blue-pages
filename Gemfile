@@ -34,6 +34,7 @@ group :development do
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
+  gem 'rails-dev-tweaks'
 end
 
 group :production do
