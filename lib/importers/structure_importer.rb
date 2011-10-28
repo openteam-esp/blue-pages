@@ -108,7 +108,7 @@ class Subdivision
       item.update_attributes :person_attributes => { :full_name => full_name },
                              :phones_attributes => self.phones.map{|phone| phone.attributes.merge(:id => nil) },
                              :address_attributes => self.address_attributes.merge(:id => nil),
-                             :emails_attributes => self.emails.map{|email| email.attributes.merge(:id => nil) },
+                             :emails_attributes => self.emails.map{|email| email.attributes.merge(:id => nil) }
     end
   end
 
