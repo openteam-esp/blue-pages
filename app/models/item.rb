@@ -31,6 +31,10 @@ class Item < ActiveRecord::Base
 
   default_scope order('position')
 
+  default_value_for :position do |item|
+    item.subdivision.items.last.try(:position).to_i + 1
+  end
+
   searchable do
     text :surname, :boost => 1.4
     text :name, :boost => 1.2
