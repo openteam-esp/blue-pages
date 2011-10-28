@@ -8,7 +8,7 @@ class Subdivision < Category
 
   has_one :address,  :as => :addressable, :dependent => :destroy
 
-  validates :address, :presence => true
+  validates :address, :parent, :presence => true
 
   validates :abbr, :allow_blank => true,
                    :format => { :with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i }

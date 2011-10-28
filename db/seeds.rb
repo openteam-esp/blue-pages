@@ -20,9 +20,9 @@ Category.root.children.find_or_create_by_title('Предприятия').childre
 end
 
 AdminUser.find_or_initialize_by_email('demo@demo.de').tap do | user |
-  user.update_attributes :name => 'Юзеров Юзер Юзерович',
-                         :password => '123123',
-                         :password_confirmation => '123123'
+  user.update_attributes! :name => 'Юзеров Юзер Юзерович',
+                          :password => '123123',
+                          :password_confirmation => '123123'
   user.categories << Category.root
 end
 
