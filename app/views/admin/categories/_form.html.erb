@@ -1,0 +1,12 @@
+<%= semantic_nested_form_for @category, :validate => true, :url => @category.new_record? ? collection_path : resource_path do |form| %>
+  <%= form.inputs :class => "inputs inline_fields" do %>
+    <%= form.input :title, :as => :string %>
+  <% end %>
+
+  <%= form.buttons do %>
+    <%= form.commit_button %>
+    <li class='cancel'>
+      <%= link_to t("active_admin.cancel"), @category.new_record? ? collection_path : resource_path %>
+    </li>
+  <% end %>
+<% end %>
