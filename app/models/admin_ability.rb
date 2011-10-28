@@ -12,11 +12,12 @@ class AdminAbility
       can? :manage, item.subdivision
     end
 
-    # TODO: переписать с учетом категорий
-    can [:create, :read], AdminUser
+    can :manage, AdminUser do | admin_user |
+      (user.categories & (admin_user.categories.map(&:ancestors).flatten + admin_user.categories)).any?
+    end
 
-    can [:destroy, :update], AdminUser do |admin_user|
-      (user.manageable_categories & admin_user.categories).any?
+    can :manage, AdminUser do | admin_user |
+      user.categories.include? Category.root
     end
   end
 end
