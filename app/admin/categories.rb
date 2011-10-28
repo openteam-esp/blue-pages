@@ -1,27 +1,8 @@
 ActiveAdmin.register Category do
   belongs_to :category, :optional => true
 
+  config.clear_sidebar_sections!
   config.clear_action_items!
-
-  filter :title
-  filter :updated_at
-
-  menu :priority => 2
-
-  index do
-    column :title do |category|
-      link_to category.title, [:admin, category]
-    end
-    column :updated_at
-  end
-
-  show :title => proc { category.title } do
-    div do
-      render 'show', :children => category.children
-    end
-  end
-
-  form :partial => 'form'
 
   action_item :only => :show do
     link_to(I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}"),
@@ -37,36 +18,25 @@ ActiveAdmin.register Category do
             :class => 'button icon trash danger') if can?(:destroy, resource)
   end
 
-  collection_action :sort, :method => :post do
-    index! do
-      authorize! :manage, @parent_subdivision
-      params[:ids].each_with_index do |id, index|
-        subdivision = Subdivision.find(id)
-        subdivision.update_attribute(:position, index.to_i+1)
-      end
-      head 200 and return
+  menu :priority => 2
+
+  index do
+    render :partial => 'index'
+  end
+
+  show :title => proc { category.title } do
+    div do
+      render 'show', :children => category.children
     end
   end
+
+  form :partial => 'form'
 
   controller do
     authorize_resource
 
-    def create
-      create! do |success, failure|
-        success.html { redirect_to admin_subdivision_path(@subdivision) }
-      end
-    end
-
     def index
-      index! do
-        redirect_to admin_subdivision_path(@parent_subdivision) and return if @parent_subdivision
-      end
+      @cats = [Category.root] + Category.root.descendants.where(:type=> nil)
     end
-
-    def collection_path
-      return admin_parent_subdivision_subdivisions_path(@parent_subdivision) if @parent_subdivision
-      admin_subdivisions_path
-    end
-
   end
 end

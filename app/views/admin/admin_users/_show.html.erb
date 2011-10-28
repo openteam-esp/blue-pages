@@ -6,7 +6,7 @@
   <div class="subdivisions">
     <h3>Подразделения</h3>
     <% if @admin_user.categories.any? %>
-      <%= render_categories_tree @admin_user.categories_tree %>
+      <%= render_tree @admin_user.categories_tree %>
     <% else %>
       <p>Нет подразделений</p>
     <% end %>
