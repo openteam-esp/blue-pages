@@ -10,7 +10,7 @@ ActiveAdmin.register Category do
 
   index do
     column :title do |category|
-      link_to category.title, category
+      link_to category.title, [:admin, category]
     end
     column :updated_at
   end
