@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 class Subdivision < Category
-
   has_many :emails,   :as => :emailable,   :dependent => :destroy
   has_many :items,                         :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
@@ -24,6 +23,8 @@ class Subdivision < Category
                                   /?
                                   (\?.*)?                                         # query params
                                 $}ix }
+
+  after_initialize :set_address_attributes, :if => :parent_is_a_subdivision?
 
   accepts_nested_attributes_for :address
 
@@ -55,6 +56,15 @@ class Subdivision < Category
   end
 
   alias :children :subdivisions
+
+  private
+    def set_address_attributes
+      self.address_attributes = parent.address_attributes.merge(:id => nil, :office => nil) unless address
+    end
+
+    def parent_is_a_subdivision?
+      parent.is_a? Subdivision
+    end
 end
 
 # == Schema Information

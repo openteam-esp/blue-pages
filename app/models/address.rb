@@ -17,7 +17,7 @@ class Address < ActiveRecord::Base
     attributes.values_at *SIGNIFICANT_ATTRIBUTES
   end
 
-  def ==(other)
+  def building_same_as?(other)
     other && self.significant_values == other.significant_values
   end
 

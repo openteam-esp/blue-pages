@@ -4,9 +4,9 @@ require 'spec_helper'
 
 describe AdminAbility do
   let(:root)                  { Category.root }
-  let(:child_1)               { root.subdivisions.create Fabricate.attributes_for(:subdivision) }
-  let(:child_1_1)             { child_1.subdivisions.create Fabricate.attributes_for(:subdivision) }
-  let(:child_2)               { root.subdivisions.create Fabricate.attributes_for(:subdivision) }
+  let(:child_1)               { Fabricate :subdivision }
+  let(:child_1_1)             { Fabricate :subdivision, :parent => child_1 }
+  let(:child_2)               { Fabricate :subdivision }
 
   def ability_for(user)
     AdminAbility.new(user)

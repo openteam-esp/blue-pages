@@ -34,6 +34,16 @@ describe Subdivision do
     it { should_not allow_value('http://сайt.рф').for(:url) }
     it { should_not allow_value('http://сайт.ру').for(:url) }
   end
+
+  describe 'вложенные подразделения' do
+    describe "подстановка адреса из родительского подразделения" do
+      let(:subdivision) { Fabricate(:subdivision, :address_attributes => Fabricate.attributes_for(:address).merge(:office => '123')) }
+      let(:child) { subdivision.subdivisions.build :title => 'вложенное подразделение' }
+
+      it { child.address.office.should be_blank }
+      it { child.address.building_same_as?(subdivision.address).should be_true }
+    end
+  end
 end
 
 # == Schema Information
