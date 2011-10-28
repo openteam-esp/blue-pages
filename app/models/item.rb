@@ -31,9 +31,13 @@ class Item < ActiveRecord::Base
 
   delegate :full_name, :surname, :name, :patronymic, :to => :person, :allow_nil => true
 
+  delegate :boost, :to => :subdivision
+
   default_scope order('position')
 
   searchable do
+    boost :boost
+
     text :surname, :boost => 1.4
     text :name, :boost => 1.2
     text :patronymic

@@ -47,6 +47,7 @@ class Subdivision < Category
   end
 
   searchable do
+    boost :boost
     text :abbr, :boost => 1.5
     text :title, :boost => 1.5
     text :address

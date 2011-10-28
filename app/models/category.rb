@@ -13,6 +13,7 @@ class Category < ActiveRecord::Base
 
   searchable do
     text :title, :boost => 1.5
+    boost :boost
   end
 
   def display_name
@@ -29,7 +30,11 @@ class Category < ActiveRecord::Base
 
   alias :to_s :display_name
 
-  private
+  def boost
+    1.0 + ((10 - [depth, 10].min) / 20.0)
+  end
+
+  protected
     def set_position
       self.position = siblings.last.try(:position).to_i + 1
     end
