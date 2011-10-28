@@ -7,6 +7,8 @@ class Category < ActiveRecord::Base
 
   default_scope order('position')
 
+  before_create :set_position
+
   has_ancestry
 
   searchable do
@@ -26,6 +28,12 @@ class Category < ActiveRecord::Base
   end
 
   alias :to_s :display_name
+
+  private
+    def set_position
+      self.position = siblings.last.try(:position).to_i + 1
+    end
+
 end
 
 # == Schema Information

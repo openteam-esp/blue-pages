@@ -11,6 +11,8 @@ class Item < ActiveRecord::Base
 
   after_initialize :set_address_attributes
 
+  before_create :set_position
+
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
 
@@ -31,10 +33,6 @@ class Item < ActiveRecord::Base
 
   default_scope order('position')
 
-  default_value_for :position do |item|
-    item.subdivision.items.last.try(:position).to_i + 1
-  end
-
   searchable do
     text :surname, :boost => 1.4
     text :name, :boost => 1.2
@@ -54,6 +52,10 @@ class Item < ActiveRecord::Base
   private
     def set_address_attributes
       self.address_attributes = subdivision.address_attributes.merge(:id => nil, :office => nil) unless address
+    end
+
+    def set_position
+      self.position = subdivision.items.last.try(:position).to_i + 1
     end
 end
 

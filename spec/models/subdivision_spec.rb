@@ -44,6 +44,18 @@ describe Subdivision do
       it { child.address.building_same_as?(subdivision.address).should be_true }
     end
   end
+
+  describe 'присваивание position' do
+    let(:root) { Category.root }
+    let(:first_subdivision) { Fabricate(:subdivision, :parent => root) }
+    let(:second_subdivision) { Fabricate(:subdivision, :parent => first_subdivision.parent) }
+    let(:child_subdivision) { first_subdivision.children.create! :title => 'Подкатегорий' }
+
+    it { root.position.should == 1 }
+    it { first_subdivision.position.should == 1 }
+    it { second_subdivision.position.should == 2 }
+    it { child_subdivision.position.should == 1 }
+  end
 end
 
 # == Schema Information
