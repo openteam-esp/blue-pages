@@ -90,11 +90,8 @@ describe StructureImporter do
     end
 
     describe 'импорт заместителей' do
-      # TODO убрать address_attributes
       let(:subdivision) do
-        Fabricate :subdivision, :title => 'Заместитель губернатора Томской области по особо важным проектам',
-                                :parent => Subdivision.governor,
-                                :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
+        Subdivision.governor.subdivisions.create! :title => 'Заместитель губернатора Томской области по особо важным проектам',
       end
       before { import :assistant_special_orders }
       it { item.full_name.should == 'Точилин Сергей Борисович' }
@@ -103,7 +100,6 @@ describe StructureImporter do
       it { subdivision.items.count.should == 4 }
     end
     describe 'импорт губера' do
-      # TODO убрать address_attributes
       let(:subdivision) { Subdivision.governor }
       before { import :governor }
       it { item.full_name.should == 'Кресс Виктор Мельхиорович' }

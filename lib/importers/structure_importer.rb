@@ -103,7 +103,7 @@ class Subdivision
   end
 
   def import_assistent
-    items.find_or_initialize_by_title(title).tap do | item |
+    (items.find_by_title(title) || items.build(:title => title)).tap do | item |
       full_name = page.css('h1').map{|h1| h1.text.squish }.select(&:present?).first
       item.update_attributes :person_attributes => { :full_name => full_name },
                              :phones_attributes => self.phones.map{|phone| phone.attributes.merge(:id => nil) },

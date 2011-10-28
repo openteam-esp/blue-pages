@@ -7,9 +7,11 @@ class Item < ActiveRecord::Base
   has_one :address,   :as => :addressable, :dependent => :destroy
   has_one :person,                         :dependent => :destroy
 
-  validates_presence_of :title
+  validates_presence_of :title, :address
 
-  accepts_nested_attributes_for :address, :reject_if => :all_blank, :allow_destroy => true
+  after_initialize :set_address_attributes
+
+  accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
 
   accepts_nested_attributes_for :emails,
@@ -45,6 +47,10 @@ class Item < ActiveRecord::Base
 
   alias :to_s :display_name
 
+  private
+    def set_address_attributes
+      self.address_attributes = subdivision.address_attributes.merge(:id => nil, :office => nil) unless address
+    end
 end
 
 # == Schema Information
