@@ -56,7 +56,7 @@ ActiveAdmin.register Category do
     protected
 
       def collection_path
-        return admin_parent_category_categories_path(@parent_category) if @parent_category
+        return admin_category_path(@parent_category) if @parent_category
         admin_categories_path
       end
   end

@@ -28,6 +28,7 @@ ru:
 
       category:
         title:                  Название
+        parent_id:              Родительский раздел
         updated_at:             Обновлено
 
       item:
@@ -47,6 +48,7 @@ ru:
         surname:                Фамилия
 
       subdivision:
+        parent_id:              Родительский раздел
         abbr:                   Аббревиатура
         address:                Адрес
         created_at:             Создано

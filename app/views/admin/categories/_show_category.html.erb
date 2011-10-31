@@ -2,7 +2,7 @@
   <div class="subdivisions">
     <% if can?(:manage, category) %>
       <div class="actions">
-        <%= link_to t('active_admin.sort'), sort_admin_parent_category_categories_path(resource.parent, resource), :class => 'sort_link off button icon loop' if children.any? %>
+        <%= link_to t('active_admin.sort'), sort_admin_parent_category_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
         <%= link_to t('active_admin.new_category'),
           new_admin_parent_category_category_path(resource),
           :class => 'button icon add' %>
