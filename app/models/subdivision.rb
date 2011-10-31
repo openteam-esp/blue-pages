@@ -48,12 +48,13 @@ class Subdivision < Category
 
   searchable do
     boost :boost
-    text :abbr, :boost => 1.5
-    text :title, :boost => 1.5
-    text :address
-    text :url
-    text :phones do phones.join(' ') end
-    text :emails do emails.join(' ') end
+
+    text  :abbr, :boost => 1.5
+    text  :title, :boost => 1.5
+    text  :address
+    text  :url
+    text  :phones do phones.join(' ') end
+    text  :emails do emails.join(' ') end
   end
 
   alias :children :subdivisions

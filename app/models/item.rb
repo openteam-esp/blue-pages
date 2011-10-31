@@ -31,20 +31,20 @@ class Item < ActiveRecord::Base
 
   delegate :full_name, :surname, :name, :patronymic, :to => :person, :allow_nil => true
 
-  delegate :boost, :to => :subdivision
+  delegate :boost, :to => :subdivision, :prefix => true
 
   default_scope order('position')
 
   searchable do
     boost :boost
 
-    text :surname, :boost => 1.4
-    text :name, :boost => 1.2
-    text :patronymic
-    text :title, :boost => 1.4
-    text :address
-    text :phones do phones.join(' ') end
-    text :emails do emails.join(' ') end
+    text  :surname, :boost => 1.4
+    text  :name, :boost => 1.2
+    text  :patronymic
+    text  :title, :boost => 1.4
+    text  :address
+    text  :phones do phones.join(' ') end
+    text  :emails do emails.join(' ') end
   end
 
   def display_name
@@ -52,6 +52,10 @@ class Item < ActiveRecord::Base
   end
 
   alias :to_s :display_name
+
+  def boost
+    subdivision_boost + ((10 - [position, 10].min) / 80.0)
+  end
 
   private
     def set_address_attributes
