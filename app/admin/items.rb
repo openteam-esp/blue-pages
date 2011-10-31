@@ -14,7 +14,6 @@ ActiveAdmin.register Item do
   menu :priority => 4
 
   index do
-    column :subdivision
     column :title do |item|
       link_to item.title, [:admin, item.subdivision, item]
     end
@@ -23,6 +22,7 @@ ActiveAdmin.register Item do
         item.person.to_s
       end
     end
+    column :subdivision
     column :updated_at do |item|
       span :class => "nobr" do
         l item.updated_at, :format => :long
@@ -31,7 +31,7 @@ ActiveAdmin.register Item do
   end
 
   show :title => :title do
-    render "item"
+    render "show"
   end
 
   form :partial => 'form'
@@ -67,12 +67,12 @@ ActiveAdmin.register Item do
 
     def index
       index! do
-        redirect_to admin_subdivision_path(@subdivision) and return if @subdivision
+        redirect_to admin_category_path(@subdivision) and return if @subdivision
       end
     end
 
     def collection_url
-      admin_subdivision_path(@subdivision)
+      admin_category_path(@subdivision)
     end
   end
 end

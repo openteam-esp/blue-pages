@@ -1,18 +1,28 @@
 ActiveAdmin.register Category do
-  belongs_to :category, :optional => true
+  belongs_to :parent_category, :optional => true, :class_name => "Category"
 
-  config.clear_sidebar_sections!
+  filter :title
+  filter :updated_at
+
+  index do
+    column :title do |category|
+      link_to category.title, admin_category_path(category)
+    end
+    column :abbr
+    column :updated_at
+  end
+
   config.clear_action_items!
 
   action_item :only => :show do
-    link_to(I18n.t("active_admin.edit_#{active_admin_config.underscored_resource_name}"),
+    link_to(I18n.t("active_admin.edit_#{resource.class.to_s.downcase}"),
             edit_resource_path,
             :class => 'button icon edit') if can?(:edit, resource)
   end
 
   action_item :only => :show do
-    link_to(I18n.t("active_admin.delete_#{active_admin_config.underscored_resource_name}"),
-            resource.parent ? admin_parent_subdivision_subdivision_path(resource.parent, resource) : resource_path,
+    link_to(I18n.t("active_admin.delete_#{resource.class.to_s.downcase}"),
+            resource.parent ? admin_parent_category_category_path(resource.parent, resource) : resource_path,
             :method => :delete,
             :confirm => I18n.t('active_admin.delete_confirmation'),
             :class => 'button icon trash danger') if can?(:destroy, resource)
@@ -20,9 +30,6 @@ ActiveAdmin.register Category do
 
   menu :priority => 2
 
-  index do
-    render :partial => 'index'
-  end
 
   show :title => proc { category.title } do
     div do
@@ -34,10 +41,10 @@ ActiveAdmin.register Category do
 
   collection_action :sort, :method => :post do
     index! do
-      authorize! :manage, @parent_subdivision
+      authorize! :manage, @parent_category
       params[:ids].each_with_index do |id, index|
-        subdivision = Subdivision.find(id)
-        subdivision.update_attribute(:position, index.to_i+1)
+        category = Category.find(id)
+        category.update_attribute(:position, index.to_i+1)
       end
       head 200 and return
     end
@@ -46,8 +53,11 @@ ActiveAdmin.register Category do
   controller do
     authorize_resource
 
-    def index
-      @cats = [Category.root] + Category.root.descendants.where(:type=> nil)
-    end
+    protected
+
+      def collection_path
+        return admin_parent_category_categories_path(@parent_category) if @parent_category
+        admin_categories_path
+      end
   end
 end

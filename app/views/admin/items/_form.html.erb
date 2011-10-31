@@ -21,12 +21,7 @@
     <%= address_form.input :house %>
     <%= address_form.input :building %>
     <%= address_form.input :office %>
-    <li class="destroy_action"><%= address_form.link_to_remove t('active_admin.delete_address'), :class => 'button icon trash danger address' %></li>
   <% end %>
-
-  <div class="address_fieldset">
-    <%= form.link_to_add t('active_admin.new_address'), :address, :class => 'button icon add address' unless form.object.address %>
-  </div>
 
   <%= form.semantic_fields_for :phones do |phone_form| %>
     <%= phone_form.inputs :class => "inputs inline_fields" do %>

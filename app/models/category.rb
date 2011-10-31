@@ -30,6 +30,7 @@ class Category < ActiveRecord::Base
   end
 
   alias :to_s :display_name
+  alias :categories :children
 
   def boost
     1.0 + ((10 - [depth, 10].min) / 100.0) + ((10 - [position, 10].min) / 1000.0)

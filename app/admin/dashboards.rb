@@ -2,13 +2,11 @@
 
 ActiveAdmin::Dashboards.build do
 
-  Category.root.children.each do | category |
-    section category.title do
-      div :class => "category" do
-        render "section", :category => category, :children => category.children
-      end
+  section "Мои подразделения" do
+    div :class => "category" do
+      render "section", :categories => current_admin_user.categories
     end
-  end if ActiveRecord::Base.connection.table_exists?(:categories)
+  end
 
   # Define your dashboard sections here. Each block will be
   # rendered on the dashboard in the context of the view. So just

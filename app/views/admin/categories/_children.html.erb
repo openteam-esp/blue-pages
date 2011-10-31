@@ -1,8 +1,8 @@
-<% if subdivision.children.empty? %>
+<% if children.empty? %>
   <h5>Нет подразделений</h5>
 <% else %>
   <ul class="sortable">
-    <% subdivision.children.each do |child| %>
+    <% children.each do |child| %>
       <li data-id='<%= child.id %>'>
         <%= render child %>
       </li>

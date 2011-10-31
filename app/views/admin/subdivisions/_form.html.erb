@@ -5,7 +5,6 @@
     <%= form.input :url, :as => :string %>
   <% end %>
 
-  <% @subdivision.build_address unless @subdivision.address %>
   <%= form.inputs :class => "inputs inline_fields", :for => :address do | address_form | %>
     <%= address_form.input :postcode %>
     <%= address_form.input :region %>

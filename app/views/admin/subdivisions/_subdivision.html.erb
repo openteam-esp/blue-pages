@@ -1,6 +1,6 @@
 <div class="title">
   <span>хвать</span>
-  <%= link_to subdivision, [:admin, subdivision] %>
+  <%= link_to subdivision, admin_category_path(subdivision) %>
 </div>
 <div class="details">
   <%= content_tag :p, subdivision.address %>

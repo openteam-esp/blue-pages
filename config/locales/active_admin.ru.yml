@@ -1,5 +1,8 @@
 ru:
   active_admin:
+    new_category: Добавление раздела
+    edit_category: Изменение раздела
+    delete_category: Удаление раздела
     new_subdivision: Добавление подразделения
     edit_subdivision: Изменение подразделения
     delete_subdivision: Удаление подразделения

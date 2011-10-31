@@ -1,21 +1,11 @@
-<% if category && can?(:manage, category) %>
-  <div class="actions">
-    <%= link_to t('active_admin.sort'), sort_admin_category_categories_path(category), :class => 'sort_link off button icon loop' %>
-    <%= link_to t('active_admin.new_subdivision'),
-                new_admin_category_category_path(category),
-                :class => 'button icon add' %>
-  </div>
-<% end %>
-
-<% if children.empty? %>
-  <h5>Нет дочерних категорий/подразделений</h5>
+<% if categories.empty? %>
+  <h5>Нет доступных элементов</h5>
 <% else %>
-  <ul class="sortable">
-    <% children.each do |child| %>
-      <li data-id='<%= child.id %>'>
+  <ul>
+    <% categories.each do |category| %>
+      <li>
         <div class="title">
-          <span>хвать</span>
-          <%= link_to child.title, [:admin, child] %>
+          <%= link_to category.title, admin_category_path(category) %>
         </div>
       </li>
     <% end %>
