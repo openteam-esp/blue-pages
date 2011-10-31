@@ -4,8 +4,10 @@ BluePages::Application.routes.draw do
 
     devise_for :admin_users, ActiveAdmin::Devise.config
 
-    resources :subdivisions, :only => [:show]
-    resources :categories, :only => [:show]
+    resources :categories, :only => [] do
+      get :index, :on => :collection, :defaults => { :format => :pdf }
+      get :show, :on => :member
+    end
 
     match "/search" => "main#search", :via => [:get]
 
