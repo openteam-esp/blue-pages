@@ -9,16 +9,16 @@
     <li class="check_boxes">
       <fieldset class="choices">
         <legend class="label"><label>Подразделения</label></legend>
-        <input id="admin_user_subdivisions_none" name="admin_user[subdivision_ids][]" type="hidden" value="" />
-        <ol class="choice_subdivisions">
-          <% current_admin_user.manageable_subdivisions.each_with_index do |subdivision, index| %>
-            <li class="depth_<%= subdivision.depth %>">
-              <%= content_tag :label, :for => "admin_user_subdivision_ids_#{subdivision.id}" do %>
-                <%= check_box_tag "admin_user[subdivision_ids][]",
-                  subdivision.id,
-                  @admin_user.subdivisions.include?(subdivision),
-                  :id => "admin_user_subdivision_ids_#{subdivision.id}" %>
-                <%= subdivision.title %>
+        <input id="admin_user_categories_none" name="admin_user[category_ids][]" type="hidden" value="" />
+        <ol class="choice_categories">
+          <% current_admin_user.manageable_categories.each_with_index do |category, index| %>
+            <li class="depth_<%= category.depth %>">
+              <%= content_tag :label, :for => "admin_user_category_ids_#{category.id}" do %>
+                <%= check_box_tag "admin_user[category_ids][]",
+                  category.id,
+                  @admin_user.categories.include?(category),
+                  :id => "admin_user_category_ids_#{category.id}" %>
+                <%= category.title %>
               <% end %>
             </li>
           <% end %>
