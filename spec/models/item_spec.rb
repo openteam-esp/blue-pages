@@ -28,6 +28,32 @@ describe Item do
     it { subject.address.office.should be_blank }
     it { subject.address.building_same_as?(subdivision.address).should be_true }
   end
+
+  describe 'boost' do
+    def subdivision(attributes={})
+      @subdivision ||= Fabricate(:subdivision, :address_attributes => Fabricate.attributes_for(:address)).tap do | subdivision |
+        subdivision.stub attributes
+      end
+    end
+
+    def another_subdivision(attributes={})
+      @another_subdivision ||= Fabricate(:subdivision, :address_attributes => Fabricate.attributes_for(:address)).tap do | subdivision |
+        subdivision.stub attributes
+      end
+    end
+
+    def item(subdivision, attributes={})
+      subdivision.items.create!(:title => 'прачка').tap do | item |
+        item.stub attributes
+      end
+    end
+
+    it { item(subdivision, :position => 1).boost.should > item(subdivision, :position => 2).boost }
+    it { item(subdivision, :position => 9).boost.should > item(subdivision, :position => 10).boost }
+    it { item(subdivision, :position => 10).boost.should == item(subdivision, :position => 11).boost }
+    it { item(subdivision).boost.should > item(another_subdivision).boost }
+    it { item(subdivision, :position => 10).boost.should > item(another_subdivision).boost }
+  end
 end
 
 # == Schema Information

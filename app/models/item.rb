@@ -54,7 +54,7 @@ class Item < ActiveRecord::Base
   alias :to_s :display_name
 
   def boost
-    subdivision_boost + ((10 - [position, 10].min) / 80.0)
+    subdivision_boost + ((10 - [position, 10].min) / 10000.0)
   end
 
   private

@@ -32,7 +32,7 @@ class Category < ActiveRecord::Base
   alias :to_s :display_name
 
   def boost
-    1.0 + ((10 - [depth, 10].min) / 20.0) + ((10 - [position, 10].min) / 40.0)
+    1.0 + ((10 - [depth, 10].min) / 100.0) + ((10 - [position, 10].min) / 1000.0)
   end
 
   protected

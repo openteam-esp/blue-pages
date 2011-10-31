@@ -45,16 +45,32 @@ describe Subdivision do
     end
   end
 
-  describe 'присваивание position' do
-    let(:root) { Category.root }
-    let(:first_subdivision) { Fabricate(:subdivision, :parent => root) }
-    let(:second_subdivision) { Fabricate(:subdivision, :parent => first_subdivision.parent) }
-    let(:child_subdivision) { first_subdivision.children.create! :title => 'Подкатегорий' }
+  let(:root) { Category.root }
+  let(:first_subdivision) { Fabricate(:subdivision, :parent => root) }
+  let(:second_subdivision) { Fabricate(:subdivision, :parent => first_subdivision.parent) }
+  let(:child_subdivision) { first_subdivision.children.create! :title => 'Подкатегорий' }
 
+  describe 'присваивание position' do
     it { root.position.should == 1 }
     it { first_subdivision.position.should == 1 }
     it { second_subdivision.position.should == 2 }
     it { child_subdivision.position.should == 1 }
+  end
+
+  describe 'boost' do
+    def subdivision(attributes={})
+      Fabricate(:subdivision, :parent => root).tap do | subdivision |
+        subdivision.stub attributes
+      end
+    end
+
+    it { root.boost.should > first_subdivision.boost }
+    it { first_subdivision.boost.should > second_subdivision.boost }
+    it { first_subdivision.boost.should > child_subdivision.boost }
+
+    it { subdivision(:position => 9).boost.should > subdivision(:position => 10).boost }
+    it { child_subdivision.boost.should < subdivision(:position => 10).boost }
+
   end
 end
 
