@@ -11,7 +11,9 @@ class Item < ActiveRecord::Base
 
   after_initialize :set_address_attributes
 
-  before_create :set_position
+  before_create :set_position, :set_weight
+
+  before_update :set_weight
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
@@ -31,9 +33,9 @@ class Item < ActiveRecord::Base
 
   delegate :full_name, :surname, :name, :patronymic, :to => :person, :allow_nil => true
 
-  delegate :boost, :to => :subdivision, :prefix => true
+  delegate :weight, :to => :subdivision, :prefix => true
 
-  default_scope order('position')
+  default_scope order('weight')
 
   searchable do
     boost :boost
@@ -54,7 +56,7 @@ class Item < ActiveRecord::Base
   alias :to_s :display_name
 
   def boost
-    subdivision_boost + ((10 - [position, 10].min) / 10000.0)
+    1.1 - decrement / 10
   end
 
   private
@@ -65,6 +67,21 @@ class Item < ActiveRecord::Base
     def set_position
       self.position = subdivision.items.last.try(:position).to_i + 1
     end
+
+    def decrement
+      @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
+    end
+
+    def set_weight
+      self.weight = weights.join('/')
+    end
+
+    def weights
+      @weights ||=  begin
+                      [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
+                    end
+    end
+
 end
 
 # == Schema Information
@@ -77,5 +94,6 @@ end
 #  created_at     :datetime
 #  updated_at     :datetime
 #  position       :integer
+#  weight         :string(255)
 #
 

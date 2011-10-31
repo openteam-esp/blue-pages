@@ -25,10 +25,11 @@ Category.government.subdivisions.tap do | subdivisions |
   end
 end
 
-Category.root.children.find_or_create_by_title('Предприятия').children.tap do | categories |
-  categories.find_or_create_by_title('Медицина')
-  categories.find_or_create_by_title('Образование')
-  categories.find_or_create_by_title('Предприятия промышленности')
+enterprises = Category.root.children.find_or_initialize_by_title('Предприятия').tap &:save!
+enterprises.children.tap do | categories |
+  categories.find_or_initialize_by_title('Медицина').tap &:save!
+  categories.find_or_initialize_by_title('Образование').tap &:save!
+  categories.find_or_initialize_by_title('Предприятия промышленности').tap &:save!
 end
 
 AdminUser.find_or_initialize_by_email('demo@demo.de').tap do | user |

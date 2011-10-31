@@ -18,7 +18,6 @@ describe Item do
     let(:first_item) { create_item :title => 'секретарь 1' }
     let(:second_item) { first_item.subdivision.items.create! :title => 'секретарь 2' }
     let(:other_item) { child.items.create! :title => 'бухгалтер' }
-
     it { first_item.position.should == 1 }
     it { second_item.position.should == 2 }
     it { other_item.position.should == 1 }
@@ -31,26 +30,21 @@ describe Item do
 
   describe 'boost' do
     def subdivision(attributes={})
-      @subdivision ||= Fabricate(:subdivision, :address_attributes => Fabricate.attributes_for(:address)).tap do | subdivision |
-        subdivision.stub attributes
-      end
+      @subdivision ||= Fabricate(:subdivision, attributes.merge(:address_attributes => Fabricate.attributes_for(:address)))
     end
 
     def another_subdivision(attributes={})
-      @another_subdivision ||= Fabricate(:subdivision, :address_attributes => Fabricate.attributes_for(:address)).tap do | subdivision |
-        subdivision.stub attributes
-      end
+      @another_subdivision ||= Fabricate(:subdivision, attributes.merge(:address_attributes => Fabricate.attributes_for(:address)))
     end
 
     def item(subdivision, attributes={})
-      subdivision.items.create!(:title => 'прачка').tap do | item |
-        item.stub attributes
-      end
+      subdivision.items.create!(attributes.merge :title => 'прачка')
     end
 
+    it { item(subdivision).boost.should < subdivision.boost }
     it { item(subdivision, :position => 1).boost.should > item(subdivision, :position => 2).boost }
     it { item(subdivision, :position => 9).boost.should > item(subdivision, :position => 10).boost }
-    it { item(subdivision, :position => 10).boost.should == item(subdivision, :position => 11).boost }
+    it { item(subdivision, :position => 10).boost.should > item(subdivision, :position => 11).boost }
     it { item(subdivision).boost.should > item(another_subdivision).boost }
     it { item(subdivision, :position => 10).boost.should > item(another_subdivision).boost }
   end
@@ -66,5 +60,6 @@ end
 #  created_at     :datetime
 #  updated_at     :datetime
 #  position       :integer
+#  weight         :string(255)
 #
 

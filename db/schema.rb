@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111027100359) do
+ActiveRecord::Schema.define(:version => 20111031101304) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20111027100359) do
     t.integer  "position"
     t.text     "url"
     t.string   "type"
+    t.string   "weight"
   end
 
   add_index "categories", ["ancestry"], :name => "index_subdivisions_on_ancestry"
@@ -96,6 +97,7 @@ ActiveRecord::Schema.define(:version => 20111027100359) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position"
+    t.string   "weight"
   end
 
   add_index "items", ["subdivision_id"], :name => "index_items_on_subdivision_id"

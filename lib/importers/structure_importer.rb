@@ -66,7 +66,7 @@ end
 
 class Category
   def self.government
-    root.children.find_or_create_by_title('Органы власти')
+    root.children.find_or_initialize_by_title('Органы власти').tap &:save!
   end
 end
 

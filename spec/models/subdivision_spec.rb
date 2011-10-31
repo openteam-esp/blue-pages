@@ -57,20 +57,42 @@ describe Subdivision do
     it { child_subdivision.position.should == 1 }
   end
 
-  describe 'boost' do
-    def subdivision(attributes={})
-      Fabricate(:subdivision, :parent => root).tap do | subdivision |
-        subdivision.stub attributes
-      end
-    end
+  def subdivision(attributes={})
+    Fabricate(:subdivision, {:parent => root}.merge(attributes))
+  end
 
+  describe '#weight' do
+    it { subdivision(:position => 10).position.should == 10 }
+    it { root.weight.should == '01' }
+    it { first_subdivision.weight.should == '01/01' }
+    it { second_subdivision.weight.should == '01/02' }
+    it { subdivision(:position => 20).weight.should == '01/20' }
+    it { child_subdivision.weight.should == '01/01/01' }
+    it { subdivision(:parent => subdivision(:position => 11), :position => 1).weight.should == '01/11/01' }
+    it { subdivision(:parent => subdivision(:position => 12), :position => 99).weight.should == '01/12/99' }
+  end
+
+  describe '#decrement' do
+    it { root.decrement.should == 0 }
+    it { first_subdivision.decrement.should == 0.01 }
+    it { second_subdivision.decrement.should == 0.02 }
+    it { subdivision(:position => 10).decrement.should == 0.1 }
+    it { subdivision(:position => 20).decrement.should == 0.2 }
+    it { child_subdivision.decrement.should == 0.0101 }
+    it { subdivision(:parent => subdivision(:position => 11), :position => 1).decrement.should == 0.0111 }
+    it { subdivision(:parent => subdivision(:position => 12), :position => 99).decrement.should == 0.9912 }
+  end
+
+  describe '#boost' do
+    it { root.boost.should == 1.1 }
+    it { subdivision.boost.should be_within(1.0e-7).of(1.099) }
+    it { second_subdivision.boost.should == 1.098 }
+    it { subdivision(:position => 99).boost.should be_within(1.0e-7).of(1.001) }
     it { root.boost.should > first_subdivision.boost }
     it { first_subdivision.boost.should > second_subdivision.boost }
     it { first_subdivision.boost.should > child_subdivision.boost }
-
     it { subdivision(:position => 9).boost.should > subdivision(:position => 10).boost }
-    it { child_subdivision.boost.should < subdivision(:position => 10).boost }
-
+    it { child_subdivision.boost.should > subdivision(:position => 10).boost }
   end
 end
 
@@ -87,5 +109,6 @@ end
 #  position   :integer
 #  url        :text
 #  type       :string(255)
+#  weight     :string(255)
 #
 

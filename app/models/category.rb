@@ -5,11 +5,14 @@ class Category < ActiveRecord::Base
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
-  default_scope order('position')
+  default_scope order('weight')
 
-  before_create :set_position
+  before_create :set_position, :set_weight
+  before_update :set_weight
 
   has_ancestry
+
+  delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 
   searchable do
     boost :boost
@@ -33,12 +36,26 @@ class Category < ActiveRecord::Base
   alias :categories :children
 
   def boost
-    1.0 + ((10 - [depth, 10].min) / 100.0) + ((10 - [position, 10].min) / 1000.0)
+    1.1 - decrement / 10
+  end
+
+  def decrement
+    @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
   end
 
   protected
     def set_position
-      self.position = siblings.last.try(:position).to_i + 1
+      self.position = siblings.last.try(:position).to_i + 1 unless self.position
+    end
+
+    def set_weight
+      self.weight = weights.join('/')
+    end
+
+    def weights
+      @weights ||=  begin
+                      [parent_weight, sprintf('%02d', position)].keep_if(&:present?).join('/').split('/')
+                    end
     end
 
 end
@@ -56,5 +73,6 @@ end
 #  position   :integer
 #  url        :text
 #  type       :string(255)
+#  weight     :string(255)
 #
 

@@ -82,5 +82,6 @@ end
 #  position   :integer
 #  url        :text
 #  type       :string(255)
+#  weight     :string(255)
 #
 
