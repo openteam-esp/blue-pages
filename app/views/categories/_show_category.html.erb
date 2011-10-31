@@ -1,0 +1,12 @@
+<h1><%= resource %></h1>
+
+<% if resource.children.any? %>
+  <h2>Подразделения</h2>
+  <ul class="subdivisions">
+    <% resource.children.each do | item | %>
+      <li class="item">
+        <%= link_to item.title, category_path(item) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

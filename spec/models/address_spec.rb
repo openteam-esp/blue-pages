@@ -20,6 +20,28 @@ describe Address do
     it { subject.district.should == 'г. Томск' }
     it { subject.locality.should == 'г. Томск' }
   end
+
+  describe 'to_s' do
+    before do
+      @subdivision = Fabricate(:subdivision)
+    end
+
+    it "for subdivision" do
+      @subdivision.address.to_s.should == ''
+    end
+
+    it "for item when equal building" do
+      item = @subdivision.items.create(:title => "должность")
+      item.address.office = "210"
+      item.save
+      item.address.to_s.should == "210 кабинет"
+    end
+
+    it "for item when not equal building" do
+      item = @subdivision.items.create(:title => "должность", :address_attributes => {:street => "пр. Ленина", :building => "40", :office => "206"})
+      item.address.to_s.should == ''
+    end
+  end
 end
 
 # == Schema Information

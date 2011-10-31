@@ -5,6 +5,7 @@ BluePages::Application.routes.draw do
     devise_for :admin_users, ActiveAdmin::Devise.config
 
     resources :subdivisions, :only => [:show]
+    resources :categories, :only => [:show]
 
     match "/search" => "main#search", :via => [:get]
 

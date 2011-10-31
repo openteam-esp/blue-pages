@@ -1,0 +1,69 @@
+<h1><%= resource.title %></h1>
+
+<div class="show_for subdivision">
+  <%= content_tag :dl, :class => "wrapper subdivision_address" do %>
+    <%= content_tag :dt, "Адрес:", :class => "label" %>
+    <%= content_tag :dd, resource.address %>
+  <% end if resource.address %>
+  <%= content_tag :dl, :class => "wrapper subdivision_phones" do %>
+    <%= content_tag :dt, "Телефоны:", :class => "label" %>
+    <%= content_tag :dd do %>
+      <%= content_tag :ul do %>
+        <% resource.phones.each do |phone| %>
+          <%= content_tag :li, phone %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end if resource.phones.any? %>
+  <%= content_tag :dl, :class => "wrapper subdivision_emails" do %>
+    <%= content_tag :dt, "Адреса электронной почты:", :class => "label" %>
+    <%= content_tag :dd do %>
+      <%= content_tag :ul do %>
+        <% resource.emails.each do |email| %>
+          <%= content_tag :li, mail_to(email) %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end if resource.emails.any? %>
+  <%= content_tag :dl, :class => "wrapper subdivision_url" do %>
+    <%= content_tag :dt, "Сайт:", :class => "label" %>
+    <%= content_tag :dd, link_to(resource.url, resource.url, :target => "_blank") %>
+  <% end if resource.url %>
+</div>
+
+<% if resource.items.any? %>
+  <h2>Сотрудники</h2>
+  <table class="subdivision_items">
+    <thead>
+      <tr>
+        <th>Фамилия, Имя, Отчество</th>
+        <th>Должность</th>
+        <th>Адрес</th>
+        <th>Телефон</th>
+        <th>E-mail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% resource.items.each do | item | %>
+        <tr>
+          <td><%= item.person %></td>
+          <td><%= item.title %></td>
+          <td><%= item.address %></td>
+          <td><%= item.phones.join(", ") %></td>
+          <td><%= item.emails.map{|email| mail_to(email)}.join(', ').html_safe %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if resource.children.any? %>
+  <h2>Подразделения</h2>
+  <ul class="subdivisions">
+    <% resource.children.each do | item | %>
+      <li class="item">
+        <%= link_to item.title, category_path(item) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

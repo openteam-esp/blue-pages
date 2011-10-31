@@ -1,8 +1,8 @@
-<% @roots.each do |root| %>
+<% Category.root.children.each do |root| %>
   <h2><%= root.title %></h2>
   <ul class="subdivisions">
   <% root.children.each do |child| %>
-    <li><%= link_to child.title, subdivision_path(child) %></li>
+    <li><%= link_to child.title, category_path(child) %></li>
   <% end %>
   </ul>
 <% end %>

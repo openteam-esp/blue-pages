@@ -2,5 +2,4 @@
 
 Fabricator(:item) do
   title "Директа"
-  office "4"
 end
