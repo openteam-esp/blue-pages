@@ -115,16 +115,17 @@ module ActiveAdmin
   module ViewHelpers
     module BreadcrumbHelper
       def breadcrumb_links(path=nil)
+        crumbs = []
         # Returns an array of links to use in a breadcrumb
         path ||= request.fullpath.dup
         path.gsub!(/^(.*)\?.*/, '\1')
-        path.gsub!(/parent_subdivision/, 'subdivision')
         path += "/new" if params[:action] == 'create'
         path += "/edit" if params[:action] == 'update'
+        path.gsub!(/parent_categories/, 'categories')
         parts = path.gsub(/^\//, '').split('/')
         last = "#{parts.pop}_#{parts[-1].singularize}" if parts.last =~ /new/
         last = "#{parts.pop}_#{parts[-2].singularize}" if parts.last =~ /edit/
-        crumbs = []
+        parts.collect! {|part| part =~ /subdivisions/ ? 'categories' : part}
         parts.each_with_index do |part, index|
           name = ""
           if part =~ /^\d/ && parent = parts[index - 1]
@@ -137,15 +138,17 @@ module ActiveAdmin
           end
           name = part.titlecase if name == ""
           begin
-            crumbs << link_to( I18n.translate!("activerecord.models.#{part.singularize}"), "/" + parts[0..index].join('/'))
+            link = "/" + parts[0..index].join("/")
+            link.gsub!(/categories/, 'subdivisions') if link =~ /items/
+            crumbs << link_to( I18n.translate!("activerecord.models.#{part.singularize}"), link) unless %w[categories items].include?(part)
           rescue I18n::MissingTranslationData
             Category.unscoped.ancestors_of(obj).each do | ancestor |
-              crumbs << link_to(ancestor.display_name, [:admin, ancestor])
+              crumbs << link_to(ancestor.display_name, admin_category_path(ancestor))
             end if obj && obj.respond_to?(:ancestors)
-            crumbs << link_to( name, "/" + parts[0..index].join('/'))
+            crumbs << link_to( name, link)
           end
         end
-        crumbs << link_to(I18n.t("active_admin.#{last}"), request.fullpath) if last
+        crumbs << link_to(I18n.t("active_admin.#{last}"), request.fullpath + "/" + last.split("_")[0]) if last
         crumbs
       end
     end

@@ -24,7 +24,7 @@ class Subdivision < Category
                                   (\?.*)?                                         # query params
                                 $}ix }
 
-  after_initialize :set_address_attributes, :if => :parent_is_a_subdivision?
+  after_initialize :set_address_attributes
 
   accepts_nested_attributes_for :address
 
@@ -61,12 +61,10 @@ class Subdivision < Category
 
   private
     def set_address_attributes
-      self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if parent && !address
+      self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return  if self.parent && self.parent.is_a?(Subdivision) && !self.address
+      self.build_address unless self.address
     end
 
-    def parent_is_a_subdivision?
-      parent.is_a? Subdivision
-    end
 end
 
 # == Schema Information

@@ -3,7 +3,7 @@
   <%= link_to item.title, admin_subdivision_item_path(resource, item) %><%= ", #{item.person}" if item.person %>
 </div>
 <div class="details">
-  <%= content_tag :p, "Дата рождения: #{l(item.person.birthdate)}" if !item.person.blank? && !item.person.birthdate.blank? %>
+  <%= content_tag :p, item.address %>
   <%= content_tag :p, item.phones.join(', ') if item.phones.any? %>
   <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>
 </div>

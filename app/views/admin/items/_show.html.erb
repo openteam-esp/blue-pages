@@ -4,10 +4,10 @@
     <%= person.attribute :birthdate %>
   <% end %>
 <% end %>
-<%= show_for item do |item| %>
-  <%= item.association :address %>
-  <%= item.association :phones, :if_blank => "Не указаны" %>
-  <%= item.association :emails, :if_blank => "Не указаны" do | email | %>
+<%= show_for item do |show_item| %>
+  <%= show_item.association :address, :using => :full_address %>
+  <%= show_item.association :phones, :if_blank => "Не указаны" %>
+  <%= show_item.association :emails, :if_blank => "Не указаны" do | email | %>
     <li><%= mail_to email %></li>
   <% end %>
 <% end %>
