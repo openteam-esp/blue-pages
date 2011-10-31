@@ -1,6 +1,6 @@
-<%= content_tag :p, link_to(item.person, subdivision_path(item.subdivision)), :class => "title" %>
+<%= content_tag :p, link_to(item.person, category_path(item.subdivision)), :class => "title" %>
 <%= content_tag :p, "#{item}, #{item.subdivision}" %>
 <%= content_tag :p, :class => "address" do %>
-  Адрес: <%= item.address %>
+  Адрес: <%= item.address.full_address %>
 <% end %>
 <%= content_tag :p, item.phones.join(", "), :class => "phones" if item.phones.any? %>

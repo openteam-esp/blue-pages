@@ -77,7 +77,7 @@ describe StructureImporter do
       describe 'импорт из странички с нестандартным расположением колонок' do
         before { import :department_families }
         it { item.phones.map(&:to_s).should == ["Телефон: (3822) 71-39-98"] }
-        it { item.address(true).to_s.should include "г. Томск, ул.Тверская, 74, 301" }
+        it { item.address(true).full_address.should include "г. Томск, ул.Тверская, 74, кабинет 301" }
         it { subdivision.address.to_s.should include "г. Томск, ул.Тверская, 74" }
         it { child.items.first.emails.map(&:address).should == %w[sma@family.tomsk.gov.ru] }
         it { child.items.first.address(true).office.should == "308" }
@@ -91,12 +91,12 @@ describe StructureImporter do
 
     describe 'импорт заместителей' do
       let(:subdivision) do
-        Subdivision.governor.subdivisions.create! :title => 'Заместитель губернатора Томской области по особо важным проектам',
+        Subdivision.governor.subdivisions.create! :title => 'Заместитель губернатора Томской области по особо важным проектам'
       end
       before { import :assistant_special_orders }
       it { item.full_name.should == 'Точилин Сергей Борисович' }
       it { item.phones.map(&:to_s).should == ['Телефон: (3822) 511-142', 'Внутренний: 473']}
-      it { item.address(true).to_s.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
+      it { item.address(true).full_address.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
       it { subdivision.items.count.should == 4 }
     end
     describe 'импорт губера' do
@@ -104,7 +104,7 @@ describe StructureImporter do
       before { import :governor }
       it { item.full_name.should == 'Кресс Виктор Мельхиорович' }
       it { item.phones.map(&:to_s).should == ['Телефон: (3822) 510-813', 'Телефон: (3822) 510-505']}
-      it { item.address(true).to_s.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
+      it { item.address(true).full_address.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
       it { subdivision.items.count.should == 13 }
     end
   end

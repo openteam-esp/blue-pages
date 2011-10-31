@@ -21,11 +21,21 @@ class Address < ActiveRecord::Base
     other && self.significant_values == other.significant_values
   end
 
+  def full_address
+    result = significant_values[0..-2].uniq
+    result << "стр.#{building}" unless building.blank?
+    result << "кабинет #{office}" unless office.blank?
+    result.join(", ")
+  end
+
   def to_s
-    result = significant_values[0..-2].uniq.join(", ")
-    result << "/" + building unless building.blank?
-    result << ", #{office} кабинет" unless office.blank?
-    result
+    result = []
+    unless addressable.is_a?(Item) && building_same_as?(addressable.subdivision.address)
+      result = significant_values[0..-2].uniq
+      result << "стр.#{building}" unless building.blank?
+    end
+    result << "кабинет #{office}" unless office.blank?
+    result.join(", ")
   end
 end
 

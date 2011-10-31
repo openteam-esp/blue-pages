@@ -27,19 +27,19 @@ describe Address do
     end
 
     it "for subdivision" do
-      @subdivision.address.to_s.should == ''
+      @subdivision.address.to_s.should == "634020, Томская область, г. Томск, пл. Ленина, 2, стр.1"
     end
 
     it "for item when equal building" do
       item = @subdivision.items.create(:title => "должность")
       item.address.office = "210"
       item.save
-      item.address.to_s.should == "210 кабинет"
+      item.address.to_s.should == "кабинет 210"
     end
 
     it "for item when not equal building" do
-      item = @subdivision.items.create(:title => "должность", :address_attributes => {:street => "пр. Ленина", :building => "40", :office => "206"})
-      item.address.to_s.should == ''
+      item = @subdivision.items.create(:title => "должность", :address_attributes => {:postcode => "634050", :street => "пр. Ленина", :house => "40", :office => "206"})
+      item.address.to_s.should == '634050, Томская область, г. Томск, пр. Ленина, 40, кабинет 206'
     end
   end
 end
