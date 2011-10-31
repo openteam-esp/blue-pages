@@ -61,7 +61,7 @@ class Subdivision < Category
 
   private
     def set_address_attributes
-      self.address_attributes = parent.address_attributes.merge(:id => nil, :office => nil) unless address
+      self.address_attributes = parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil) unless address
     end
 
     def parent_is_a_subdivision?

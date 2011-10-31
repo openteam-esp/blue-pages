@@ -15,7 +15,7 @@ describe StructureImporter do
         subject.import
       end
       it { Subdivision.governor.children.count.should == 11 }
-      it { Category.administration.children.count.should == 47 }
+      it { Subdivision.administration.children.count.should == 47 }
     end
 
 

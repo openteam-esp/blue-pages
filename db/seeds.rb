@@ -2,21 +2,33 @@
 require Rails.root.join 'lib/importers/structure_importer'
 
 Subdivision.governor
-Category.administration
+Subdivision.administration
 
-Category.government.children.tap do | children |
-  children.find_or_create_by_title('Законодательная Дума Томской области')
-  children.find_or_create_by_title('Избирательная комиссия Томской области')
-  children.find_or_create_by_title('Местное самоуправление Томской области')
-  children.find_or_create_by_title('Федеральные структуры')
-  children.find_or_create_by_title('Уполномоченный по правам человека в Томской области')
-  children.find_or_create_by_title('Уполномоченный по правам ребенка в Томской области')
+Category.government.subdivisions.tap do | subdivisions |
+  subdivisions.find_or_initialize_by_title('Законодательная Дума Томской области').tap do | council |
+    council.update_attributes! :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
+  end
+  subdivisions.find_or_initialize_by_title('Избирательная комиссия Томской области').tap do | committee |
+    committee.update_attributes! :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
+  end
+end
+Category.government.children.tap do | categories |
+  categories.find_or_initialize_by_title('Местное самоуправление Томской области').save!
+  categories.find_or_initialize_by_title('Федеральные структуры').save!
+end
+Category.government.subdivisions.tap do | subdivisions |
+  subdivisions.find_or_initialize_by_title('Уполномоченный по правам человека в Томской области').tap do | human_rights_commissioner |
+    human_rights_commissioner.update_attributes! :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
+  end
+  subdivisions.find_or_initialize_by_title('Уполномоченный по правам ребенка в Томской области').tap do | child_rights_commissioner |
+    child_rights_commissioner.update_attributes! :address_attributes => { :postcode => '654050', :street => 'пер. Нахановича', :house => '3а' }
+  end
 end
 
-Category.root.children.find_or_create_by_title('Предприятия').children.tap do | children |
-  children.find_or_create_by_title('Медицина')
-  children.find_or_create_by_title('Образование')
-  children.find_or_create_by_title('Предприятия промышленности')
+Category.root.children.find_or_create_by_title('Предприятия').children.tap do | categories |
+  categories.find_or_create_by_title('Медицина')
+  categories.find_or_create_by_title('Образование')
+  categories.find_or_create_by_title('Предприятия промышленности')
 end
 
 AdminUser.find_or_initialize_by_email('demo@demo.de').tap do | user |

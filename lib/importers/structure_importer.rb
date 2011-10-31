@@ -68,12 +68,6 @@ class Category
   def self.government
     root.children.find_or_create_by_title('Органы власти')
   end
-
-  def self.administration
-    government.children.find_or_initialize_by_title('Администрация Томской области').tap do | administration |
-      administration.update_attributes! :position => 2
-    end
-  end
 end
 
 class Subdivision
@@ -82,8 +76,13 @@ class Subdivision
 
   def self.governor
     government.subdivisions.find_or_initialize_by_title('Губернатор').tap do | governor |
-      governor.update_attributes! :position => 1,
-                                  :address_attributes => { :postcode => '634050', :street => 'пл. Ленина', :house => '6' }
+      governor.update_attributes! :address_attributes => { :postcode => '634050', :street => 'пл. Ленина', :house => '6' }
+    end
+  end
+
+  def self.administration
+    government.subdivisions.find_or_initialize_by_title('Администрация Томской области').tap do | administration |
+      administration.update_attributes! :address_attributes => governor.address_attributes.symbolize_keys.merge(:id => nil)
     end
   end
 
@@ -106,9 +105,9 @@ class Subdivision
     (items.find_by_title(title) || items.build(:title => title)).tap do | item |
       full_name = page.css('h1').map{|h1| h1.text.squish }.select(&:present?).first
       item.update_attributes :person_attributes => { :full_name => full_name },
-                             :phones_attributes => self.phones.map{|phone| phone.attributes.merge(:id => nil) },
-                             :address_attributes => self.address_attributes.merge(:id => nil),
-                             :emails_attributes => self.emails.map{|email| email.attributes.merge(:id => nil) }
+                             :phones_attributes => self.phones.map{|phone| phone.attributes.symbolize_keys.merge(:id => nil) },
+                             :address_attributes => self.address_attributes.symbolize_keys.merge(:id => nil),
+                             :emails_attributes => self.emails.map{|email| email.attributes.symbolize_keys.merge(:id => nil) }
     end
   end
 
@@ -144,13 +143,13 @@ class Subdivision
         end
         subdivision.items.create(:title => tds[1]).tap do | item |
           item.update_attributes :person_attributes => {:surname => surname, :name => name, :patronymic => patronymic},
-                                 :address_attributes => subdivision.address_attributes.merge(:office => tds[office_column], :id => nil),
+                                 :address_attributes => subdivision.address_attributes.symbolize_keys.merge(:office => tds[office_column], :id => nil),
                                  :phones_attributes => phones,
                                  :emails_attributes => tds[email_column].to_s.extract_emails
           unless item.valid?
             p phones
             p tds[email_column].to_s.extract_emails
-            p subdivision.address_attributes.merge(:office => tds[office_column], :id => nil)
+            p subdivision.address_attributes.symbolize_keys.merge(:office => tds[office_column], :id => nil)
             p item
             item.save!
           end
@@ -160,7 +159,7 @@ class Subdivision
         lines = content.split("\n").map{|line| line.gsub(/[[:space:]]/, ' ').squish }
         title = lines.first.gsub(/“/, '"').gsub(/”/, '"')
         subdivision = children.find_or_initialize_by_title(title).tap do | subdivision |
-          subdivision.address_attributes = self.address_attributes.merge(:id => nil)
+          subdivision.address_attributes = self.address_attributes.symbolize_keys.merge(:id => nil)
           subdivision.import_info(lines[1..-1].join("\n"))
           subdivision.items.destroy_all
         end
@@ -229,7 +228,7 @@ class StructureImporter
         subdivision = Subdivision.governor
       when /заместитель/i
         subdivision = Subdivision.governor.subdivisions.find_or_initialize_by_title(title)
-        subdivision.update_attributes :address_attributes => Subdivision.governor.address_attributes.merge(:id => nil)
+        subdivision.update_attributes :address_attributes => Subdivision.governor.address_attributes.symbolize_keys.merge(:id => nil)
       else
         subdivision = Subdivision.administration.subdivisions.find_or_initialize_by_title(title)
         subdivision.save :validate => false
