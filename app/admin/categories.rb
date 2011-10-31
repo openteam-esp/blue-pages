@@ -32,6 +32,17 @@ ActiveAdmin.register Category do
 
   form :partial => 'form'
 
+  collection_action :sort, :method => :post do
+    index! do
+      authorize! :manage, @parent_subdivision
+      params[:ids].each_with_index do |id, index|
+        subdivision = Subdivision.find(id)
+        subdivision.update_attribute(:position, index.to_i+1)
+      end
+      head 200 and return
+    end
+  end
+
   controller do
     authorize_resource
 

@@ -1,1 +1,7 @@
+<div class="breadcrumbs">
+  <% Category.unscoped.ancestors_of(@category).each do |ancestor| %>
+    <%= link_to ancestor.title, ancestor.is_root? ? root_path : category_path(ancestor) %> /
+  <% end %>
+</div>
+
 <%= render "show_#{@category.class.to_s.downcase}", :object => @category %>

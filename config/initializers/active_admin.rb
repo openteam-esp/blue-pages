@@ -139,7 +139,7 @@ module ActiveAdmin
           begin
             crumbs << link_to( I18n.translate!("activerecord.models.#{part.singularize}"), "/" + parts[0..index].join('/'))
           rescue I18n::MissingTranslationData
-            obj.ancestors.each do | ancestor |
+            Category.unscoped.ancestors_of(obj).each do | ancestor |
               crumbs << link_to(ancestor.display_name, [:admin, ancestor])
             end if obj && obj.respond_to?(:ancestors)
             crumbs << link_to( name, "/" + parts[0..index].join('/'))
