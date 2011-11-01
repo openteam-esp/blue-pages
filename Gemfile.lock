@@ -19,7 +19,7 @@ GIT
     nested_form (0.1.1)
 
 GIT
-  remote: git://github.com/sandal/prawn.git
+  remote: git://github.com/sandal/prawn
   revision: e4d0d0a75bc6534dfa1673a7595dd818122dc322
   specs:
     prawn (1.0.0.rc1)

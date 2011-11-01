@@ -10,6 +10,7 @@ db/*.sqlite3
 log/*.log
 log/*.log.lck
 public/assets/
+public/*.pdf
 solr/data/
 solr/pids/
 tmp/
