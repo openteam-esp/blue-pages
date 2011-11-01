@@ -12,7 +12,7 @@ class AdminUser < ActiveRecord::Base
   has_and_belongs_to_many :categories
 
   def manageable_categories
-    (categories + categories.map(&:descendants)).flatten
+    categories.map(&:subtree).flatten
   end
 
   def categories_tree

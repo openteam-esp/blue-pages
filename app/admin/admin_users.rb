@@ -54,6 +54,6 @@ ActiveAdmin.register AdminUser do
   form :partial => 'form'
 
   controller do
-    authorize_resource
+    load_and_authorize_resource
   end
 end
