@@ -1,8 +1,30 @@
 ActiveAdmin.register AdminUser do
+  config.clear_action_items!
+
   filter :email
   filter :name
 
   menu :priority => 5
+
+  action_item :only => :index do
+    link_to(I18n.t("active_admin.create_#{AdminUser.to_s.downcase}"),
+            new_resource_path,
+            :class => 'button icon add') if can?(:create, AdminUser)
+  end
+
+  action_item :only => :show do
+    link_to(I18n.t("active_admin.edit_#{resource.class.to_s.downcase}"),
+            edit_resource_path,
+            :class => 'button icon edit') if can?(:edit, resource)
+  end
+
+  action_item :only => :show do
+    link_to(I18n.t("active_admin.delete_#{resource.class.to_s.downcase}"),
+            resource_path,
+            :method => :delete,
+            :confirm => I18n.t('active_admin.delete_confirmation'),
+            :class => 'button icon trash danger') if can?(:destroy, resource)
+  end
 
   index do
     column :name do |admin_user|

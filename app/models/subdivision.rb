@@ -61,8 +61,10 @@ class Subdivision < Category
 
   private
     def set_address_attributes
-      self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return  if self.parent && self.parent.is_a?(Subdivision) && !self.address
-      self.build_address unless self.address
+      if self.new_record?
+        self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return  if self.parent && self.parent.is_a?(Subdivision) && !self.address
+        self.build_address unless self.address
+      end
     end
 
 end

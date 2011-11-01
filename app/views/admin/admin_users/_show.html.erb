@@ -3,7 +3,7 @@
     <%= admin_user.attribute :email %>
   <% end %>
 
-  <div class="subdivisions">
+  <div class="categories">
     <h3>Подразделения</h3>
     <% if @admin_user.categories.any? %>
       <%= render_tree @admin_user.categories_tree %>

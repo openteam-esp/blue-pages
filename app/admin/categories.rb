@@ -30,7 +30,6 @@ ActiveAdmin.register Category do
 
   menu :priority => 2
 
-
   show :title => proc { category.title } do
     div do
       render 'show', :children => category.children
@@ -54,7 +53,6 @@ ActiveAdmin.register Category do
     authorize_resource
 
     protected
-
       def collection_path
         return admin_category_path(@parent_category) if @parent_category
         admin_categories_path
