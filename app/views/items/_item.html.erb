@@ -4,3 +4,4 @@
   Адрес: <%= item.address.full_address %>
 <% end %>
 <%= content_tag :p, item.phones.join(", "), :class => "phones" if item.phones.any? %>
+<%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>

@@ -1,4 +1,4 @@
-<%= content_tag :p, link_to(subdivision, subdivision), :class => "title" %>
+<%= content_tag :p, link_to(subdivision, category_path(subdivision)), :class => "title" %>
 <%= content_tag :p, :class => "address" do %>
   Адрес: <%= subdivision.address %>
 <% end if subdivision.address %>
