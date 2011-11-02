@@ -35,8 +35,8 @@ ActiveAdmin.register AdminUser do
     end
     column :last_sign_in_at do |admin_user|
       span :class => "nobr" do
-        l admin_user.last_sign_in_at, :format => :long
-      end
+        l(admin_user.last_sign_in_at, :format => :long)
+      end if admin_user.last_sign_in_at.present?
     end
     column :last_sign_in_ip do |admin_user|
       span :class => "nobr" do
