@@ -19,6 +19,12 @@ ActiveAdmin.register Subdivision do
       end
     end
 
+    def update
+      update! do |success, failure|
+        success.html { redirect_to admin_category_path(@subdivision) }
+      end
+    end
+
     def index
       index! do
         redirect_to admin_category_path(@category) and return
@@ -26,10 +32,8 @@ ActiveAdmin.register Subdivision do
     end
 
     protected
-
       def collection_path
         admin_category_subdivisions_path(@category)
       end
-
   end
 end
