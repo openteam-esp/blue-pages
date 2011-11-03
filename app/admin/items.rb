@@ -22,7 +22,7 @@ ActiveAdmin.register Item do
         item.person.to_s
       end
     end
-    column :subdivision
+    column :subdivision, :sortable => false
     column :updated_at do |item|
       span :class => "nobr" do
         l item.updated_at, :format => :long
