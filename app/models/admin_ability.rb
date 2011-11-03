@@ -5,7 +5,7 @@ class AdminAbility
     can :read, [Item, Category]
 
     can :manage, Category do |category|
-      user.manageable_categories.include?(category)
+      user && user.manageable_categories.include?(category)
     end
 
     can :manage, Item do |item|
