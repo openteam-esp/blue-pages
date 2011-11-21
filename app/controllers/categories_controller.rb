@@ -5,6 +5,8 @@ class CategoriesController < ApplicationController
 
   layout "public/main"
 
+  respond_to :html, :json
+
   def current_ability
     @current_ability ||= AdminAbility.new(current_admin_user)
   end
