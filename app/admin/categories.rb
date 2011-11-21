@@ -52,6 +52,16 @@ ActiveAdmin.register Category do
   controller do
     load_and_authorize_resource
 
+    def create
+      create! do |success, failure|
+        success.html { redirect_to admin_category_path(@parent_category || @category) }
+      end
+    end
+
+    def destroy
+      destroy! { redirect_to admin_category_path(@parent_category || @category) and return }
+    end
+
     protected
       def collection_path
         return admin_category_path(@parent_category) if @parent_category

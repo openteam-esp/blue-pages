@@ -94,6 +94,13 @@ describe Subdivision do
     it { subdivision(:position => 9).boost.should > subdivision(:position => 10).boost }
     it { child_subdivision.boost.should > subdivision(:position => 10).boost }
   end
+
+  describe 'создание категорий в подразделении' do
+    let(:subdivision) { Fabricate(:subdivision) }
+    let(:category_in_subdivision) { Fabricate(:category, :parent => subdivision) }
+
+    it { category_in_subdivision.should be_valid }
+  end
 end
 
 # == Schema Information

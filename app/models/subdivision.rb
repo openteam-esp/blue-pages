@@ -59,6 +59,10 @@ class Subdivision < Category
 
   alias :children :subdivisions
 
+  def categories
+    Category.where(:ancestry => child_ancestry, :type => nil)
+  end
+
   private
     def set_address_attributes
       if self.new_record?
