@@ -45,7 +45,11 @@ end
 
 group :test do
   gem 'fabrication'
-  gem 'rspec-rails',                              :require => false
+  gem 'guard-rspec'
+  gem 'guard-spork'
+  gem 'libnotify'
+  gem 'rb-inotify'
+  gem 'rspec-rails',            '~> 2.6.0',       :require => false
   gem 'shoulda-matchers',                         :require => false
   gem 'spork',                  '>= 0.9.0.rc9',   :require => false
   gem 'sqlite3',                                  :require => false
