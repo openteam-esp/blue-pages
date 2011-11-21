@@ -54,12 +54,12 @@ ActiveAdmin.register Category do
 
     def create
       create! do |success, failure|
-        success.html { redirect_to admin_category_path(@parent_category || @category) }
+        success.html { redirect_to admin_category_path(@category) }
       end
     end
 
     def destroy
-      destroy! { redirect_to admin_category_path(@parent_category || @category) and return }
+      destroy! { redirect_to admin_category_path(@parent_category) and return }
     end
 
     protected

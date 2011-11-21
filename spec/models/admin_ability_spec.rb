@@ -3,10 +3,11 @@
 require 'spec_helper'
 
 describe AdminAbility do
-  let(:root)                  { Category.root }
-  let(:child_1)               { Fabricate :subdivision }
-  let(:child_1_1)             { Fabricate :subdivision, :parent => child_1 }
-  let(:child_2)               { Fabricate :subdivision }
+  let(:root)                { Category.root }
+    let(:child_1)           { Fabricate :subdivision }
+      let(:category_1_1)    { Fabricate :category, :parent => child_1 }
+    let(:child_1_1)         { Fabricate :subdivision, :parent => child_1 }
+    let(:child_2)           { Fabricate :subdivision }
 
   def ability_for(user)
     AdminAbility.new(user)
@@ -45,6 +46,10 @@ describe AdminAbility do
       it { ability.should be_able_to(:manage, child_1_1.items.new) }
       it { ability.should be_able_to(:manage, child_2.items.new) }
     end
+
+    describe 'управление разделами' do
+      it { ability.should be_able_to(:manage, category_1_1) }
+    end
   end
 
   describe 'администратор вложенного подразделения' do
@@ -69,6 +74,10 @@ describe AdminAbility do
       it { ability.should be_able_to(:manage, child_1.items.new) }
       it { ability.should be_able_to(:manage, child_1_1.items.new) }
       it { ability.should_not be_able_to(:manage, child_2.items.new) }
+    end
+
+    describe 'управление разделами' do
+      it { ability.should be_able_to(:manage, category_1_1) }
     end
   end
 end

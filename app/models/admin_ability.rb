@@ -4,11 +4,8 @@ class AdminAbility
   def initialize(user)
     can :read, [Item, Category]
 
-    # TODO: написать как надо
-    can :manage, Category
-
     can :manage, Category do |category|
-      user && user.manageable_categories.include?(category)
+      user && (user.manageable_categories.include?(category) || user.manageable_categories.include?(category.parent))
     end
 
     can :manage, Item do |item|
