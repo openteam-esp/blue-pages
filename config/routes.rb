@@ -1,12 +1,10 @@
 BluePages::Application.routes.draw do
-  unless Rails.env.test?
-    ActiveAdmin.routes(self)
+  ActiveAdmin.routes(self) unless Rails.env.test?
 
-    devise_for :admin_users, ActiveAdmin::Devise.config
+  devise_for :admin_users, ActiveAdmin::Devise.config
 
-    resources :categories, :only => [:index, :show]
-    match "/search" => "main#search", :via => [:get]
+  resources :categories, :only => [:index, :show]
+  match "/search" => "main#search", :via => [:get]
 
-    root :to => 'main#index'
-  end
+  root :to => 'main#index'
 end
