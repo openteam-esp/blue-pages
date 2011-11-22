@@ -14,6 +14,8 @@ class Category < ActiveRecord::Base
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 
+  attr_accessor :expand
+
   searchable do
     boost :boost
 
@@ -41,6 +43,32 @@ class Category < ActiveRecord::Base
 
   def decrement
     @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
+  end
+
+  def to_json
+    result = {}
+    result['title'] = title
+
+    result['address'] = address.to_s          if respond_to?(:address)
+    result['phones'] = phones.map(&:to_s)     if respond_to?(:phones) && phones.any?
+    result['emails'] = emails.map(&:address)  if respond_to?(:emails) && emails.any?
+
+    if respond_to?(:items)
+      result['items'] = [] if items.any?
+
+      items.each do |item|
+        hash = { 'person' => item.person.to_s, 'title' => item.title, 'address' => item.address.to_s }
+
+        hash.merge!('phones' => item.phones.map(&:to_s)) if item.phones.any?
+        hash.merge!('emails' => item.emails.map(&:address)) if item.emails.any?
+
+        result['items'] << hash
+      end
+    end
+
+    result['subdivisions'] = children.map(&:to_json) if children.any? && expand
+
+    result
   end
 
   protected
