@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
   inherit_resources
 
-  actions :show
+  actions :index, :show
 
   layout "public/main"
 
