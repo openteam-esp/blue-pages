@@ -9,9 +9,7 @@ class CategoriesController < ApplicationController
 
   def show
     show! do |success|
-      @category.expand = true if params[:expand]
-
-      success.json { render :json => @category.to_json }
+      success.json { render :json => @category.to_json(params[:expand]) }
     end
   end
 
