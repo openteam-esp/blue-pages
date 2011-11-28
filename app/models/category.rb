@@ -14,8 +14,6 @@ class Category < ActiveRecord::Base
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 
-  attr_accessor :expand
-
   searchable do
     boost :boost
 
@@ -45,7 +43,7 @@ class Category < ActiveRecord::Base
     @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
   end
 
-  def to_json
+  def to_json(expand = false)
     result = {}
     result['title'] = title
 
@@ -66,7 +64,7 @@ class Category < ActiveRecord::Base
       end
     end
 
-    result['subdivisions'] = children.map(&:to_json) if children.any? && expand
+    result['subdivisions'] = children.map { |child| child.to_json(expand) } if expand && children.any?
 
     result
   end

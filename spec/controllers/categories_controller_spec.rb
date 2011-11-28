@@ -8,6 +8,7 @@ describe CategoriesController do
   let(:category) { Fabricate(:category) }
     let(:subdivision) { Fabricate(:subdivision, :parent => category, :title => 'Подразделение') }
       let(:child_subdivision) { Fabricate(:subdivision, :parent => subdivision, :title => 'Вложенное подразеделение') }
+        let(:another_child_subdivision) { Fabricate(:subdivision, :parent => child_subdivision, :title => 'Ещё одно вложенное подразеделение') }
 
   def store_data
     @store_data ||= subdivision.tap do |subdivision|
@@ -15,7 +16,7 @@ describe CategoriesController do
       Fabricate(:item, :subdivision => subdivision, :person_attributes => Fabricate.attributes_for(:person))
     end
 
-    child_subdivision
+    another_child_subdivision
   end
 
   describe 'дожен отдаваться JSON' do
@@ -28,7 +29,8 @@ describe CategoriesController do
         'categories' => [
           { 'title' => ' Категория', 'id' => 1 },
           { 'title' => '- Подразделение', 'id' => 2 },
-          { 'title' => '-- Вложенное подразеделение', 'id' => 3 }
+          { 'title' => '-- Вложенное подразеделение', 'id' => 3 },
+          { 'title' => '--- Ещё одно вложенное подразеделение', 'id' => 4 }
         ]
       }
 
@@ -52,7 +54,7 @@ describe CategoriesController do
       ActiveSupport::JSON.decode(response.body).should == expected_hash
     end
 
-    it 'GET expanded show' do
+    it 'GET show with expand' do
       get :show, :id => subdivision.id, :expand => true, :format => :json
 
       expected_hash = {
@@ -67,7 +69,13 @@ describe CategoriesController do
         'subdivisions' => [
           {
             'title' => 'Вложенное подразеделение',
-            'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1'
+            'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1',
+            'subdivisions' => [
+              {
+                'title' => 'Ещё одно вложенное подразеделение',
+                'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1'
+              }
+            ]
           },
         ]
       }
