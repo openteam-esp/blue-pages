@@ -3,6 +3,12 @@
     <%= form.input :title, :as => :string %>
     <%= form.input :abbr %>
     <%= form.input :url, :as => :string %>
+    <%= form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
+    <% if info_path = form.object.info_path %>
+      <%= link_to t('edit'), info_path, :class => 'edit_info' %>
+    <% else %>
+      <%= link_to t('add_info'), '#', :class => 'add_info' %>
+    <% end %>
     <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @subdivision.id %>
   <% end %>
 
