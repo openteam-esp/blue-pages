@@ -9,6 +9,12 @@
                             :class => "date",
                             :value => @item.person.birthdate ? I18n.l(@item.person.birthdate) : nil
                           } %>
+    <%= person_form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
+    <% if info_path = person_form.object.info_path %>
+      <%= link_to t('edit'), info_path, :class => 'edit_info' %>
+    <% else %>
+      <%= link_to t('add_info'), '#', :class => 'add_info' %>
+    <% end %>
     <%= form.input :title %>
   <% end %>
 
