@@ -4,9 +4,11 @@ gem 'activeadmin',                                :git => 'git://github.com/greg
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
+gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
 gem 'compass',                  '~> 0.12.alpha'
 gem 'configliere'
 gem 'default_value_for'
+gem 'el_vfs_client'
 gem 'email_validator'
 gem 'forgery',                                    :require => false
 gem 'formtastic'

@@ -16,6 +16,8 @@
       <%= link_to t('add_info'), '#', :class => 'add_info' %>
     <% end %>
     <%= form.input :title %>
+    <%= javascript_include_tag 'ckeditor/ckeditor_source.js' %>
+    <%= person_form.input :info_path, :as => :ckeditor %>
   <% end %>
 
   <%= form.inputs "Адрес", :class => "inputs inline_fields", :for => :address do |address_form| %>
