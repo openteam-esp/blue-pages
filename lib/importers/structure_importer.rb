@@ -112,22 +112,19 @@ class Subdivision
   end
 
   def import
-    begin
-      unless Rails.env.test?
-        puts "================================="
-        puts import_url
-      end
-      import_info(subdivision_text)
-      items.destroy_all
-      if parent == Subdivision.governor || self == Subdivision.governor
-        import_assistent
-      end
-      import_items
-    rescue => e
-      puts e.backtrace.grep(/structure_importer/).first
-      puts "#{e.message} во время импорта #{import_url}"
-      throw e
+    unless Rails.env.test?
+      puts "================================="
+      puts import_url
     end
+    import_info(subdivision_text)
+    items.destroy_all
+    if parent == Subdivision.governor || self == Subdivision.governor
+      import_assistent
+    end
+    import_items
+  rescue => e
+    puts "!!! #{e.message} во время импорта #{import_url}"
+    puts e.backtrace.grep(/structure_importer/).first
   end
 
   def import_items
