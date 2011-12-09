@@ -1,5 +1,12 @@
 @import "compass/utilities"
 
+.ajax_loading
+  background: image_url('ajax_loading_min.gif') no-repeat center center
+  display: block
+  height: 16px
+  margin: 8px 0 0 0
+  width: 16px
+
 form
   fieldset ol > li
     label
@@ -58,8 +65,33 @@ form
     .destroy_action
       margin-top: 25px
 
+  .info_wrapper
+    +clearfix
+    background: image_url('profile.png') no-repeat left center
+    clear: both
+    display: block
+    height: 32px
+    line-height: 32px
+    padding: 0 0 0 40px !important
+    width: 360px !important
+
+    a
+      border-bottom: 1px dashed #38678B
+      text-decoration: none
+
+      &:hover
+        border: none
+
+    .choose_link
+      font-size: 10px
+      margin: 0 0 0 7px
+
+    .ajax_loading
+      float: right
+
   #item_title_input
-    clear: left
+    float: none
+    clear: both
   #item_title
     width: 666px
   #item_address_attributes_street_input
