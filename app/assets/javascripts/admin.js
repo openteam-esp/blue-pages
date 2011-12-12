@@ -27,10 +27,7 @@ function init_datepicker() {
       changeYear: true,
       yearRange: "c-60:c+60",
       showOn: "button",
-      showOtherMonths: true,
-      buttonText: '',
-      buttonImage: "<%= image_path("ui/calendar.png") %>",
-      buttonImageOnly: true
+      showOtherMonths: true
     });
   };
 };
@@ -101,52 +98,7 @@ function nested_form() {
   });
 };
 
-function show_ajax_indicator() {
-  $("<div />").appendTo("body")
-    .attr("id", "ajax_loading_overlay")
-    .css({
-      "position": "absolute",
-      "top": 0,
-      "left": 0,
-      "width": document.width,
-      "height": document.height,
-      "z-index": 1001,
-      "background-color": "#fff",
-      "opacity": 0.5
-    })
-  .append("<img width='32' height='32' src='<%= image_path("ajax_loading.gif") %>' />");
-  $("#ajax_loading_overlay img").css({
-    "display": "block",
-    "margin": (document.height / 2 - 16) + "px auto 0 auto"
-  });
-};
-
-function hide_ajax_indicator() {
-  $("#ajax_loading_overlay").remove();
-};
-
 $(function() {
-  preload_images(
-    [
-      "<%= image_path("sort.png") %>",
-      "<%= image_path("ajax_loading.gif") %>",
-      "<%= image_path("ui/calendar.png") %>",
-      "<%= image_path("ui/ui-bg_flat_0_aaaaaa_40x100.png") %>",
-      "<%= image_path("ui/ui-bg_flat_75_ffffff_40x100.png") %>",
-      "<%= image_path("ui/ui-bg_glass_55_fbf9ee_1x400.png") %>",
-      "<%= image_path("ui/ui-bg_glass_65_ffffff_1x400.png") %>",
-      "<%= image_path("ui/ui-bg_glass_75_dadada_1x400.png") %>",
-      "<%= image_path("ui/ui-bg_glass_75_e6e6e6_1x400.png") %>",
-      "<%= image_path("ui/ui-bg_glass_95_fef1ec_1x400.png") %>",
-      "<%= image_path("ui/ui-bg_highlight-soft_75_cccccc_1x100.png") %>",
-      "<%= image_path("ui/ui-icons_222222_256x240.png") %>",
-      "<%= image_path("ui/ui-icons_2e83ff_256x240.png") %>",
-      "<%= image_path("ui/ui-icons_454545_256x240.png") %>",
-      "<%= image_path("ui/ui-icons_888888_256x240.png") %>",
-      "<%= image_path("ui/ui-icons_cd0a0a_256x240.png") %>"
-    ]
-  );
-
   init_datepicker();
   nested_form();
 
@@ -179,12 +131,6 @@ $(function() {
             url: url,
             type: "post",
             data: serializeBlock(parent_block),
-            beforeSend: function(jqXHR, settings) {
-              show_ajax_indicator();
-            },
-            complete: function(jqXHR, textStatus) {
-              hide_ajax_indicator();
-            },
             success: function(data, textStatus, jqXHR) {
               $(block).effect("highlight");
             },

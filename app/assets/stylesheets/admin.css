@@ -5,8 +5,13 @@
  *= require_self
  *= require reset
  *= require admin/text
- *= require buttons
- *= require jquery_ui
+ *= require admin/buttons
+ *= require admin/treeview
+ *= require admin/jquery_ui
+ *= require admin/errors
+ *= require admin/form
  *= require admin/layout
+ *= require admin/toolbar
+ *= require admin/title
  *= require admin/footer
  */
