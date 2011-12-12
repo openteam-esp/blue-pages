@@ -1,5 +1,5 @@
 <%= form.inputs do %>
-  <%= form.input :title, :as => :string %>
+  <%= form.input :title, :as => :string, :input_html => { :autofocus => true } %>
   <%= form.input :parent_id, :as => :select,
                  :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @category.id %>
 <% end %>
