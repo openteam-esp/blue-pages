@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source :rubygems
 
 gem 'ancestry'
 gem 'attribute_normalizer'
@@ -25,6 +25,7 @@ gem 'ryba',                                       :require => false
 gem 'sass-rails'
 gem 'sanitize',                                   :require => false
 gem 'show_for'
+gem 'simple-navigation'
 gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do
