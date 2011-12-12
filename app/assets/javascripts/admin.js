@@ -30,30 +30,14 @@ function serializeBlock(parent_block) {
   };
 };
 
-$(function() {
-  init_datepicker();
-  nested_form();
-
-  $(".phone_kind").live("change", function(){
-    var phone_kind = $(this).val();
-    var phone_code = $(this).closest("li").siblings("li[id*=\"code_input\"]");
-    var phone_additional_number = $(this).closest("li").siblings("li[id*=\"additional_number_input\"]");
-    if ((phone_kind == "internal") || (phone_kind == 'mobile')) {
-      phone_code.slideUp("slow");
-      phone_additional_number.slideUp("slow");
-    } else {
-      phone_code.slideDown("slow");
-      phone_additional_number.slideDown("slow");
-    };
-  });
-
+function init_sort() {
   $(".sort_link").click(function() {
     var it_off = $(this).hasClass("off"),
         url = $(this).attr("href"),
         parent_block = $(this).parent().parent();
     if (it_off) {
-      $(this).removeClass("off").addClass("on");
-      $(".sortable span", parent_block).css("display", "inline-block");
+      $(this).removeClass("off").addClass("on").addClass("invert");
+      $(".sortable span", parent_block).removeClass("hidden").addClass("inline-block");
       $(".sortable", parent_block).sortable({
         axis: "y",
         handle: "span",
@@ -86,9 +70,27 @@ $(function() {
         }
       });
     } else {
-      $(".sortable span", parent_block).hide();
-      $(this).removeClass("on").addClass("off");
+      $(".sortable span", parent_block).removeClass("inline-block").addClass("hidden");
+      $(this).removeClass("on").addClass("off").removeClass("invert");
     };
     return false;
+  });
+};
+
+$(function() {
+  init_datepicker();
+  init_sort();
+
+  $(".phone_kind").live("change", function(){
+    var phone_kind = $(this).val();
+    var phone_code = $(this).closest("li").siblings("li[id*=\"code_input\"]");
+    var phone_additional_number = $(this).closest("li").siblings("li[id*=\"additional_number_input\"]");
+    if ((phone_kind == "internal") || (phone_kind == 'mobile')) {
+      phone_code.slideUp("slow");
+      phone_additional_number.slideUp("slow");
+    } else {
+      phone_code.slideDown("slow");
+      phone_additional_number.slideDown("slow");
+    };
   });
 });
