@@ -5,14 +5,13 @@ BluePages::Application.routes.draw do
 
   namespace :admin do
     resources :categories do
-      resources :categories do
-        post :sort, :on => :collection
-      end
+      resources :categories, :only => [:create, :new]
+      resources :subdivisions, :only => [:create, :new]
 
-      resources :subdivisions
+      post :sort, :on => :collection
     end
 
-    resources :subdivisions do
+    resources :subdivisions, :except => [:index] do
       resources :items
     end
   end

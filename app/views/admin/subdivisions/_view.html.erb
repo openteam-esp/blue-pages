@@ -1,0 +1,40 @@
+<div class="subdivision">
+  <%= show_for resource do | s | %>
+    <%= s.association :address, :if_blank => "Не указан" %>
+    <%= s.association :phones, :if_blank => "Не указаны" %>
+    <%= s.association :emails, :if_blank => "Не указаны" do | email | %>
+      <li><%= mail_to email %></li>
+    <% end %>
+    <%= s.attribute :url do %>
+      <%= resource.url.blank? ? "Не указан" : link_to(resource.url, resource.url, :target => "_blank") %>
+    <% end %>
+  <% end %>
+
+  <div class="items">
+    <h3>Сотрудники</h3>
+    <div class="actions">
+      <%#= link_to t('active_admin.sort'), sort_admin_subdivision_items_path(resource), :class => 'sort_link off button icon loop' if resource.items.any? %>
+      <%= link_to t('active_admin.new_item'), new_admin_subdivision_item_path(resource), :class => 'button icon add' %>
+    </div>
+    <%= render :partial => "admin/items/items", :locals => { :items => resource.items } %>
+  </div>
+
+  <div class="subdivisions">
+    <h3>Разделы</h3>
+    <div class="actions">
+      <%= link_to t('active_admin.sort'), sort_admin_categories_path, :class => 'sort_link off button icon loop' if resource.children.any? %>
+      <%= link_to t('active_admin.new_category'), new_admin_category_category_path(resource), :class => 'button icon add'%>
+    </div>
+    <%= render :partial => "admin/categories/children", :locals => { :children => resource.categories } %>
+  </div>
+
+  <div class="subdivisions">
+    <h3>Подразделения</h3>
+    <div class="actions">
+      <%= link_to t('active_admin.sort'), sort_admin_categories_path, :class => 'sort_link off button icon loop' if resource.children.any? %>
+      <%= link_to t('active_admin.new_subdivision'), new_admin_category_subdivision_path(resource), :class => 'button icon add' %>
+    </div>
+    <%= render :partial => "admin/categories/children", :locals => { :children => resource.children } %>
+  </div>
+</div>
+
