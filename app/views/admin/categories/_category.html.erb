@@ -1,4 +1,4 @@
-<div class='title'>
+<div class="title">
   <span class='hidden'>хвать</span>
-  <%= link_to category, admin_category_path(category) %>
+  <%= link_to category, category.parent ? admin_category_category_path(category.parent, category) : admin_category_path(category) %>
 </div>

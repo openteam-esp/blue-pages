@@ -1,7 +1,8 @@
 <div class="title">
   <span class='hidden'>хвать</span>
-  <%= link_to subdivision, admin_category_path(subdivision) %>
+  <%= link_to subdivision, admin_category_subdivision_path(subdivision.parent, subdivision) %>
 </div>
+
 <div class="details">
   <%= content_tag :p, subdivision.address %>
   <%= content_tag :p, subdivision.phones.join(", ") if subdivision.phones.any?%>
