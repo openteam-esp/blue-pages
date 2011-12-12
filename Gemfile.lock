@@ -88,7 +88,7 @@ GEM
       orm_adapter (~> 0.0.3)
       warden (~> 1.0.3)
     diff-lcs (1.1.3)
-    el_vfs_client (0.0.5.2)
+    el_vfs_client (0.0.5.3)
       configliere
       curb
       rails
@@ -285,7 +285,7 @@ DEPENDENCIES
   compass (~> 0.12.alpha)
   configliere
   default_value_for
-  el_vfs_client
+  el_vfs_client (= 0.0.5.3)
   email_validator
   fabrication
   forgery
