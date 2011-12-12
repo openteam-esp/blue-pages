@@ -1,8 +1,8 @@
-<%= semantic_nested_form_for resource, :as => resource_instance_name, :url => collection_url do | form | %>
+<%= semantic_nested_form_for resource, :url => collection_path do | form | %>
   <%= form.semantic_errors %>
   <%= render :partial => "fields", :locals => { :form => form } %>
   <%= form.buttons do %>
     <%= form.commit_button :button_html => { :class => 'button' } %>
-    <li class="cancel"><%= link_to t("cancel"), smart_resource_url %></li>
+    <li class="cancel"><%= link_to t("cancel"), resource.parent ? parent_path : resource_path %></li>
   <% end %>
 <% end %>
