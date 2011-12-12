@@ -19,6 +19,12 @@ class Admin::CategoriesController < Admin::ApplicationController
     destroy! { @category.parent ? admin_category_path(@category.parent) : admin_categories_path }
   end
 
+  def index
+    index! {
+      @categories = Category.roots
+    }
+  end
+
   def sort
     index! do
       params[:ids].each_with_index do |id, index|
