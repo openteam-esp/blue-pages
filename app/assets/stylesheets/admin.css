@@ -13,5 +13,6 @@
  *= require admin/layout
  *= require admin/toolbar
  *= require admin/title
+ *= require admin/content
  *= require admin/footer
  */

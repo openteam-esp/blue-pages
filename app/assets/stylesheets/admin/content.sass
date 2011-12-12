@@ -1,0 +1,50 @@
+@import 'compass/utilities'
+
+#content_wrapper
+  +clearfix
+  nav
+    width: 250px
+    float: left
+    h1
+      font-size: 16px
+      a
+        padding-left: 21px
+        background: transparent url('site.png') no-repeat left
+  article
+    border-left: 1px solid #ccc
+    margin-left: 250px
+    padding-left: 10px
+  .change_route_wrapper
+    border-bottom: 1px solid #ccc
+    margin-bottom: 10px
+    padding-bottom: 10px
+    #change_route_route
+      width: 99%
+  .collection_list
+    font-size: 16px
+  .regions_list
+    .region
+      padding: 5px 10px 10px 10px
+      border: 1px solid #ddd
+      margin-bottom: 10px
+      legend
+        font-size: 16px
+  .category .subdivisions
+    +clearfix
+    .actions
+      float: right
+    .sortable
+      li
+        margin-bottom: 3px
+      span
+        width: 16px
+        height: 16px
+        overflow: hidden
+        cursor: move
+        text-indent: -9999em
+        background: transparent url('sort.png') no-repeat
+        margin-right: 5px
+        &.hidden
+          display: none
+        &.inline-block
+          +inline-block
