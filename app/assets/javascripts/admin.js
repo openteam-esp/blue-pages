@@ -1,8 +1,7 @@
 /*
- *= require active_admin/base
- *= require jquery
- *= require jquery-ui
- *= require jquery.ui.datepicker-ru
+ *= require jquery.js
+ *= require jquery-ui.js
+ *= require jquery.ui.datepicker-ru.js
  */
 
 function preload_images(images) {

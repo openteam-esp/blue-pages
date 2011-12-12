@@ -1,0 +1,46 @@
+body
+  color: #333
+  font-size: 12px
+  font-family: Helvetica, Arial, Verdana, sans-serif
+  line-height: 1.6
+  background-color: #fff
+
+@for $i from 1 through 5
+  h#{$i}
+    font-size: 22px - $i * 2
+    font-family: Arial, Verdana, sans-serif
+    font-weight: normal
+
+a
+  color: #333377
+  &:hover
+    color: #333
+    text-decoration: none
+  &:active
+    color: #aa0000
+
+strong, b
+  font-weight: bold
+
+em, i
+  font-style: italic
+
+sub
+  font-size: 11px
+  vertical-align: sub
+
+sup
+  font-size: 11px
+  vertical-align: super
+
+.nobr
+  white-space: nowrap
+
+table
+  border-collapse: collapse
+  th, td
+    padding: 2px 5px
+    border: 1px solid #ccc
+
+.big
+  font-size: 16px

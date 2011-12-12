@@ -28,7 +28,6 @@ gem 'show_for'
 gem 'sunspot_rails',            '~> 1.3.0.rc4'
 
 group :assets do
-  gem 'therubyracer'
   gem 'uglifier'
 end
 
@@ -36,13 +35,15 @@ group :development do
   gem 'annotate',               '~> 2.4.1.beta1', :require => false
   gem 'hirb',                                     :require => false
   gem 'itslog'
-  gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
   gem 'rails-dev-tweaks'
+  gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
+  gem 'therubyracer'
 end
 
 group :production do
   gem 'hoptoad_notifier'
   gem 'pg',                                       :require => false
+  gem 'unicorn'
 end
 
 group :test do
