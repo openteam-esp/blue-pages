@@ -104,5 +104,9 @@ ru:
       one:                      раздел
       few:                      раздела
       many:                     разделов
+    admin/subdivision:
+      one:                      подразделение
+      few:                      подразделения
+      many:                     подразделений
   toolbar:
     categories:                 Разделы и подразделения
