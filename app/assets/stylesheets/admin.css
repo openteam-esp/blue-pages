@@ -4,12 +4,9 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require reset
- *= require text
+ *= require admin/text
  *= require buttons
  *= require jquery_ui
- *= require layout
- *= require header
- *= require main
- *= require content
- *= require pagination
+ *= require admin/layout
+ *= require admin/footer
  */
