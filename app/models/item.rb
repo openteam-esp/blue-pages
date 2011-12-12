@@ -37,6 +37,8 @@ class Item < ActiveRecord::Base
 
   default_scope order('weight')
 
+  alias :parent :subdivision
+
   searchable do
     boost :boost
 

@@ -10,6 +10,7 @@
  *= require admin/jquery_ui
  *= require admin/errors
  *= require admin/form
+ *= require admin/show_for
  *= require admin/layout
  *= require admin/toolbar
  *= require admin/title
