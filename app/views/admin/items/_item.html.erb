@@ -1,6 +1,6 @@
 <div class="title">
   <span>хвать</span>
-  <%#= link_to item.title, admin_subdivision_item_path(resource, item) %><%= ", #{item.person}" if item.person %>
+  <%= link_to item.title, admin_subdivision_item_path(resource, item) %><%= ", #{item.person}" if item.person %>
 </div>
 <div class="details">
   <%= content_tag :p, item.address %>
