@@ -26,7 +26,6 @@
         display: block
         abbr
           color: #800000
-          font-size: 16px
           margin-left: 1px
     .string,
     .password,
@@ -35,6 +34,8 @@
       input
         width: 250px
         +input_style
+        padding-top: 4px
+        padding-bottom: 4px
     .number
       input
         width: 100px
@@ -74,6 +75,13 @@
     .inline-errors
       background: url('inline_error_arrow.png') no-repeat 2px 2px
       padding-left: 16px
+    &.bordered
+      border: 1px solid #ddd
+      padding: 5px 10px 10px 10px
+      +clearfix
+      margin-bottom: 10px
+      li
+        float: left
   .buttons
     +clearfix
     margin-top: 10px
@@ -84,6 +92,70 @@
   /* customize */
   #part_title
     width: 350px
+
+  #subdivision_title_input
+    margin-right: 10px
+  #subdivision_url_input
+    margin-right: 10px
+    clear: left
+  #subdivision_address_attributes_postcode_input
+    margin-right: 10px
+  #subdivision_address_attributes_postcode
+    width: 100px
+  #subdivision_address_attributes_region_input
+    margin-right: 10px
+  #subdivision_address_attributes_region
+    width: 200px
+  #subdivision_address_attributes_district_input
+    margin-right: 10px
+  #subdivision_address_attributes_district
+    width: 200px
+  #subdivision_address_attributes_locality_input
+    clear: left
+    margin-right: 10px
+  #subdivision_address_attributes_locality
+    width: 150px
+  #subdivision_address_attributes_street_input
+    margin-right: 10px
+  #subdivision_address_attributes_street
+    width: 150px
+  #subdivision_address_attributes_house_input
+    margin-right: 10px
+  #subdivision_address_attributes_house
+    width: 55px
+  #subdivision_address_attributes_building_input
+    margin-right: 10px
+  #subdivision_address_attributes_building
+    width: 55px
+  #subdivision_address_attributes_office
+    width: 54px
+
+  .phone
+    .select
+      .phone_kind
+        width: 100px
+    .input
+      .code
+        width: 50px
+      .number
+        width: 100px
+      .additional_number
+        width: 65px
+    li
+      margin-right: 10px
+    .destroy_action
+      margin: 20px 0 0 0
+
+  .phones_fieldset
+    margin-bottom: 10px
+
+  .email
+    .input input
+      width: 200px
+    li
+      margin-right: 10px
+    .destroy_action
+      margin: 20px 0 0 0
 
 .regions_list
   .formtastic
