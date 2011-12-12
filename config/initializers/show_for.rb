@@ -4,13 +4,13 @@ ShowFor.setup do |config|
   # config.show_for_tag = :div
 
   # The tag which wraps each attribute/association call. Default is :p.
-  config.wrapper_tag = :dl
+  #config.wrapper_tag = :dl
 
   # The tag used to wrap each label. Default is :strong.
-  config.label_tag = :dt
+  #config.label_tag = :dt
 
   # The tag used to wrap each content (value). Default is nil.
-  config.content_tag = :dd
+  #config.content_tag = :dd
 
   # The DOM class set for blank content tags. Default is "blank".
   # config.blank_content_class = 'no_content'
@@ -33,5 +33,5 @@ ShowFor.setup do |config|
 
   # If you want to wrap the text inside a label (e.g. to append a semicolon),
   # specify label_proc - it will be automatically called, passing in the label text.
-  config.label_proc = lambda { |l| l + ":" }
+  config.label_proc = lambda { |l| l + ": " }
 end

@@ -8,7 +8,7 @@
 
 function init_datepicker() {
   if ($.fn.datepicker) {
-    $("form input.date").datepicker({
+    $("form input.date_picker").datepicker({
       changeMonth: true,
       changeYear: true,
       yearRange: "c-60:c+60",
