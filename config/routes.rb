@@ -1,11 +1,14 @@
 BluePages::Application.routes.draw do
-  ActiveAdmin.routes(self) unless Rails.env.test?
+  devise_for :admin_users
 
   mount ElVfsClient::Engine => '/'
 
-  devise_for :admin_users, ActiveAdmin::Devise.config
+  namespace :admin do
+    resources :categories
+  end
 
   resources :categories, :only => [:index, :show]
+
   match "/search" => "main#search", :via => [:get]
   match "/build_info_path" => 'service#build_info_path'
 
