@@ -1,0 +1,13 @@
+<%= semantic_nested_form_for resource, :url => collection_path do | form | %>
+  <%= form.semantic_errors %>
+
+  <%= form.inputs do %>
+    <%= form.input :title, :as => :string %>
+  <% end %>
+
+  <%= form.buttons do %>
+    <%= form.commit_button :button_html => { :class => 'button' } %>
+    <li class="cancel"><%= link_to t("cancel"), smart_collection_url %></li>
+  <% end %>
+<% end %>
+

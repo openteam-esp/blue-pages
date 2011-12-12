@@ -4,7 +4,17 @@ BluePages::Application.routes.draw do
   mount ElVfsClient::Engine => '/'
 
   namespace :admin do
-    resources :categories
+    resources :categories do
+      resources :categories do
+        post :sort, :on => :collection
+      end
+
+      resources :subdivisions
+    end
+
+    resources :subdivisions do
+      resources :items
+    end
   end
 
   resources :categories, :only => [:index, :show]
