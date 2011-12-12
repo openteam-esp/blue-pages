@@ -1,6 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'activeadmin',                                :git => 'git://github.com/gregbell/active_admin'
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
