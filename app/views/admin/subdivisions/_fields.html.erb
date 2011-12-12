@@ -49,11 +49,3 @@
   <div class="emails_fieldset">
     <%= form.link_to_add t('active_admin.new_email'), :emails, :class => 'button icon add' %>
   </div>
-
-  <%= form.buttons do %>
-    <%= form.commit_button %>
-    <li class='cancel'>
-      <%= link_to t("active_admin.cancel"), @subdivision.new_record? ? collection_path : resource_path %>
-    </li>
-  <% end %>
-<% end %>

@@ -3,6 +3,7 @@
  *= require jquery-ui.js
  *= require jquery.ui.datepicker-ru.js
  *= require jquery_ujs.js
+ *= require nested_form.js
  */
 
 function init_datepicker() {
