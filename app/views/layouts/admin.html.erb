@@ -9,7 +9,7 @@
 </head>
 <body>
   <div id="toolbar_wrapper">
-    <%#= render_navigation :context => :toolbar %>
+    <%= render_navigation :context => :toolbar %>
   </div>
   <div id="title_wrapper">
     <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
