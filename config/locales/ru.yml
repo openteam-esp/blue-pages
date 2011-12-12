@@ -1,4 +1,9 @@
 ru:
+  actions:
+    index:                      Список
+    new:                        Добавление
+    edit:                       Изменение
+    destroy:                    Удаление
   activerecord:
     attributes:
       email:
@@ -81,7 +86,9 @@ ru:
       phone:                    Телефон
       subdivision:              Подразделения
 
-  blue_pages_system:            Телефонный справочник
+  application:                  Телефонный справочник
+  "Are you sure?":              Вы уверены?
+  cancel:                       Отмена
   download:                     Скачать в формате pdf
   manage:                       Управление
   personal_info:                Создать/редактировать досье
@@ -92,3 +99,10 @@ ru:
     emails:                     Адреса электронная почта
     phones:                     Телефоны
     url:                        Сайт
+  pluralize:
+    admin/category:
+      one:                      раздел
+      few:                      раздела
+      many:                     разделов
+  toolbar:
+    categories:                 Разделы и подразделения

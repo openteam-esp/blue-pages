@@ -1,6 +1,12 @@
 class Admin::CategoriesController < Admin::ApplicationController
   belongs_to :parent_category, :class_name => 'Category', :optional => true, :param => :category_id
 
+  def index
+    index! {
+      @categories = Category.roots
+    }
+  end
+
   def sort
     index! do
       params[:ids].each_with_index do |id, index|
