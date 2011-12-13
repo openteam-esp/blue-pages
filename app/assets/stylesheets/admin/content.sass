@@ -29,8 +29,12 @@
       margin-bottom: 10px
       legend
         font-size: 16px
-  .category .subdivisions
+  .category .subdivisions,
+  .subdivision .items,
+  .subdivision .categories,
+  .subdivision .subdivisions
     +clearfix
+    margin-top: 10px
     .actions
       float: right
     .sortable
@@ -48,3 +52,13 @@
           display: none
         &.inline-block
           +inline-block
+  .subdivision
+    ul
+      padding-left: 15px
+      list-style: disc
+    .title
+      font-size: 14px
+    .details
+      color: #777
+      a
+        color: #777
