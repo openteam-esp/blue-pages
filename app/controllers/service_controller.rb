@@ -9,7 +9,7 @@ class ServiceController < ApplicationController
 
   private
     def generated_path
-      subdivision = Subdivision.find(params[:subdivision_id])
+      subdivision = Category.find(params[:subdivision_id])
       additional  = params[:additional].split('/').select{|a| !a.empty?}.join('/')
       ActiveSupport::Inflector.transliterate("/#{subdivision.path.map{|a| a.title}.join('/')}/#{additional}/#{additional}.xhtml").downcase.gsub(/\s/,'_')
     end
