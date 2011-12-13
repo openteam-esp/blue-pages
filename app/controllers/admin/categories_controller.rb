@@ -7,7 +7,7 @@ class Admin::CategoriesController < Admin::ApplicationController
   def index
     index! {
       @categories = Category.roots
-      render :layout => 'admin' and return
+      render :index, :layout => 'admin' and return
     }
   end
 
@@ -17,12 +17,6 @@ class Admin::CategoriesController < Admin::ApplicationController
 
   def destroy
     destroy! { @category.parent ? admin_category_path(@category.parent) : admin_categories_path }
-  end
-
-  def index
-    index! {
-      @categories = Category.roots
-    }
   end
 
   def sort
