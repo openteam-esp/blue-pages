@@ -4,6 +4,9 @@
  *= require jquery.ui.datepicker-ru.js
  *= require jquery_ujs.js
  *= require nested_form.js
+ *= require treeview/jquery.treeview.js
+ *= require treeview/jquery.treeview.edit.js
+ *= require treeview/jquery.treeview.async.js
  */
 
 function init_datepicker() {
@@ -78,9 +81,19 @@ function init_sort() {
   });
 };
 
+function init_tree() {
+  if ($.fn.treeview) {
+    $('.categories_tree').treeview({
+      url: '/admin/treeview',
+      persist: 'location'
+    });
+  };
+};
+
 $(function() {
   init_datepicker();
   init_sort();
+  init_tree();
 
   $(".phone_kind").live("change", function(){
     var phone_kind = $(this).val();

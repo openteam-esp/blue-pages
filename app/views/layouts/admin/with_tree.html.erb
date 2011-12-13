@@ -1,6 +1,8 @@
 <% content_for :content do %>
   <nav>
-    ололо
+    <ul class='categories_tree'>
+      <%= expanded_ancestors(resource.ancestors.from_depth(1).all << resource) %>
+    </ul>
   </nav>
   <article>
     <%= yield %>

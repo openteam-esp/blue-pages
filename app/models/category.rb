@@ -10,7 +10,7 @@ class Category < ActiveRecord::Base
   before_create :set_position, :set_weight
   before_update :set_weight
 
-  has_ancestry
+  has_ancestry :cache_depth => true
 
   delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 
