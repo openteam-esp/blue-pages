@@ -34,12 +34,13 @@ module ApplicationHelper
   def expanded_ancestors(ancestors)
     result = ""
     if ancestors.empty?
-      resource.children.each do |child|
+      obj = resource.is_a?(Item) ? resource.subdivision : resource
+      obj.children.each do |child|
         li_options = { :id => child.id }
         li_options.merge!(:class => 'hasChildren') if child.has_children?
         result += content_tag :li, li_options do
           res = ""
-          res += content_tag(:span, link_to(child.title, child))
+          res += content_tag(:span, link_to(child.title, child.is_a?(Subdivision) ? admin_subdivision_path(child) : admin_category_path(child)))
           res += content_tag(:ul, content_tag(:li, content_tag(:span, raw('&nbsp;'), :class => 'placeholder'))) if child.has_children?
           raw(res)
         end
@@ -53,7 +54,7 @@ module ApplicationHelper
       li_options[:class] += " open" if node == sibling && sibling.has_children?
       result += content_tag :li, li_options do
         res = ""
-        res += content_tag(:span, link_to(sibling.title, sibling))
+        res += content_tag(:span, link_to(sibling.title, sibling.is_a?(Subdivision) ? admin_subdivision_path(sibling) : admin_category_path(sibling)))
         res += content_tag :ul do
           node == sibling ? expanded_ancestors(ancestors) : content_tag(:li, content_tag(:span, raw('&nbsp;'), :class => 'placeholder'))
         end if sibling.has_children?

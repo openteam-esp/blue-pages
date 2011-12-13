@@ -34,6 +34,26 @@ function serializeBlock(parent_block) {
   };
 };
 
+function show_ajax_error(jqXHR, textStatus, errorThrown) {
+  $("<div />")
+    .attr("id", "ajax_error")
+    .appendTo("body")
+    .hide()
+    .html(jqXHR.responseText);
+  $("#ajax_error meta").remove();
+  $("#ajax_error style").remove();
+  $("#ajax_error").dialog({
+    title: errorThrown,
+    width: "70%",
+    height: 500,
+    modal: true,
+    resizable: false,
+    close: function() {
+      $("#ajax_error").remove();
+    }
+  });
+};
+
 function init_sort() {
   $(".sort_link").click(function() {
     var it_off = $(this).hasClass("off"),
@@ -55,20 +75,7 @@ function init_sort() {
               $(block).effect("highlight");
             },
             error: function(jqXHR, textStatus, errorThrown) {
-              $("<div />")
-                .attr("id", "ajax_error")
-                .appendTo("body")
-                .hide()
-                .html(jqXHR.responseText);
-              $("#ajax_error meta").remove();
-              $("#ajax_error style").remove();
-              $("#ajax_error").dialog({
-                title: errorThrown,
-                width: "70%",
-                height: 500,
-                modal: true,
-                resizable: false
-              });
+              show_ajax_error(jqXHR, textStatus, errorThrown);
             }
           });
         }
@@ -85,7 +92,12 @@ function init_tree() {
   if ($.fn.treeview) {
     $('.categories_tree').treeview({
       url: '/admin/treeview',
-      persist: 'location'
+      persist: 'location',
+      ajax: {
+        error: function(jqXHR, textStatus, errorThrown) {
+          show_ajax_error(jqXHR, textStatus, errorThrown);
+        }
+      }
     });
   };
 };

@@ -61,6 +61,10 @@ class Item < ActiveRecord::Base
     1.1 - decrement / 10
   end
 
+  def ancestors_for_tree
+    subdivision.ancestors.from_depth(1).all << subdivision
+  end
+
   private
     def set_address_attributes
       self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if subdivision && !address
