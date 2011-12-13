@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'dossier_info' %>
 
   <%= form.inputs "Сотрудник", :class => "inputs bordered", :for => [:person, @item.person || @item.build_person] do |person_form| %>
-    <%= person_form.input :surname %>
+    <%= person_form.input :surname, :input_html => {:class => 'for_info_path'} %>
     <%= person_form.input :name %>
     <%= person_form.input :patronymic %>
     <%= form.input :title %>
