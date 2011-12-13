@@ -11,9 +11,13 @@ BluePages::Application.routes.draw do
       post :sort, :on => :collection
     end
 
-    resources :subdivisions, :except => [:index] do
-      resources :items
+    resources :subdivisions, :except => :index do
+      resources :items, :except => :index do
+        post :sort, :on => :collection
+      end
     end
+
+    root :to => 'categories#index'
   end
 
   resources :categories, :only => [:index, :show]
