@@ -247,12 +247,12 @@ GEM
     uglifier (1.0.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    uuid (2.3.4)
-      macaddr (~> 1.0)
     unicorn (4.1.1)
       kgio (~> 2.4)
       rack
       raindrops (~> 0.6)
+    uuid (2.3.4)
+      macaddr (~> 1.0)
     warden (1.1.0)
       rack (>= 1.0)
 
@@ -268,6 +268,7 @@ DEPENDENCIES
   compass (~> 0.12.alpha)
   configliere
   default_value_for
+  devise
   el_vfs_client (= 0.0.5.3)
   email_validator
   fabrication

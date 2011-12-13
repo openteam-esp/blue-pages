@@ -1,6 +1,39 @@
 @import 'compass/utilities'
 @import 'compass/css3'
 
+.ajax_loading
+  background: image_url('ajax_loading_min.gif') no-repeat center center
+  display: block
+  height: 16px
+  margin: 8px 0 0 0
+  width: 16px
+
+form
+  .info_wrapper
+    +clearfix
+    background: image_url('profile.png') no-repeat left center
+    clear: both
+    display: block
+    height: 32px
+    line-height: 32px
+    padding: 0 0 0 40px !important
+    width: 510px !important
+
+    a
+      border-bottom: 1px dashed #38678B
+      text-decoration: none
+
+      &:hover
+        border: none
+
+    .choose_link
+      font-size: 10px
+      margin: 0 0 0 7px
+
+    .ajax_loading
+      float: right
+      margin-right: 150px
+
 =input_style
   color: #333
   font-family: Arial, Verdana, sans-serif
