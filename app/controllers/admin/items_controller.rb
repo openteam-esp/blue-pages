@@ -9,7 +9,7 @@ class Admin::ItemsController < Admin::ApplicationController
     index! do
       params[:ids].each_with_index do |id, index|
         item = Item.find(id)
-        itemsem.update_attribute(:position, index.to_i + 1)
+        item.update_attribute(:position, index.to_i + 1)
       end
 
       render :nothing => true, :status => 200 and return
