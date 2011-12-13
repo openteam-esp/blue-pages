@@ -17,6 +17,8 @@ BluePages::Application.routes.draw do
       end
     end
 
+    match 'treeview' => 'categories#treeview', :via => :get
+
     root :to => 'categories#index'
   end
 

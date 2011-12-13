@@ -36,8 +36,27 @@ class Admin::CategoriesController < Admin::ApplicationController
     end
   end
 
+  def treeview
+    result = []
+    categories = params[:root].eql?('source') ? Category.all : Category.find(params[:root]).children
+    categories.each do | category |
+      result << fill_category(category)
+    end
+    render :json => result, :layout => false
+  end
+
   protected
+
     def collection_path
       @parential_category ? admin_category_categories_path(@parential_category) : admin_categories_path
     end
+
+  private
+
+    def fill_category(category)
+      hash = { 'text' => "<a href='/admin/#{category.class.name.tableize}/#{category.id}'>#{category.title}</a>" }
+      hash.merge!({ 'id' => category.id.to_s, 'hasChildren' => true }) if category.has_children?
+      hash
+    end
+
 end

@@ -69,6 +69,12 @@ class Category < ActiveRecord::Base
     result
   end
 
+  def ancestors_for_tree
+    categories = ancestors.from_depth(1).all
+    categories << self unless self.is_root?
+    categories
+  end
+
   protected
     def set_position
       self.position = siblings.last.try(:position).to_i + 1 unless self.position
