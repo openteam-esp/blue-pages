@@ -5,7 +5,10 @@ class Admin::CategoriesController < Admin::ApplicationController
              :param => :category_id
 
   def index
-    index! { @categories = Category.roots }
+    index! {
+      @categories = Category.roots
+      render :layout => 'admin' and return
+    }
   end
 
   def create
