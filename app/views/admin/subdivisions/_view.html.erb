@@ -8,6 +8,11 @@
     <%= s.attribute :url do %>
       <%= resource.url.blank? ? "Не указан" : link_to(resource.url, resource.url, :target => "_blank") %>
     <% end %>
+
+    <% if resource.info_path %>
+      <h2>Дополнительная информация</h2>
+      <%= raw resource.dossier %>
+    <% end %>
   <% end %>
 
   <div class="items">

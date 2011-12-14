@@ -4,6 +4,6 @@
 </div>
 <div class="details">
   <%= content_tag :p, item.address %>
-  <%= content_tag :p, Phone.present_as_string(item.phones) if item.phones.any? %>
+  <%= content_tag :p, Phone.present_as_str(item.phones) if item.phones.any? %>
   <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>
 </div>
