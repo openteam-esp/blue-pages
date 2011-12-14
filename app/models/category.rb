@@ -75,6 +75,10 @@ class Category < ActiveRecord::Base
     categories
   end
 
+  def subdivisions_and_categories
+    subdivisions + categories
+  end
+
   protected
     def set_position
       self.position = siblings.last.try(:position).to_i + 1 unless self.position
