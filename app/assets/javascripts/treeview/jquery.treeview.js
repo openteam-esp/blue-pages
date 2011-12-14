@@ -190,14 +190,12 @@
         return href
           // чистим якорь и параметры
           .replace(/#.+/, "").replace(/\?.+/, "")
-          // чистим урл сотрудника
-          .replace(/\/items\/\d+|\/items$/, "")
-          // чистим урл категории
-          .replace(/\/categories$/, "")
-          // чистим урл создания
-          .replace(/\/new$/, "")
-          // чистим урл редактирования
-          .replace(/\/edit$/, "");
+          // меняем все подразделы на разделы
+          .replace("subdivisions", "categories")
+          // чистим разделы
+          .replace(/\/categories\/new$|\/categories$|\/edit$/, "")
+          // чистим сотрудников
+          .replace(/\/items\/new$|\/items$|\/items\/\d+$/, "");
       }
 
       // add treeview class to activate styles
