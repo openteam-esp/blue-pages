@@ -68,7 +68,7 @@ class BluePagesBook < Prawn::Document
   def render_contacts(object, font_size = 10)
     if object.is_a?(Subdivision) || object.is_a?(Item)
       text object.emails.map(&:to_s).join(', '), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
-      text object.phones.map(&:to_s).join(', '), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
+      text Phone.present_as_str(object.phones), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
       text object.url.to_s, :url => object.url,  :size => font_size-1, :indent_paragraphs => 10, :leading => 2 if object.is_a? Subdivision
       text object.address.to_s, :size => font_size-1, :indent_paragraphs => 10, :leading => 2 if object.address.present?
     end

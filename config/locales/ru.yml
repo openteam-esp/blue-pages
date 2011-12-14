@@ -70,10 +70,10 @@ ru:
         kind:                   Тип
         number:                 Телефон
         kind_enum:
-          phone:                Телефон
+          phone:                Тел.
           fax:                  Факс
           phone_and_fax:        Тел./факс
-          internal:             Внутренний
+          internal:             Внутр.
           mobile:               Мобильный
 
     models:

@@ -8,17 +8,12 @@
   <%= content_tag :dl, :class => "wrapper subdivision_address" do %>
     <%= content_tag :dt, "Адрес:", :class => "label" %>
     <%= content_tag :dd, resource.address %>
-  <% end if resource.address %>
+    <% end if resource.address %>
+
   <%= content_tag :dl, :class => "wrapper subdivision_phones" do %>
-    <%= content_tag :dt, "Телефоны:", :class => "label" %>
-    <%= content_tag :dd do %>
-      <%= content_tag :ul do %>
-        <% resource.phones.each do |phone| %>
-          <%= content_tag :li, phone %>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= Phone.present_as_str(resource.phones) %>
   <% end if resource.phones.any? %>
+
   <%= content_tag :dl, :class => "wrapper subdivision_emails" do %>
     <%= content_tag :dt, "Адреса электронной почты:", :class => "label" %>
     <%= content_tag :dd do %>
@@ -53,7 +48,7 @@
           <td><%= item.person %></td>
           <td><%= item.title %></td>
           <td><%= item.address %></td>
-          <td><%= item.phones.join(", ") %></td>
+          <td><%= Phone.present_as_str(item.phones) %></td>
           <td><%= item.emails.map{|email| mail_to(email)}.join(', ').html_safe %></td>
         </tr>
       <% end %>
