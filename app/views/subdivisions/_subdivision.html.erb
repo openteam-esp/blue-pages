@@ -4,4 +4,4 @@
   Адрес: <%= subdivision.address %>
 <% end if subdivision.address %>
 
-<%= content_tag :p, subdivision.phones.join(", "), :class => "phones" if subdivision.phones.any? %>
+<%= content_tag :p, Phone.present_as_str(subdivision.phones), :class => "phones" if subdivision.phones.any? %>

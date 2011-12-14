@@ -15,7 +15,7 @@ class Phone < ActiveRecord::Base
   has_enums
 
   def to_s
-    res = "#{human_kind}: "
+    res = ""
     res << "(#{code}) " if code.present?
     res << number
     res << " добавочный #{additional_number}" if additional_number.present?
@@ -24,6 +24,12 @@ class Phone < ActiveRecord::Base
 
   def kind_internal_or_mobile?
     kind_internal? || kind_mobile?
+  end
+
+  def self.present_as_str(phones)
+    phones.group_by(&:kind).map do |kind, phones|
+      "#{Phone.human_enums[:kind][kind.to_sym]}: #{phones.join(', ')}"
+    end.join('; ')
   end
 
   private
