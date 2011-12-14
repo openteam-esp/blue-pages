@@ -8,7 +8,7 @@
   <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @subdivision.id %>
   <%= form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
   <li class='info_wrapper'>
-    <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :data_subdivision => @category.id, :class => 'info_link' %>
+    <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :data_subdivision => resource.parent.id, :class => 'info_link' %>
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
   </li>
 <% end %>
