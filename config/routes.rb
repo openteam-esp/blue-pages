@@ -22,7 +22,10 @@ BluePages::Application.routes.draw do
     root :to => 'categories#index'
   end
 
-  resources :categories, :only => [:index, :show]
+  resources :categories, :only => [:index, :show] do
+    resources :items, :only => :show
+  end
+
 
   match "/search" => "main#search", :via => [:get]
   match "/build_info_path" => 'service#build_info_path'

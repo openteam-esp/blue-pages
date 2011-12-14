@@ -1,4 +1,5 @@
 # encoding: utf-8
+
 require 'base64'
 
 class Subdivision < Category

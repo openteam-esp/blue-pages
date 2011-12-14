@@ -47,15 +47,16 @@ class Category < ActiveRecord::Base
     result = {}
     result['title'] = title
 
-    result['address'] = address.to_s                                     if respond_to?(:address)
+    result['address'] = address.to_s                                               if respond_to?(:address)
     result['phones'] = Phone.present_as_str(phones.select{|a| !a.kind_internal? }) if respond_to?(:phones) && phones.any?
-    result['emails'] = emails.map(&:address)                             if respond_to?(:emails) && emails.any?
+    result['emails'] = emails.map(&:address)                                       if respond_to?(:emails) && emails.any?
+    result['dossier'] = dossier                                                    if respond_to?(:dossier) && info_path
 
     if respond_to?(:items)
       result['items'] = [] if items.any?
 
       items.each do |item|
-        hash = { 'person' => item.person.to_s, 'title' => item.title, 'address' => item.address.to_s }
+        hash = { 'person' => item.person.to_s, 'title' => item.title, 'address' => item.address.to_s, 'link' => ''}
 
         hash.merge!('phones' => Phone.present_as_str(item.phones.select{|a| !a.kind_internal? })) if item.phones.any?
         hash.merge!('emails' => item.emails.map(&:address)) if item.emails.any?
