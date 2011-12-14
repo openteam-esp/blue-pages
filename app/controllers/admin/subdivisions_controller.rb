@@ -2,7 +2,9 @@ class Admin::SubdivisionsController < Admin::ApplicationController
   belongs_to :category, :optional => true
 
   def create
-    create! { admin_subdivision_path(@subdivision) }
+    create! { |success, failure|
+      success.html { redirect_to admin_subdivision_path(@subdivision) }
+    }
   end
 
   def destroy

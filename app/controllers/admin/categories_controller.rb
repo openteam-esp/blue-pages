@@ -12,7 +12,9 @@ class Admin::CategoriesController < Admin::ApplicationController
   end
 
   def create
-    create! { admin_category_path(@category) }
+    create! { |success, failure|
+      success.html { redirect_to admin_category_path(@category) }
+    }
   end
 
   def destroy
@@ -25,7 +27,6 @@ class Admin::CategoriesController < Admin::ApplicationController
         category = Category.find(id)
         category.update_attribute(:position, index.to_i + 1)
       end
-
       render :nothing => true, :status => 200 and return
     end
   end
