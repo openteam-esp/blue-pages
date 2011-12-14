@@ -1,4 +1,5 @@
 # encoding: utf-8
+require 'base64'
 
 class Subdivision < Category
   has_many :emails,   :as => :emailable,   :dependent => :destroy
@@ -63,7 +64,21 @@ class Subdivision < Category
     Category.where(:ancestry => child_ancestry, :type => nil)
   end
 
+  def dossier
+    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
+    JSON.parse(c.body_str)['content']
+  end
+
   private
+
+    def str_to_hash(str)
+      Base64.urlsafe_encode64(str).strip.tr('=', '')
+    end
+
+    def remote_url
+      "#{Settings[:el_vfs][:protocol]}://#{Settings[:el_vfs][:host]}:#{Settings[:el_vfs][:port]}/api/el_finder/v2?format=json&cmd=get"
+    end
+
     def set_address_attributes
       if self.new_record?
         self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return  if self.parent && self.parent.is_a?(Subdivision) && !self.address

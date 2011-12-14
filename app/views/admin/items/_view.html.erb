@@ -11,3 +11,8 @@
     <li><%= mail_to email %></li>
   <% end %>
 <% end %>
+
+<% if resource.person && resource.person.info_path %>
+  <h2>Дополнительная информация</h2>
+  <%= raw resource.person.dossier %>
+<% end %>

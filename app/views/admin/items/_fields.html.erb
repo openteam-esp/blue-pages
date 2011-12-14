@@ -1,5 +1,5 @@
 <%= javascript_include_tag 'ckeditor/ckeditor' %>
-<%= javascript_include_tag 'dossier_info' %>
+<%= javascript_include_tag 'info_plugin' %>
 
   <%= form.inputs "Сотрудник", :class => "inputs bordered", :for => [:person, @item.person || @item.build_person] do |person_form| %>
     <%= person_form.input :surname, :input_html => {:class => 'for_info_path'} %>
@@ -9,9 +9,12 @@
     <%= person_form.input :birthdate, :as => :date_picker %>
     <%= person_form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
     <li class='info_wrapper'>
-      <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :data_subdivision => @subdivision.id, :class => 'info_link' %>
+      <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :parent_data => @subdivision.id, :class => 'info_link' %>
       <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
     </li>
+    <div class="show_info_path" style='clear: both;'>
+      <%= raw person_form.object.dossier if person_form.object.info_path %>
+    </div>
   <% end %>
 
   <%= form.inputs "Адрес", :class => "inputs bordered", :for => :address do |address_form| %>

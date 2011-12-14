@@ -1,3 +1,5 @@
+require 'base64'
+
 class Person < ActiveRecord::Base
   belongs_to :item
 
@@ -12,6 +14,21 @@ class Person < ActiveRecord::Base
   end
 
   alias :to_s :full_name
+
+  def dossier
+    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
+    JSON.parse(c.body_str)['content']
+  end
+
+  private
+
+    def str_to_hash(str)
+      Base64.urlsafe_encode64(str).strip.tr('=', '')
+    end
+
+    def remote_url
+      "#{Settings[:el_vfs][:protocol]}://#{Settings[:el_vfs][:host]}:#{Settings[:el_vfs][:port]}/api/el_finder/v2?format=json&cmd=get"
+    end
 end
 
 # == Schema Information

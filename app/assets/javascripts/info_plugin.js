@@ -84,6 +84,7 @@ $.fn.save_file_content = function(common_path, info_path){
   $.post(common_path+'&root_path='+path_object.info_path+'&cmd=put&target=r1_'+path_object.file_name_hash, { content: content })
     .success(function(){
       dialog.dialog('close');
+      show_content(content);
     })
     .error(function(){
       $('.ui-dialog-buttonset')
@@ -163,6 +164,10 @@ function service(params){
   return result;
 };
 
+function show_content(content) {
+  $('.show_info_path').html(content);
+};
+
 // Вешаем обработку изменения поля info_path после callback из elFinder
 $.fn.watch_for_callback_from_elFinder = function(){
   var dialog = $(this);
@@ -175,6 +180,7 @@ $.fn.watch_for_callback_from_elFinder = function(){
 
     // Записать в input
     info_path_input.val(info_path);
+    info_path_input.unbind('change');
 
     dialog.dialog('close');
   });
@@ -189,7 +195,7 @@ $(function(){
   var common_path      = '/api/el_finder/v2?format=json';
 
   create_edit_link.click(function(){
-    var subdivision_id = create_edit_link.attr('data_subdivision');
+    var parent_id = create_edit_link.attr('parent_data');
     var additional     = $('.for_info_path').val();
 
     $('.error_messages').remove();
@@ -222,7 +228,7 @@ $(function(){
 
     // Если нет info_path сгенерить
     if (info_path.length == 0){
-      info_path = service({ subdivision_id: subdivision_id, additional: additional });
+      info_path = service({ parent_id: parent_id, additional: additional });
       info_path_input.val(info_path);
     };
 
@@ -254,3 +260,5 @@ $(function(){
   });
 
 });
+
+
