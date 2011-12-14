@@ -35,7 +35,7 @@ module ApplicationHelper
     result = ""
     if ancestors.empty?
       obj = resource.is_a?(Item) ? resource.subdivision : resource
-      obj.children.each do |child|
+      obj.subdivisions_and_categories.each do |child|
         li_options = { :id => child.id }
         li_options.merge!(:class => 'hasChildren') if child.has_children?
         result += content_tag :li, li_options do
