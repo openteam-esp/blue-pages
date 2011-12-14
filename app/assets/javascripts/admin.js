@@ -89,7 +89,7 @@ function init_sort() {
 };
 
 function init_tree() {
-  if ($.fn.treeview) {
+  if ($.fn.treeview && $('.categories_tree').length) {
     $('.categories_tree').treeview({
       url: '/admin/treeview',
       persist: 'location',
