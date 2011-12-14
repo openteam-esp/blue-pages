@@ -1,0 +1,13 @@
+<div class="breadcrumbs">
+  <% resource.subdivision.path.each do |ancestor| %>
+    <%= link_to ancestor.title, ancestor.is_root? ? root_path : category_path(ancestor) %> /
+  <% end %>
+  <%= resource.person %>
+</div>
+
+<%= render @item %>
+
+<% if resource.person.info_path %>
+  <h2>Дополнительная информация</h2>
+  <%= raw resource.person.dossier %>
+<% end %>
