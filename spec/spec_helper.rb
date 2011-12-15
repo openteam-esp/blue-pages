@@ -23,9 +23,8 @@ Spork.prefork do
 
     config.use_transactional_fixtures = true
 
-    #config.infer_base_class_for_anonymous_controllers = false
-
     config.before(:all) do
+      Dir[Rails.root.join("spec/fabricators/*.rb")].each {|f| require f}
       Dir[Rails.root.join("spec/support/matchers/*.rb")].each {|f| require f}
       Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
     end
