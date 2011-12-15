@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215033049) do
+ActiveRecord::Schema.define(:version => 20111215111111) do
 
   create_table "addresses", :force => true do |t|
     t.string   "postcode"
@@ -93,5 +93,29 @@ ActiveRecord::Schema.define(:version => 20111215033049) do
     t.string   "kind"
     t.string   "additional_number"
   end
+
+  create_table "users", :force => true do |t|
+    t.string   "uid"
+    t.text     "name"
+    t.text     "email"
+    t.text     "nickname"
+    t.text     "first_name"
+    t.text     "last_name"
+    t.text     "location"
+    t.text     "description"
+    t.text     "image"
+    t.text     "phone"
+    t.text     "urls"
+    t.text     "raw_info"
+    t.integer  "sign_in_count",      :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["uid"], :name => "index_users_on_uid"
 
 end
