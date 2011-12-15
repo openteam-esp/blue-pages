@@ -1,3 +1,11 @@
+el_vfs:
+  host:     http://pool.openteam.ru
+
+sso:
+  host:     http://esp-sso.openteam.ru
+  key:      KEY
+  secret:   SECRET
+
 hoptoad:
   api_key:            key
   host:               host
