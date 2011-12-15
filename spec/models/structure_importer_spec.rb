@@ -49,7 +49,7 @@ describe StructureImporter do
         it { subdivision.items(true).last.phones.map(&:number).should == ["303-359", "8-913-823-25-89"] }
       end
 
-      describe "импорт вложенных подразделений" do
+      context "импорт вложенных подразделений" do
         before { import :government_archival }
         it { subdivision.address.to_s.should == "634009, Томская область, г. Томск, ул. К.Маркса, 26"}
         it { subdivision.phones(true).map(&:kind).should == %w[phone fax] }
@@ -61,14 +61,16 @@ describe StructureImporter do
         it { item(1).emails.map(&:address).should == ["oblarch@tomsk.gov.ru"] }
         it { item(1).phones.map(&:number).should == ["515-723"] }
         it { item(1).phones.map(&:kind).should == ["phone"] }
-        it { subdivision.items(true).last.phones.map(&:to_s).should == ["Тел./факс: (3822) 511-560"] }
+        it { subdivision.items(true).last.phones.map(&:to_s).should == ["(3822) 511-560"] }
+        it { subdivision.items(true).last.phones.last.kind == 'phone_and_fax' }
 
         describe ', вложенное подразделение должно' do
           let (:subsubdivision) { subdivision.children.second }
 
           it { subsubdivision.url.should == 'http://www.gato.tomica.ru/' }
           it { subsubdivision.emails.map(&:address).should == ['awbgat@mail.tomsknet.ru'] }
-          it { subsubdivision.phones.map(&:to_s).should == ['Тел./факс: (3822) 513-025'] }
+          it { subsubdivision.phones.map(&:to_s).should == ['(3822) 513-025'] }
+          it { subsubdivision.phones.last.kind.should == 'phone_and_fax' }
           it { subsubdivision.address.to_s.should == '634009, Томская область, г. Томск, ул. К.Маркса, 26' }
           it { subsubdivision.items.count.should == 6 }
         end
@@ -76,7 +78,8 @@ describe StructureImporter do
 
       describe 'импорт из странички с нестандартным расположением колонок' do
         before { import :department_families }
-        it { item.phones.map(&:to_s).should == ["Телефон: (3822) 71-39-98"] }
+        it { item.phones.map(&:to_s).should == ["(3822) 71-39-98"] }
+        it { item.phones.last.kind.should == 'phone' }
         it { item.address(true).full_address.should include "г. Томск, ул.Тверская, 74, кабинет 301" }
         it { subdivision.address.to_s.should include "г. Томск, ул.Тверская, 74" }
         it { child.items.first.emails.map(&:address).should == %w[sma@family.tomsk.gov.ru] }
@@ -95,7 +98,8 @@ describe StructureImporter do
       end
       before { import :assistant_special_orders }
       it { item.full_name.should == 'Точилин Сергей Борисович' }
-      it { item.phones.map(&:to_s).should == ['Телефон: (3822) 511-142', 'Внутренний: 473']}
+      it { item.phones.map(&:to_s).should == ['(3822) 511-142', '473']}
+      it { item.phones.map(&:kind).should == ['phone', 'internal']}
       it { item.address(true).full_address.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
       it { subdivision.items.count.should == 4 }
     end
@@ -103,7 +107,8 @@ describe StructureImporter do
       let(:subdivision) { Subdivision.governor }
       before { import :governor }
       it { item.full_name.should == 'Кресс Виктор Мельхиорович' }
-      it { item.phones.map(&:to_s).should == ['Телефон: (3822) 510-813', 'Телефон: (3822) 510-505']}
+      it { item.phones.map(&:to_s).should == ['(3822) 510-813', '(3822) 510-505']}
+      it { item.phones.map(&:kind).should == ['phone', 'phone']}
       it { item.address(true).full_address.should == '634050, Томская область, г. Томск, пл. Ленина, 6'}
       it { subdivision.items.count.should == 13 }
     end
