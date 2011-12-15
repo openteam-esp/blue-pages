@@ -1,4 +1,4 @@
-class AdminAbility
+class Ability
   include CanCan::Ability
 
   def initialize(user)
@@ -12,14 +12,16 @@ class AdminAbility
       can? :manage, item.subdivision
     end
 
-    can [:destroy, :update], AdminUser do | admin_user |
-      (user.categories & (admin_user.categories.map(&:ancestors).flatten + admin_user.categories)).any?
+    can [:destroy, :update], User do | user |
+      (user.categories & (user.categories.map(&:ancestors).flatten + user.categories)).any?
     end
 
-    can :manage, AdminUser do | admin_user |
+    can :manage, User do
       user.categories.include? Category.root
     end
 
-    can [:create, :read], AdminUser
+    can [:create, :read], User do
+      user.categories.any?
+    end
   end
 end

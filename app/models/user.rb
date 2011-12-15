@@ -1,4 +1,4 @@
-class AdminUser < ActiveRecord::Base
+class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable,
@@ -33,7 +33,7 @@ end
 
 # == Schema Information
 #
-# Table name: admin_users
+# Table name: users
 #
 #  id                     :integer         not null, primary key
 #  email                  :string(255)     default(""), not null

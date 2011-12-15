@@ -17,12 +17,12 @@ ru:
         office:                 Кабинет
         postcode:               Почтовый индекс
         region:                 Регион
-        admin_user:
-          name: Имя
+        user:
+          name:                 Имя
           email:
         street:                 Улица
 
-      admin_user:
+      user:
         email:                  Адрес электронной почты
         name:                   Имя
         password:               Пароль
@@ -79,7 +79,7 @@ ru:
     models:
       address:                  Адрес
       admin:                    Главная
-      admin_user:               Пользователи
+      user:                     Пользователи
       category:                 Разделы и подразделения
       email:                    Электронная почта
       item:                     Сотрудники

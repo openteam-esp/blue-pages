@@ -1,12 +1,12 @@
-<div class="admin_user">
-  <%= show_for @admin_user do |admin_user| %>
-    <%= admin_user.attribute :email %>
+<div class="user">
+  <%= show_for @user do |user| %>
+    <%= user.attribute :email %>
   <% end %>
 
   <div class="categories">
     <h3>Подразделения</h3>
-    <% if @admin_user.categories.any? %>
-      <%= render_tree @admin_user.categories_tree %>
+    <% if @user.categories.any? %>
+      <%= render_tree @user.categories_tree %>
     <% else %>
       <p>Нет подразделений</p>
     <% end %>
