@@ -43,11 +43,12 @@ describe CategoriesController do
       expected_hash = {
         'title' => 'Подразделение',
         'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1',
-        'phones' => ['Телефон: (3822) 22-33-44'],
+        'phones' => 'Тел.: (3822) 22-33-44',
         'items' => [{
           'person' => 'Иванов Иван Иванович',
           'title' => 'Директа',
-          'address' => 'кабинет 123'
+          'address' => 'кабинет 123',
+          'link' => '/categories/2/items/1'
         }]
       }
 
@@ -60,11 +61,12 @@ describe CategoriesController do
       expected_hash = {
         'title' => 'Подразделение',
         'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1',
-        'phones' => ['Телефон: (3822) 22-33-44'],
+        'phones' => 'Тел.: (3822) 22-33-44',
         'items' => [{
           'person' => 'Иванов Иван Иванович',
           'title' => 'Директа',
-          'address' => 'кабинет 123'
+          'address' => 'кабинет 123',
+          'link' => '/categories/2/items/1'
         }],
         'subdivisions' => [
           {

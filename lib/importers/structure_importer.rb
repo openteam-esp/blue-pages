@@ -18,7 +18,15 @@ class String
       kind = "Телефон" if kind == "Тел"
       kind = "Внутренний" if kind == "Внутр"
       kind = "Тел./факс" if kind == "Тел/факс"
-      kind = Phone.human_enums[:kind].invert[kind]
+
+      mapping = {
+        'Телефон'    => 'phone',
+        'Факс'       => 'fax',
+        'Тел./факс'  => 'phone_and_fax',
+        'Внутренний' => 'internal',
+        'Мобильный'  => 'mobile'
+      }
+      kind = mapping[kind]
       numbers.split(/, /).each do |code_number|
         code, number = code_number.match(/(?:(?:8 )?\(([\d-]+)\) )?([\d-]+)/)[1..2]
         code ||= '3822'
