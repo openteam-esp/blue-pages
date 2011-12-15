@@ -101,15 +101,17 @@ end
 #
 # Table name: categories
 #
-#  id         :integer         not null, primary key
-#  title      :text
-#  abbr       :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  ancestry   :string(255)
-#  position   :integer
-#  url        :text
-#  type       :string(255)
-#  weight     :string(255)
+#  id             :integer         not null, primary key
+#  title          :text
+#  abbr           :string(255)
+#  created_at     :datetime
+#  updated_at     :datetime
+#  ancestry       :string(255)
+#  position       :integer
+#  url            :text
+#  type           :string(255)
+#  weight         :string(255)
+#  info_path      :string(255)
+#  ancestry_depth :integer         default(0)
 #
 
