@@ -43,5 +43,6 @@ end
 #  item_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  info_path  :string(255)
 #
 
