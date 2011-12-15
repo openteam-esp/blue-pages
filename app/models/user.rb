@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   devise :omniauthable, :trackable, :timeoutable
 
-  attr_accessible :category_ids
+  attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info
 
   has_and_belongs_to_many :categories
 
