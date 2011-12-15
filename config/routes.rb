@@ -1,6 +1,4 @@
 BluePages::Application.routes.draw do
-  devise_for :admin_users
-
   mount ElVfsClient::Engine => '/'
 
   namespace :admin do

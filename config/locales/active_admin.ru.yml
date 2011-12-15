@@ -1,8 +1,8 @@
 ru:
   active_admin:
-    edit_adminuser: Изменение пользователя
-    create_adminuser: Добавление пользователя
-    delete_adminuser: Удаление пользователя
+    edit_user: Изменение пользователя
+    create_user: Добавление пользователя
+    delete_user: Удаление пользователя
     new_category: Добавление раздела
     edit_category: Изменение раздела
     delete_category: Удаление раздела
@@ -11,8 +11,8 @@ ru:
     delete_subdivision: Удаление подразделения
     new_item: Добавление сотрудника
     edit_item: Изменение сотрудника
-    new_admin_user: Добавление пользователя
-    edit_admin_user: Изменение пользователя
+    new_user: Добавление пользователя
+    edit_user: Изменение пользователя
     delete_item: Удаление сотрудника
     new_phone: Добавить телефон
     delete_phone: Удалить телефон

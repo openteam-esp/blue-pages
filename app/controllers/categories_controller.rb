@@ -14,6 +14,6 @@ class CategoriesController < ApplicationController
   end
 
   def current_ability
-    @current_ability ||= AdminAbility.new(current_admin_user)
+    @current_ability ||= Ability.new(current_user)
   end
 end

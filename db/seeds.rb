@@ -32,10 +32,9 @@ enterprises.children.tap do | categories |
   categories.find_or_initialize_by_title('Предприятия промышленности').tap &:save!
 end
 
-AdminUser.find_or_initialize_by_email('demo@demo.de').tap do | user |
+User.find_or_initialize_by_uid('1') .tap do | user |
   user.update_attributes! :name => 'Юзеров Юзер Юзерович',
-                          :password => '123123',
-                          :password_confirmation => '123123'
+                          :email => 'demo@demo.de'
   user.categories << Category.root
 end
 

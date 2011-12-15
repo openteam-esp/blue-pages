@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Category < ActiveRecord::Base
-  has_and_belongs_to_many :admin_users
+  has_and_belongs_to_many :users
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 

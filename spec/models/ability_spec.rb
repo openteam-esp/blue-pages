@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe AdminAbility do
+describe Ability do
   let(:root)                { Category.root }
     let(:child_1)           { Fabricate :subdivision }
       let(:category_1_1)    { Fabricate :category, :parent => child_1 }
@@ -10,11 +10,11 @@ describe AdminAbility do
     let(:child_2)           { Fabricate :subdivision }
 
   def ability_for(user)
-    AdminAbility.new(user)
+    Ability.new(user)
   end
 
   def user
-    Fabricate(:admin_user)
+    Fabricate(:user)
   end
 
   def admin_of(category)
