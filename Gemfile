@@ -3,7 +3,7 @@ source :rubygems
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
-gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
+gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor'
 gem 'compass',                  '~> 0.12.alpha.2'
 gem 'configliere'
 gem 'curb'
