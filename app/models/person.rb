@@ -27,7 +27,7 @@ class Person < ActiveRecord::Base
     end
 
     def remote_url
-      "#{Settings[:el_vfs][:protocol]}://#{Settings[:el_vfs][:host]}:#{Settings[:el_vfs][:port]}/api/el_finder/v2?format=json&cmd=get"
+      "#{Settings[:vfs][:host]}/api/el_finder/v2?format=json&cmd=get"
     end
 end
 

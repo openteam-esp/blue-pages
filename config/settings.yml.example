@@ -1,4 +1,4 @@
-el_vfs:
+vfs:
   host:     http://pool.openteam.ru
 
 sso:
