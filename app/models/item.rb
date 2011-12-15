@@ -65,6 +65,21 @@ class Item < ActiveRecord::Base
     subdivision.ancestors.from_depth(1).all << subdivision
   end
 
+  def to_json
+    result = {}
+    result['title'] = title
+
+    result['address'] = address.to_s                                               if respond_to?(:address)
+    result['phones'] = Phone.present_as_str(phones.select{|a| !a.kind_internal? }) if respond_to?(:phones) && phones.any?
+    result['emails'] = emails.map(&:address)                                       if respond_to?(:emails) && emails.any?
+    result['surname'] = person.surname
+    result['name'] = person.name
+    result['patronymic'] = person.patronymic
+    result['dossier'] = person.dossier                                             if person.info_path
+
+    result
+  end
+
   private
     def set_address_attributes
       self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if subdivision && !address
