@@ -4,23 +4,22 @@ gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
 gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor.git'
-gem 'compass',                  '~> 0.12.alpha'
+gem 'compass',                  '~> 0.12.alpha.2'
 gem 'configliere'
 gem 'curb'
 gem 'default_value_for'
-gem 'devise'
-gem 'el_vfs_client',            '0.0.5.3'
+gem 'el_vfs_client'
 gem 'email_validator'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
 gem 'has_enum'
 gem 'has_searcher'
-gem 'inherited_resources',      '< 1.3.0'
+gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
 gem 'nokogiri',                                   :require => false
-gem 'prawn',                                      :git => 'git://github.com/sandal/prawn'
+gem 'prawn',  '~>1.0.0.rc1'
 gem 'rails',                                      :require => false
 gem 'restfulie'
 gem 'russian'
@@ -29,7 +28,8 @@ gem 'sass-rails'
 gem 'sanitize',                                   :require => false
 gem 'show_for'
 gem 'simple-navigation'
-gem 'sunspot_rails',            '~> 1.3.0.rc4'
+gem 'sso_client'
+gem 'sunspot_rails'
 
 group :assets do
   gem 'uglifier'
@@ -40,7 +40,7 @@ group :development do
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'rails-dev-tweaks'
-  gem 'sunspot_solr',           '~> 1.3.0.rc4',   :require => false
+  gem 'sunspot_solr',                             :require => false
   gem 'therubyracer'
 end
 
