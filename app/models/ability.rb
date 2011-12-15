@@ -12,8 +12,8 @@ class Ability
       can? :manage, item.subdivision
     end
 
-    can [:destroy, :update], User do | user |
-      (user.categories & (user.categories.map(&:ancestors).flatten + user.categories)).any?
+    can [:destroy, :update], User do | another_user |
+      (user.categories & (another_user.categories.map(&:ancestors).flatten + another_user.categories)).any?
     end
 
     can :manage, User do
