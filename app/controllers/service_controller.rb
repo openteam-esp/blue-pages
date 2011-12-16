@@ -17,6 +17,7 @@ class ServiceController < ApplicationController
     def decode_hash_to_path
       result = ''
       result << ActiveSupport::Inflector.transliterate("/#{Subdivision.root}").downcase.gsub(/\s/,'_')
+      result << '/'
       result << Base64.urlsafe_decode64(padded(params[:path_hash].gsub(/r.+?_/,'')))
 
       return result
