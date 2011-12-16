@@ -33,6 +33,7 @@ gem 'sunspot_rails'
 
 group :assets do
   gem 'uglifier'
+  gem 'therubyrhino'
 end
 
 group :development do
@@ -41,7 +42,6 @@ group :development do
   gem 'itslog'
   gem 'rails-dev-tweaks'
   gem 'sunspot_solr',                             :require => false
-  gem 'therubyracer'
 end
 
 group :production do
