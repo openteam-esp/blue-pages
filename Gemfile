@@ -33,7 +33,7 @@ gem 'sunspot_rails'
 
 group :assets do
   gem 'uglifier'
-  gem 'therubyrhino',                             :require => 'rhino'
+  gem 'therubyracer'
 end
 
 group :development do
