@@ -1,8 +1,8 @@
 vfs:
-  host:     http://pool.openteam.ru
+  url:      http://pool.openteam.ru
 
 sso:
-  host:     http://esp-sso.openteam.ru
+  url:      http://esp-sso.openteam.ru
   key:      KEY
   secret:   SECRET
 
