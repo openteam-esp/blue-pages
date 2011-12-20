@@ -5,6 +5,13 @@ GIT
     nested_form (0.1.1)
 
 GIT
+  remote: git://github.com/mwmitchell/rsolr
+  revision: 3c2d13656e4647325bafed733b682852a472d863
+  specs:
+    rsolr (1.0.6)
+      builder (>= 2.1.2)
+
+GIT
   remote: git://github.com/pshoukry/ckeditor
   revision: d9b2ca104e8ebd91cc8eb6446ac1682c974f6af3
   specs:
@@ -204,8 +211,6 @@ GEM
       nokogiri (>= 1.4.2)
       rack-conneg
       respondie (~> 0.9.0)
-    rsolr (1.0.6)
-      builder (>= 2.1.2)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
       rspec-expectations (~> 2.6.0)
@@ -315,6 +320,7 @@ DEPENDENCIES
   rails-dev-tweaks
   rb-inotify
   restfulie
+  rsolr!
   rspec-rails (~> 2.6.0)
   russian
   ryba
