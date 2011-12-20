@@ -23,7 +23,6 @@ gem 'prawn',  '~>1.0.0.rc1',                      :require => false
 gem 'rails',                                      :require => false
 gem 'restfulie'
 gem 'russian'
-gem 'rsolr',                                      :git => 'git://github.com/mwmitchell/rsolr'
 gem 'ryba',                                       :require => false
 gem 'sass-rails'
 gem 'sanitize',                                   :require => false
