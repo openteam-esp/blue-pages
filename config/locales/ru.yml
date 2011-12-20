@@ -25,14 +25,13 @@ ru:
       user:
         email:                  Адрес электронной почты
         name:                   Имя
-        password:               Пароль
-        password_confirmation:  Подтверждение пароля
         subdivisions:           Подразделения
         last_sign_in_at:        Последняя авторизация
         last_sign_in_ip:        Последний IP-адрес
 
       category:
         title:                  Название
+        users:                  Менеджеры раздела
         parent_id:              Родительский раздел
         updated_at:             Обновлено
 
@@ -53,6 +52,7 @@ ru:
         surname:                Фамилия
 
       subdivision:
+        users:                  Менеджеры подразделения
         parent_id:              Родительский раздел
         abbr:                   Аббревиатура
         address:                Адрес
