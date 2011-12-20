@@ -22,7 +22,7 @@
   <div class="subdivisions">
     <h3>Разделы</h3>
     <div class="actions">
-      <%= link_to t('active_admin.sort'), sort_admin_category_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
+      <%= link_to t('active_admin.sort'), sort_admin_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
       <%= link_to t('active_admin.new_category'), new_admin_category_category_path(resource), :class => 'button icon add'%>
     </div>
     <%= render :partial => "children", :locals => { :children => resource.categories } %>
@@ -31,7 +31,7 @@
   <div class="subdivisions">
     <h3>Подразделения</h3>
     <div class="actions">
-      <%= link_to t('active_admin.sort'), sort_admin_category_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
+      <%= link_to t('active_admin.sort'), sort_admin_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
       <%= link_to t('active_admin.new_subdivision'), new_admin_category_subdivision_path(resource), :class => 'button icon add' %>
     </div>
     <%= render :partial => "children", :locals => { :children => children } %>

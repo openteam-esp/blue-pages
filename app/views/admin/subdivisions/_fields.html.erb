@@ -51,3 +51,7 @@
 <div class="emails_fieldset">
   <%= form.link_to_add t('active_admin.new_email'), :emails, :class => 'button icon add' %>
 </div>
+
+<%= form.inputs :class => 'inputs bordered' do %>
+  <%= form.input :users, :as => :check_boxes %>
+<% end %>
