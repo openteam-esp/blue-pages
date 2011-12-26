@@ -9,6 +9,8 @@
  *= require treeview/jquery.treeview.async.js
  */
 
+var CKEDITOR_BASEPATH = '/assets/ckeditor/';
+
 function init_datepicker() {
   if ($.fn.datepicker) {
     $("form input.date_picker").datepicker({
