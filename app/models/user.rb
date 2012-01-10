@@ -3,14 +3,10 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info
 
-  has_and_belongs_to_many :categories
+  has_and_belongs_to_many :categories, :uniq => true
 
   def manageable_categories
     categories.map(&:subtree).flatten
-  end
-
-  def categories_tree
-    categories.map(&:subtree).map(&:arrange).inject({}) { |a, v| a.merge(v) }
   end
 
   def display_name

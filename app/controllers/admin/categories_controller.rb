@@ -6,7 +6,7 @@ class Admin::CategoriesController < Admin::ApplicationController
 
   def index
     index! {
-      @categories = Category.roots
+      @categories = current_user.categories
       render :index, :layout => 'admin' and return
     }
   end

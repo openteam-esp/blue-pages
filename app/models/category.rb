@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Category < ActiveRecord::Base
-  has_and_belongs_to_many :users
+  has_and_belongs_to_many :users, :uniq => true
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
@@ -16,7 +16,6 @@ class Category < ActiveRecord::Base
 
   searchable do
     boost :boost
-
     text  :title, :boost => 1.5
   end
 
@@ -37,10 +36,6 @@ class Category < ActiveRecord::Base
 
   def boost
     1.1 - decrement / 10
-  end
-
-  def decrement
-    @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
   end
 
   def to_json(expand = false)
@@ -70,10 +65,8 @@ class Category < ActiveRecord::Base
     result
   end
 
-  def ancestors_for_tree
-    categories = ancestors.from_depth(1).all
-    categories << self unless self.is_root?
-    categories
+  def ancestors_for_tree(user)
+    ancestors.inject([]) { |sum, c| sum << c if sum.any? || c.users.where(:id => user.id).exists?; sum } << self
   end
 
   def subdivisions_and_categories
@@ -90,11 +83,12 @@ class Category < ActiveRecord::Base
     end
 
     def weights
-      @weights ||=  begin
-                      [parent_weight, sprintf('%02d', position)].keep_if(&:present?).join('/').split('/')
-                    end
+      @weights ||= [parent_weight, sprintf('%02d', position)].keep_if(&:present?).join('/').split('/')
     end
 
+    def decrement
+      @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
+    end
 end
 
 # == Schema Information

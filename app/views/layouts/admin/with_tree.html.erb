@@ -1,7 +1,7 @@
 <% content_for :content do %>
   <nav>
     <ul class='categories_tree'>
-      <%= expanded_ancestors(resource.ancestors_for_tree) %>
+      <%= expanded_ancestors(resource.ancestors_for_tree(current_user)) %>
     </ul>
   </nav>
   <article>

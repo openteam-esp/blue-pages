@@ -35,6 +35,8 @@ class Item < ActiveRecord::Base
 
   delegate :weight, :to => :subdivision, :prefix => true
 
+  delegate :ancestors_for_tree, :to => :subdivision
+
   default_scope order('weight')
 
   alias :parent :subdivision
@@ -59,10 +61,6 @@ class Item < ActiveRecord::Base
 
   def boost
     1.1 - decrement / 10
-  end
-
-  def ancestors_for_tree
-    subdivision.ancestors.from_depth(1).all << subdivision
   end
 
   def to_json
@@ -98,9 +96,7 @@ class Item < ActiveRecord::Base
     end
 
     def weights
-      @weights ||=  begin
-                      [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
-                    end
+      @weights ||= [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
     end
 
 end
