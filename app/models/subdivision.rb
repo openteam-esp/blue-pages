@@ -61,7 +61,6 @@ class Subdivision < Category
   end
 
   def dossier
-    return if info_path.blank?
     c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
     JSON.parse(c.body_str)['content']
   end

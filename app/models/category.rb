@@ -19,6 +19,8 @@ class Category < ActiveRecord::Base
     text  :title, :boost => 1.5
   end
 
+  normalize_attribute :info_path
+
   def display_name
     title
   end

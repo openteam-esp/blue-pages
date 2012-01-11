@@ -19,6 +19,7 @@ describe Subdivision do
   it { should_not allow_value('English title').for(:title) }
   it { should_not allow_value('Название с цифрами 123').for(:title) }
 
+  it { should normalize_attribute(:info_path).from('').to(nil) }
 
   describe "#url" do
     it { should normalize_attribute(:url).from('www.ru').to('http://www.ru') }

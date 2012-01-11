@@ -5,6 +5,8 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :surname, :name, :patronymic
 
+  normalize_attribute :info_path
+
   def full_name=(full_name)
     self.surname, self.name, self.patronymic = full_name.split
   end
