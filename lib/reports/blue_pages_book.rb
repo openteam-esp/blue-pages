@@ -11,20 +11,19 @@ class BluePagesBook < Prawn::Document
   end
 
   def root_categories
-    Category.root.children.each do |category|
-      text category.title, :size => 18, :valign => :center, :align => :center
-      outline.section category.title
-      start_new_page
-      @pages_arr = []
-      render_subdivision(category)
-      pages_arr = @pages_arr
+    category = Category.root.children.first
+    text category.title, :size => 18, :valign => :center, :align => :center
+    outline.section category.title
+    start_new_page
+    @pages_arr = []
+    render_subdivision(category)
+    pages_arr = @pages_arr
 
-      repeat(lambda { |pg| pages_arr.include? pg}) do
-        bounding_box([0, 800], :width => bounds.right) do
-          text category.title, :size => 8, :align => :right
-          move_down 5
-          stroke_horizontal_rule
-        end
+    repeat(lambda { |pg| pages_arr.include? pg}) do
+      bounding_box([0, 800], :width => bounds.right) do
+        text category.title, :size => 8, :align => :right
+        move_down 5
+        stroke_horizontal_rule
       end
     end
   end
@@ -46,7 +45,7 @@ class BluePagesBook < Prawn::Document
       render_contacts subdivision
       render_items subdivision
       render_subdivision subdivision
-      start_new_page if subdivision.parent.children.last == subdivision || subdivision.depth == 3
+      start_new_page if subdivision.depth == 3
     end
   end
 
