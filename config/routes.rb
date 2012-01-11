@@ -1,4 +1,5 @@
 BluePages::Application.routes.draw do
+  #mount Ckeditor::Engine => '/ckeditor'
   mount ElVfsClient::Engine => '/'
 
   namespace :admin do

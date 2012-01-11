@@ -3,8 +3,8 @@ source :rubygems
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
-gem 'ckeditor',                                   :git => 'git://github.com/pshoukry/ckeditor'
-gem 'compass',                  '~> 0.12.alpha.2'
+gem 'ckeditor',                 '>= 3.7.0.rc1'
+gem 'compass',                  '>= 0.12.alpha.2'
 gem 'configliere'
 gem 'curb'
 gem 'default_value_for'
@@ -33,11 +33,11 @@ gem 'sunspot_rails'
 
 group :assets do
   gem 'uglifier'
-  gem 'therubyracer'
+  gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
 end
 
 group :development do
-  gem 'annotate',               '~> 2.4.1.beta1', :require => false
+  gem 'annotate',               '>= 2.4.1.beta1', :require => false
   gem 'hirb',                                     :require => false
   gem 'itslog'
   gem 'rails-dev-tweaks'
@@ -47,7 +47,7 @@ end
 group :production do
   gem 'hoptoad_notifier'
   gem 'pg',                                       :require => false
-  gem 'unicorn'
+  gem 'unicorn',                                  :require => false         unless ENV['SHARED_DATABASE_URL']
 end
 
 group :test do
