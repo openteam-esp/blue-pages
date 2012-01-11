@@ -33,7 +33,7 @@ class Admin::CategoriesController < Admin::ApplicationController
 
   def treeview
     result = []
-    Category.find(params[:root]).subdivisions_and_categories.each do | category |
+    Category.find(params[:root]).children.each do | category |
       result << fill_category(category)
     end
     render :json => result, :layout => false

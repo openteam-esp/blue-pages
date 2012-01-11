@@ -73,8 +73,7 @@ class Item < ActiveRecord::Base
     result['surname'] = person.surname
     result['name'] = person.name
     result['patronymic'] = person.patronymic
-    result['dossier'] = person.dossier                                             if person.info_path
-
+    result['dossier'] = person.dossier                                             if person.info_path.present?
     result
   end
 

@@ -5,7 +5,7 @@ require 'spec_helper'
 describe Item do
   let(:subdivision) { Fabricate(:subdivision, :address_attributes => Fabricate.attributes_for(:address).merge(:office => '123')) }
   let(:subject) { subdivision.items.build }
-  let(:child) { subdivision.children.create!(:title => 'вложенное подразделение') }
+  let(:child) { subdivision.subdivisions.create!(:title => 'вложенное подразделение') }
 
   def create_item(attributes={})
     subdivision.items.create! attributes

@@ -31,8 +31,11 @@ class Category < ActiveRecord::Base
     Subdivision.where(:ancestry => child_ancestry)
   end
 
+  def categories
+    children.where(:type => nil)
+  end
+
   alias :to_s :display_name
-  alias :categories :children
 
   def boost
     1.1 - decrement / 10
@@ -67,10 +70,6 @@ class Category < ActiveRecord::Base
 
   def ancestors_for_tree(user)
     ancestors.inject([]) { |sum, c| sum << c if sum.any? || c.users.where(:id => user.id).exists?; sum } << self
-  end
-
-  def subdivisions_and_categories
-    subdivisions + categories
   end
 
   protected

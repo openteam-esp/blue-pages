@@ -29,4 +29,10 @@ BluePages::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = false
+
+  config.to_prepare do
+    %w[subdivision category].each do |klass|
+      require_dependency Rails.root.join("app/models/#{klass}.rb").to_s
+    end
+  end
 end

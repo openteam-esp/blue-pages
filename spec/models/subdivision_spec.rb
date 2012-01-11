@@ -48,7 +48,7 @@ describe Subdivision do
   let(:root) { Category.root }
   let(:first_subdivision) { Fabricate(:subdivision, :parent => root) }
   let(:second_subdivision) { Fabricate(:subdivision, :parent => first_subdivision.parent) }
-  let(:child_subdivision) { first_subdivision.children.create! :title => 'Подкатегорий' }
+  let(:child_subdivision) { first_subdivision.subdivisions.create! :title => 'Подкатегорий' }
 
   describe 'присваивание position' do
     it { root.position.should == 1 }
@@ -73,14 +73,14 @@ describe Subdivision do
   end
 
   describe '#decrement' do
-    it { root.decrement.should == 0 }
-    it { first_subdivision.decrement.should == 0.01 }
-    it { second_subdivision.decrement.should == 0.02 }
-    it { subdivision(:position => 10).decrement.should == 0.1 }
-    it { subdivision(:position => 20).decrement.should == 0.2 }
-    it { child_subdivision.decrement.should == 0.0101 }
-    it { subdivision(:parent => subdivision(:position => 11), :position => 1).decrement.should == 0.0111 }
-    it { subdivision(:parent => subdivision(:position => 12), :position => 99).decrement.should == 0.9912 }
+    it { root.send(:decrement).should == 0 }
+    it { first_subdivision.send(:decrement).should == 0.01 }
+    it { second_subdivision.send(:decrement).should == 0.02 }
+    it { subdivision(:position => 10).send(:decrement).should == 0.1 }
+    it { subdivision(:position => 20).send(:decrement).should == 0.2 }
+    it { child_subdivision.send(:decrement).should == 0.0101 }
+    it { subdivision(:parent => subdivision(:position => 11), :position => 1).send(:decrement).should == 0.0111 }
+    it { subdivision(:parent => subdivision(:position => 12), :position => 99).send(:decrement).should == 0.9912 }
   end
 
   describe '#boost' do

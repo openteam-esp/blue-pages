@@ -74,7 +74,7 @@ end
 
 class Category
   def self.government
-    root.children.find_or_initialize_by_title('Органы власти').tap &:save!
+    root.categories.find_or_initialize_by_title('Органы власти').tap &:save!
   end
 end
 
@@ -163,7 +163,7 @@ class Subdivision
         content = texts.first.strip
         lines = content.split("\n").map{|line| line.gsub(/[[:space:]]/, ' ').squish }
         title = lines.first.gsub(/“/, '"').gsub(/”/, '"')
-        subdivision = children.find_or_initialize_by_title(title).tap do | subdivision |
+        subdivision = subdivisions.find_or_initialize_by_title(title).tap do | subdivision |
           subdivision.address_attributes = self.address_attributes.symbolize_keys.merge(:id => nil)
           subdivision.import_info(lines[1..-1].join("\n"))
           subdivision.items.destroy_all

@@ -43,6 +43,7 @@ class Subdivision < Category
            :prefix => true,
            :allow_nil => true
 
+
   normalize_attribute :url do | value |
     value = "http://#{value}" unless value.blank? || value.starts_with?('http')
     value
@@ -59,13 +60,8 @@ class Subdivision < Category
     text  :emails do emails.join(' ') end
   end
 
-  alias :children :subdivisions
-
-  def categories
-    Category.where(:ancestry => child_ancestry, :type => nil)
-  end
-
   def dossier
+    return if info_path.blank?
     c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
     JSON.parse(c.body_str)['content']
   end
