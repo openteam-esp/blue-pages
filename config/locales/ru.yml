@@ -63,6 +63,13 @@ ru:
         updated_at:             Обновлено
         url:                    Сайт
 
+      permission:
+        context:                Категория
+        role:                   Роль
+        role_enum:
+          manager:              Менеджер раздела
+          editor:               Реактор дополнительной информации раздела
+
       phone:
         _destroy:               Удалить
         additional_number:      Добавочный
@@ -84,6 +91,7 @@ ru:
       item:                     Сотрудники
       phone:                    Телефон
       subdivision:              Подразделения
+      permission:               Право доступа
 
   application:                  Телефонный справочник
   "Are you sure?":              Вы уверены?

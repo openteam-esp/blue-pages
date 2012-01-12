@@ -5,7 +5,6 @@ BluePages::Application.routes.draw do
     resources :categories do
       resources :categories, :only => [:create, :new]
       resources :subdivisions, :only => [:create, :new]
-
       post :sort, :on => :collection
     end
 
@@ -13,6 +12,13 @@ BluePages::Application.routes.draw do
       resources :items, :except => :index do
         post :sort, :on => :collection
       end
+    end
+
+    namespace :permissions do
+      resources :users, :only => [:index, :show] do
+        resources :permissions, :only => [:new, :create, :destroy], :shallow => true
+      end
+      root :to => 'users#index'
     end
 
     match 'treeview' => 'categories#treeview', :via => :get

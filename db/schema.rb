@@ -94,7 +94,6 @@ ActiveRecord::Schema.define(:version => 20120112021354) do
 
   create_table "permissions", :force => true do |t|
     t.integer  "context_id"
-    t.string   "context_type"
     t.integer  "user_id"
     t.string   "role"
     t.datetime "created_at"

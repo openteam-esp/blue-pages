@@ -1,6 +1,9 @@
 class Permission < ActiveRecord::Base
-  belongs_to :context, :polymorphic => true
+  belongs_to :context, :class_name => 'Category'
   belongs_to :user
+  has_enum :role
+
+  validates_presence_of :context, :role
 end
 
 # == Schema Information

@@ -3,12 +3,12 @@ class User < ActiveRecord::Base
 
   attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info
 
-  has_and_belongs_to_many :categories, :uniq => true
-
   has_many :permissions
 
+  has_many :categories, :through => :permissions, :source => :context
+
   def manageable_categories
-    categories.map(&:subtree).flatten
+    categories.where(:permissions => {:role => :manager}).map(&:subtree).flatten.uniq
   end
 
   def display_name

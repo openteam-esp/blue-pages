@@ -19,7 +19,7 @@ describe Ability do
 
   def manager_of(category)
     user.tap do | user |
-      user.categories << category
+      user.permissions.create! :context => category, :role => :manager
     end
   end
 
@@ -63,11 +63,8 @@ describe Ability do
     end
 
     describe 'управление пользователями' do
-      it { ability.should_not be_able_to(:manage, user) }
-      it { ability.should_not be_able_to(:update, manager_of(root)) }
-      it { ability.should be_able_to(:update, manager_of(child_1)) }
-      it { ability.should be_able_to(:update, manager_of(child_1_1)) }
-      it { ability.should_not be_able_to(:update, manager_of(child_2)) }
+      it { ability.should be_able_to(:manage, user.permissions.new) }
+      it { ability_for(manager_of(child_1)).should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
     end
 
     describe 'управление должностями' do

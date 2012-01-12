@@ -17,11 +17,19 @@ class Ability
     end
 
     can :manage, User do
-      user.categories.include? Category.root
+      user.permissions.where(:role => :manager).exists?
     end
 
     can [:create, :read], User do
       user.categories.any?
+    end
+
+    can :manage, Permission do | permission |
+      permission.new_record? && permission.context.nil?
+    end
+
+    can :manage, Permission do | permission |
+      can? :manage, permission.context
     end
   end
 end
