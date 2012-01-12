@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111215111111) do
+ActiveRecord::Schema.define(:version => 20120112021354) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -91,6 +91,15 @@ ActiveRecord::Schema.define(:version => 20111215111111) do
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"
+
+  create_table "permissions", :force => true do |t|
+    t.integer  "context_id"
+    t.string   "context_type"
+    t.integer  "user_id"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "phones", :force => true do |t|
     t.integer  "phoneable_id"

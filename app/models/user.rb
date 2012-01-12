@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :categories, :uniq => true
 
+  has_many :permissions
+
   def manageable_categories
     categories.map(&:subtree).flatten
   end

@@ -3,6 +3,8 @@
 class Category < ActiveRecord::Base
   has_and_belongs_to_many :users, :uniq => true
 
+  has_many :permissions, :as => :context
+
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
   default_scope order('weight')
