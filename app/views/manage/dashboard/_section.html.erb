@@ -5,7 +5,7 @@
     <% categories.each do |category| %>
       <li>
         <div class="title">
-          <%= link_to category.title, admin_category_path(category) %>
+          <%= link_to category.title, manage_category_path(category) %>
         </div>
       </li>
     <% end %>

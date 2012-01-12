@@ -1,8 +1,8 @@
-class Admin::ItemsController < Admin::ApplicationController
+class Manage::ItemsController < Manage::ApplicationController
   belongs_to :subdivision
 
   def destroy
-    destroy! { admin_subdivision_path(@subdivision) }
+    destroy! { manage_subdivision_path(@subdivision) }
   end
 
   def sort

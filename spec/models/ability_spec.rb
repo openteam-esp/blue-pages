@@ -17,14 +17,14 @@ describe Ability do
     Fabricate(:user)
   end
 
-  def admin_of(category)
+  def manager_of(category)
     user.tap do | user |
       user.categories << category
     end
   end
 
   describe 'администратор телефонного справочника' do
-    let(:ability) { ability_for(admin_of(root)) }
+    let(:ability) { ability_for(manager_of(root)) }
 
     describe 'управление подразделениями' do
       it { ability.should be_able_to(:manage, root) }
@@ -35,10 +35,10 @@ describe Ability do
 
     describe 'управление пользователями' do
       it { ability.should be_able_to(:manage, user) }
-      it { ability.should be_able_to(:update, admin_of(root)) }
-      it { ability.should be_able_to(:update, admin_of(child_1)) }
-      it { ability.should be_able_to(:update, admin_of(child_1_1)) }
-      it { ability.should be_able_to(:update, admin_of(child_2)) }
+      it { ability.should be_able_to(:update, manager_of(root)) }
+      it { ability.should be_able_to(:update, manager_of(child_1)) }
+      it { ability.should be_able_to(:update, manager_of(child_1_1)) }
+      it { ability.should be_able_to(:update, manager_of(child_2)) }
     end
 
     describe 'управление должностями' do
@@ -53,7 +53,7 @@ describe Ability do
   end
 
   describe 'администратор вложенного подразделения' do
-    let(:ability) { ability_for(admin_of(child_1)) }
+    let(:ability) { ability_for(manager_of(child_1)) }
 
     describe 'управление подразделениями' do
       it { ability.should_not be_able_to(:manage, root) }
@@ -64,10 +64,10 @@ describe Ability do
 
     describe 'управление пользователями' do
       it { ability.should_not be_able_to(:manage, user) }
-      it { ability.should_not be_able_to(:update, admin_of(root)) }
-      it { ability.should be_able_to(:update, admin_of(child_1)) }
-      it { ability.should be_able_to(:update, admin_of(child_1_1)) }
-      it { ability.should_not be_able_to(:update, admin_of(child_2)) }
+      it { ability.should_not be_able_to(:update, manager_of(root)) }
+      it { ability.should be_able_to(:update, manager_of(child_1)) }
+      it { ability.should be_able_to(:update, manager_of(child_1_1)) }
+      it { ability.should_not be_able_to(:update, manager_of(child_2)) }
     end
 
     describe 'управление должностями' do

@@ -4,16 +4,16 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require reset
- *= require admin/text
- *= require admin/buttons
- *= require admin/treeview
- *= require admin/jquery_ui
- *= require admin/errors
- *= require admin/form
- *= require admin/show_for
- *= require admin/layout
- *= require admin/toolbar
- *= require admin/title
- *= require admin/content
- *= require admin/footer
+ *= require manage/text
+ *= require manage/buttons
+ *= require manage/treeview
+ *= require manage/jquery_ui
+ *= require manage/errors
+ *= require manage/form
+ *= require manage/show_for
+ *= require manage/layout
+ *= require manage/toolbar
+ *= require manage/title
+ *= require manage/content
+ *= require manage/footer
  */

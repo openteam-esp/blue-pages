@@ -1,4 +1,4 @@
-class Admin::CategoriesController < Admin::ApplicationController
+class Manage::CategoriesController < Manage::ApplicationController
   belongs_to :parential_category,
              :class_name => 'Category',
              :optional => true,
@@ -7,18 +7,18 @@ class Admin::CategoriesController < Admin::ApplicationController
   def index
     index! {
       @categories = current_user.categories
-      render :index, :layout => 'admin' and return
+      render :index, :layout => 'manage' and return
     }
   end
 
   def create
     create! { |success, failure|
-      success.html { redirect_to admin_category_path(@category) }
+      success.html { redirect_to manage_category_path(@category) }
     }
   end
 
   def destroy
-    destroy! { @category.parent ? admin_category_path(@category.parent) : admin_categories_path }
+    destroy! { @category.parent ? manage_category_path(@category.parent) : manage_categories_path }
   end
 
   def sort
@@ -42,13 +42,13 @@ class Admin::CategoriesController < Admin::ApplicationController
   protected
 
     def collection_path
-      @parential_category ? admin_category_categories_path(@parential_category) : admin_categories_path
+      @parential_category ? manage_category_categories_path(@parential_category) : manage_categories_path
     end
 
   private
 
     def fill_category(category)
-      hash = { 'text' => "<a href='/admin/#{category.class.name.tableize}/#{category.id}'>#{category.title}</a>" }
+      hash = { 'text' => "<a href='/manage/#{category.class.name.tableize}/#{category.id}'>#{category.title}</a>" }
       hash.merge!({ 'id' => category.id.to_s, 'hasChildren' => true }) if category.has_children?
       hash
     end

@@ -93,7 +93,7 @@ function init_sort() {
 function init_tree() {
   if ($.fn.treeview && $('.categories_tree').length) {
     $('.categories_tree').treeview({
-      url: '/admin/treeview',
+      url: '/manage/treeview',
       persist: 'location',
       ajax: {
         error: function(jqXHR, textStatus, errorThrown) {

@@ -78,7 +78,6 @@ ru:
 
     models:
       address:                  Адрес
-      admin:                    Главная
       user:                     Пользователи
       category:                 Разделы и подразделения
       email:                    Электронная почта
@@ -88,10 +87,10 @@ ru:
 
   application:                  Телефонный справочник
   "Are you sure?":              Вы уверены?
-  blue_pages_system:             Телефонный справочник
+  blue_pages_system:            Телефонный справочник
   cancel:                       Отмена
   download:                     Скачать в формате pdf
-  manage:                       Управление
+  go_to_manage:                 Управление
   personal_info:                Создать/редактировать досье
   choose_link:                  выбрать уже существующее досье
   search:                       Поиск
@@ -101,15 +100,15 @@ ru:
     phones:                     Телефоны
     url:                        Сайт
   pluralize:
-    admin/category:
+    manage/category:
       one:                      раздел
       few:                      раздела
       many:                     разделов
-    admin/subdivision:
+    manage/subdivision:
       one:                      подразделение
       few:                      подразделения
       many:                     подразделений
-    admin/item:
+    manage/item:
       one:                      сотрудник
       few:                      сотрудника
       many:                     сотрудников

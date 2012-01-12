@@ -1,7 +1,7 @@
-class Admin::ApplicationController < ApplicationController
+class Manage::ApplicationController < ApplicationController
   before_filter :authenticate_user!
   before_filter :authorize_manage_resource, :only => :show
-  layout 'admin/with_tree'
+  layout 'manage/with_tree'
   inherit_resources
   load_and_authorize_resource :except => :index
 

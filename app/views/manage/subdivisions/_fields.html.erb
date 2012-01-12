@@ -33,23 +33,23 @@
     <%= phone_form.input :code, :input_html => { :class => "code" }, :wrapper_html => {:class => phone_form.object.kind_internal? ? 'hidden' : 'blank'} %>
     <%= phone_form.input :number, :input_html => { :class => "number" } %>
     <%= phone_form.input :additional_number, :input_html => { :class => "additional_number" } %>
-    <li class="destroy_action"><%= phone_form.link_to_remove t('active_admin.delete_phone'), :class => 'button icon trash danger' %></li>
+    <li class="destroy_action"><%= phone_form.link_to_remove t('manage.delete_phone'), :class => 'button icon trash danger' %></li>
   <% end %>
 <% end %>
 
 <div class="phones_fieldset">
-  <%= form.link_to_add t('active_admin.new_phone'), :phones, :class => 'button icon add' %>
+  <%= form.link_to_add t('manage.new_phone'), :phones, :class => 'button icon add' %>
 </div>
 
 <%= form.fields_for :emails do |email_form| %>
   <%= email_form.inputs :class => "inputs bordered email" do %>
     <%= email_form.input :address %>
-    <li class="destroy_action"><%= email_form.link_to_remove t('active_admin.delete_email'), :class => 'button icon trash danger' %></li>
+    <li class="destroy_action"><%= email_form.link_to_remove t('manage.delete_email'), :class => 'button icon trash danger' %></li>
   <% end %>
 <% end %>
 
 <div class="emails_fieldset">
-  <%= form.link_to_add t('active_admin.new_email'), :emails, :class => 'button icon add' %>
+  <%= form.link_to_add t('manage.new_email'), :emails, :class => 'button icon add' %>
 </div>
 
 <%= form.inputs :class => 'inputs bordered' do %>

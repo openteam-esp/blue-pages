@@ -13,17 +13,17 @@
   <div class="items">
     <h3>Сотрудники</h3>
     <div class="actions">
-      <%#= link_to t('active_admin.sort'), sort_admin_subdivision_items_path(resource), :class => 'sort_link off button icon loop' if resource.items.any? %>
-      <%= link_to t('active_admin.new_item'), new_admin_subdivision_item_path(resource), :class => 'button icon add' %>
+      <%#= link_to t('manage.sort'), sort_manage_subdivision_items_path(resource), :class => 'sort_link off button icon loop' if resource.items.any? %>
+      <%= link_to t('manage.new_item'), new_manage_subdivision_item_path(resource), :class => 'button icon add' %>
     </div>
-    <%= render :partial => "admin/items/items", :locals => { :items => resource.items } %>
+    <%= render :partial => "manage/items/items", :locals => { :items => resource.items } %>
   </div>
 
   <div class="subdivisions">
     <h3>Разделы</h3>
     <div class="actions">
-      <%= link_to t('active_admin.sort'), sort_admin_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
-      <%= link_to t('active_admin.new_category'), new_admin_category_category_path(resource), :class => 'button icon add'%>
+      <%= link_to t('manage.sort'), sort_manage_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
+      <%= link_to t('manage.new_category'), new_manage_category_category_path(resource), :class => 'button icon add'%>
     </div>
     <%= render :partial => "children", :locals => { :children => resource.categories } %>
   </div>
@@ -31,8 +31,8 @@
   <div class="subdivisions">
     <h3>Подразделения</h3>
     <div class="actions">
-      <%= link_to t('active_admin.sort'), sort_admin_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
-      <%= link_to t('active_admin.new_subdivision'), new_admin_category_subdivision_path(resource), :class => 'button icon add' %>
+      <%= link_to t('manage.sort'), sort_manage_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
+      <%= link_to t('manage.new_subdivision'), new_manage_category_subdivision_path(resource), :class => 'button icon add' %>
     </div>
     <%= render :partial => "children", :locals => { :children => children } %>
   </div>

@@ -1,16 +1,16 @@
 <div class="category">
   <div class="subdivisions">
     <div class="actions">
-      <%= link_to t('active_admin.sort'),
-                  sort_admin_categories_path,
+      <%= link_to t('manage.sort'),
+                  sort_manage_categories_path,
                   :class => 'sort_link off button icon loop' if children.many? %>
 
-      <%= link_to t('active_admin.new_category'),
-                  new_admin_category_category_path(resource),
+      <%= link_to t('manage.new_category'),
+                  new_manage_category_category_path(resource),
                   :class => 'button icon add' %>
 
-      <%= link_to t('active_admin.new_subdivision'),
-                  new_admin_category_subdivision_path(resource),
+      <%= link_to t('manage.new_subdivision'),
+                  new_manage_category_subdivision_path(resource),
                   :class => 'button icon add' %>
     </div>
     <%= render :partial => "children", :locals => { :children => children } %>

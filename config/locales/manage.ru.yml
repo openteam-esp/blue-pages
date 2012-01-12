@@ -1,5 +1,5 @@
 ru:
-  active_admin:
+  manage:
     edit_user: Изменение пользователя
     create_user: Добавление пользователя
     delete_user: Удаление пользователя
@@ -21,10 +21,6 @@ ru:
     new_address: Добавить адрес
     delete_address: Удалить адрес
 
-    dashboard: Панель управления
-    dashboard_welcome:
-      welcome: "Добро пожаловать в Active Admin. Это стандартная страница управления сайтом."
-      call_to_action: "Чтобы добавить сюда что-нибудь загляните в 'app/admin/dashboards.rb'"
     view: "Открыть"
     edit: "Изменить"
     delete: "Удалить"
