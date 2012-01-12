@@ -15,7 +15,7 @@ BluePages::Application.routes.draw do
     end
 
     namespace :permissions do
-      resources :users, :only => [:index, :show] do
+      resources :users, :only => :index do
         resources :permissions, :only => [:new, :create, :destroy], :shallow => true
       end
       root :to => 'users#index'

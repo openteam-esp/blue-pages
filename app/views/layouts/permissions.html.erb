@@ -2,11 +2,14 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title></title>
-  <%= javascript_include_tag 'application' %>
+  <title><%= t('permissions.title') %></title>
+  <%= stylesheet_link_tag 'permissions' %>
+  <%= javascript_include_tag 'jquery','jquery_ujs', 'permissions' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>

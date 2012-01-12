@@ -1,9 +1,38 @@
-<% if collection.any? %>
-  <ul class="collection_list">
-    <% collection.each do | item | %>
-      <li><%= render item %></li>
-    <% end %>
-  </ul>
-<% else %>
-  Список <%= t(pluralized_model, :count => 10) %> пуст
-<% end %>
+<ul class="collection_list">
+  <% collection.each do | user | %>
+    <li>
+      <div class='name'>
+        <%= user.name %>
+      </div>
+
+      <div class='email'>
+        &lt;<%= mail_to user.email, user.email %>&gt;
+      </div>
+
+      <div class="button-group">
+        <%= link_to t('permissions.show_permissions'), '#', :class => 'button icon arrowdown show_permissions' %>
+        <%= link_to t('permissions.new'), new_manage_permissions_user_permission_path(user), :class => 'button icon add' %>
+      </div>
+
+      <%= content_tag :ul, :class => 'permission_list' do %>
+        <% user.permissions.group_by(&:role).each do |role, permissions| %>
+          <li>
+            <h4><%= Permission.human_enums[:role][role] %></h4>
+            <ul>
+              <% permissions.each do |permission| %>
+                <li>
+                  <%= permission.context %>
+                  <%= link_to t('permissions.delete'),
+                    manage_permissions_permission_path(permission),
+                    :method => :delete,
+                    :confirm => t('Are you sure?'),
+                    :class => 'button icon remove danger' if can?(:manage, permission) %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      <% end if user.permissions.exists? %>
+    </li>
+  <% end %>
+</ul>

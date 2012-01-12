@@ -1,8 +1,10 @@
 <%= semantic_form_for resource, :url => collection_path do |form| %>
   <%= form.inputs do  %>
-    <%= form.input :context, :collection => current_user.manageable_categories, :member_label => :hierarchical_title, :polymorphic => true %>
-    <%= form.input :role, :as => :select, :collection => Permission.human_enums[:role].invert %>
+    <%= form.input :context, :collection => current_user.manageable_categories, :member_label => :hierarchical_title, :polymorphic => true, :include_blank => t('permissions.not_selected') %>
+    <%= form.input :role, :as => :select, :collection => Permission.human_enums[:role].invert, :include_blank => t('permissions.not_selected') %>
   <% end %>
-  <%= form.buttons %>
+  <%= form.buttons :class => 'button-group' do %>
+    <li><%= button_tag t('permissions.create'), :class => 'button icon approve' %></li>
+    <li><%= link_to t('permissions.cancel'), [:manage, :permissions, :users], :class => 'button icon arrowleft'  %></li>
+  <% end %>
 <% end %>
-

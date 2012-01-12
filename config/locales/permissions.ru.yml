@@ -1,0 +1,9 @@
+ru:
+  permissions:
+    delete: Удалить
+    new:    Добавить право доступа
+    title:  Управление правами доступа
+    show_permissions: Показать права доступа
+    create: Создать
+    cancel: Отмена
+    not_selected: -- не выбрано --
