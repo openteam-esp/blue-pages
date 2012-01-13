@@ -11,7 +11,7 @@
 
       <div class="links">
         <%= link_to "&darr;&nbsp;#{t('permissions.show_permissions')}".html_safe, '#', :class => 'show_permissions' %>
-        <%= link_to "&#43;#{t('permissions.new')}".html_safe, new_manage_permissions_user_permission_path(user), :class => 'add' %>
+        <%= link_to "&#43;#{t('permissions.new')}".html_safe, new_manage_permissions_user_permission_path(user), :class => 'add' if can?(:modify, user) %>
       </div>
 
       <%= content_tag :ul, :class => 'permission_list' do %>
@@ -27,7 +27,7 @@
                       manage_permissions_permission_path(permission),
                       :method => :delete,
                       :confirm => t('Are you sure?'),
-                      :class => 'buttton icon remove danger' if can?(:manage, permission) %>
+                      :class => 'buttton icon remove danger' if can?(:modify, permission) %>
                   </li>
                 <% end %>
               </ul>

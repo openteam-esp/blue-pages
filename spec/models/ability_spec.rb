@@ -17,7 +17,7 @@ describe Ability do
     Fabricate(:user)
   end
 
-  %w[manager operator corrector].each do | role |
+  %w[manager editor operator].each do | role |
     define_method "#{role}_of" do | category |
       user.tap do | user |
         user.permissions.create! :context => category, :role => role
@@ -30,36 +30,36 @@ describe Ability do
       subject { ability_for(manager_of(root)) }
 
       context 'управление пользователями' do
-        it { should be_able_to(:manage, user) }
-        it { should be_able_to(:manage, manager_of(root)) }
-        it { should be_able_to(:manage, manager_of(child_1)) }
-        it { should be_able_to(:manage, manager_of(child_1_1)) }
-        it { should be_able_to(:manage, manager_of(child_2)) }
+        it { should be_able_to(:modify, user) }
+        it { should be_able_to(:modify, manager_of(root)) }
+        it { should be_able_to(:modify, manager_of(child_1)) }
+        it { should be_able_to(:modify, manager_of(child_1_1)) }
+        it { should be_able_to(:modify, manager_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should be_able_to(:manage, user.permissions.new) }
-        it { should be_able_to(:manage, manager_of(root).permissions.first) }
-        it { should be_able_to(:manage, manager_of(child_1).permissions.first) }
-        it { should be_able_to(:manage, manager_of(child_1_1).permissions.first) }
-        it { should be_able_to(:manage, manager_of(child_2).permissions.first) }
+        it { should be_able_to(:modify, user.permissions.new) }
+        it { should be_able_to(:modify, manager_of(root).permissions.first) }
+        it { should be_able_to(:modify, manager_of(child_1).permissions.first) }
+        it { should be_able_to(:modify, manager_of(child_1_1).permissions.first) }
+        it { should be_able_to(:modify, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
-        it { should be_able_to(:manage, category_1_1) }
+        it { should be_able_to(:modify, category_1_1) }
       end
 
       context 'управление подразделениями' do
-        it { should be_able_to(:manage, root) }
-        it { should be_able_to(:manage, child_1) }
-        it { should be_able_to(:manage, child_1_1) }
-        it { should be_able_to(:manage, child_2) }
+        it { should be_able_to(:modify, root) }
+        it { should be_able_to(:modify, child_1) }
+        it { should be_able_to(:modify, child_1_1) }
+        it { should be_able_to(:modify, child_2) }
       end
 
       context 'управление должностями' do
-        it { should be_able_to(:manage, child_1.items.new) }
-        it { should be_able_to(:manage, child_1_1.items.new) }
-        it { should be_able_to(:manage, child_2.items.new) }
+        it { should be_able_to(:modify, child_1.items.new) }
+        it { should be_able_to(:modify, child_1_1.items.new) }
+        it { should be_able_to(:modify, child_2.items.new) }
       end
     end
 
@@ -67,113 +67,224 @@ describe Ability do
       subject { ability_for(manager_of(child_1)) }
 
       context 'управление пользователями' do
-        it { should be_able_to(:manage, user) }
-        it { should be_able_to(:manage, operator_of(root)) }
-        it { should be_able_to(:manage, operator_of(child_1)) }
-        it { should be_able_to(:manage, operator_of(child_1_1)) }
-        it { should be_able_to(:manage, operator_of(child_2)) }
+        it { should be_able_to(:modify, user) }
+        it { should be_able_to(:modify, editor_of(root)) }
+        it { should be_able_to(:modify, editor_of(child_1)) }
+        it { should be_able_to(:modify, editor_of(child_1_1)) }
+        it { should be_able_to(:modify, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should be_able_to(:manage, user.permissions.new) }
-        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
-        it { should be_able_to(:manage, manager_of(child_1).permissions.first) }
-        it { should be_able_to(:manage, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
+        it { should be_able_to(:modify, user.permissions.new) }
+        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
+        it { should be_able_to(:modify, manager_of(child_1).permissions.first) }
+        it { should be_able_to(:modify, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
-        it { should be_able_to(:manage, category_1_1) }
+        it { should be_able_to(:modify, category_1_1) }
       end
 
       context 'управление подразделениями' do
-        it { should_not be_able_to(:manage, root) }
-        it { should be_able_to(:manage, child_1) }
-        it { should be_able_to(:manage, child_1_1) }
-        it { should_not be_able_to(:manage, child_2) }
+        it { should_not be_able_to(:modify, root) }
+        it { should be_able_to(:modify, child_1) }
+        it { should be_able_to(:modify, child_1_1) }
+        it { should_not be_able_to(:modify, child_2) }
       end
 
       context 'управление должностями' do
-        it { should be_able_to(:manage, child_1.items.new) }
-        it { should be_able_to(:manage, child_1_1.items.new) }
-        it { should_not be_able_to(:manage, child_2.items.new) }
+        it { should be_able_to(:modify, child_1.items.new) }
+        it { should be_able_to(:modify, child_1_1.items.new) }
+        it { should_not be_able_to(:modify, child_2.items.new) }
       end
     end
   end
 
-  context 'роль опреатора' do
+  context 'редактор' do
+    context 'телефонного справочника' do
+      subject { ability_for(editor_of(root)) }
+
+      context 'управление пользователями' do
+        it { should_not be_able_to(:modify, user) }
+        it { should_not be_able_to(:modify, editor_of(root)) }
+        it { should_not be_able_to(:modify, editor_of(child_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_2)) }
+      end
+
+      context 'управление правами доступа' do
+        it { should_not be_able_to(:modify, user.permissions.new) }
+        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+      end
+
+      context 'управление разделами' do
+        it { should be_able_to(:modify, category_1_1) }
+      end
+
+      context 'управление подразделениями' do
+        it { should be_able_to(:modify, root) }
+        it { should be_able_to(:modify, child_1) }
+        it { should be_able_to(:modify, child_1_1) }
+        it { should be_able_to(:modify, child_2) }
+      end
+
+      context 'управление должностями' do
+        it { should be_able_to(:modify, child_1.items.new) }
+        it { should be_able_to(:modify, child_1_1.items.new) }
+        it { should be_able_to(:modify, child_2.items.new) }
+      end
+
+      context 'управление досье' do
+        it { should be_able_to(:modify_dossier, child_1) }
+        it { should be_able_to(:modify_dossier, child_1.items.new) }
+        it { should be_able_to(:modify_dossier, child_1_1) }
+        it { should be_able_to(:modify_dossier, child_1_1.items.new) }
+        it { should be_able_to(:modify_dossier, child_2) }
+        it { should be_able_to(:modify_dossier, child_2.items.new) }
+      end
+    end
+
+    context 'вложенного подразделения' do
+      subject { ability_for(editor_of(child_1)) }
+
+      context 'управление пользователями' do
+        it { should_not be_able_to(:modify, user) }
+        it { should_not be_able_to(:modify, editor_of(root)) }
+        it { should_not be_able_to(:modify, editor_of(child_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_2)) }
+      end
+
+      context 'управление правами доступа' do
+        it { should_not be_able_to(:modify, user.permissions.new) }
+        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+      end
+
+      context 'управление разделами' do
+        it { should be_able_to(:modify, category_1_1) }
+      end
+
+      context 'управление подразделениями' do
+        it { should_not be_able_to(:modify, root) }
+        it { should be_able_to(:modify, child_1) }
+        it { should be_able_to(:modify, child_1_1) }
+        it { should_not be_able_to(:modify, child_2) }
+      end
+
+      context 'управление должностями' do
+        it { should be_able_to(:modify, child_1.items.new) }
+        it { should be_able_to(:modify, child_1_1.items.new) }
+        it { should_not be_able_to(:modify, child_2.items.new) }
+      end
+
+      context 'управление досье' do
+        it { should be_able_to(:modify_dossier, child_1) }
+        it { should be_able_to(:modify_dossier, child_1.items.new) }
+        it { should be_able_to(:modify_dossier, child_1_1) }
+        it { should be_able_to(:modify_dossier, child_1_1.items.new) }
+        it { should_not be_able_to(:modify_dossier, child_2) }
+        it { should_not be_able_to(:modify_dossier, child_2.items.new) }
+      end
+    end
+  end
+
+  context 'оператор' do
     context 'телефонного справочника' do
       subject { ability_for(operator_of(root)) }
 
       context 'управление пользователями' do
-        it { should_not be_able_to(:manage, user) }
-        it { should_not be_able_to(:manage, operator_of(root)) }
-        it { should_not be_able_to(:manage, operator_of(child_1)) }
-        it { should_not be_able_to(:manage, operator_of(child_1_1)) }
-        it { should_not be_able_to(:manage, operator_of(child_2)) }
+        it { should_not be_able_to(:modify, user) }
+        it { should_not be_able_to(:modify, editor_of(root)) }
+        it { should_not be_able_to(:modify, editor_of(child_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should_not be_able_to(:manage, user.permissions.new) }
-        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_1).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
+        it { should_not be_able_to(:modify, user.permissions.new) }
+        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
-        it { should be_able_to(:manage, category_1_1) }
+        it { should be_able_to(:modify, category_1_1) }
       end
 
       context 'управление подразделениями' do
-        it { should be_able_to(:manage, root) }
-        it { should be_able_to(:manage, child_1) }
-        it { should be_able_to(:manage, child_1_1) }
-        it { should be_able_to(:manage, child_2) }
+        it { should be_able_to(:modify, root) }
+        it { should be_able_to(:modify, child_1) }
+        it { should be_able_to(:modify, child_1_1) }
+        it { should be_able_to(:modify, child_2) }
       end
 
       context 'управление должностями' do
-        it { should be_able_to(:manage, child_1.items.new) }
-        it { should be_able_to(:manage, child_1_1.items.new) }
-        it { should be_able_to(:manage, child_2.items.new) }
+        it { should be_able_to(:modify, child_1.items.new) }
+        it { should be_able_to(:modify, child_1_1.items.new) }
+        it { should be_able_to(:modify, child_2.items.new) }
       end
 
+      context 'управление досье' do
+        it { should_not be_able_to(:modify_dossier, child_1) }
+        it { should_not be_able_to(:modify_dossier, child_1.items.new) }
+        it { should_not be_able_to(:modify_dossier, child_1_1) }
+        it { should_not be_able_to(:modify_dossier, child_1_1.items.new) }
+        it { should_not be_able_to(:modify_dossier, child_2) }
+        it { should_not be_able_to(:modify_dossier, child_2.items.new) }
+      end
     end
 
     context 'вложенного подразделения' do
       subject { ability_for(operator_of(child_1)) }
 
       context 'управление пользователями' do
-        it { should_not be_able_to(:manage, user) }
-        it { should_not be_able_to(:manage, operator_of(root)) }
-        it { should_not be_able_to(:manage, operator_of(child_1)) }
-        it { should_not be_able_to(:manage, operator_of(child_1_1)) }
-        it { should_not be_able_to(:manage, operator_of(child_2)) }
+        it { should_not be_able_to(:modify, user) }
+        it { should_not be_able_to(:modify, editor_of(root)) }
+        it { should_not be_able_to(:modify, editor_of(child_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
+        it { should_not be_able_to(:modify, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should_not be_able_to(:manage, user.permissions.new) }
-        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_1).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
+        it { should_not be_able_to(:modify, user.permissions.new) }
+        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
-        it { should be_able_to(:manage, category_1_1) }
+        it { should be_able_to(:modify, category_1_1) }
       end
 
       context 'управление подразделениями' do
-        it { should_not be_able_to(:manage, root) }
-        it { should be_able_to(:manage, child_1) }
-        it { should be_able_to(:manage, child_1_1) }
-        it { should_not be_able_to(:manage, child_2) }
+        it { should_not be_able_to(:modify, root) }
+        it { should be_able_to(:modify, child_1) }
+        it { should be_able_to(:modify, child_1_1) }
+        it { should_not be_able_to(:modify, child_2) }
       end
 
       context 'управление должностями' do
-        it { should be_able_to(:manage, child_1.items.new) }
-        it { should be_able_to(:manage, child_1_1.items.new) }
-        it { should_not be_able_to(:manage, child_2.items.new) }
+        it { should be_able_to(:modify, child_1.items.new) }
+        it { should be_able_to(:modify, child_1_1.items.new) }
+        it { should_not be_able_to(:modify, child_2.items.new) }
+      end
+
+      context 'управление досье' do
+        it { should_not be_able_to(:modify_dossier, child_1) }
+        it { should_not be_able_to(:modify_dossier, child_1.items.new) }
+        it { should_not be_able_to(:modify_dossier, child_1_1) }
+        it { should_not be_able_to(:modify_dossier, child_1_1.items.new) }
+        it { should_not be_able_to(:modify_dossier, child_2) }
+        it { should_not be_able_to(:modify_dossier, child_2.items.new) }
       end
     end
   end

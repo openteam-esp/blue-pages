@@ -1,5 +1,5 @@
 <%= content_tag :div, :class => "actions" do %>
-  <%= link_to t("go_to_manage"), manage_category_path(resource), :class => "button icon edit" if can?(:manage, resource) %>
+  <%= link_to t("go_to_manage"), manage_category_path(resource), :class => "button icon edit" if can?(:resource, resource) %>
 <% end %>
 
 <h1><%= resource.title %></h1>

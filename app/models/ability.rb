@@ -1,25 +1,37 @@
 class Ability
   include CanCan::Ability
 
+
   def initialize(user)
-    can :manage, Category do |category|
+    alias_action :create, :read, :update, :destroy, :to => :modify
+
+    can :modify, Category do |category|
       (user.category_ids & category.ancestor_ids + [category.id]).any?
     end
 
-    can :manage, Item do |item|
-      can? :manage, item.subdivision
+    can :modify, Item do |item|
+      can? :modify, item.subdivision
     end
 
-    can :manage, User do
+    can :modify_dossier, Category do | category |
+      (user.categories.where(:permissions => {:role => [:editor, :manager]}) & category.ancestors + [category]).any?
+    end
+
+    can :modify_dossier, Item do | item |
+      can? :modify_dossier, item.subdivision
+    end
+
+    can :modify, User do
       user.permissions.where(:role => :manager).exists?
     end
 
-    can :manage, Permission do | permission |
-      permission.new_record? && permission.context.nil? && can?(:manage, permission.user)
+    can :modify, Permission do | permission |
+      permission.new_record? && permission.context.nil? && can?(:modify, permission.user)
     end
 
-    can :manage, Permission do | permission |
-      can?(:manage, permission.context) && can?(:manage, permission.user)
+    can :modify, Permission do | permission |
+      can?(:modify, permission.context) && can?(:modify, permission.user)
     end
+
   end
 end

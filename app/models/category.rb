@@ -1,9 +1,8 @@
 # encoding: utf-8
 
 class Category < ActiveRecord::Base
-  has_and_belongs_to_many :users, :uniq => true
-
-  has_many :permissions, :as => :context
+  has_many :permissions, :foreign_key => :context_id
+  has_many :users, :through => :permissions
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 

@@ -7,10 +7,10 @@
   <%= form.input :url, :as => :string %>
   <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @subdivision.id %>
   <%= form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
-  <li class='info_wrapper'>
+  <%= content_tag :li, :class => 'info_wrapper' do %>
     <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :parent_data => resource.parent.id, :class => 'info_link' %>
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
-  </li>
+  <% end if can?(:modify_dossier, resource) %>
   <div class="show_info_path" style='clear: both;'>
     <%= raw form.object.dossier if form.object.info_path %>
   </div>
@@ -51,7 +51,3 @@
 <div class="emails_fieldset">
   <%= form.link_to_add t('manage.new_email'), :emails, :class => 'button icon add' %>
 </div>
-
-<%= form.inputs :class => 'inputs bordered' do %>
-  <%= form.input :users, :as => :check_boxes %>
-<% end %>
