@@ -68,7 +68,8 @@ ru:
         role:                   Роль
         role_enum:
           manager:              Менеджер раздела
-          editor:               Редактор раздела
+          operator:             Оператор раздела
+          publisher:            Редактор раздела
 
       phone:
         _destroy:               Удалить

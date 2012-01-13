@@ -7,8 +7,16 @@ class User < ActiveRecord::Base
 
   has_many :categories, :through => :permissions, :source => :context
 
-  def manageable_categories
-    categories.where(:permissions => {:role => :manager}).map(&:subtree).flatten.uniq
+  def categories_for(role)
+    categories.where(:permissions => {:role => role})
+  end
+
+  def categories_subtree
+    categories_subtree_for(Permission.enums[:role])
+  end
+
+  def categories_subtree_for(role)
+    categories_for(role).map(&:subtree).flatten.uniq
   end
 
   def display_name

@@ -1,7 +1,7 @@
 class Permission < ActiveRecord::Base
   belongs_to :context, :class_name => 'Category'
   belongs_to :user
-  has_enum :role
+  has_enum :role, :scopes => true
 
   validates_presence_of :context, :role
 end

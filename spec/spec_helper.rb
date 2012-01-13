@@ -32,4 +32,6 @@ Spork.prefork do
 end
 
 Spork.each_run do
+  ActiveSupport::Dependencies.clear
+  Rails.application.reload_routes!
 end
