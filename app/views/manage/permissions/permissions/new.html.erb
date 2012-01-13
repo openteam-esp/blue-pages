@@ -1,3 +1,10 @@
+<h3>
+  <%= t('permissions.You are adding role to') %>
+  <span>
+    <%= @user.name %>
+    &lt;<%= mail_to @user.email, @user.email %>&gt;
+  </span>
+</h3>
 <%= semantic_form_for resource, :url => collection_path do |form| %>
   <%= form.inputs do  %>
     <%= form.input :context, :collection => current_user.manageable_categories, :member_label => :hierarchical_title, :polymorphic => true, :include_blank => t('permissions.not_selected') %>

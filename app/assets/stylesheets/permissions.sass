@@ -26,6 +26,12 @@ body
     padding: 15px 0
     width: 100%
 
+  h3
+    font-size: 14px
+
+    span
+      font-weight: bold
+
   .container
     +border-radius(4px)
     +single-box-shadow(#555, 0px, 0px, 20px)
@@ -92,6 +98,12 @@ body
         line-height: 26px
 
     .formtastic
+      .inline-errors
+        background: transparent image_url("inline_error_arrow.png") no-repeat left center
+        font-size: 12px
+        color: #933
+        padding: 0 0 0 18px
+
       .inputs
         li
           margin: 15px 0
