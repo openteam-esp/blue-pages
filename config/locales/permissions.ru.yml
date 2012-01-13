@@ -2,11 +2,12 @@ ru:
   permissions:
     'Are you sure?':        Вы уверены, в том что хотите удалить запись?
     'You are sign in as':   Вы вошли как
-    sign_out:               Выход
+    back_to_manage:         Назад в раздел управления
     cancel:                 Отмена
     create:                 Создать
     delete:                 Удалить
     new:                    Добавить право доступа
     not_selected:           -- не выбрано --
     show_permissions:       Показать права доступа
+    sign_out:               Выход
     title:                  Управление правами доступа

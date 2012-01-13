@@ -9,9 +9,9 @@
         &lt;<%= mail_to user.email, user.email %>&gt;
       </div>
 
-      <div class="button-group">
-        <%= link_to t('permissions.show_permissions'), '#', :class => 'button icon arrowdown show_permissions' %>
-        <%= link_to t('permissions.new'), new_manage_permissions_user_permission_path(user), :class => 'button icon add' %>
+      <div class="links">
+        <%= link_to "&darr;&nbsp;#{t('permissions.show_permissions')}".html_safe, '#', :class => 'show_permissions' %>
+        <%= link_to "&#43;#{t('permissions.new')}".html_safe, new_manage_permissions_user_permission_path(user), :class => 'add' %>
       </div>
 
       <%= content_tag :ul, :class => 'permission_list' do %>
@@ -27,7 +27,7 @@
                       manage_permissions_permission_path(permission),
                       :method => :delete,
                       :confirm => t('Are you sure?'),
-                      :class => 'button icon remove danger' if can?(:manage, permission) %>
+                      :class => 'buttton icon remove danger' if can?(:manage, permission) %>
                   </li>
                 <% end %>
               </ul>

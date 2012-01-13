@@ -8,13 +8,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <h1><%= t('permissions.title') %></h1>
   <div class="container">
     <div class="logged_info">
+      <%= link_to "&larr; #{t('permissions.back_to_manage')}".html_safe, manage_categories_path, :class => 'back_link' %>
       <%= t('permissions.You are sign in as') %>
       <%= "#{current_user.name} &lt;#{current_user.email}&gt;".html_safe %>
       <%= link_to t('permissions.sign_out'), destroy_user_session_path %>
     </div>
-    <h1><%= t('permissions.title') %></h1>
     <%= yield %>
   </div>
 </body>
