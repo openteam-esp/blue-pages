@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112021354) do
+ActiveRecord::Schema.define(:version => 20120112083051) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -47,14 +47,6 @@ ActiveRecord::Schema.define(:version => 20120112021354) do
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
   add_index "categories", ["position"], :name => "index_categories_on_position"
   add_index "categories", ["weight"], :name => "index_categories_on_weight"
-
-  create_table "categories_users", :id => false, :force => true do |t|
-    t.integer "user_id"
-    t.integer "category_id"
-  end
-
-  add_index "categories_users", ["category_id"], :name => "index_categories_users_on_category_id"
-  add_index "categories_users", ["user_id"], :name => "index_categories_users_on_user_id"
 
   create_table "emails", :force => true do |t|
     t.integer  "emailable_id"
