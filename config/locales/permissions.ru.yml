@@ -1,9 +1,12 @@
 ru:
   permissions:
-    delete: Удалить
-    new:    Добавить право доступа
-    title:  Управление правами доступа
-    show_permissions: Показать права доступа
-    create: Создать
-    cancel: Отмена
-    not_selected: -- не выбрано --
+    'Are you sure?':        Вы уверены, в том что хотите удалить запись?
+    'You are sign in as':   Вы вошли как
+    sign_out:               Выход
+    cancel:                 Отмена
+    create:                 Создать
+    delete:                 Удалить
+    new:                    Добавить право доступа
+    not_selected:           -- не выбрано --
+    show_permissions:       Показать права доступа
+    title:                  Управление правами доступа

@@ -15,24 +15,28 @@
       </div>
 
       <%= content_tag :ul, :class => 'permission_list' do %>
-        <% user.permissions.group_by(&:role).each do |role, permissions| %>
-          <li>
-            <h4><%= Permission.human_enums[:role][role] %></h4>
-            <ul>
-              <% permissions.each do |permission| %>
-                <li>
-                  <%= permission.context %>
-                  <%= link_to t('permissions.delete'),
-                    manage_permissions_permission_path(permission),
-                    :method => :delete,
-                    :confirm => t('Are you sure?'),
-                    :class => 'button icon remove danger' if can?(:manage, permission) %>
-                </li>
-              <% end %>
-            </ul>
-          </li>
+        <% if user.permissions.exists? %>
+          <% user.permissions.group_by(&:role).each do |role, permissions| %>
+            <li>
+              <h4><%= Permission.human_enums[:role][role] %></h4>
+              <ul>
+                <% permissions.each do |permission| %>
+                  <li>
+                    <%= permission.context %>
+                    <%= link_to t('permissions.delete'),
+                      manage_permissions_permission_path(permission),
+                      :method => :delete,
+                      :confirm => t('Are you sure?'),
+                      :class => 'button icon remove danger' if can?(:manage, permission) %>
+                  </li>
+                <% end %>
+              </ul>
+            </li>
+          <% end %>
+        <% else %>
+          <li>Нет прав доступа</li>
         <% end %>
-      <% end if user.permissions.exists? %>
+      <% end %>
     </li>
   <% end %>
 </ul>

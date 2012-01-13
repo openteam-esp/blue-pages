@@ -9,6 +9,12 @@
 </head>
 <body>
   <div class="container">
+    <div class="logged_info">
+      <%= t('permissions.You are sign in as') %>
+      <%= "#{current_user.name} &lt;#{current_user.email}&gt;".html_safe %>
+      <%= link_to t('permissions.sign_out'), destroy_user_session_path %>
+    </div>
+    <h1><%= t('permissions.title') %></h1>
     <%= yield %>
   </div>
 </body>
