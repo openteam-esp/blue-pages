@@ -43,6 +43,12 @@
     <requestParsers enableRemoteStreaming="true" multipartUploadLimitInKB="2048000"/>
     <httpCaching lastModifiedFrom="openTime" etagSeed="Solr"/>
   </requestDispatcher>
+  <requestHandler name="standard" class="solr.SearchHandler" default="true">
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+    </lst>
+  </requestHandler>
+
   <requestHandler name="/update" class="solr.XmlUpdateRequestHandler"/>
   <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers"/>
 </config>

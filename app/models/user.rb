@@ -7,6 +7,10 @@ class User < ActiveRecord::Base
 
   has_many :categories, :through => :permissions, :source => :context
 
+  searchable do
+    text :name, :email, :nickname, :phone
+  end
+
   def categories_for(role)
     categories.where(:permissions => {:role => role})
   end
