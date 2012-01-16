@@ -46,7 +46,7 @@
     <tbody>
       <% resource.items.each do | item | %>
         <tr>
-          <td><%= link_to item.person, category_item_path(item.subdivision, item) %></td>
+          <td><%= link_to item.person, category_item_path(item.subdivision, item) if item.person %></td>
           <td><%= item.title %></td>
           <td><%= item.address %></td>
           <td><%= Phone.present_as_str(item.phones) %></td>
