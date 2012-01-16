@@ -4,4 +4,8 @@
   <% end %>
 </div>
 
+<%= content_tag :div, :class => "actions" do %>
+  <%= link_to t("go_to_manage"), manage_category_path(resource), :class => "button icon edit" if can?(:modify, resource) %>
+<% end %>
+
 <%= render "show_#{@category.class.to_s.downcase}", :object => @category %>

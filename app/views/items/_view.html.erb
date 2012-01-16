@@ -5,6 +5,10 @@
   <%= resource.person %>
 </div>
 
+<%= content_tag :div, :class => "actions" do %>
+  <%= link_to t("go_to_manage"), manage_subdivision_item_path(parent, resource), :class => "button icon edit" if can?(:modify, resource) %>
+<% end %>
+
 <%= render @item %>
 
 <% if resource.person.info_path %>

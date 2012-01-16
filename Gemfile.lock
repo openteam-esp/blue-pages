@@ -288,6 +288,7 @@ DEPENDENCIES
   guard-rspec
   guard-spork
   has_enum
+  has_scope
   has_searcher
   hirb
   hoptoad_notifier

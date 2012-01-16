@@ -1,6 +1,7 @@
 class Manage::Permissions::UsersController < Manage::Permissions::ApplicationController
   has_searcher
   actions :index
+  has_scope :page, :default => 1
 
   protected
 
@@ -14,7 +15,7 @@ class Manage::Permissions::UsersController < Manage::Permissions::ApplicationCon
         search_object.pagination = paginate_options
         search_object.results
       else
-        end_of_association_chain.paginate(paginate_options)
+        end_of_association_chain
       end
     end
 

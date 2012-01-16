@@ -13,6 +13,7 @@ gem 'email_validator'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
 gem 'has_enum'
+gem 'has_scope'
 gem 'has_searcher'
 gem 'inherited_resources'
 gem 'jquery-rails'

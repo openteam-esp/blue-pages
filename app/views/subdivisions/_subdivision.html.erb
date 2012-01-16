@@ -2,6 +2,6 @@
 
 <%= content_tag :p, :class => "address" do %>
   Адрес: <%= subdivision.address %>
-<% end if subdivision.address %>
+<% end if subdivision.address.presence %>
 
 <%= content_tag :p, Phone.present_as_str(subdivision.phones), :class => "phones" if subdivision.phones.any? %>
