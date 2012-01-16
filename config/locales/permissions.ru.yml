@@ -9,6 +9,7 @@ ru:
     delete:                   Удалить
     new:                      Добавить право доступа
     not_selected:             -- не выбрано --
+    search:                   Поиск
     show_permissions:         Показать права доступа
     sign_out:                 Выход
     title:                    Управление правами доступа

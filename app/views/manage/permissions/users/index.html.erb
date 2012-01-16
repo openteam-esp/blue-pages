@@ -1,3 +1,11 @@
+<%= semantic_search_form_for :user do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :keywords, :as => :string, :label => false %>
+  <% end %>
+  <%= form.buttons do %>
+    <li><%= button_tag t('permissions.search'), :class => 'button icon search' %></li>
+  <% end %>
+<% end %>
 <ul class="collection_list">
   <% collection.each do | user | %>
     <li>
