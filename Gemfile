@@ -31,6 +31,7 @@ gem 'show_for'
 gem 'simple-navigation'
 gem 'sso_client'
 gem 'sunspot_rails'
+gem 'whenever',                                   :require => false
 
 group :assets do
   gem 'uglifier'

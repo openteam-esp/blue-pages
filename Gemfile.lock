@@ -45,6 +45,7 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     cancan (1.6.7)
+    chronic (0.6.6)
     chunky_png (1.2.5)
     ckeditor (3.7.0.rc1)
       mime-types (~> 1.16)
@@ -266,6 +267,9 @@ GEM
       raindrops (~> 0.6)
     warden (1.1.0)
       rack (>= 1.0)
+    whenever (0.7.2)
+      activesupport (>= 2.3.4)
+      chronic (~> 0.6.3)
 
 PLATFORMS
   ruby
@@ -322,3 +326,4 @@ DEPENDENCIES
   therubyracer
   uglifier
   unicorn
+  whenever
