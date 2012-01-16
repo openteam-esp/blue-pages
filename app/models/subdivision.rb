@@ -51,13 +51,7 @@ class Subdivision < Category
 
   searchable do
     boost :boost
-
-    text  :abbr, :boost => 1.5
-    text  :title, :boost => 1.5
-    text  :address
-    text  :url
-    text  :phones do phones.join(' ') end
-    text  :emails do emails.join(' ') end
+    text :term
   end
 
   def dossier
@@ -66,6 +60,10 @@ class Subdivision < Category
   end
 
   private
+
+    def term
+     "#{abbr} #{title} #{address} #{url} #{phones.join(' ')} #{emails.join(' ')}"
+    end
 
     def str_to_hash(str)
       Base64.urlsafe_encode64(str).strip.tr('=', '')

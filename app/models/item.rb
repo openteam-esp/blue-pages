@@ -44,13 +44,7 @@ class Item < ActiveRecord::Base
   searchable do
     boost :boost
 
-    text  :surname, :boost => 1.4
-    text  :name, :boost => 1.2
-    text  :patronymic
-    text  :title, :boost => 1.4
-    text  :address
-    text  :phones do phones.join(' ') end
-    text  :emails do emails.join(' ') end
+    text :term
   end
 
   def display_name
@@ -79,6 +73,11 @@ class Item < ActiveRecord::Base
   end
 
   private
+
+    def term
+      "#{full_name} #{title} #{address} #{phones.join(' ')} #{emails.join(' ')}"
+    end
+
     def set_address_attributes
       self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if subdivision && !address
     end
