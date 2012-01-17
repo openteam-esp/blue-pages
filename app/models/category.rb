@@ -2,7 +2,7 @@
 
 class Category < ActiveRecord::Base
   has_many :permissions, :foreign_key => :context_id
-  has_many :users, :through => :permissions
+  has_many :users, :through => :permissions, :uniq => true
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
@@ -75,7 +75,7 @@ class Category < ActiveRecord::Base
     ancestors.inject([]) { |sum, c| sum << c if sum.any? || c.users.where(:id => user.id).exists?; sum } << self
   end
 
-  def hierarchical_title
+  def context_title
     ('&nbsp;' * depth * 2 + title).html_safe
   end
 

@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :permissions
 
-  has_many :categories, :through => :permissions, :source => :context
+  has_many :categories, :through => :permissions, :source => :context, :uniq => true
 
   searchable do
     text :name, :email, :nickname, :phone
@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
 
   def categories_subtree_for(role)
     categories_for(role).map(&:subtree).flatten.uniq
+  end
+
+  def available_contexts
+    categories_subtree_for(:manager)
   end
 
   def display_name

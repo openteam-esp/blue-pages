@@ -14,12 +14,7 @@ BluePages::Application.routes.draw do
       end
     end
 
-    namespace :permissions do
-      resources :users, :only => :index do
-        resources :permissions, :only => [:new, :create, :destroy], :shallow => true
-      end
-      root :to => 'users#index'
-    end
+    mount EspPermissions::Engine => '/permissions'
 
     match 'treeview' => 'categories#treeview', :via => :get
 

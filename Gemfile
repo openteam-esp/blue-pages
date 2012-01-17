@@ -10,6 +10,7 @@ gem 'curb'
 gem 'default_value_for'
 gem 'el_vfs_client'
 gem 'email_validator'
+gem 'esp-permissions'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
 gem 'has_enum'

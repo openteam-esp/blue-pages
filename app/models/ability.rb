@@ -3,7 +3,7 @@ class Ability
 
 
   def initialize(user)
-    alias_action :create, :read, :update, :destroy, :to => :modify
+    alias_action :create, :read, :update, :destroy, :treeview, :to => :modify
 
     can :modify, Category do |category|
       (user.category_ids & category.ancestor_ids + [category.id]).any?

@@ -71,6 +71,19 @@ GEM
       activemodel
     erubis (2.7.0)
     escape (0.0.4)
+    esp-permissions (0.0.1)
+      cancan
+      compass (>= 0.12.alpha.2)
+      formtastic
+      has_enum
+      has_searcher
+      inherited_resources
+      kaminari
+      rails
+      sass
+      sass-rails
+      sso_client
+      sunspot_rails
     execjs (1.2.13)
       multi_json (~> 1.0)
     fabrication (1.2.0)
@@ -286,6 +299,7 @@ DEPENDENCIES
   default_value_for
   el_vfs_client
   email_validator
+  esp-permissions
   fabrication
   forgery
   formtastic
