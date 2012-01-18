@@ -3,6 +3,8 @@ class Ability
 
 
   def initialize(user)
+    return unless user
+
     alias_action :create, :read, :update, :destroy, :treeview, :to => :modify
 
     can :modify, Category do |category|
@@ -32,6 +34,5 @@ class Ability
     can :modify, Permission do | permission |
       can?(:modify, permission.context) && can?(:modify, permission.user)
     end
-
   end
 end
