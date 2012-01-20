@@ -7,6 +7,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
-var CKEDITOR_BASEPATH = '/assets/ckeditor/';
-
