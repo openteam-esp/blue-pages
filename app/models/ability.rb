@@ -5,7 +5,7 @@ class Ability
   def initialize(user)
     return unless user
 
-    alias_action :create, :read, :update, :destroy, :treeview, :to => :modify
+    alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
 
     can :modify, Category do |category|
       (user.category_ids & category.ancestor_ids + [category.id]).any?

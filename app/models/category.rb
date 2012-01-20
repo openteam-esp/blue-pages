@@ -44,7 +44,22 @@ class Category < ActiveRecord::Base
     1.1 - decrement / 10
   end
 
-  def to_json(expand = false)
+  def to_json(expand, sync)
+    sync ? json_sync : json_cms(expand)
+  end
+
+  def json_sync
+    subtree.map do |category|
+      {
+        :id => category.id,
+        :title => category.title,
+        :ancestry => category.ancestry,
+        :weight => category.weight
+      }
+    end
+  end
+
+  def json_cms(expand)
     result = {}
     result['title'] = title
 
