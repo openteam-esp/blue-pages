@@ -71,13 +71,14 @@ GEM
     esp-ckeditor (0.0.6)
       formtastic
       rails (~> 3.1.0)
-    esp-permissions (0.0.7.1)
+    esp-permissions (0.0.8)
       ancestry
       cancan
       compass (>= 0.12.alpha.2)
       curb
       formtastic
       has_enum
+      has_scope
       has_searcher
       inherited_resources
       kaminari
