@@ -74,11 +74,19 @@ class BluePagesBook < Prawn::Document
   end
 
   def to_pdf
-    font_families.update(
-      "Verdana" => {
-      :bold => "/usr/share/fonts/truetype/msttcorefonts/Verdana_Bold.ttf",
-      :italic => "/usr/share/fonts/truetype/msttcorefonts/Verdana_Italic.ttf",
-      :normal  => "/usr/share/fonts/truetype/msttcorefonts/Verdana.ttf" })
+    if RUBY_PLATFORM =~ /freebsd/
+      font_families.update(
+        "Verdana" => {
+          :bold   => "/usr/local/lib/X11/fonts/webfonts/verdanab.ttf",
+          :italic => "/usr/local/lib/X11/fonts/webfonts/verdanai.ttf",
+          :normal => "/usr/local/lib/X11/fonts/webfonts/verdana.ttf" })
+    else
+      font_families.update(
+        "Verdana" => {
+          :bold   => "/usr/share/fonts/truetype/msttcorefonts/Verdana_Bold.ttf",
+          :italic => "/usr/share/fonts/truetype/msttcorefonts/Verdana_Italic.ttf",
+          :normal => "/usr/share/fonts/truetype/msttcorefonts/Verdana.ttf" })
+    end
     font "Verdana", :size => 10
 
     title_page
