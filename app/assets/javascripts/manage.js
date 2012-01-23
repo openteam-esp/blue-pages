@@ -56,6 +56,26 @@ function show_ajax_error(jqXHR, textStatus, errorThrown) {
   });
 };
 
+function ajaxStart() {
+  if (!$(".ajax-overlay").length) {
+      $("<div class='ajax-overlay'><div class='indicator'></div></div>").appendTo("body");
+    };
+  var indicator = $(".ajax-overlay .indicator");
+  var overlayWidth = $(window).width();
+  var overlayHeight = $(document).height();
+  $(".ajax-overlay").css("width", overlayWidth);
+  $(".ajax-overlay").css("height", overlayHeight);
+  var winWidth = $(window).width();
+  var winHeight = $(window).height();
+  $(indicator).css('top',  winHeight/2 - $(indicator).height()/2 + $(document).scrollTop());
+  $(indicator).css('left', winWidth/2 - $(indicator).width()/2);
+  $(".ajax-overlay").show();
+};
+
+function ajaxStop() {
+  $(".ajax-overlay").remove();
+};
+
 function init_sort() {
   $(".sort_link").click(function() {
     var it_off = $(this).hasClass("off"),
@@ -73,6 +93,12 @@ function init_sort() {
             url: url,
             type: "post",
             data: serializeBlock(parent_block),
+            beforeSend: function(jqXHR, settings) {
+              ajaxStart();
+            },
+            complete: function(jqXHR, textStatus) {
+              ajaxStop();
+            },
             success: function(data, textStatus, jqXHR) {
               $(block).effect("highlight");
             },
