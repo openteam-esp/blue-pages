@@ -26,8 +26,8 @@ gem 'rails',                                      :require => false
 gem 'restfulie'
 gem 'russian'
 gem 'ryba',                                       :require => false
-gem 'sass-rails'
 gem 'sanitize',                                   :require => false
+gem 'sass-rails'
 gem 'show_for'
 gem 'simple-navigation'
 gem 'sso_client'
@@ -59,7 +59,7 @@ group :test do
   gem 'guard-spork'
   gem 'libnotify'
   gem 'rb-inotify'
-  gem 'rspec-rails',            '~> 2.6.0',       :require => false
+  gem 'rspec-rails',                              :require => false
   gem 'shoulda-matchers',                         :require => false
   gem 'spork',                  '>= 0.9.0.rc9',   :require => false
   gem 'sqlite3',                                  :require => false

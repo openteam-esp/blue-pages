@@ -44,7 +44,7 @@ class Category < ActiveRecord::Base
     1.1 - decrement / 10
   end
 
-  def to_json(expand, sync)
+  def to_json(expand=false, sync=false)
     sync ? json_sync : json_cms(expand)
   end
 

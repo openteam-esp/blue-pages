@@ -1,34 +1,15 @@
 class User < ActiveRecord::Base
   devise :omniauthable, :trackable, :timeoutable
-
-  attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info
+  attr_accessible :name, :email, :nickname, :first_name, :last_name, :location, :description, :image, :phone, :urls, :raw_info, :uid
+  validates_presence_of :uid
 
   has_many :permissions
+  has_many :contexts, :through => :permissions
 
-  has_many :categories, :through => :permissions, :source => :context, :uniq => true
+  before_create :set_name, :unless => :name?
 
   searchable do
-    text :name, :email, :nickname, :phone
-  end
-
-  def categories_for(role)
-    categories.where(:permissions => {:role => role})
-  end
-
-  def categories_subtree
-    categories_subtree_for(Permission.enums[:role])
-  end
-
-  def categories_subtree_for(role)
-    categories_for(role).map(&:subtree).flatten.uniq
-  end
-
-  def available_contexts
-    categories_subtree_for(:manager)
-  end
-
-  def display_name
-    name
+    text :name, :email, :nickname, :phone, :last_name, :first_name
   end
 
   def self.from_omniauth(hash)
@@ -36,6 +17,32 @@ class User < ActiveRecord::Base
       user.update_attributes hash['info']
     end
   end
+
+  def contexts_for(role)
+    contexts.where(:permissions => {:role => role})
+  end
+
+  def contexts_subtree_for(role)
+    contexts_for(role).map(&:subtree).flatten.uniq
+  end
+
+  def contexts_subtree
+    contexts_subtree_for(Permission.enums[:role])
+  end
+
+  def available_contexts
+    contexts_subtree_for(:manager)
+  end
+
+  def manager?
+    permissions.where(:role => :manager).exists?
+  end
+
+  protected
+
+    def set_name
+      self.name = [first_name, last_name].join(' ')
+    end
 end
 
 

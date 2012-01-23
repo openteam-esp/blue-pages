@@ -8,7 +8,7 @@ class Ability
     alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
 
     can :modify, Category do |category|
-      (user.category_ids & category.ancestor_ids + [category.id]).any?
+      (user.context_ids & category.ancestor_ids + [category.id]).any?
     end
 
     can :modify, Item do |item|
@@ -16,7 +16,7 @@ class Ability
     end
 
     can :modify_dossier, Category do | category |
-      (user.categories.where(:permissions => {:role => [:editor, :manager]}) & category.ancestors + [category]).any?
+      (user.contexts_for([:editor, :manager]) & category.ancestors + [category]).any?
     end
 
     can :modify_dossier, Item do | item |
@@ -24,11 +24,11 @@ class Ability
     end
 
     can :modify, User do
-      user.permissions.where(:role => :manager).exists?
+      user.manager?
     end
 
     can :modify, Permission do | permission |
-      permission.new_record? && permission.context.nil? && can?(:modify, permission.user)
+      permission.new_record? && permission.context.nil? && user.manager?
     end
 
     can :modify, Permission do | permission |

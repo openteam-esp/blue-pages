@@ -10,7 +10,11 @@ SimpleNavigation::Configuration.run do |navigation|
     primary.item :categories, I18n.t('toolbar.categories'), manage_categories_path,
       :highlights_on => /^\/manage\/categories/
 
+    primary.item :permissions, I18n.t('permissions.title'), manage_esp_permissions_path if can?(:create, Permission.new)
+
     primary.item :logout, I18n.t('toolbar.logout'), destroy_user_session_path
+
+    primary.item :user_name, current_user.name
 
     primary.dom_id = 'toolbar'
   end
