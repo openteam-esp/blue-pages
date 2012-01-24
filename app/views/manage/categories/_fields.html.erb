@@ -2,7 +2,4 @@
   <%= form.input :title, :as => :string, :input_html => { :autofocus => true } %>
   <%= form.input :parent_id, :as => :select,
                  :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @category.id %>
-
-  <%= form.input :users, :as => :check_boxes %>
-
 <% end %>
