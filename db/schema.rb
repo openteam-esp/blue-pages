@@ -24,8 +24,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.string   "house"
     t.string   "building"
     t.string   "office"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
   end
 
   add_index "addresses", ["addressable_id"], :name => "index_addresses_on_addressable_id"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.string   "weight"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -52,8 +52,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.integer  "emailable_id"
     t.string   "emailable_type"
     t.string   "address"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "emails", ["emailable_id"], :name => "index_emails_on_emailable_id"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.string   "title"
     t.integer  "position"
     t.string   "weight"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "items", ["position"], :name => "index_items_on_position"
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.string   "patronymic"
     t.date     "birthdate"
     t.string   "info_path"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.integer  "context_id"
     t.integer  "user_id"
     t.string   "role"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "phones", :force => true do |t|
@@ -99,8 +99,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.string   "code"
     t.string   "number"
     t.string   "additional_number"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
   end
 
   add_index "phones", ["phoneable_id"], :name => "index_phones_on_phoneable_id"
@@ -123,8 +123,8 @@ ActiveRecord::Schema.define(:version => 20120123154428) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "permissions_count"
   end
 
