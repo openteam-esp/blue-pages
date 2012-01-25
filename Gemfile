@@ -27,7 +27,6 @@ gem 'restfulie'
 gem 'russian'
 gem 'ryba',                                       :require => false
 gem 'sanitize',                                   :require => false
-gem 'sass-rails'
 gem 'show_for'
 gem 'simple-navigation'
 gem 'sso_client'
@@ -43,7 +42,6 @@ group :development do
   gem 'annotate',               '>= 2.4.1.beta1', :require => false
   gem 'hirb',                                     :require => false
   gem 'itslog'
-  gem 'rails-dev-tweaks'
   gem 'sunspot_solr',                             :require => false
 end
 
