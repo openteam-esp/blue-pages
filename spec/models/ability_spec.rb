@@ -30,19 +30,19 @@ describe Ability do
       subject { ability_for(manager_of(root)) }
 
       context 'управление пользователями' do
-        it { should be_able_to(:modify, user) }
-        it { should be_able_to(:modify, manager_of(root)) }
-        it { should be_able_to(:modify, manager_of(child_1)) }
-        it { should be_able_to(:modify, manager_of(child_1_1)) }
-        it { should be_able_to(:modify, manager_of(child_2)) }
+        it { should be_able_to(:manage, user) }
+        it { should be_able_to(:manage, manager_of(root)) }
+        it { should be_able_to(:manage, manager_of(child_1)) }
+        it { should be_able_to(:manage, manager_of(child_1_1)) }
+        it { should be_able_to(:manage, manager_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should be_able_to(:modify, user.permissions.new) }
-        it { should be_able_to(:modify, manager_of(root).permissions.first) }
-        it { should be_able_to(:modify, manager_of(child_1).permissions.first) }
-        it { should be_able_to(:modify, manager_of(child_1_1).permissions.first) }
-        it { should be_able_to(:modify, manager_of(child_2).permissions.first) }
+        it { should be_able_to(:create, user.permissions.new) }
+        it { should be_able_to(:manage, manager_of(root).permissions.first) }
+        it { should be_able_to(:manage, manager_of(child_1).permissions.first) }
+        it { should be_able_to(:manage, manager_of(child_1_1).permissions.first) }
+        it { should be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
@@ -67,19 +67,19 @@ describe Ability do
       subject { ability_for(manager_of(child_1)) }
 
       context 'управление пользователями' do
-        it { should be_able_to(:modify, user) }
-        it { should be_able_to(:modify, editor_of(root)) }
-        it { should be_able_to(:modify, editor_of(child_1)) }
-        it { should be_able_to(:modify, editor_of(child_1_1)) }
-        it { should be_able_to(:modify, editor_of(child_2)) }
+        it { should be_able_to(:manage, user) }
+        it { should be_able_to(:manage, editor_of(root)) }
+        it { should be_able_to(:manage, editor_of(child_1)) }
+        it { should be_able_to(:manage, editor_of(child_1_1)) }
+        it { should be_able_to(:manage, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should be_able_to(:modify, user.permissions.new) }
-        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
-        it { should be_able_to(:modify, manager_of(child_1).permissions.first) }
-        it { should be_able_to(:modify, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+        it { should be_able_to(:create, user.permissions.new) }
+        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
+        it { should be_able_to(:manage, manager_of(child_1).permissions.first) }
+        it { should be_able_to(:manage, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
@@ -106,19 +106,19 @@ describe Ability do
       subject { ability_for(editor_of(root)) }
 
       context 'управление пользователями' do
-        it { should_not be_able_to(:modify, user) }
-        it { should_not be_able_to(:modify, editor_of(root)) }
-        it { should_not be_able_to(:modify, editor_of(child_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_2)) }
+        it { should_not be_able_to(:manage, user) }
+        it { should_not be_able_to(:manage, editor_of(root)) }
+        it { should_not be_able_to(:manage, editor_of(child_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_1_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should_not be_able_to(:modify, user.permissions.new) }
-        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+        it { should_not be_able_to(:create, user.permissions.new) }
+        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
@@ -152,19 +152,19 @@ describe Ability do
       subject { ability_for(editor_of(child_1)) }
 
       context 'управление пользователями' do
-        it { should_not be_able_to(:modify, user) }
-        it { should_not be_able_to(:modify, editor_of(root)) }
-        it { should_not be_able_to(:modify, editor_of(child_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_2)) }
+        it { should_not be_able_to(:manage, user) }
+        it { should_not be_able_to(:manage, editor_of(root)) }
+        it { should_not be_able_to(:manage, editor_of(child_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_1_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should_not be_able_to(:modify, user.permissions.new) }
-        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+        it { should_not be_able_to(:create, user.permissions.new) }
+        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
@@ -200,19 +200,19 @@ describe Ability do
       subject { ability_for(operator_of(root)) }
 
       context 'управление пользователями' do
-        it { should_not be_able_to(:modify, user) }
-        it { should_not be_able_to(:modify, editor_of(root)) }
-        it { should_not be_able_to(:modify, editor_of(child_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_2)) }
+        it { should_not be_able_to(:manage, user) }
+        it { should_not be_able_to(:manage, editor_of(root)) }
+        it { should_not be_able_to(:manage, editor_of(child_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_1_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should_not be_able_to(:modify, user.permissions.new) }
-        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+        it { should_not be_able_to(:create, user.permissions.new) }
+        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do
@@ -246,19 +246,19 @@ describe Ability do
       subject { ability_for(operator_of(child_1)) }
 
       context 'управление пользователями' do
-        it { should_not be_able_to(:modify, user) }
-        it { should_not be_able_to(:modify, editor_of(root)) }
-        it { should_not be_able_to(:modify, editor_of(child_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_1_1)) }
-        it { should_not be_able_to(:modify, editor_of(child_2)) }
+        it { should_not be_able_to(:manage, user) }
+        it { should_not be_able_to(:manage, editor_of(root)) }
+        it { should_not be_able_to(:manage, editor_of(child_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_1_1)) }
+        it { should_not be_able_to(:manage, editor_of(child_2)) }
       end
 
       context 'управление правами доступа' do
-        it { should_not be_able_to(:modify, user.permissions.new) }
-        it { should_not be_able_to(:modify, manager_of(root).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_1_1).permissions.first) }
-        it { should_not be_able_to(:modify, manager_of(child_2).permissions.first) }
+        it { should_not be_able_to(:create, user.permissions.new) }
+        it { should_not be_able_to(:manage, manager_of(root).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_1_1).permissions.first) }
+        it { should_not be_able_to(:manage, manager_of(child_2).permissions.first) }
       end
 
       context 'управление разделами' do

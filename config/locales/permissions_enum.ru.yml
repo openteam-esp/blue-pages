@@ -1,0 +1,8 @@
+ru:
+  activerecord:
+    attributes:
+      permission:
+        role_enum:
+          manager:              Менеджер раздела
+          editor:               Редактор раздела
+          operator:             Оператор раздела

@@ -3,12 +3,13 @@ class Ability
 
 
   def initialize(user)
+
     return unless user
 
     alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
 
-    can :modify, Category do |category|
-      user.permissions.where(:context_id => category.ancestor_ids + [category.id]).exists?
+    can :modify, Category do | category |
+      user.permissions.for_context(category).exists?
     end
 
     can :modify, Item do |item|
@@ -16,23 +17,23 @@ class Ability
     end
 
     can :modify_dossier, Category do | category |
-      user.permissions.where(:role => [:manager, :editor]).where(:context_id => category.ancestor_ids + [category.id]).exists?
+      user.permissions.for_roles(:manager, :editor).for_context(category).exists?
     end
 
-    can :modify_dossier, Item do | item |
+    can :modify_dossier, Item do | item|
       can? :modify_dossier, item.subdivision
     end
 
-    can :modify, User do
+    can :manage, Permission do | permission |
+      permission.context && user.permissions.for_roles(:manager).for_context(permission.context).exists?
+    end
+
+    can :create, Permission do | permission |
       user.manager?
     end
 
-    can :modify, Permission do | permission |
-      permission.new_record? && permission.context.nil? && user.manager?
-    end
-
-    can :modify, Permission do | permission |
-      can?(:modify, permission.context) && can?(:modify, permission.user)
+    can :manage, User do
+      user.manager?
     end
   end
 end

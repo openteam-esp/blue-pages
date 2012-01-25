@@ -33,8 +33,6 @@ enterprises.children.tap do | categories |
 end
 
 User.find_or_initialize_by_uid('1') .tap do | user |
-  user.update_attributes! :name => 'Юзеров Юзер Юзерович',
-                          :email => 'demo@demo.de'
+  user.save(:validate => false)
   user.permissions.create! :context => Category.root, :role => :manager
 end
-

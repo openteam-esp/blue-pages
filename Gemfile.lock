@@ -70,7 +70,7 @@ GEM
     esp-ckeditor (0.0.7)
       formtastic
       rails
-    esp-permissions (0.0.13)
+    esp-permissions (0.0.17)
       ancestry
       cancan
       compass (>= 0.12.alpha.2)
@@ -319,7 +319,6 @@ DEPENDENCIES
   simple-navigation
   spork (>= 0.9.0.rc9)
   sqlite3
-  sso_client
   sunspot_matchers
   sunspot_rails
   sunspot_solr
