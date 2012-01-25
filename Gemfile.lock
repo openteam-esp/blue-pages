@@ -68,9 +68,9 @@ GEM
       activemodel
     erubis (2.7.0)
     escape (0.0.4)
-    esp-ckeditor (0.0.6)
+    esp-ckeditor (0.0.7)
       formtastic
-      rails (~> 3.1.0)
+      rails
     esp-permissions (0.0.8)
       ancestry
       cancan
