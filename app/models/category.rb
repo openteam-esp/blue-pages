@@ -90,10 +90,6 @@ class Category < ActiveRecord::Base
     ancestors.inject([]) { |sum, c| sum << c if sum.any? || c.users.where(:id => user.id).exists?; sum } << self
   end
 
-  def context_title
-    ('&nbsp;' * depth * 2 + title).html_safe
-  end
-
   protected
     def set_position
       self.position = siblings.last.try(:position).to_i + 1 unless self.position

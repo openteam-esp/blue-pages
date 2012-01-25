@@ -12,4 +12,10 @@ class CategoriesController < ApplicationController
       success.json { render :json => @category.to_json(params[:expand], params[:sync]) }
     end
   end
+
+  def index
+    index! do | success |
+      success.json { render :json => {:categories => @categories.map{|c| {:id => c.id, :title => ['-' * c.depth, c.title].join(' ')}}} }
+    end
+  end
 end

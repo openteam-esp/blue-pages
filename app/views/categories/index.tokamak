@@ -1,8 +1,0 @@
-collection(@categories) do |collection|
-  collection.members(:root => 'categories') do |member, object|
-    member.values do |value|
-      value.title "#{'-' * object.depth} #{object.title}"
-      value.id object[:id]
-    end
-  end
-end
