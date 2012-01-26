@@ -11,6 +11,6 @@ end
 #
 # Table name: searches
 #
-#  keywords :text
+#  term :text
 #
 
