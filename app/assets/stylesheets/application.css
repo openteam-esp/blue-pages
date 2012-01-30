@@ -13,4 +13,6 @@
  *= require content
  *= require error
  *= require pagination
+ *= require esp_permissions/shared
+ *= require esp_permissions
  */

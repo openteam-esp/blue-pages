@@ -8,9 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="toolbar_wrapper">
-    <%= render_navigation :context => :toolbar %>
-  </div>
+  <%= render :partial => "esp_permissions/shared/header" %>
   <div id="title_wrapper">
     <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
     <h1><%= title %></h1>
@@ -18,15 +16,6 @@
   <div id="content_wrapper">
     <%= content_for?(:content) ? yield(:content) : yield %>
   </div>
-  <div id="footer">
-    <div class="client">
-      <%= request.remote_ip %>,
-      <%= request.env['HTTP_USER_AGENT'] %>
-    </div>
-    <div class="copyright">
-      <%= Time.now.year.eql?(2011) ? "2011" : raw("2011&ndash;#{Time.now.year}") %>,
-      <%= link_to "OpenTeam", "http://openteam.ru/" %>
-    </div>
-  </div>
+  <%= render :partial => "esp_permissions/shared/footer" %>
 </body>
 </html>
