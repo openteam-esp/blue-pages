@@ -1,39 +1,56 @@
 class Ability
   include CanCan::Ability
 
-
   def initialize(user)
-
     return unless user
 
-    alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
-
-    can :modify, Category do | category |
-      user.permissions.for_context(category).exists?
-    end
-
-    can :modify, Item do |item|
-      can? :modify, item.subdivision
-    end
-
-    can :modify_dossier, Category do | category |
-      user.permissions.for_roles(:manager, :editor).for_context(category).exists?
-    end
-
-    can :modify_dossier, Item do | item|
-      can? :modify_dossier, item.subdivision
+    ## common
+    can :manage, Category do | context |
+      user.manager_of? context
     end
 
     can :manage, Permission do | permission |
-      permission.context && user.permissions.for_roles(:manager).for_context(permission.context).exists?
+      permission.context && user.manager_of?(permission.context)
     end
 
-    can :create, Permission do | permission |
+    can [:new, :create], Permission do | permission |
+      !permission.context && user.manager?
+    end
+
+    can [:search, :index], User do
       user.manager?
     end
 
-    can :manage, User do
+    can :manage, :application do
+      user.permissions.exists?
+    end
+
+    can :manage, :permissions do
       user.manager?
+    end
+
+    ## app specific
+
+    alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
+
+    can :manage, Category do | category |
+      user.editor_of? category
+    end
+
+    can :modify, Category do | category |
+      user.operator_of? category
+    end
+
+    can :manage, Item do | item |
+      user.manager_of? item.subdivision
+    end
+
+    can :manage, Item do | item |
+      user.editor_of? item.subdivision
+    end
+
+    can :modify, Item do | item |
+      user.operator_of? item.subdivision
     end
   end
 end

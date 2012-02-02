@@ -1,19 +1,17 @@
 # encoding: utf-8
 
 class Category < ActiveRecord::Base
-  has_many :permissions, :foreign_key => :context_id
-  has_many :users, :through => :permissions, :uniq => true
-
-  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
   default_scope order('weight')
+
+  has_many :permissions, :as => :context
+
+  has_ancestry :cache_depth => true
 
   before_create :set_position, :set_weight
   before_update :set_weight
 
-  has_ancestry :cache_depth => true
-
-  delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
+  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
   searchable do
     boost :boost
@@ -106,6 +104,8 @@ class Category < ActiveRecord::Base
     def decrement
       @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
     end
+
+    delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 end
 
 # == Schema Information

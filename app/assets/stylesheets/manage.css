@@ -17,5 +17,5 @@
  *= require manage/title
  *= require manage/content
  *= require manage/footer
- *= require esp_permissions/shared
+ *= require esp_auth/shared
  */

@@ -14,8 +14,6 @@ BluePages::Application.routes.draw do
       end
     end
 
-    mount EspPermissions::Engine => '/permissions'
-
     match 'treeview' => 'categories#treeview', :via => :get
 
     root :to => 'categories#index'

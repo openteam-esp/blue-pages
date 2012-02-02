@@ -12,12 +12,14 @@ Spork.prefork do
   require 'cancan/matchers'
   require 'shoulda-matchers'
   require 'sunspot_matchers'
+  require 'esp_auth/spec_helper'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
   RSpec.configure do |config|
     config.include AttributeNormalizer::RSpecMatcher
     config.include SunspotMatchers
+    config.include EspAuth::SpecHelper
 
     config.mock_with :rspec
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125172563) do
+ActiveRecord::Schema.define(:version => 20120201171055) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -85,14 +85,15 @@ ActiveRecord::Schema.define(:version => 20120125172563) do
   add_index "people", ["item_id"], :name => "index_people_on_item_id"
 
   create_table "permissions", :force => true do |t|
-    t.integer  "context_id"
     t.integer  "user_id"
+    t.integer  "context_id"
+    t.string   "context_type"
     t.string   "role"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
-  add_index "permissions", ["role", "context_id", "user_id"], :name => "index_permissions_on_role_and_context_id_and_user_id"
+  add_index "permissions", ["user_id", "role", "context_id", "context_type"], :name => "by_user_and_role_and_context"
 
   create_table "phones", :force => true do |t|
     t.integer  "phoneable_id"
@@ -120,14 +121,13 @@ ActiveRecord::Schema.define(:version => 20120125172563) do
     t.text     "phone"
     t.text     "urls"
     t.text     "raw_info"
-    t.integer  "sign_in_count",      :default => 0
+    t.integer  "sign_in_count"
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.integer  "permissions_count"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
   end
 
   add_index "users", ["uid"], :name => "index_users_on_uid"

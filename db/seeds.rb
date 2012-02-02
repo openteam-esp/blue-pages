@@ -34,5 +34,5 @@ end
 
 User.find_or_initialize_by_uid('1') .tap do | user |
   user.save(:validate => false)
-  user.permissions.create! :context => Category.root, :role => :manager
+  user.permissions.create! :context => Category.root, :role => :manager if user.permissions.empty?
 end

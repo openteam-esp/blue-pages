@@ -20,6 +20,9 @@ BluePages::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
+  # Compile manage.css
+  config.assets.precompile << "manage.css"
+
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
 
