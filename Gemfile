@@ -3,7 +3,7 @@ source :rubygems
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
-gem 'compass',                  '>= 0.12.alpha.2'
+gem 'compass',                  '~> 0.12.alpha.4'
 gem 'configliere'
 gem 'curb'
 gem 'default_value_for'
@@ -56,7 +56,7 @@ group :test do
   gem 'rb-inotify'
   gem 'rspec-rails',                              :require => false
   gem 'shoulda-matchers',                         :require => false
-  gem 'spork',                  '>= 0.9.0.rc9',   :require => false
+  gem 'spork',                  '>= 1.0.0.rc1',   :require => false
   gem 'sqlite3',                                  :require => false
   gem 'sunspot_matchers',                         :require => false
 end

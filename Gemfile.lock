@@ -44,9 +44,9 @@ GEM
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
     cancan (1.6.7)
-    chronic (0.6.6)
+    chronic (0.6.7)
     chunky_png (1.2.5)
-    compass (0.12.alpha.4)
+    compass (0.12.rc.0)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
@@ -69,7 +69,7 @@ GEM
       activemodel
     erubis (2.7.0)
     escape (0.0.4)
-    esp-auth (1.0.1)
+    esp-auth (1.0.2)
       ancestry
       cancan
       compass (>= 0.12.alpha.4)
@@ -112,7 +112,7 @@ GEM
       thor (~> 0.14.6)
     guard-rspec (0.6.0)
       guard (>= 0.10.0)
-    guard-spork (0.5.1)
+    guard-spork (0.5.2)
       guard (>= 0.10.0)
       spork (>= 0.8.4)
     has_enum (0.10.0)
@@ -279,7 +279,7 @@ DEPENDENCIES
   annotate (>= 2.4.1.beta1)
   attribute_normalizer
   cancan
-  compass (>= 0.12.alpha.2)
+  compass (~> 0.12.alpha.4)
   configliere
   curb
   default_value_for
@@ -314,7 +314,7 @@ DEPENDENCIES
   sanitize
   shoulda-matchers
   show_for
-  spork (>= 0.9.0.rc9)
+  spork (>= 1.0.0.rc1)
   sqlite3
   sunspot_matchers
   sunspot_rails
