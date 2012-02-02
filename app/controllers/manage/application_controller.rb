@@ -1,6 +1,4 @@
 class Manage::ApplicationController < ApplicationController
-  before_filter :authenticate_user!
+  esp_load_and_authorize_resource
   layout 'manage/with_tree'
-  inherit_resources
-  load_and_authorize_resource
 end
