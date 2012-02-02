@@ -4,32 +4,6 @@ GIT
   specs:
     nested_form (0.1.1)
 
-PATH
-  remote: ../esp-auth
-  specs:
-    esp-auth (0.2.0)
-      ancestry
-      cancan
-      compass (>= 0.12.alpha.4)
-      curb
-      default_value_for
-      devise
-      devise-russian
-      formtastic
-      has_enum
-      has_scope
-      has_searcher
-      inherited_resources
-      kaminari
-      omniauth
-      omniauth-oauth2
-      progress_bar
-      rails
-      sass
-      sass-rails
-      sunspot_rails
-      whenever
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -95,6 +69,28 @@ GEM
       activemodel
     erubis (2.7.0)
     escape (0.0.4)
+    esp-auth (1.0.0)
+      ancestry
+      cancan
+      compass (>= 0.12.alpha.4)
+      curb
+      default_value_for
+      devise
+      devise-russian
+      formtastic
+      has_enum
+      has_scope
+      has_searcher
+      inherited_resources
+      kaminari
+      omniauth
+      omniauth-oauth2
+      progress_bar
+      rails
+      sass
+      sass-rails
+      sunspot_rails
+      whenever
     esp-ckeditor (0.0.8)
       formtastic
       rails
@@ -289,7 +285,7 @@ DEPENDENCIES
   default_value_for
   el_vfs_client
   email_validator
-  esp-auth!
+  esp-auth
   esp-ckeditor
   fabrication
   forgery

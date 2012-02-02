@@ -10,7 +10,7 @@ gem 'default_value_for'
 gem 'el_vfs_client'
 gem 'email_validator'
 gem 'esp-ckeditor'
-gem 'esp-auth',                                   :path => '../esp-auth'
+gem 'esp-auth'
 gem 'forgery',                                    :require => false
 gem 'formtastic'
 gem 'has_enum'
