@@ -3,7 +3,7 @@ source :rubygems
 gem 'ancestry'
 gem 'attribute_normalizer'
 gem 'cancan'
-gem 'compass',                  '~> 0.12.alpha.4'
+gem 'compass',                  '= 0.12.alpha.4'
 gem 'configliere'
 gem 'curb'
 gem 'default_value_for'
