@@ -85,7 +85,8 @@ class Category < ActiveRecord::Base
   end
 
   def ancestors_for_tree(user)
-    ancestors.inject([]) { |sum, c| sum << c if sum.any? || c.permissions.where(:user_id => user.id).exists?; sum } << self
+    root = ((ancestors + [self]) & user.contexts).first
+    ancestors.inject([]) { |ancestors, ancestror| ancestors << ancestror if ([ancestror] + ancestror.ancestors).include?(root); ancestors } << self
   end
 
   protected
