@@ -2,7 +2,7 @@ BluePages::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
   # In the development environment your application's code is reloaded on
-  # every request.  This slows down response time but is perfect for development
+  # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
   config.cache_classes = false
 
@@ -22,12 +22,6 @@ BluePages::Application.configure do
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 
-  # Do not compress assets
-  config.assets.compress = false
-
-  # Expands the lines which load the assets
-  config.assets.debug = false
-
   # Raise exception on mass assignment protection for Active Record models
   config.active_record.mass_assignment_sanitizer = :strict
 
@@ -35,9 +29,24 @@ BluePages::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   config.active_record.auto_explain_threshold_in_seconds = 0.5
 
+  # Do not compress assets
+  config.assets.compress = false
+
+  # Expands the lines which load the assets
+  config.assets.debug = false
+
+  # Rails generate
+  config.generators do |generators|
+    generators.test_framework       :rspec, :fixture => true
+    generators.fixture_replacement  :fabrication
+    generators.stylesheet_engine    :sass
+  end
+
+  # Load Category hierarcy (for right sql queries)
   config.to_prepare do
-    %w[subdivision category].each do |klass|
-      require_dependency Rails.root.join("app/models/#{klass}.rb").to_s
+    %w[subdivision category].each do |model|
+      require_dependency Rails.root.join("app/models/#{model}.rb").to_s
     end
   end
+
 end
