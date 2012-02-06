@@ -1,11 +1,28 @@
-vfs:
-  url:      http://pool.openteam.ru
+app:
+  secret:     SECRET
+
+errors:
+  url:        http://errors.esp.org
+  key:        KEY
+
+solr:
+  url:        http://localhost:8982/solr
 
 sso:
-  url:      http://esp-sso.openteam.ru
-  key:      KEY
-  secret:   SECRET
+  url:        http://sso.esp.org
+  key:        KEY
+  secret:     SECRET
 
-hoptoad:
-  api_key:            key
-  host:               host
+vfs:
+  url:        http://vfs.esp.org
+
+unicorn:
+  workers:    2
+  preload:    true
+  timeout:    300
+  listen:     localhost:3000
+  prefix:
+    pid:      tmp/pids/         # => tmp/pids/blue-pages.pid
+    logs:     log/              # => log/{stderr,stdout,application}.log
+    socket:   tmp/sockets/      # => tmp/esp-blue_pages.sock
+

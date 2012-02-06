@@ -36,6 +36,9 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.6)
+    airbrake (3.0.9)
+      activesupport
+      builder
     ancestry (1.2.4)
       activerecord (>= 2.2.2)
     annotate (2.4.1.beta1)
@@ -94,6 +97,11 @@ GEM
     esp-ckeditor (0.0.8)
       formtastic
       rails
+    esp-commons (0.0.1)
+      airbrake
+      configliere
+      rails
+      russian
     execjs (1.3.0)
       multi_json (~> 1.0)
     fabrication (1.2.0)
@@ -124,9 +132,6 @@ GEM
     highline (1.6.11)
     hike (1.2.1)
     hirb (0.6.0)
-    hoptoad_notifier (2.4.11)
-      activesupport
-      builder
     i18n (0.6.0)
     inherited_resources (1.3.0)
       has_scope (~> 0.5.0)
@@ -280,13 +285,13 @@ DEPENDENCIES
   attribute_normalizer
   cancan
   compass (= 0.12.alpha.4)
-  configliere
   curb
   default_value_for
   el_vfs_client
   email_validator
   esp-auth
   esp-ckeditor
+  esp-commons
   fabrication
   forgery
   formtastic
@@ -296,7 +301,6 @@ DEPENDENCIES
   has_scope
   has_searcher
   hirb
-  hoptoad_notifier
   inherited_resources
   itslog
   jquery-rails
@@ -309,7 +313,6 @@ DEPENDENCIES
   rails
   rb-inotify
   rspec-rails
-  russian
   ryba
   sanitize
   shoulda-matchers
@@ -322,4 +325,3 @@ DEPENDENCIES
   therubyracer
   uglifier
   unicorn
-  whenever
