@@ -8,22 +8,22 @@ settings['unicorn'] ||= {}
 settings['unicorn']['workers'] ||= 2
 settings['unicorn']['preload'] = true if settings['unicorn']['preload'] != false
 settings['unicorn']['timeout'] ||= 300
-settings['unicorn']['prefix'] ||= {}
-settings['unicorn']['prefix']['pid'] ||= '/var/run/esp/'
-settings['unicorn']['prefix']['logs'] ||= "/var/log/esp/#{project}/"
-settings['unicorn']['prefix']['socket'] ||= '/tmp/esp-'
-unless settings['unicorn']['prefix']['socket'].start_with? "/"
-  settings['unicorn']['prefix']['socket'] = "#{current_dir}/#{settings['unicorn']['prefix']['socket']}"
+
+settings['unicorn']['logs_dir'] ||= "/var/log/esp/#{project}"
+settings['unicorn']['pids_dir'] ||= '/var/run/esp'
+settings['unicorn']['socks_dir'] ||= '/tmp'
+unless settings['unicorn']['socks_dir'].start_with? "/"
+  settings['unicorn']['socks_dir'] = "#{current_dir}/#{settings['unicorn']['socks_dir']}"
 end
 
 worker_processes  settings['unicorn']['workers']
 preload_app       settings['unicorn']['preload']
 timeout           settings['unicorn']['timeout']
-pid               "#{settings['unicorn']['prefix']['pid']}#{project}.pid"
-stderr_path       "#{settings['unicorn']['prefix']['logs']}stderr.log"
-stdout_path       "#{settings['unicorn']['prefix']['logs']}stdout.log"
 listen            settings['unicorn']['listen'] if settings['unicorn']['listen']
-listen            "#{settings['unicorn']['prefix']['socket']}#{project}.sock", :backlog => 64
+listen            "#{settings['unicorn']['socks_dir']}/esp-#{project}.sock", :backlog => 64
+pid               "#{settings['unicorn']['pids_dir']}/#{project}.pid"
+stderr_path       "#{settings['unicorn']['logs_dir']}/stderr.log"
+stdout_path       "#{settings['unicorn']['logs_dir']}/stdout.log"
 
 before_fork do |server, worker|
   defined?(ActiveRecord::Base) and ActiveRecord::Base.connection.disconnect!

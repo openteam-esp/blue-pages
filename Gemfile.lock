@@ -97,7 +97,7 @@ GEM
     esp-ckeditor (0.0.8)
       formtastic
       rails
-    esp-commons (0.0.2)
+    esp-commons (0.0.3)
       airbrake
       configliere
       rails
