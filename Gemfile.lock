@@ -72,7 +72,7 @@ GEM
       activemodel
     erubis (2.7.0)
     escape (0.0.4)
-    esp-auth (1.0.2)
+    esp-auth (1.0.3)
       ancestry
       cancan
       compass (>= 0.12.alpha.4)
