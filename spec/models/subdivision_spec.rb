@@ -58,6 +58,13 @@ describe Subdivision do
     it { child_subdivision.weight.should == '01/01/01' }
     it { subdivision(:parent => subdivision(:position => 11), :position => 1).weight.should == '01/11/01' }
     it { subdivision(:parent => subdivision(:position => 12), :position => 99).weight.should == '01/12/99' }
+
+    describe 'обновление position должно менять веса у детей' do
+      before { child_subdivision.parent.update_attribute(:position, 2) }
+
+      it { child_subdivision.reload.weight.should == '01/02/01' }
+      it { first_subdivision.reload.weight.should == '01/02' }
+    end
   end
 
   describe '#decrement' do

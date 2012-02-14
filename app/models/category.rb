@@ -11,6 +11,8 @@ class Category < ActiveRecord::Base
   before_create :set_position, :set_weight
   before_update :set_weight
 
+  after_update :set_subtree_weights, :if => :weight_changed?
+
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
 
   searchable do
@@ -104,6 +106,13 @@ class Category < ActiveRecord::Base
 
     def decrement
       @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
+    end
+
+    def set_subtree_weights
+      descendants.each do |category|
+        category.set_weight
+        category.save!
+      end
     end
 
     delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
