@@ -19,7 +19,7 @@ gem 'has_searcher'
 gem 'inherited_resources'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'nested_form',                                :git => 'git://github.com/kfprimm/nested_form'
+gem 'nested_form'
 gem 'nokogiri',                                   :require => false
 gem 'prawn',                    '>= 1.0.0.rc1',   :require => false
 gem 'rails',                                      :require => false
