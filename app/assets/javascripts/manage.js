@@ -4,6 +4,7 @@
  *= require jquery.ui.datepicker-ru.js
  *= require jquery_ujs.js
  *= require nested_form.js
+ *= require info_plugin.js
  *= require treeview/jquery.treeview.js
  *= require treeview/jquery.treeview.edit.js
  *= require treeview/jquery.treeview.async.js
@@ -130,6 +131,43 @@ function init_tree() {
   };
 };
 
+function choose_file(){
+  $('.choose_file').click(function(){
+    var link = $(this);
+    var origin_id = 'image_url';
+    var input = $('#'+origin_id);
+
+    var dialog = link.create_or_return_dialog('elfinder_picture_dialog');
+
+    dialog.attr('id_data', origin_id);
+
+    dialog.load_iframe();
+
+    input.change(function(){
+      var attached_file_wrapper = $('.attached_file');
+      var image_url              = input.val();
+      var file_name = decodeURIComponent(image_url).match(/([^\/.]+)(\.(.{3}))?$/);
+
+      attached_file_wrapper
+      .children('.wrapper')
+      .html('<a href="'+image_url+'" class="'+file_name[3]+'"><span></span>'+file_name[1]+'</a> <a href="#" class="button icon remove danger delete_file">Удалить</a>');
+
+    input.unbind('change');
+    });
+
+    return false;
+  });
+};
+
+function delete_file(){
+  $('.delete_file').live('click', function(){
+    $('.attached_file .wrapper').html('<span>Файл не выбран</span>');
+    $('#image_url').val('');
+
+    return false;
+  });
+};
+
 $(function() {
   init_datepicker();
   init_sort();
@@ -147,4 +185,7 @@ $(function() {
       phone_additional_number.slideDown("slow");
     };
   });
+
+  choose_file();
+  delete_file();
 });

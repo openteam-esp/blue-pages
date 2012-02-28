@@ -55,11 +55,12 @@ end
 # Table name: items
 #
 #  id             :integer         not null, primary key
-#  title          :string(255)
 #  subdivision_id :integer
-#  created_at     :datetime
-#  updated_at     :datetime
+#  title          :string(255)
 #  position       :integer
 #  weight         :string(255)
+#  created_at     :datetime        not null
+#  updated_at     :datetime        not null
+#  image_url      :string(255)
 #
 

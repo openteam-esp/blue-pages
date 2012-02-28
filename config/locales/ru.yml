@@ -91,8 +91,11 @@ ru:
   cancel:                       Отмена
   download:                     Скачать в формате pdf
   go_to_manage:                 Управление
-  personal_info:                Создать/редактировать досье
-  choose_link:                  выбрать уже существующее досье
+  personal_info:                Создать/редактировать описание
+  choose_link:                  выбрать уже существующее описание
+  choose_file:                  Выбрать файл
+  file_not_selected:            Файл не выбран
+  image_file:                   Изображение
   search:                       Поиск
   subdivision:
     address:                    Адрес
