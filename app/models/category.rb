@@ -72,7 +72,13 @@ class Category < ActiveRecord::Base
       result['items'] = [] if items.any?
 
       items.each do |item|
-        hash = { 'person' => item.person.to_s, 'title' => item.title, 'address' => item.address.to_s, 'link' => Rails.application.routes.url_helpers.category_item_path(item.subdivision, item) }
+        hash = {
+          'person' => item.person.to_s,
+          'title' => item.title,
+          'address' => item.address.to_s,
+          'link' => Rails.application.routes.url_helpers.category_item_path(item.subdivision, item),
+          'image_url' => item.image_url
+        }
 
         hash.merge!('phones' => Phone.present_as_str(item.phones.select{|a| !a.kind_internal? })) if item.phones.any?
         hash.merge!('emails' => item.emails.map(&:address)) if item.emails.any?
