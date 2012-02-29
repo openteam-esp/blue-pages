@@ -57,10 +57,10 @@
   </table>
 <% end %>
 
-<% if resource.children.any? %>
+<% if resource.subdivisions.any? %>
   <h2>Подразделения</h2>
   <ul class="subdivisions">
-    <% resource.children.each do | item | %>
+    <% resource.subdivisions.each do | item | %>
       <li class="item">
         <%= link_to item.title, category_path(item) %>
       </li>
@@ -68,3 +68,13 @@
   </ul>
 <% end %>
 
+<% if resource.categories.any? %>
+  <h2>Разделы</h2>
+  <ul class="subdivisions">
+    <% resource.categories.each do | item | %>
+      <li class="item">
+        <%= link_to item.title, category_path(item) %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -87,7 +87,8 @@ class Category < ActiveRecord::Base
       end
     end
 
-    result['subdivisions'] = children.map { |child| child.to_json(expand) } if expand && children.any?
+    result['categories'] = categories.map { |child| child.to_json(expand) } if expand && categories.any?
+    result['subdivisions'] = subdivisions.map { |child| child.to_json(expand) } if expand && subdivisions.any?
 
     result
   end
