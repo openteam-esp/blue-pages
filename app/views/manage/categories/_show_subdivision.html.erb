@@ -34,6 +34,6 @@
       <%= link_to t('manage.sort'), sort_manage_categories_path(resource), :class => 'sort_link off button icon loop' if children.any? %>
       <%= link_to t('manage.new_subdivision'), new_manage_category_subdivision_path(resource), :class => 'button icon add' %>
     </div>
-    <%= render :partial => "children", :locals => { :children => children } %>
+    <%= render :partial => "children", :locals => { :children => resource.subdivisions } %>
   </div>
 </div>
