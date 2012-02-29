@@ -48,7 +48,8 @@ describe CategoriesController do
           'person' => 'Иванов Иван Иванович',
           'title' => 'Директа',
           'address' => 'кабинет 123',
-          'link' => '/categories/2/items/1'
+          'link' => '/categories/2/items/1',
+          'image_url' => nil
         }]
       }
 
@@ -66,7 +67,8 @@ describe CategoriesController do
           'person' => 'Иванов Иван Иванович',
           'title' => 'Директа',
           'address' => 'кабинет 123',
-          'link' => '/categories/2/items/1'
+          'link' => '/categories/2/items/1',
+          'image_url' => nil
         }],
         'subdivisions' => [
           {
