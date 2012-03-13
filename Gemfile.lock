@@ -2,12 +2,12 @@ GEM
   remote: http://rubygems.org/
   specs:
     Ascii85 (1.0.1)
-    actionmailer (3.2.1)
-      actionpack (= 3.2.1)
+    actionmailer (3.2.2)
+      actionpack (= 3.2.2)
       mail (~> 2.4.0)
-    actionpack (3.2.1)
-      activemodel (= 3.2.1)
-      activesupport (= 3.2.1)
+    actionpack (3.2.2)
+      activemodel (= 3.2.2)
+      activesupport (= 3.2.2)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.1)
@@ -15,18 +15,21 @@ GEM
       rack-cache (~> 1.1)
       rack-test (~> 0.6.1)
       sprockets (~> 2.1.2)
-    activemodel (3.2.1)
-      activesupport (= 3.2.1)
+    active_attr (0.5.0)
+      activemodel (>= 3.1, < 4.1)
+      activesupport (>= 3.1, < 4.1)
+    activemodel (3.2.2)
+      activesupport (= 3.2.2)
       builder (~> 3.0.0)
-    activerecord (3.2.1)
-      activemodel (= 3.2.1)
-      activesupport (= 3.2.1)
-      arel (~> 3.0.0)
+    activerecord (3.2.2)
+      activemodel (= 3.2.2)
+      activesupport (= 3.2.2)
+      arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.1)
-      activemodel (= 3.2.1)
-      activesupport (= 3.2.1)
-    activesupport (3.2.1)
+    activeresource (3.2.2)
+      activemodel (= 3.2.2)
+      activesupport (= 3.2.2)
+    activesupport (3.2.2)
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.2.7)
@@ -43,12 +46,12 @@ GEM
     cancan (1.6.7)
     chronic (0.6.7)
     chunky_png (1.2.5)
-    compass (0.12.rc.1)
+    compass (0.12.0)
       chunky_png (~> 1.2)
       fssm (>= 0.2.7)
       sass (~> 3.1)
-    compass-rails (1.0.0.rc.3)
-      compass (~> 0.12.rc.0)
+    compass-rails (1.0.0)
+      compass (~> 0.12.0)
     configliere (0.4.8)
       json
     curb (0.8.0)
@@ -68,10 +71,9 @@ GEM
       activemodel
     erubis (2.7.0)
     escape (0.0.4)
-    esp-auth (1.0.7)
+    esp-auth (1.1.2)
       ancestry
       cancan
-      compass (>= 0.12.alpha.4)
       curb
       default_value_for
       devise
@@ -85,34 +87,20 @@ GEM
       omniauth
       omniauth-oauth2
       progress_bar
-      rails
-      sass
-      sass-rails
       sunspot_rails
       whenever
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.0.6)
+    esp-commons (0.2.0)
+      active_attr
       airbrake
-      ancestry
-      annotate (>= 2.4.1.beta1)
-      compass-rails (>= 1.0.0.rc2)
       configliere
-      default_value_for
-      formtastic (>= 2.1.0.beta1)
-      has_enum
-      has_searcher
-      inherited_resources
-      kaminari
-      pg
       rails
-      russian
-      sunspot_rails
       unicorn
     execjs (1.3.0)
       multi_json (~> 1.0)
-    fabrication (1.3.1)
+    fabrication (1.3.2)
     faraday (0.7.6)
       addressable (~> 2.2)
       multipart-post (~> 1.1)
@@ -120,10 +108,10 @@ GEM
     fattr (2.2.1)
     ffi (1.0.11)
     forgery (0.5.0)
-    formtastic (2.1.0.rc)
+    formtastic (2.1.1)
       actionpack (~> 3.0)
     fssm (0.2.8.1)
-    guard (1.0.0)
+    guard (1.0.1)
       ffi (>= 0.5.0)
       thor (~> 0.14.6)
     guard-rspec (0.6.0)
@@ -139,15 +127,13 @@ GEM
     hashie (1.2.0)
     highline (1.6.11)
     hike (1.2.1)
-    hirb (0.6.0)
     i18n (0.6.0)
-    inherited_resources (1.3.0)
+    inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
-      responders (~> 0.6.0)
-    itslog (0.6.1)
+      responders (~> 0.6)
     journey (1.0.3)
-    jquery-rails (2.0.0)
-      railties (>= 3.2.0.beta, < 5.0)
+    jquery-rails (2.0.1)
+      railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.6.5)
     kaminari (0.13.0)
@@ -157,7 +143,7 @@ GEM
     kgio (2.7.2)
     libnotify (0.7.2)
     libv8 (3.3.10.4)
-    mail (2.4.1)
+    mail (2.4.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
@@ -165,11 +151,11 @@ GEM
     multi_json (1.1.0)
     multipart-post (1.1.5)
     nested_form (0.2.0)
-    nokogiri (1.5.0)
+    nokogiri (1.5.2)
     oauth2 (0.5.2)
       faraday (~> 0.7)
       multi_json (~> 1.0)
-    omniauth (1.0.2)
+    omniauth (1.0.3)
       hashie (~> 1.2)
       rack
     omniauth-oauth2 (1.0.0)
@@ -191,23 +177,23 @@ GEM
       highline (~> 1.6.1)
       options (~> 2.3.0)
     rack (1.4.1)
-    rack-cache (1.1)
+    rack-cache (1.2)
       rack (>= 0.4)
     rack-ssl (1.3.2)
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.2.1)
-      actionmailer (= 3.2.1)
-      actionpack (= 3.2.1)
-      activerecord (= 3.2.1)
-      activeresource (= 3.2.1)
-      activesupport (= 3.2.1)
+    rails (3.2.2)
+      actionmailer (= 3.2.2)
+      actionpack (= 3.2.2)
+      activerecord (= 3.2.2)
+      activeresource (= 3.2.2)
+      activesupport (= 3.2.2)
       bundler (~> 1.0)
-      railties (= 3.2.1)
-    railties (3.2.1)
-      actionpack (= 3.2.1)
-      activesupport (= 3.2.1)
+      railties (= 3.2.2)
+    railties (3.2.2)
+      actionpack (= 3.2.2)
+      activesupport (= 3.2.2)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -218,7 +204,8 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
-    responders (0.6.5)
+    responders (0.8.0)
+      railties (~> 3.1)
     rsolr (1.0.7)
       builder (>= 2.1.2)
     rspec (2.8.0)
@@ -235,16 +222,10 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.8.0)
     ruby-rc4 (0.1.5)
-    russian (0.6.0)
-      i18n (>= 0.5.0)
     ryba (0.1.2)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
     sass (3.1.15)
-    sass-rails (3.2.4)
-      railties (~> 3.2.0)
-      sass (>= 3.1.10)
-      tilt (~> 1.3)
     shoulda-matchers (1.0.0)
     show_for (0.2.4)
     spork (1.0.0rc2)
@@ -271,7 +252,7 @@ GEM
       polyglot
       polyglot (>= 0.3.1)
     ttfunk (1.0.3)
-    tzinfo (0.3.31)
+    tzinfo (0.3.32)
     uglifier (1.2.3)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
@@ -309,9 +290,7 @@ DEPENDENCIES
   has_enum
   has_scope
   has_searcher
-  hirb
   inherited_resources
-  itslog
   jquery-rails
   kaminari
   libnotify

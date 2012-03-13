@@ -34,8 +34,6 @@ end
 
 group :development do
   gem 'annotate',               '>= 2.4.1.beta1', :require => false
-  gem 'hirb',                                     :require => false
-  gem 'itslog'
   gem 'sunspot_solr',                             :require => false
 end
 
