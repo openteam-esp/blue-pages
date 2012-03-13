@@ -98,6 +98,19 @@ GEM
       configliere
       rails
       unicorn
+    esp-gems (0.0.2)
+      ancestry
+      annotate (>= 2.4.1.beta1)
+      compass-rails (>= 1.0.0.rc.3)
+      default_value_for
+      formtastic
+      has_enum
+      has_searcher
+      inherited_resources
+      kaminari
+      pg
+      russian
+      sunspot_rails
     execjs (1.3.0)
       multi_json (~> 1.0)
     fabrication (1.3.2)
@@ -222,6 +235,8 @@ GEM
       railties (>= 3.0)
       rspec (~> 2.8.0)
     ruby-rc4 (0.1.5)
+    russian (0.6.0)
+      i18n (>= 0.5.0)
     ryba (0.1.2)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
@@ -273,30 +288,21 @@ DEPENDENCIES
   ancestry
   annotate (>= 2.4.1.beta1)
   attribute_normalizer
-  cancan
   compass-rails
-  curb
-  default_value_for
   el_vfs_client
   email_validator
   esp-auth
   esp-ckeditor
   esp-commons
+  esp-gems
   fabrication
   forgery
-  formtastic
   guard-rspec
   guard-spork
-  has_enum
-  has_scope
-  has_searcher
-  inherited_resources
   jquery-rails
-  kaminari
   libnotify
   nested_form
   nokogiri
-  pg
   prawn (>= 1.0.0.rc1)
   rails
   rb-inotify
@@ -305,11 +311,9 @@ DEPENDENCIES
   sanitize
   shoulda-matchers
   show_for
-  spork (>= 1.0.0.rc1)
+  spork (>= 1.0.0.rc2)
   sqlite3
   sunspot_matchers
-  sunspot_rails
   sunspot_solr
   therubyracer
   uglifier
-  unicorn

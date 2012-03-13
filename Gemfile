@@ -1,35 +1,27 @@
 source :rubygems
 
-gem 'ancestry'
-gem 'attribute_normalizer'
-gem 'cancan'
-gem 'compass-rails'
-gem 'curb'
-gem 'default_value_for'
-gem 'el_vfs_client'
-gem 'email_validator'
-gem 'esp-commons'
-gem 'esp-ckeditor'
-gem 'esp-auth'
-gem 'forgery',                                    :require => false
-gem 'formtastic'
-gem 'has_enum'
-gem 'has_scope'
-gem 'has_searcher'
-gem 'inherited_resources'
-gem 'jquery-rails'
-gem 'kaminari'
-gem 'nested_form'
-gem 'nokogiri',                                   :require => false
-gem 'prawn',                    '>= 1.0.0.rc1',   :require => false
-gem 'rails',                                      :require => false
-gem 'sanitize',                                   :require => false
-gem 'show_for'
-gem 'sunspot_rails'
-
 group :assets do
   gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
   gem 'uglifier'
+end
+
+group :default do
+  gem 'ancestry'
+  gem 'attribute_normalizer'
+  gem 'compass-rails'
+  gem 'el_vfs_client'
+  gem 'email_validator'
+  gem 'esp-auth'
+  gem 'esp-ckeditor'
+  gem 'esp-commons'
+  gem 'esp-gems'
+  gem 'jquery-rails'
+  gem 'nested_form'
+  gem 'nokogiri',                                   :require => false
+  gem 'prawn',                    '>= 1.0.0.rc1',   :require => false
+  gem 'rails',                                      :require => false
+  gem 'sanitize',                                   :require => false
+  gem 'show_for'
 end
 
 group :development do
@@ -37,13 +29,9 @@ group :development do
   gem 'sunspot_solr',                             :require => false
 end
 
-group :production do
-  gem 'pg',                                       :require => false
-  gem 'unicorn',                                  :require => false         unless ENV['SHARED_DATABASE_URL']
-end
-
 group :test do
   gem 'fabrication'
+  gem 'forgery',                                    :require => false
   gem 'guard-rspec'
   gem 'guard-spork'
   gem 'libnotify'
@@ -51,7 +39,7 @@ group :test do
   gem 'rspec-rails',                              :require => false
   gem 'ryba',                                     :require => false
   gem 'shoulda-matchers',                         :require => false
-  gem 'spork',                  '>= 1.0.0.rc1',   :require => false
+  gem 'spork',                  '>= 1.0.0.rc2',   :require => false
   gem 'sqlite3',                                  :require => false
   gem 'sunspot_matchers',                         :require => false
 end
