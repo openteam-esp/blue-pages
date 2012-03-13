@@ -13,7 +13,7 @@ class Category < ActiveRecord::Base
 
   after_update :set_subtree_weights, :if => :weight_changed?
 
-  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i}
+  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
 
   searchable do
     boost :boost

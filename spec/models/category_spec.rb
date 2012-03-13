@@ -3,6 +3,7 @@
 require 'spec_helper'
 
 describe Category do
+
   it { should have_many :permissions }
   it { should validate_presence_of :title }
   it { should allow_value('Название на русском языке').for(:title) }
@@ -10,6 +11,7 @@ describe Category do
   it { should allow_value('Название со скобками ()').for(:title) }
   it { should allow_value('Название со дефисом -').for(:title) }
   it { should allow_value('Название с «"кавычками"»').for(:title) }
+  it { should allow_value('Название с точкой.').for(:title) }
 
   it { should_not allow_value('English title').for(:title) }
   it { should_not allow_value('Название с цифрами 123').for(:title) }
