@@ -1,10 +1,10 @@
 source :rubygems
 
 group :assets do
-  gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
-  gem 'uglifier'
   gem 'compass-rails'
   gem 'sass-rails'
+  gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
+  gem 'uglifier'
 end
 
 group :default do
