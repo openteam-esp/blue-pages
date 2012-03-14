@@ -10,6 +10,7 @@ end
 group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
+  gem 'curb'
   gem 'el_vfs_client'
   gem 'email_validator'
   gem 'esp-auth'
