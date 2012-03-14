@@ -3,12 +3,13 @@ source :rubygems
 group :assets do
   gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
   gem 'uglifier'
+  gem 'compass-rails'
+  gem 'sass-rails'
 end
 
 group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
-  gem 'compass-rails'
   gem 'el_vfs_client'
   gem 'email_validator'
   gem 'esp-auth'
