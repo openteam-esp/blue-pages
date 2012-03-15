@@ -68,6 +68,7 @@ class Item < ActiveRecord::Base
     result['name'] = person.name
     result['patronymic'] = person.patronymic
     result['dossier'] = person.dossier                                             if person.info_path
+    result['image_url'] = image_url                                         if image_url.present?
 
     result
   end

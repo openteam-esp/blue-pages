@@ -293,6 +293,7 @@ DEPENDENCIES
   annotate (>= 2.4.1.beta1)
   attribute_normalizer
   compass-rails
+  curb
   el_vfs_client
   email_validator
   esp-auth
