@@ -9,8 +9,8 @@
       <%= form.inputs do %>
         <%= form.input :term, :as => :string, :label => false %>
       <% end %>
-      <%= form.buttons do %>
-        <%= form.commit_button t('search'), :button_html => { :class => "button" } %>
+      <%= form.actions do %>
+        <%= form.action :submit, :label => t('search'), :button_html => { :class => "button" } %>
       <% end %>
     <% end %>
     <%= yield %>
