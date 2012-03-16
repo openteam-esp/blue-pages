@@ -1,15 +1,18 @@
 <% if resource.person %>
   <h2><%= resource.person %></h2>
-  <%= show_for resource.person do |person| %>
-    <%= person.attribute :birthdate %>
-  <% end %>
-<% end %>
-<%= show_for resource do |show_item| %>
-  <%= show_item.association :address, :using => :full_address %>
-  <%= show_item.association :phones, :if_blank => "Не указаны" %>
-  <%= show_item.association :emails, :if_blank => "Не указаны" do | email | %>
-    <li><%= mail_to email %></li>
-  <% end %>
+  <div class="person_info">
+    <%= content_tag(:div, link_to(image_for(resource.image_url, :width => '100'), resource.image_url), :class => 'image') if resource.image_url? %>
+    <%= show_for resource.person do |person| %>
+      <%= person.attribute :birthdate %>
+    <% end %>
+    <%= show_for resource do |show_item| %>
+      <%= show_item.association :address, :using => :full_address %>
+      <%= show_item.association :phones, :if_blank => "Не указаны" %>
+      <%= show_item.association :emails, :if_blank => "Не указаны" do | email | %>
+        <li><%= mail_to email %></li>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>
 
 <% if resource.person && resource.person.info_path %>
