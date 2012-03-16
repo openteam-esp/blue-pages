@@ -9,8 +9,12 @@
   <%= link_to t("go_to_manage"), manage_subdivision_item_path(parent, resource), :class => "button icon edit" if can?(:modify, resource) %>
 <% end %>
 
-<%= render @item %>
-
+<div class="person_info">
+  <%= content_tag(:div, link_to(image_for(resource.image_url, :width => '100'), resource.image_url, :target => '_blank'), :class => 'image') if resource.image_url? %>
+  <div class="info">
+    <%= render @item %>
+  </div>
+</div>
 <% if resource.person.info_path %>
   <h2>Дополнительная информация</h2>
   <%= raw resource.person.dossier %>
