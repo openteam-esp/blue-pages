@@ -160,7 +160,9 @@ function choose_file(){
         .children('.wrapper')
         .text('')
         .css('width', parseInt(resized_width) + 4)
-        .append('<a href="' + image_url + '"><img src="' + resized_url.join('/') + '" width="' + resized_width + '" height="' + resized_height + '" alt="' + image_name.split('.')[0] + '"/></a>');
+        .append('<a target="_blank" href="' + image_url + '">' +
+                '<img src="' + resized_url.join('/') + '" width="' + resized_width + '" height="' + resized_height + '" alt="' + image_name.split('.')[0] + '"/>' +
+                '</a>');
 
       if (!$('.actions .delete_file', attached_file_wrapper.closest('ol')).length) {
         $('.actions', attached_file_wrapper.closest('ol')).append('<a href="#" class="button icon remove danger delete_file">Удалить</a>');

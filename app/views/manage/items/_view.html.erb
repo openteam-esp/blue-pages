@@ -1,7 +1,7 @@
 <% if resource.person %>
   <h2><%= resource.person %></h2>
   <div class="person_info">
-    <%= content_tag(:div, link_to(image_for(resource.image_url, :width => '100'), resource.image_url), :class => 'image') if resource.image_url? %>
+    <%= content_tag(:div, link_to(image_for(resource.image_url, :width => '100'), resource.image_url, :target => '_blank'), :class => 'image') if resource.image_url? %>
     <%= show_for resource.person do |person| %>
       <%= person.attribute :birthdate %>
     <% end %>

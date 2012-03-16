@@ -4,7 +4,7 @@
     <li class='attached_file'>
       <div class='wrapper'>
         <% if form.object.image_url? %>
-          <%= link_to image_for(form.object.image_url, :width => '100'), form.object.image_url %>
+          <%= link_to image_for(form.object.image_url, :width => '100'), form.object.image_url, :target => '_blank' %>
         <% else %>
           <%= t('file_not_selected') %>
         <% end %>
