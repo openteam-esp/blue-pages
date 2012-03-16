@@ -1,10 +1,14 @@
 @import 'compass/utilities'
 
+$nav_width: 300px
+
 #content_wrapper
   +clearfix
   nav
-    width: 250px
+    width: $nav_width
     float: left
+    .categories_tree
+      padding-right: 10px
     h1
       font-size: 16px
       a
@@ -12,7 +16,7 @@
         background: transparent url('site.png') no-repeat left
   article
     border-left: 1px solid #ccc
-    margin-left: 250px
+    margin-left: $nav_width
     padding-left: 10px
   .change_route_wrapper
     border-bottom: 1px solid #ccc

@@ -145,14 +145,28 @@ function choose_file(){
 
     input.change(function(){
       var attached_file_wrapper = $('.attached_file');
-      var image_url              = input.val();
-      var file_name = decodeURIComponent(image_url).match(/([^\/.]+)(\.(.{3}))?$/);
+      var image_url = input.val();
+      var image_name = image_url.split('/').slice(-1)[0];
+
+      var array_url = image_url.split('/');
+      var original_size = array_url.splice(-2, 1)[0].split('-');
+      var resized_url = array_url.slice(0, array_url.length-1);
+      var resized_width = '100';
+      var resized_height = parseInt(original_size[1] * resized_width / original_size[0]);
+      resized_url.push(resized_width + '-' + resized_height)
+      resized_url.push(array_url.slice(-1)[0]);
 
       attached_file_wrapper
-      .children('.wrapper')
-      .html('<a href="'+image_url+'" class="'+file_name[3]+'"><span></span>'+file_name[1]+'</a> <a href="#" class="button icon remove danger delete_file">Удалить</a>');
+        .children('.wrapper')
+        .text('')
+        .css('width', parseInt(resized_width) + 4)
+        .append('<a href="' + image_url + '"><img src="' + resized_url.join('/') + '" width="' + resized_width + '" height="' + resized_height + '" alt="' + image_name.split('.')[0] + '"/></a>');
 
-    input.unbind('change');
+      if (!$('.actions .delete_file', attached_file_wrapper.closest('ol')).length) {
+        $('.actions', attached_file_wrapper.closest('ol')).append('<a href="#" class="button icon remove danger delete_file">Удалить</a>');
+      };
+
+      input.unbind('change');
     });
 
     return false;
@@ -161,9 +175,9 @@ function choose_file(){
 
 function delete_file(){
   $('.delete_file').live('click', function(){
-    $('.attached_file .wrapper').html('<span>Файл не выбран</span>');
+    $('.attached_file .wrapper').html('Файл не выбран');
     $('#image_url').val('');
-
+    $(this).remove();
     return false;
   });
 };

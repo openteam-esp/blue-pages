@@ -69,4 +69,11 @@ module ApplicationHelper
     content_tag(:li, content_tag(:span, raw('&nbsp;'), :class => 'placeholder'))
   end
 
+  def image_for(picture, options)
+    original_width, original_height = picture[/\d+-\d+/].split('-')
+    width = options.delete(:width)
+    height = width.to_i * original_height.to_i / original_width.to_i
+    image_tag picture.gsub(/\d+-\d+/, "#{width}-#{height}"), :width => width, :height => height
+  end
+
 end
