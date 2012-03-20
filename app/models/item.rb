@@ -41,6 +41,8 @@ class Item < ActiveRecord::Base
 
   alias :parent :subdivision
 
+  normalize_attribute :image_url
+
   searchable do
     boost :boost
 
