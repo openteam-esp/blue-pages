@@ -20,6 +20,7 @@ group :default do
   gem 'jquery-rails'
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
+  gem 'openteam-commons'
   gem 'prawn',                    '>= 1.0.0.rc1',   :require => false
   gem 'rails',                                      :require => false
   gem 'sanitize',                                   :require => false

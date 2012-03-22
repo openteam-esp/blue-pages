@@ -96,6 +96,34 @@ describe Subdivision do
 
     it { category_in_subdivision.should be_valid }
   end
+
+  describe 'изменение родителя' do
+    let(:root) { Category.root }
+
+    let(:category_1) { Fabricate :category, :parent => root }
+    let(:category_2) { Fabricate :category, :parent => root }
+
+    let(:subdivision_1_1) { Fabricate :subdivision, :parent => category_1 }
+    let(:subdivision_1_1_1) { Fabricate :subdivision, :parent => subdivision_1_1 }
+    let(:subdivision_1_1_2) { Fabricate :subdivision, :parent => subdivision_1_1 }
+
+    before { category_1 and category_2 and subdivision_1_1 and subdivision_1_1_1 and subdivision_1_1_2 }
+    before { subdivision_1_1.update_attributes(:parent_id => category_2.id) }
+
+    it { category_2.reload.children.should == [subdivision_1_1] }
+
+    it { subdivision_1_1.reload.parent.should == category_2 }
+    it { subdivision_1_1.reload.ancestry.should == '1/3' }
+    it { subdivision_1_1.reload.weight.should == '01/02/01' }
+
+    it { subdivision_1_1_1.reload.parent.should == subdivision_1_1 }
+    it { subdivision_1_1_1.reload.ancestry.should == '1/3/4' }
+    it { subdivision_1_1_1.reload.weight.should == '01/02/01/01' }
+
+    it { subdivision_1_1_2.reload.parent.should == subdivision_1_1 }
+    it { subdivision_1_1_2.reload.ancestry.should == '1/3/4' }
+    it { subdivision_1_1_2.reload.weight.should == '01/02/01/02' }
+  end
 end
 
 # == Schema Information

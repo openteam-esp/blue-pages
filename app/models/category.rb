@@ -112,7 +112,7 @@ class Category < ActiveRecord::Base
     end
 
     def weights
-      @weights ||= [parent_weight, sprintf('%02d', position)].keep_if(&:present?).join('/').split('/')
+      [parent_weight, sprintf('%02d', position)].compact.join('/').split('/')
     end
 
     def decrement
@@ -120,9 +120,13 @@ class Category < ActiveRecord::Base
     end
 
     def set_subtree_weights
-      descendants.each do |category|
-        category.set_weight
-        category.save!
+      unless ancestry_callbacks_disabled?
+        reload.descendants.each do |descendant|
+          descendant.without_ancestry_callbacks do
+            descendant.set_weight
+            descendant.save!
+          end
+        end
       end
     end
 
