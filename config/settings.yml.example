@@ -1,28 +1,21 @@
 app:
-  secret:     SECRET
+  secret:       SECRET
 
 errors:
-  url:        http://errors.esp.org
-  key:        KEY
+  key:          KEY
+  url:          http://errors.openteam.ru
 
-solr:
-  url:        http://localhost:8982/solr
+#solr:
+#  url:          http://localhost:8982/solr
 
-sso:
-  url:        http://sso.esp.org
-  key:        KEY
-  secret:     SECRET
+#sso:
+#  key:          KEY
+#  secret:       SECRET
+#  url:          http://esp-sso.openteam.ru
 
-vfs:
-  url:        http://vfs.esp.org
+#storage
+  #url:         http://esp-storage.openteam.ru
 
 unicorn:
-  workers:    2
-  preload:    true
-  timeout:    300
-  listen:     localhost:3000
-  prefix:
-    pid:      tmp/pids/         # => tmp/pids/blue-pages.pid
-    logs:     log/              # => log/{stderr,stdout,application}.log
-    socket:   tmp/sockets/      # => tmp/esp-blue_pages.sock
-
+  workers:      2
+  timeout:      300
