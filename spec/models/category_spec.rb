@@ -27,7 +27,7 @@ end
 #  title          :text
 #  abbr           :string(255)
 #  url            :text
-#  info_path      :string(255)
+#  info_path      :text
 #  position       :integer
 #  weight         :string(255)
 #  ancestry       :string(255)

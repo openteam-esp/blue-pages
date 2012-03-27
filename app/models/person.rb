@@ -38,13 +38,13 @@ end
 # Table name: people
 #
 #  id         :integer         not null, primary key
+#  item_id    :integer
 #  surname    :string(255)
 #  name       :string(255)
 #  patronymic :string(255)
 #  birthdate  :date
-#  item_id    :integer
-#  created_at :datetime
-#  updated_at :datetime
-#  info_path  :string(255)
+#  info_path  :text
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
 #
 

@@ -13,8 +13,8 @@ end
 #  name       :string(255)
 #  patronymic :string(255)
 #  birthdate  :date
-#  info_path  :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  info_path  :text
+#  created_at :datetime        not null
+#  updated_at :datetime        not null
 #
 
