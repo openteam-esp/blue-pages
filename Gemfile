@@ -28,8 +28,8 @@ group :default do
 end
 
 group :development do
-  gem 'annotate',               '>= 2.4.1.beta1', :require => false
-  gem 'sunspot_solr',                             :require => false
+  gem 'annotate',               '>= 2.4.1.beta1',   :require => false
+  gem 'sunspot_solr',                               :require => false
 end
 
 group :test do
@@ -39,10 +39,10 @@ group :test do
   gem 'guard-spork'
   gem 'libnotify'
   gem 'rb-inotify'
-  gem 'rspec-rails',                              :require => false
-  gem 'ryba',                                     :require => false
-  gem 'shoulda-matchers',                         :require => false
-  gem 'spork',                  '>= 1.0.0.rc2',   :require => false
-  gem 'sqlite3',                                  :require => false
-  gem 'sunspot_matchers',                         :require => false
+  gem 'rspec-rails',                                :require => false
+  gem 'ryba',                                       :require => false
+  gem 'shoulda-matchers',                           :require => false
+  gem 'spork',                  '>= 1.0.0.rc2',     :require => false
+  gem 'sqlite3',                                    :require => false
+  gem 'sunspot_matchers',                           :require => false
 end

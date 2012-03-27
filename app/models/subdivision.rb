@@ -70,7 +70,7 @@ class Subdivision < Category
     end
 
     def remote_url
-      "#{Settings['vfs.url']}/api/el_finder/v2?format=json&cmd=get"
+      "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
     end
 
     def set_address_attributes
