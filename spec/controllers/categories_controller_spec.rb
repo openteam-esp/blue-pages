@@ -55,8 +55,29 @@ describe CategoriesController do
       ActiveSupport::JSON.decode(response.body).should == expected_hash
     end
 
+    it 'GET show with expand 1' do
+      get :show, :id => subdivision.id, :expand => '1', :format => :json
+      expected_hash = {
+        'title' => 'Подразделение',
+        'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1',
+        'phones' => 'Тел.: (3822) 22-33-44',
+        'items' => [{
+          'person' => 'Иванов Иван Иванович',
+          'title' => 'Директа',
+          'address' => 'кабинет 123',
+          'image_url' => nil
+        }],
+        'subdivisions' => [
+          {
+            'title' => 'Вложенное подразеделение',
+            'address' => '634020, Томская область, г. Томск, пл. Ленина, 2, стр.1'
+          }
+        ]
+      }
+    end
+
     it 'GET show with expand' do
-      get :show, :id => subdivision.id, :expand => true, :format => :json
+      get :show, :id => subdivision.id, :expand => '2', :format => :json
 
       expected_hash = {
         'title' => 'Подразделение',

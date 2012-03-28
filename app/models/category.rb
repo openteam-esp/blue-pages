@@ -46,7 +46,7 @@ class Category < ActiveRecord::Base
     1.1 - decrement / 10
   end
 
-  def to_json(expand=false, sync=false)
+  def to_json(expand, sync=false)
     sync ? json_sync : json_cms(expand)
   end
 
@@ -91,8 +91,12 @@ class Category < ActiveRecord::Base
       end
     end
 
-    result['categories'] = categories.map { |child| child.to_json(expand) } if expand && categories.any?
-    result['subdivisions'] = subdivisions.map { |child| child.to_json(expand) } if expand && subdivisions.any?
+    expand = [expand.to_i, 5].min
+
+    #subtree(:to_depth => expand)
+
+    result['categories'] = categories.map { |child| child.to_json(expand - 1) } if expand > 0 && categories.any?
+    result['subdivisions'] = subdivisions.map { |child| child.to_json(expand - 1) } if expand > 0 && subdivisions.any?
 
     result
   end
