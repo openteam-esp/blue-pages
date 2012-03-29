@@ -70,7 +70,7 @@ class Item < ActiveRecord::Base
     result['name'] = person.name
     result['patronymic'] = person.patronymic
     result['dossier'] = person.dossier                                             if person.info_path
-    result['image_url'] = image_url                                         if image_url.present?
+    result['image_url'] = image_url                                                if image_url.present?
 
     result
   end
@@ -82,7 +82,7 @@ class Item < ActiveRecord::Base
     end
 
     def set_address_attributes
-      self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if subdivision && !address
+      self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if new_record? && subdivision && !address
     end
 
     def set_position

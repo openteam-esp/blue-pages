@@ -65,19 +65,11 @@ class Category < ActiveRecord::Base
     result = {}
     result['title'] = title
 
-    if respond_to?(:items)
-      result['items'] = [] if items.any?
-
-      items.each do |item|
-        hash = {
-          'person' => item.person.to_s,
-          'title' => item.title,
-          'image_url' => item.image_url
-        }
-
-        result['items'] << hash
-      end
-    end
+    result['items'] = [ {
+      'person' => chief.person.to_s,
+      'title' => chief.title,
+      'image_url' => chief.image_url
+    } ] if chief
 
     expand = [expand, 2].min
     result['subdivisions'] = subdivisions.map { |child| child.json_cms_lite(expand - 1) } if expand > 0 && subdivisions.any?
