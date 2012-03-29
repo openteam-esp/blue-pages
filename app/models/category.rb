@@ -61,7 +61,35 @@ class Category < ActiveRecord::Base
     end
   end
 
+  def json_cms_lite(expand)
+    result = {}
+    result['title'] = title
+
+    if respond_to?(:items)
+      result['items'] = [] if items.any?
+
+      items.each do |item|
+        hash = {
+          'person' => item.person.to_s,
+          'title' => item.title,
+          'image_url' => item.image_url
+        }
+
+        result['items'] << hash
+      end
+    end
+
+    expand = [expand, 2].min
+    result['subdivisions'] = subdivisions.map { |child| child.json_cms_lite(expand - 1) } if expand > 0 && subdivisions.any?
+
+    result
+  end
+
   def json_cms(expand)
+    expand = expand.to_i
+
+    return json_cms_lite(expand) if expand > 1
+
     result = {}
     result['title'] = title
 
@@ -91,12 +119,8 @@ class Category < ActiveRecord::Base
       end
     end
 
-    expand = [expand.to_i, 5].min
-
-    #subtree(:to_depth => expand)
-
-    result['categories'] = categories.map { |child| child.to_json(expand - 1) } if expand > 0 && categories.any?
-    result['subdivisions'] = subdivisions.map { |child| child.to_json(expand - 1) } if expand > 0 && subdivisions.any?
+    result['categories'] = categories.map { |child| child.json_cms(expand - 1) } if expand > 0 && categories.any?
+    result['subdivisions'] = subdivisions.map { |child| child.json_cms(expand - 1) } if expand > 0 && subdivisions.any?
 
     result
   end
