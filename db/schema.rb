@@ -35,13 +35,13 @@ ActiveRecord::Schema.define(:version => 20120327094624) do
     t.text     "title"
     t.string   "abbr"
     t.text     "url"
-    t.text     "info_path",      :limit => 255
+    t.text     "info_path"
     t.integer  "position"
     t.string   "weight"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -78,9 +78,9 @@ ActiveRecord::Schema.define(:version => 20120327094624) do
     t.string   "name"
     t.string   "patronymic"
     t.date     "birthdate"
-    t.text     "info_path",  :limit => 255
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.text     "info_path"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"
