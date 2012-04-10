@@ -77,7 +77,7 @@ class Category < ActiveRecord::Base
     result
   end
 
-  def json_cms(expand)
+  def json_cms(expand, expand_categories=true)
     expand = expand.to_i
 
     return json_cms_lite(expand) if expand > 1
@@ -111,7 +111,7 @@ class Category < ActiveRecord::Base
       end
     end
 
-    result['categories'] = categories.map { |child| child.json_cms(expand - 1) } if expand > 0 && categories.any?
+    result['categories'] = categories.map { |child| child.json_cms(expand, false) } if expand > 0 && expand_categories && categories.any?
     result['subdivisions'] = subdivisions.map { |child| child.json_cms(expand - 1) } if expand > 0 && subdivisions.any?
 
     result
