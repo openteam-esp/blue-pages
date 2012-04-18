@@ -2,7 +2,7 @@
 <%= javascript_include_tag 'info_plugin' %>
 
 <%= form.inputs :class => "inputs bordered" do %>
-  <%= form.input :title, :as => :string, :input_html => { :autofocus => true, :class => 'for_info_path' } %>
+  <%= form.input :title, :as => :text, :input_html => { :autofocus => true, :class => 'for_info_path' } %>
   <%= form.input :abbr %>
   <%= form.input :url, :as => :string %>
   <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @subdivision.id %>
