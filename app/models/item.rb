@@ -109,7 +109,7 @@ end
 #
 #  id             :integer         not null, primary key
 #  subdivision_id :integer
-#  title          :string(255)
+#  title          :text(255)
 #  position       :integer
 #  weight         :string(255)
 #  created_at     :datetime        not null

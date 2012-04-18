@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120327094624) do
+ActiveRecord::Schema.define(:version => 20120418053125) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20120327094624) do
     t.string   "weight"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -60,11 +60,11 @@ ActiveRecord::Schema.define(:version => 20120327094624) do
 
   create_table "items", :force => true do |t|
     t.integer  "subdivision_id"
-    t.string   "title"
+    t.text     "title"
     t.integer  "position"
     t.string   "weight"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
     t.string   "image_url"
   end
 
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(:version => 20120327094624) do
     t.string   "patronymic"
     t.date     "birthdate"
     t.text     "info_path"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"
