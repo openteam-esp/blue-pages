@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20120418053125) do
     t.string   "weight"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(:version => 20120418053125) do
     t.text     "title"
     t.integer  "position"
     t.string   "weight"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "image_url"
   end
 
@@ -79,8 +79,8 @@ ActiveRecord::Schema.define(:version => 20120418053125) do
     t.string   "patronymic"
     t.date     "birthdate"
     t.text     "info_path"
-    t.datetime "created_at",                :null => false
-    t.datetime "updated_at",                :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"
