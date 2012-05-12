@@ -14,8 +14,9 @@ class Category < ActiveRecord::Base
   before_update :set_weight
 
   before_update :send_messages_on_move, :if => :ancestry_changed?
-  after_create  :send_messages_on_create_and_update
-  after_update  :send_messages_on_create_and_update, :unless => :ancestry_changed?
+  after_create  :send_messages_on_create
+  after_update  :send_messages_on_update, :unless => :ancestry_changed?
+  after_destroy  :send_messages_on_destroy
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
 
@@ -160,8 +161,14 @@ class Category < ActiveRecord::Base
       MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestry_was.split('/').reverse.map(&:to_i))
     end
 
-    def send_messages_on_create_and_update
+    def send_messages_on_create
       MessageMaker.make_message('esp.blue-pages.cms', :add_category, id, :parent_ids => ancestor_ids.reverse)
+    end
+
+    alias_method :send_messages_on_update, :send_messages_on_create
+
+    def send_messages_on_destroy
+      MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestor_ids.reverse)
     end
 end
 

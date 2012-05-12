@@ -39,6 +39,7 @@ describe Category do
     describe '#destroy' do
       before { child_1 }
       before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
+      specify { child_1.destroy }
     end
   end
 end
