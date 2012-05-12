@@ -28,6 +28,7 @@ Spork.prefork do
 
     config.before { BluePages::SpecHelper.stub_message_maker }
     config.before(:all) {
+      ActiveRecord::IdentityMap.enabled = true
       Dir[Rails.root.join("spec/fabricators/*.rb")].each {|f| require f}
       Dir[Rails.root.join("spec/support/matchers/*.rb")].each {|f| require f}
       Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)

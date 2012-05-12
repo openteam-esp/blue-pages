@@ -15,31 +15,40 @@ describe Address do
   it { should_not allow_value('123ab').for(:postcode) }
 
   describe 'default values' do
-    it { subject.postcode.should == '634***' }
-    it { subject.region.should == 'Томская область' }
-    it { subject.district.should == 'г. Томск' }
-    it { subject.locality.should == 'г. Томск' }
+    its(:postcode)  { should == '634***' }
+    its(:region)    { should == 'Томская область' }
+    its(:district)  { should == 'г. Томск' }
+    its(:locality)  { should == 'г. Томск' }
   end
 
-  describe 'to_s' do
-    before do
-      @subdivision = Fabricate(:subdivision)
-    end
+  let(:subdivision) { Fabricate(:subdivision) }
 
-    it "for subdivision" do
-      @subdivision.address.to_s.should == "634020, Томская область, г. Томск, пл. Ленина, 2, стр.1"
-    end
+  context 'of subdivision' do
+    subject { subdivision.address }
 
-    it "for item when equal building" do
-      item = @subdivision.items.create(:title => "должность")
-      item.address.office = "210"
-      item.save
-      item.address.to_s.should == "кабинет 210"
-    end
+    its(:to_s) { should == "634020, Томская область, г. Томск, пл. Ленина, 2, стр.1" }
 
-    it "for item when not equal building" do
-      item = @subdivision.items.create(:title => "должность", :address_attributes => {:postcode => "634050", :street => "пр. Ленина", :house => "40", :office => "206"})
-      item.address.to_s.should == '634050, Томская область, г. Томск, пр. Ленина, 40, кабинет 206'
+    describe 'sending messages' do
+      before { subdivision.should_receive :send_messages_on_update }
+
+      specify { subject.update_attributes! :postcode => '777777' }
+    end
+  end
+
+  context 'of item' do
+    subject { item.address }
+    context 'when equal building' do
+      let(:item) do
+        subdivision.items.create(:title => "должность").tap do | item |
+          item.address.office = "210"
+          item.save
+        end
+      end
+      its(:to_s) { should == "кабинет 210" }
+    end
+    context 'when not equal building' do
+      let(:item) { subdivision.items.create(:title => "должность", :address_attributes => {:postcode => "634050", :street => "пр. Ленина", :house => "40", :office => "206"}) }
+      its(:to_s) { should == '634050, Томская область, г. Томск, пр. Ленина, 40, кабинет 206' }
     end
   end
 end

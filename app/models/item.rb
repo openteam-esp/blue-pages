@@ -15,6 +15,8 @@ class Item < ActiveRecord::Base
 
   before_update :set_weight
 
+  #after_update :send_messages_on_update
+
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
 
@@ -76,7 +78,6 @@ class Item < ActiveRecord::Base
   end
 
   private
-
     def term
       "#{full_name} #{title} #{address} #{phones.join(' ')} #{emails.join(' ')}"
     end
@@ -101,6 +102,8 @@ class Item < ActiveRecord::Base
       @weights ||= [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
     end
 
+    def send_messages_on_update
+    end
 end
 
 # == Schema Information

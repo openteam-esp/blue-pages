@@ -6,6 +6,10 @@ class Address < ActiveRecord::Base
   validates :region, :district, :locality, :street, :house, :presence => true
   validates :postcode, :numericality => true, :length => { :within => 6..6 }, :presence => true
 
+  after_update :send_messages_on_update
+
+  delegate :send_messages_on_update, :to => :addressable
+
   default_values :postcode => '634***',
                  :region => 'Томская область',
                  :district => 'г. Томск',
