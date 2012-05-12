@@ -17,6 +17,30 @@ describe Category do
   it { should_not allow_value('Название с цифрами 123').for(:title) }
 
   it { should normalize_attribute(:info_path).from('').to(nil) }
+
+  context 'sending messages' do
+    describe '#create' do
+      before { child_1 }
+      before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 3, :parent_ids => [2, 1]) }
+      specify { child_1_1 }
+    end
+    describe '#update' do
+      before { child_1 }
+      context 'updated name' do
+        before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 2, :parent_ids => [1]) }
+        specify { child_1.update_attributes! :title => 'Новое название' }
+      end
+      context 'updated ancestry' do
+        before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
+        before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 2, :parent_ids => [3, 1]) }
+        specify { child_1.update_attributes! :parent => child_2 }
+      end
+    end
+    describe '#destroy' do
+      before { child_1 }
+      before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
+    end
+  end
 end
 # == Schema Information
 #

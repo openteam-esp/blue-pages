@@ -4,14 +4,6 @@ require 'spec_helper'
 
 describe Ability do
 
-  def root
-    @root ||= Category.root
-  end
-
-  def create_context(parent=nil)
-    Fabricate :subdivision, :parent => parent
-  end
-
   context 'менеджер' do
     context 'корневого контекста' do
       subject { ability_for(manager_of(root)) }

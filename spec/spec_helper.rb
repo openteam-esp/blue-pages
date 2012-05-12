@@ -20,16 +20,18 @@ Spork.prefork do
     config.include AttributeNormalizer::RSpecMatcher
     config.include SunspotMatchers
     config.include EspAuth::SpecHelper
+    config.include BluePages::SpecHelper
 
     config.mock_with :rspec
 
     config.use_transactional_fixtures = true
 
-    config.before(:all) do
+    config.before { BluePages::SpecHelper.stub_message_maker }
+    config.before(:all) {
       Dir[Rails.root.join("spec/fabricators/*.rb")].each {|f| require f}
       Dir[Rails.root.join("spec/support/matchers/*.rb")].each {|f| require f}
       Sunspot.session = SunspotMatchers::SunspotSessionSpy.new(Sunspot.session)
-    end
+    }
   end
 end
 

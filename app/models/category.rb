@@ -6,12 +6,16 @@ class Category < ActiveRecord::Base
 
   has_many :permissions, :as => :context
 
+
   has_ancestry :cache_depth => true
 
+  after_update :set_subtree_weights, :if => :weight_changed?
   before_create :set_position, :set_weight
   before_update :set_weight
 
-  after_update :set_subtree_weights, :if => :weight_changed?
+  before_update :send_messages_on_move, :if => :ancestry_changed?
+  after_create  :send_messages_on_create_and_update
+  after_update  :send_messages_on_create_and_update, :unless => :ancestry_changed?
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
 
@@ -136,7 +140,7 @@ class Category < ActiveRecord::Base
     end
 
     def decrement
-      @decrement ||= ("0." + weights.reverse[0..-2].join).to_f
+      @decrement ||= ('0.' + weights.reverse[0..-2].join).to_f
     end
 
     def set_subtree_weights
@@ -151,6 +155,14 @@ class Category < ActiveRecord::Base
     end
 
     delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
+
+    def send_messages_on_move
+      MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestry_was.split('/').reverse.map(&:to_i))
+    end
+
+    def send_messages_on_create_and_update
+      MessageMaker.make_message('esp.blue-pages.cms', :add_category, id, :parent_ids => ancestor_ids.reverse)
+    end
 end
 
 # == Schema Information
