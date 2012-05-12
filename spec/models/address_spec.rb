@@ -30,25 +30,25 @@ describe Address do
 
     describe 'sending messages' do
       before { subdivision.should_receive :send_messages_on_update }
-
       specify { subject.update_attributes! :postcode => '777777' }
     end
   end
 
   context 'of item' do
     subject { item.address }
+    let(:item) { Fabricate :item }
     context 'when equal building' do
-      let(:item) do
-        subdivision.items.create(:title => "должность").tap do | item |
-          item.address.office = "210"
-          item.save
-        end
-      end
-      its(:to_s) { should == "кабинет 210" }
+      its(:to_s) { should == "кабинет 123" }
     end
+
     context 'when not equal building' do
       let(:item) { subdivision.items.create(:title => "должность", :address_attributes => {:postcode => "634050", :street => "пр. Ленина", :house => "40", :office => "206"}) }
       its(:to_s) { should == '634050, Томская область, г. Томск, пр. Ленина, 40, кабинет 206' }
+    end
+
+    describe 'sending messages' do
+      before { item.should_receive :send_messages_on_update }
+      specify { subject.update_attributes! :postcode => '777777' }
     end
   end
 end

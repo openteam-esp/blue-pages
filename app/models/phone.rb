@@ -10,7 +10,9 @@ class Phone < ActiveRecord::Base
 
   before_save :reset_code_and_additional_number, :if => :kind_internal_or_mobile?
 
+  after_create :send_messages_on_create
   after_update :send_messages_on_update
+  after_destroy :send_messages_on_destroy
 
   default_value_for :code, "3822"
 
@@ -35,7 +37,7 @@ class Phone < ActiveRecord::Base
   end
 
   private
-    delegate :send_messages_on_update, :to => :phoneable
+    delegate :send_messages_on_create, :send_messages_on_update, :send_messages_on_destroy, :to => :phoneable
 
     def reset_code_and_additional_number
       self.code = nil

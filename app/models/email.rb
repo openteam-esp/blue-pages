@@ -3,14 +3,16 @@ class Email < ActiveRecord::Base
 
   validates :address, :presence => true, :email => true
 
-  after_update :send_messages_on_update
+  after_create  :send_messages_on_create
+  after_update  :send_messages_on_update
+  after_destroy :send_messages_on_destroy
 
   def to_s
     address
   end
 
   private
-    delegate :send_messages_on_update, :to => :emailable
+    delegate :send_messages_on_create, :send_messages_on_update, :send_messages_on_destroy, :to => :emailable
 end
 
 # == Schema Information

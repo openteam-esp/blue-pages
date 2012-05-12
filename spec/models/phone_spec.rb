@@ -8,8 +8,7 @@ describe Phone do
   end
 
   def create_phone(attributes)
-    phone(attributes).save!
-    phone
+    Fabricate :phone, attributes
   end
 
   it { should validate_presence_of :number }
@@ -51,13 +50,23 @@ describe Phone do
 
   context 'of subdivision' do
     let(:subdivision) { Fabricate(:subdivision) }
-
     subject { subdivision.phones.create! :number => '1234', :kind => :internal }
 
     describe 'sending messages' do
-      before { subdivision.should_receive :send_messages_on_update  }
-
-      specify { subject.update_attributes :number => '3214' }
+      describe '#create' do
+        before { subdivision.should_receive :send_messages_on_create }
+        specify { subject }
+      end
+      describe '#update' do
+        before { subject }
+        before { subdivision.should_receive :send_messages_on_update }
+        specify { subject.update_attributes :number => '3214' }
+      end
+      describe '#destroy' do
+        before { subject }
+        before { subdivision.should_receive :send_messages_on_destroy }
+        specify { subject.destroy }
+      end
     end
   end
 end
