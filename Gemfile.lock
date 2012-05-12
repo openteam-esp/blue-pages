@@ -36,6 +36,14 @@ GEM
     airbrake (3.0.9)
       activesupport
       builder
+    amq-client (0.9.2)
+      amq-protocol (>= 0.9.0)
+      eventmachine
+    amq-protocol (0.9.0)
+    amqp (0.9.4)
+      amq-client (~> 0.9.2)
+      amq-protocol (>= 0.9.0)
+      eventmachine
     ancestry (1.2.5)
       activerecord (>= 2.2.2)
     annotate (2.4.1.beta1)
@@ -43,6 +51,7 @@ GEM
     attribute_normalizer (1.1.0)
     bcrypt-ruby (3.0.1)
     builder (3.0.0)
+    bunny (0.7.9)
     cancan (1.6.7)
     chronic (0.6.7)
     chunky_png (1.2.5)
@@ -55,6 +64,7 @@ GEM
     configliere (0.4.8)
       json
     curb (0.8.0)
+    daemons (1.1.8)
     default_value_for (1.0.7)
     devise (2.0.4)
       bcrypt-ruby (~> 3.0)
@@ -92,8 +102,12 @@ GEM
     esp-ckeditor (0.1.0)
       formtastic
       rails
-    esp-commons (0.2.3)
+    esp-commons (0.4.2)
       active_attr
+      amqp
+      bunny
+      curb
+      daemons
       openteam-commons
       rails
     esp-gems (0.0.2)
@@ -109,6 +123,7 @@ GEM
       pg
       russian
       sunspot_rails
+    eventmachine (0.12.10)
     execjs (1.3.0)
       multi_json (~> 1.0)
     fabrication (1.3.2)
