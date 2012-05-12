@@ -31,6 +31,7 @@ describe Category do
         specify { child_1.update_attributes! :title => 'Новое название' }
       end
       context 'updated ancestry' do
+        before { child_2 }
         before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
         before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 2, :parent_ids => [3, 1]) }
         specify { child_1.update_attributes! :parent => child_2 }
