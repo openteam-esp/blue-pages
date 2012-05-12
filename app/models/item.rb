@@ -15,7 +15,10 @@ class Item < ActiveRecord::Base
 
   before_update :set_weight
 
-  #after_update :send_messages_on_update
+  after_create  :send_messages_on_create
+  after_update  :send_messages_on_update
+  after_destroy  :send_messages_on_destroy
+
 
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
@@ -102,7 +105,14 @@ class Item < ActiveRecord::Base
       @weights ||= [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
     end
 
-    def send_messages_on_update
+    def send_messages_on_create
+      MessageMaker.make_message('esp.blue-pages.cms', :add_item, id, :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse})
+    end
+
+    alias_method :send_messages_on_update, :send_messages_on_create
+
+    def send_messages_on_destroy
+      MessageMaker.make_message('esp.blue-pages.cms', :remove_item, id, :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse})
     end
 end
 

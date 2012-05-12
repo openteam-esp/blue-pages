@@ -48,6 +48,27 @@ describe Item do
     it { item(subdivision).boost.should > item(another_subdivision).boost }
     it { item(subdivision, :position => 10).boost.should > item(another_subdivision).boost }
   end
+
+  context 'sending messages' do
+    let(:item) { Fabricate :item, :subdivision => child_1 }
+    describe '#create' do
+      before { child_1 }
+      before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_item, 1, :subdivision => {:id => 2, :parent_ids => [1]}) }
+      specify { item }
+    end
+
+    describe '#update' do
+      before { item }
+      before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_item, 1, :subdivision => {:id => 2, :parent_ids => [1]}) }
+      specify { item.update_attributes! :title => 'Новая должность' }
+    end
+
+    describe '#destroy' do
+      before { item }
+      before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_item, 1, :subdivision => {:id => 2, :parent_ids => [1]}) }
+      specify { item.destroy }
+    end
+  end
 end
 
 # == Schema Information

@@ -3,7 +3,6 @@
 require 'spec_helper'
 
 describe Category do
-
   it { should have_many :permissions }
   it { should validate_presence_of :title }
   it { should allow_value('Название на русском языке').for(:title) }
@@ -12,7 +11,6 @@ describe Category do
   it { should allow_value('Название со дефисом -').for(:title) }
   it { should allow_value('Название с «"кавычками"»').for(:title) }
   it { should allow_value('Название с точкой.').for(:title) }
-
   it { should_not allow_value('English title').for(:title) }
   it { should_not allow_value('Название с цифрами 123').for(:title) }
 
@@ -24,12 +22,15 @@ describe Category do
       before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 3, :parent_ids => [2, 1]) }
       specify { child_1_1 }
     end
+
     describe '#update' do
       before { child_1 }
+
       context 'updated name' do
         before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 2, :parent_ids => [1]) }
         specify { child_1.update_attributes! :title => 'Новое название' }
       end
+
       context 'updated ancestry' do
         before { child_2 }
         before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
@@ -37,6 +38,7 @@ describe Category do
         specify { child_1.update_attributes! :parent => child_2 }
       end
     end
+
     describe '#destroy' do
       before { child_1 }
       before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
@@ -44,6 +46,7 @@ describe Category do
     end
   end
 end
+
 # == Schema Information
 #
 # Table name: categories
