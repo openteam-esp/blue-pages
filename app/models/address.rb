@@ -8,8 +8,6 @@ class Address < ActiveRecord::Base
 
   after_update :send_messages_on_update
 
-  delegate :send_messages_on_update, :to => :addressable
-
   default_values :postcode => '634***',
                  :region => 'Томская область',
                  :district => 'г. Томск',
@@ -43,6 +41,9 @@ class Address < ActiveRecord::Base
     result << "кабинет #{office}" unless office.blank?
     result.join(", ")
   end
+
+  private
+    delegate :send_messages_on_update, :to => :addressable
 end
 
 # == Schema Information

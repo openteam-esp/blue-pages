@@ -22,8 +22,8 @@ describe Phone do
   end
 
   describe "код должен сбросится если телефон внутренний" do
-    it { create_phone(:code => '123', :number => '33-33-11', :kind => :phone).code.should_not be_nil }
     it { create_phone(:code => '123', :number => '33-33-11', :kind => :internal).code.should be_nil }
+    it { create_phone(:code => '123', :number => '33-33-11', :kind => :phone).code.should_not be_nil }
   end
 
   describe "если телефон мобильный должен сбросится" do
@@ -47,6 +47,18 @@ describe Phone do
     it { should_not allow_value("11-123-").for(:number) }
     it { should allow_value("11-123").for(:number) }
     it { should allow_value("1234").for(:number) }
+  end
+
+  context 'of subdivision' do
+    let(:subdivision) { Fabricate(:subdivision) }
+
+    subject { subdivision.phones.create! :number => '1234', :kind => :internal }
+
+    describe 'sending messages' do
+      before { subdivision.should_receive :send_messages_on_update  }
+
+      specify { subject.update_attributes :number => '3214' }
+    end
   end
 end
 

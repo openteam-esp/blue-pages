@@ -10,6 +10,8 @@ class Phone < ActiveRecord::Base
 
   before_save :reset_code_and_additional_number, :if => :kind_internal_or_mobile?
 
+  after_update :send_messages_on_update
+
   default_value_for :code, "3822"
 
   has_enums
@@ -33,6 +35,8 @@ class Phone < ActiveRecord::Base
   end
 
   private
+    delegate :send_messages_on_update, :to => :phoneable
+
     def reset_code_and_additional_number
       self.code = nil
       self.additional_number = nil
