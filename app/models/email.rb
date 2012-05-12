@@ -1,13 +1,16 @@
 class Email < ActiveRecord::Base
-
   belongs_to :emailable, :polymorphic => true
 
   validates :address, :presence => true, :email => true
+
+  after_update :send_messages_on_update
 
   def to_s
     address
   end
 
+  private
+    delegate :send_messages_on_update, :to => :emailable
 end
 
 # == Schema Information

@@ -7,6 +7,18 @@ describe Email do
 
   it { should allow_value('mail@mail.com').for(:address) }
   it { should_not allow_value('mail.com').for(:address) }
+
+  context 'of subdivision' do
+    let(:subdivision) { Fabricate(:subdivision) }
+
+    subject { subdivision.emails.create! :address => 'ololo@mailinator.com' }
+
+    describe 'sending messages' do
+      before { subdivision.should_receive :send_messages_on_update  }
+
+      specify { subject.update_attributes :address => 'ololo@mail.ru' }
+    end
+  end
 end
 
 # == Schema Information
