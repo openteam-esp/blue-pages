@@ -5,6 +5,8 @@ class Person < ActiveRecord::Base
 
   validates_presence_of :surname, :name, :patronymic
 
+  after_update :send_messages_on_update
+
   normalize_attribute :info_path
 
   def full_name=(full_name)
@@ -30,6 +32,8 @@ class Person < ActiveRecord::Base
     def remote_url
       "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
     end
+
+    delegate :send_messages_on_update, :to => :item
 end
 
 # == Schema Information
