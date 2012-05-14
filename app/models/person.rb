@@ -7,6 +7,10 @@ class Person < ActiveRecord::Base
 
   after_update :send_messages_on_update
 
+  after_update :update_info_path, :if => [:info_path_changed?, :info_path?]
+
+  after_update :remove_info_path, :if => :info_path_changed?, :unless => :info_path?
+
   normalize_attribute :info_path
 
   def full_name=(full_name)
@@ -38,6 +42,10 @@ class Person < ActiveRecord::Base
     end
 
     delegate :send_messages_on_update, :to => :item
+
+    def remove_info_path
+      MessageMaker.make_message 'esp.blue-pages.cms', 'remove_item', item_id
+    end
 end
 
 # == Schema Information
