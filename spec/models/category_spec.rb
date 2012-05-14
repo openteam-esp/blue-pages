@@ -45,6 +45,12 @@ describe Category do
       specify { child_1.destroy }
     end
   end
+
+  describe '#update_info_path' do
+    before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :update_category, 2) }
+
+    specify { child_1.update_info_path }
+  end
 end
 
 # == Schema Information

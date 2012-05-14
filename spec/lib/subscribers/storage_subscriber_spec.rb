@@ -9,13 +9,13 @@ describe StorageSubscriber do
 
   context '#update_content' do
     describe 'for subdivision' do
-      before { subdivision.should_receive :send_update_message }
+      before { subdivision.should_receive :update_info_path }
 
       specify { subject.update_content '/tel_sprav/ololo/pish-pish' }
     end
 
-    describe 'for item' do
-      before { item.should_receive :send_update_message }
+    describe 'for person' do
+      before { person.should_receive :update_info_path }
 
       specify { subject.update_content '/tel_sprav/ololo/chief' }
     end

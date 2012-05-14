@@ -125,8 +125,8 @@ class Category < ActiveRecord::Base
     ancestors.inject([]) { |ancestors, ancestror| ancestors << ancestror if ([ancestror] + ancestror.ancestors).include?(root); ancestors } << self
   end
 
-  def send_update_message
-    send_messages_on_update
+  def update_info_path
+    MessageMaker.make_message 'esp.blue-pages.cms', :update_category, id
   end
 
   protected

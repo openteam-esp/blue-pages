@@ -24,6 +24,10 @@ class Person < ActiveRecord::Base
     JSON.parse(c.body_str)['content']
   end
 
+  def update_info_path
+    MessageMaker.make_message 'esp.blue-pages.cms', 'update_item', item_id
+  end
+
   private
     def str_to_hash(str)
       Base64.urlsafe_encode64(str).strip.tr('=', '')
