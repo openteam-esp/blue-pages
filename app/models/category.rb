@@ -115,7 +115,6 @@ class Category < ActiveRecord::Base
       end
     end
 
-    result['categories'] = categories.map { |child| child.json_cms(expand, false) } if expand > 0 && expand_categories && categories.any?
     result['subdivisions'] = subdivisions.map { |child| child.json_cms(expand - 1) } if expand > 0 && subdivisions.any?
 
     result
