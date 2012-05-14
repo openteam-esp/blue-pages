@@ -80,6 +80,10 @@ class Item < ActiveRecord::Base
     result
   end
 
+  def send_update_message
+    send_messages_on_update
+  end
+
   private
     def term
       "#{full_name} #{title} #{address} #{phones.join(' ')} #{emails.join(' ')}"

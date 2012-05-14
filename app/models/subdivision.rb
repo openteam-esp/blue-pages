@@ -61,7 +61,6 @@ class Subdivision < Category
   end
 
   private
-
     def term
      "#{abbr} #{title} #{address} #{url} #{phones.join(' ')} #{emails.join(' ')}"
     end

@@ -6,7 +6,6 @@ class Category < ActiveRecord::Base
 
   has_many :permissions, :as => :context
 
-
   has_ancestry :cache_depth => true
 
   after_update :set_subtree_weights, :if => :weight_changed?
@@ -125,6 +124,10 @@ class Category < ActiveRecord::Base
   def ancestors_for_tree(user)
     root = ((ancestors + [self]) & user.contexts).first
     ancestors.inject([]) { |ancestors, ancestror| ancestors << ancestror if ([ancestror] + ancestror.ancestors).include?(root); ancestors } << self
+  end
+
+  def send_update_message
+    send_messages_on_update
   end
 
   protected
