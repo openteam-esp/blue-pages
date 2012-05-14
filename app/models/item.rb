@@ -106,13 +106,19 @@ class Item < ActiveRecord::Base
     end
 
     def send_messages_on_create
-      MessageMaker.make_message('esp.blue-pages.cms', :add_item, id, :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse})
+      MessageMaker.make_message('esp.blue-pages.cms', 
+                                :add_item, id, 
+                                :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse},
+                                :position => position)
     end
 
     alias_method :send_messages_on_update, :send_messages_on_create
 
     def send_messages_on_destroy
-      MessageMaker.make_message('esp.blue-pages.cms', :remove_item, id, :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse})
+      MessageMaker.make_message('esp.blue-pages.cms', 
+                                :remove_item, id, 
+                                :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse},
+                                :position => position)
     end
 end
 
