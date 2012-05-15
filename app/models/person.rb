@@ -13,6 +13,8 @@ class Person < ActiveRecord::Base
 
   normalize_attribute :info_path
 
+  delegate :subdivision, :to => :item
+
   def full_name=(full_name)
     self.surname, self.name, self.patronymic = full_name.split
   end
@@ -29,7 +31,7 @@ class Person < ActiveRecord::Base
   end
 
   def update_info_path
-    MessageMaker.make_message 'esp.blue-pages.cms', 'update_item', item_id
+    MessageMaker.make_message 'esp.blue-pages.cms', 'add_person', item.id, 'subdivision' => { 'id' => subdivision.id, 'parent_ids' => subdivision.ancestor_ids }
   end
 
   private
@@ -44,7 +46,7 @@ class Person < ActiveRecord::Base
     delegate :send_messages_on_update, :to => :item
 
     def remove_info_path
-      MessageMaker.make_message 'esp.blue-pages.cms', 'remove_item', item_id
+      MessageMaker.make_message 'esp.blue-pages.cms', 'remove_person', item.id, 'subdivision' => { 'id' => subdivision.id, 'parent_ids' => subdivision.ancestor_ids }
     end
 end
 
