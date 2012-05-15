@@ -9,14 +9,17 @@ class Item < ActiveRecord::Base
 
   validates_presence_of :title, :address
 
-  after_initialize :set_address_attributes
+  after_initialize :set_address_attributes, :if => :new_record?
 
   before_create :set_position, :set_weight
 
   before_update :set_weight
 
   after_create  :send_messages_on_create
-  after_update  :send_messages_on_update
+
+  # NOTE: very strange behaviour in test environment - #send_messages_on_update called twice
+  # TODO: remove :if block
+  after_update  :send_messages_on_update, :if => -> { (changes.keys - ['updated_at']).any? }
   after_destroy  :send_messages_on_destroy
 
 
@@ -90,7 +93,7 @@ class Item < ActiveRecord::Base
     end
 
     def set_address_attributes
-      self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if new_record? && subdivision && !address
+      self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if subdivision && !address
     end
 
     def set_position
@@ -110,19 +113,15 @@ class Item < ActiveRecord::Base
     end
 
     def send_messages_on_create
-      MessageMaker.make_message('esp.blue-pages.cms', 
-                                :add_item, id, 
-                                :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse},
-                                :position => position)
+      subdivision.send_update_message
     end
 
-    alias_method :send_messages_on_update, :send_messages_on_create
+    def send_messages_on_update
+      subdivision.send_update_message
+    end
 
     def send_messages_on_destroy
-      MessageMaker.make_message('esp.blue-pages.cms', 
-                                :remove_item, id, 
-                                :subdivision => {:id => subdivision.id, :parent_ids => subdivision.ancestor_ids.reverse},
-                                :position => position)
+      subdivision.send_update_message
     end
 end
 

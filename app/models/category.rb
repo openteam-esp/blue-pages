@@ -129,6 +129,10 @@ class Category < ActiveRecord::Base
     send_messages_on_update
   end
 
+  def send_update_message
+    send_messages_on_update
+  end
+
   protected
     def set_position
       self.position = siblings.last.try(:position).to_i + 1 unless self.position
