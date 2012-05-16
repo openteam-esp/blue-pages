@@ -44,6 +44,7 @@ class Subdivision < Category
            :prefix => true,
            :allow_nil => true
 
+  after_update :change_item_weights
 
   normalize_attribute :url do | value |
     value = "http://#{value}" unless value.blank? || value.starts_with?('http')
@@ -61,6 +62,13 @@ class Subdivision < Category
   end
 
   private
+    def change_item_weights
+      items.each do |item|
+        item.send :set_weight
+        item.save
+      end
+    end
+
     def term
      "#{abbr} #{title} #{address} #{url} #{phones.join(' ')} #{emails.join(' ')}"
     end

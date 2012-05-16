@@ -65,6 +65,17 @@ describe Subdivision do
       it { child_subdivision.reload.weight.should == '01/02/01' }
       it { first_subdivision.reload.weight.should == '01/02' }
     end
+
+    describe 'обновление position должно менять веса у item' do
+      let(:child_item) { child_subdivision.items.create! :title => 'ololo' }
+      let(:first_item) { first_subdivision.items.create! :title => 'ololo' }
+      before { child_item }
+      before { first_item }
+      before { first_subdivision.update_attribute(:position, 2) }
+
+      it { child_item.reload.weight.should == '01/02/01/01' }
+      it { first_item.reload.weight.should == '01/02/01' }
+    end
   end
 
   describe '#decrement' do

@@ -109,7 +109,7 @@ class Item < ActiveRecord::Base
     end
 
     def weights
-      @weights ||= [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
+      [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
     end
 
     def send_messages_on_create
