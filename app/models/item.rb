@@ -91,11 +91,12 @@ class Item < ActiveRecord::Base
 
   alias_method :original_person_attributes=, :person_attributes=
 
-  def person_attributes=(hash)
-    if persisted? && hash.empty?
+  def person_attributes=(attributes)
+
+    if persisted? && attributes['id'] && attributes.merge('id' => '').values.select(&:present?).empty?
       person.destroy
     else
-      self.original_person_attributes = hash
+      self.original_person_attributes = attributes
     end
   end
 

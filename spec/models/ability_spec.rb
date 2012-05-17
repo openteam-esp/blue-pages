@@ -150,11 +150,18 @@ describe Ability do
     context 'вложенного контекста' do
       subject { ability_for(operator_of(child_1)) }
 
-      context 'изменение контекстов' do
+      context 'изменение подразделений' do
         it { should_not be_able_to(:modify, root) }
         it { should     be_able_to(:modify, child_1) }
         it { should     be_able_to(:modify, child_1_1) }
         it { should_not be_able_to(:modify, child_2) }
+      end
+
+      context 'изменение подразделов' do
+        it { should_not be_able_to(:modify, root.categories.new) }
+        it { should     be_able_to(:modify, child_1.categories.new) }
+        it { should     be_able_to(:modify, child_1_1.categories.new) }
+        it { should_not be_able_to(:modify, child_2.categories.new) }
       end
 
       context 'изменение должностей' do

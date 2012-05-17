@@ -1,19 +1,17 @@
-<% if resource.person %>
-  <h2><%= resource.person %></h2>
-  <div class="person_info">
-    <%= content_tag(:div, link_to(image_for(resource.image_url, :width => '100'), resource.image_url, :target => '_blank'), :class => 'image') if resource.image_url? %>
-    <%= show_for resource.person do |person| %>
-      <%= person.attribute :birthdate %>
+<%= content_tag :h2, resource.person if resource.person %>
+<div class="person_info">
+  <%= content_tag(:div, link_to(image_for(resource.image_url, :width => '100'), resource.image_url, :target => '_blank'), :class => 'image') if resource.image_url? %>
+  <%= show_for resource.person do |person| %>
+    <%= person.attribute :birthdate %>
+  <% end if resource.person %>
+  <%= show_for resource do |show_item| %>
+    <%= show_item.association :address, :using => :full_address %>
+    <%= show_item.association :phones, :if_blank => "Не указаны" %>
+    <%= show_item.association :emails, :if_blank => "Не указаны" do | email | %>
+      <li><%= mail_to email %></li>
     <% end %>
-    <%= show_for resource do |show_item| %>
-      <%= show_item.association :address, :using => :full_address %>
-      <%= show_item.association :phones, :if_blank => "Не указаны" %>
-      <%= show_item.association :emails, :if_blank => "Не указаны" do | email | %>
-        <li><%= mail_to email %></li>
-      <% end %>
-    <% end %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <% if resource.person && resource.person.info_path %>
   <h2>Дополнительная информация</h2>

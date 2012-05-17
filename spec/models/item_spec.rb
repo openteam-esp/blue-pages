@@ -23,7 +23,7 @@ describe Item do
       let(:person) { item.build_person(person_attributes) }
       before { item.save! }
       before { person.save! }
-      before { subject.update_attributes! :person_attributes => {} }
+      before { subject.update_attributes! :person_attributes => {'name' => '', 'surname' => '', 'patronymic' => '', 'birthday' => '', 'id' => person.id} }
 
       specify { subject.reload.person.should be_nil }
       specify { person.should_not be_persisted }
