@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 class Item < ActiveRecord::Base
   belongs_to :subdivision
 
@@ -24,7 +26,7 @@ class Item < ActiveRecord::Base
 
 
   accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :person, :reject_if => :all_blank, :allow_destroy => true
+  accepts_nested_attributes_for :person, :reject_if => :all_blank
 
   accepts_nested_attributes_for :emails,
                                 :reject_if => ->(attr) { attr.values_at(*(attr.keys - %w[id _destroy])).all?(&:blank?) },
@@ -85,6 +87,16 @@ class Item < ActiveRecord::Base
 
   def send_update_message
     send_messages_on_update
+  end
+
+  alias_method :original_person_attributes=, :person_attributes=
+
+  def person_attributes=(hash)
+    if persisted? && hash.empty?
+      person.destroy
+    else
+      self.original_person_attributes = hash
+    end
   end
 
   private

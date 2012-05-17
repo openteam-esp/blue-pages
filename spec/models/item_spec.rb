@@ -4,8 +4,10 @@ require 'spec_helper'
 
 describe Item do
   let(:subdivision) { Fabricate :subdivision }
-  let(:subject) { subdivision.items.build }
+  let(:item) { subdivision.items.build :title => 'должность' }
   let(:child) { Fabricate :subdivision, :parent => subdivision }
+
+  subject { item }
 
   def create_item(attributes={})
     subdivision.items.create! attributes
@@ -13,6 +15,20 @@ describe Item do
 
   it { should have_one(:address) }
   it { should validate_presence_of :address }
+
+  describe '#person_attributes' do
+    let(:person_attributes) { {:surname => 'Иванов', :name => 'Иван', :patronymic => 'Иванович'} }
+    it { should allow_value(person_attributes).for(:person_attributes) }
+    context 'should destroy person if empty person_attributes' do
+      let(:person) { item.build_person(person_attributes) }
+      before { item.save! }
+      before { person.save! }
+      before { subject.update_attributes! :person_attributes => {} }
+
+      specify { subject.reload.person.should be_nil }
+      specify { person.should_not be_persisted }
+    end
+  end
 
   describe 'присваивание position' do
     let(:first_item) { create_item :title => 'секретарь 1' }
