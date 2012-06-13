@@ -67,6 +67,14 @@ ru:
         updated_at:             Обновлено
         url:                    Сайт
 
+      innorganization:
+        parent_id:              Родительский раздел
+        address:                Адрес
+        emails:                 Адреса электронной почты
+        phones:                 Телефоны
+        title:                  Название
+        url:                    Сайт
+
       phone:
         _destroy:               Удалить
         additional_number:      Добавочный

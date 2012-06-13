@@ -1,5 +1,6 @@
 <%= form.inputs :class => "inputs bordered" do %>
   <%= form.input :title, :as => :text, :input_html => { :autofocus => true, :class => 'for_info_path' } %>
+  <%= form.input :url, :as => :string %>
 <% end %>
 
 <%= form.inputs :class => "inputs bordered", :for => :address do | address_form | %>

@@ -18,7 +18,6 @@ class Category < ActiveRecord::Base
   after_destroy  :send_messages_on_destroy
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
-  validates_presence_of :kind
 
   has_enums
 
