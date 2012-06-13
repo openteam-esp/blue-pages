@@ -2,7 +2,6 @@
   <% resource.subdivision.path.each do |ancestor| %>
     <%= link_to ancestor.title, ancestor.is_root? ? root_path : category_path(ancestor) %> /
   <% end %>
-  <%= resource.person %>
 </div>
 
 <%= content_tag :div, :class => "actions" do %>

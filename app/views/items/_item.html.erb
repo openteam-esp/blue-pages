@@ -1,5 +1,5 @@
 <%= content_tag :p, link_to(item.person || item.subdivision, category_path(item.subdivision)), :class => "title" %>
-<%= content_tag :p, "#{item}, #{item.subdivision}" %>
+<%= content_tag :p, "#{item}" %>
 <%= content_tag :p, :class => "address" do %>
   Адрес: <%= item.address.full_address %>
 <% end %>
