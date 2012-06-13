@@ -53,7 +53,15 @@ class Subdivision < Category
 
   searchable do
     boost :boost
-    text :term
+
+    text  :abbr,    :boost => 1.5
+    text  :title,   :boost => 1.5
+    text  :address, :boost => 0.7
+    text  :url,     :boost => 0.7
+    text  :phones,  :boost => 0.7 do phones.join(' ') end
+    text  :emails,  :boost => 0.7 do emails.join(' ') end
+
+    text  :term,    :boost => 0.5
   end
 
   def dossier

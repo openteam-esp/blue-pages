@@ -7,7 +7,7 @@
   <div class='content_wrapper'>
     <%= semantic_search_form_for :main, :url => "/search"  do |form| %>
       <%= form.inputs do %>
-        <%= form.input :term, :as => :string, :label => false %>
+        <%= form.input :keywords, :as => :string, :label => false %>
       <% end %>
       <%= form.actions do %>
         <%= form.action :submit, :label => t('search'), :button_html => { :class => "button" } %>

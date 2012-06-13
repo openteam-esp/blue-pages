@@ -56,7 +56,13 @@ class Item < ActiveRecord::Base
   searchable do
     boost :boost
 
-    text :term
+    text  :full_name, :boost => 1.5
+    text  :title,     :boost => 1.5
+    text  :address,   :boost => 0.7
+    text  :phones,    :boost => 0.7     do phones.join(' ') end
+    text  :emails,    :boost => 0.7     do emails.join(' ') end
+
+    text  :term,      :boost => 0.5
   end
 
   def display_name

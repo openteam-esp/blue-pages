@@ -1,5 +1,5 @@
 class MainSearch < Search
-  column :term, :text
+  column :keywords, :text
 
   private
     def klass
