@@ -2,4 +2,5 @@
   <%= form.input :title, :as => :text, :input_html => { :autofocus => true } %>
   <%= form.input :parent_id, :as => :select,
                  :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @category.id %>
+ <%= form.input :kind, :collection => Category.values_for_select_tag(:kind) %>
 <% end %>

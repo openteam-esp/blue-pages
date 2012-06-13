@@ -88,14 +88,6 @@ class Subdivision < Category
     def remote_url
       "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
     end
-
-    def set_address_attributes
-      if self.new_record?
-        self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return  if self.parent && self.parent.is_a?(Subdivision) && !self.address
-        self.build_address unless self.address
-      end
-    end
-
 end
 
 # == Schema Information

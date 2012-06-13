@@ -18,6 +18,9 @@ class Category < ActiveRecord::Base
   after_destroy  :send_messages_on_destroy
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
+  validates_presence_of :kind
+
+  has_enums
 
   searchable do
     boost :boost
@@ -34,6 +37,10 @@ class Category < ActiveRecord::Base
 
   def self.root
     Category.find_or_create_by_title('Телефонный справочник')
+  end
+
+  def innorganizations
+    Innorganization.where(:ancestry => child_ancestry)
   end
 
   def subdivisions
@@ -175,6 +182,13 @@ class Category < ActiveRecord::Base
 
     def send_messages_on_destroy
       MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestor_ids.reverse)
+    end
+
+    def set_address_attributes
+      if self.new_record?
+        self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return if self.parent && (self.parent.is_a?(Innorganization) || self.parent.is_a?(Subdivision)) && !self.address
+        self.build_address unless self.address
+      end
     end
 end
 

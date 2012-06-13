@@ -5,8 +5,11 @@ BluePages::Application.routes.draw do
     resources :categories do
       resources :categories, :only => [:create, :new]
       resources :subdivisions, :only => [:create, :new]
+      resources :innorganizations, :only => [:create, :new]
       post :sort, :on => :collection
     end
+
+    resources :innorganizations, :except => :index
 
     resources :subdivisions, :except => :index do
       resources :items, :except => :index do

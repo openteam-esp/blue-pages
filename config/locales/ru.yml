@@ -34,6 +34,10 @@ ru:
         users:                  Менеджеры раздела
         parent_id:              Родительский раздел
         updated_at:             Обновлено
+        kind:                   Тип дочерних элементов
+        kind_enum:
+          subdivisions:         Подразделения
+          innorganizations:     Инновационные предприятия
 
       item:
         address:                Адрес
@@ -115,6 +119,10 @@ ru:
       one:                      сотрудник
       few:                      сотрудника
       many:                     сотрудников
+    manage/innorganization:
+      one:                      инновационная организация
+      few:                      инновационной организации
+      many:                     инновационных организаций
   toolbar:
     categories:                 Разделы и подразделения
     logout:                     Выход

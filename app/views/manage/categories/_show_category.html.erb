@@ -9,9 +9,15 @@
                   new_manage_category_category_path(resource),
                   :class => 'button icon add' %>
 
-      <%= link_to t('manage.new_subdivision'),
-                  new_manage_category_subdivision_path(resource),
-                  :class => 'button icon add' %>
+      <% if resource.kind_innorganizations? %>
+        <%= link_to t('manage.new_innorganization'),
+                    new_manage_category_innorganization_path(resource),
+                    :class => 'button icon add' %>
+      <% else %>
+        <%= link_to t('manage.new_subdivision'),
+                    new_manage_category_subdivision_path(resource),
+                    :class => 'button icon add' %>
+      <% end %>
     </div>
     <%= render :partial => "children", :locals => { :children => children } %>
   </div>

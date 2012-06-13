@@ -1,0 +1,39 @@
+<%= form.inputs :class => "inputs bordered" do %>
+  <%= form.input :title, :as => :text, :input_html => { :autofocus => true, :class => 'for_info_path' } %>
+<% end %>
+
+<%= form.inputs :class => "inputs bordered", :for => :address do | address_form | %>
+  <%= address_form.input :postcode %>
+  <%= address_form.input :region %>
+  <%= address_form.input :district %>
+  <%= address_form.input :locality %>
+  <%= address_form.input :street %>
+  <%= address_form.input :house %>
+  <%= address_form.input :building %>
+  <%= address_form.input :office %>
+<% end %>
+
+<%= form.semantic_fields_for :phones do |phone_form| %>
+  <%= phone_form.inputs :class => "inputs bordered phone" do %>
+    <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind), :input_html => { :class => 'phone_kind'} %>
+    <%= phone_form.input :code, :input_html => { :class => "code" }, :wrapper_html => {:class => phone_form.object.kind_internal? ? 'hidden' : 'blank'} %>
+    <%= phone_form.input :number, :input_html => { :class => "number" } %>
+    <%= phone_form.input :additional_number, :input_html => { :class => "additional_number" } %>
+    <li class="destroy_action"><%= phone_form.link_to_remove t('manage.delete_phone'), :class => 'button icon trash danger' %></li>
+  <% end %>
+<% end %>
+
+<div class="phones_fieldset">
+  <%= form.link_to_add t('manage.new_phone'), :phones, :class => 'button icon add' %>
+</div>
+
+<%= form.fields_for :emails do |email_form| %>
+  <%= email_form.inputs :class => "inputs bordered email" do %>
+    <%= email_form.input :address %>
+    <li class="destroy_action"><%= email_form.link_to_remove t('manage.delete_email'), :class => 'button icon trash danger' %></li>
+  <% end %>
+<% end %>
+
+<div class="emails_fieldset">
+  <%= form.link_to_add t('manage.new_email'), :emails, :class => 'button icon add' %>
+</div>
