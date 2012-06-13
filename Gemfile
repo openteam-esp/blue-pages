@@ -21,15 +21,16 @@ group :default do
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
   gem 'openteam-commons'
-  gem 'prawn',                    '>= 1.0.0.rc1',   :require => false
+  gem 'prawn',                '>= 1.0.0.rc1',       :require => false
   gem 'rails',                                      :require => false
   gem 'sanitize',                                   :require => false
   gem 'show_for'
+  gem 'sunspot_rails',      '>= 2.0.0.pre.120417',  :require => false
 end
 
 group :development do
-  gem 'annotate',               '>= 2.4.1.beta1',   :require => false
-  gem 'sunspot_solr',                               :require => false
+  gem 'annotate',           '>= 2.4.1.beta1',       :require => false
+  gem 'sunspot_solr',       '>= 2.0.0.pre.120417',  :require => false
 end
 
 group :test do
@@ -39,10 +40,11 @@ group :test do
   gem 'guard-spork'
   gem 'libnotify'
   gem 'rb-inotify'
-  gem 'rspec-rails',                                :require => false
-  gem 'ryba',                                       :require => false
-  gem 'shoulda-matchers',                           :require => false
-  gem 'spork',                  '>= 1.0.0.rc2',     :require => false
-  gem 'sqlite3',                                    :require => false
-  gem 'sunspot_matchers',                           :require => false
+  gem 'rspec-rails',                               :require => false
+  gem 'ryba',                                      :require => false
+  gem 'shoulda-matchers',                          :require => false
+  gem 'spork',              '>= 1.0.0.rc2',        :require => false
+  gem 'sqlite3',                                   :require => false
+  gem 'sunspot_matchers',                          :require => false
 end
+

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <config>
   <abortOnConfigurationError>${solr.abortOnConfigurationError:true}</abortOnConfigurationError>
   <indexDefaults>
@@ -48,7 +48,7 @@
       <str name="echoParams">explicit</str>
     </lst>
   </requestHandler>
-
   <requestHandler name="/update" class="solr.XmlUpdateRequestHandler"/>
   <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers"/>
+  <requestHandler name="/mlt" class="solr.MoreLikeThisHandler"/>
 </config>
