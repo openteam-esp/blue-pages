@@ -1,0 +1,10 @@
+<div class="title">
+  <span class='hidden'>хвать</span>
+  <%= link_to innorganization, manage_innorganization_path(innorganization) %>
+</div>
+
+<div class="details">
+  <%= content_tag :p, innorganization.address %>
+  <%= content_tag :p, Phone.present_as_str(innorganization.phones) if innorganization.phones.any?%>
+  <%= content_tag :p, innorganization.emails.map{|email| mail_to(email)}.join(', ').html_safe if innorganization.emails.any? %>
+</div>

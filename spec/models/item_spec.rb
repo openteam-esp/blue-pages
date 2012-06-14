@@ -32,7 +32,7 @@ describe Item do
 
   describe 'присваивание position' do
     let(:first_item) { create_item :title => 'секретарь 1' }
-    let(:second_item) { first_item.subdivision.items.create! :title => 'секретарь 2' }
+    let(:second_item) { first_item.itemable.items.create! :title => 'секретарь 2' }
     let(:other_item) { child.items.create! :title => 'бухгалтер' }
     it { first_item.position.should == 1 }
     it { second_item.position.should == 2 }
@@ -66,7 +66,7 @@ describe Item do
   end
 
   context 'sending messages' do
-    let(:item) { Fabricate :item, :subdivision => child_1 }
+    let(:item) { Fabricate :item, :itemable => child_1 }
     describe '#create' do
       before { child_1 }
       before { child_1.should_receive(:send_update_message) }

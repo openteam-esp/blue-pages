@@ -4,10 +4,10 @@ require 'base64'
 
 class Subdivision < Category
   has_many :emails,   :as => :emailable,   :dependent => :destroy
-  has_many :items,                         :dependent => :destroy
+  has_many :items,    :as => :itemable,    :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
 
-  has_one :chief, :class_name => 'Item'
+  has_one :chief, :class_name => 'Item', :as => :itemable
   has_one :address,  :as => :addressable, :dependent => :destroy
 
   validates :address, :parent, :presence => true

@@ -9,7 +9,11 @@ BluePages::Application.routes.draw do
       post :sort, :on => :collection
     end
 
-    resources :innorganizations, :except => :index
+    resources :innorganizations, :except => :index do
+      resources :items, :except => :index do
+        post :sort, :on => :collection
+      end
+    end
 
     resources :subdivisions, :except => :index do
       resources :items, :except => :index do

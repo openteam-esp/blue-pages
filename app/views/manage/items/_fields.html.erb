@@ -9,7 +9,7 @@
     <%= person_form.input :birthdate, :as => :date_picker %>
     <%= person_form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
     <%= content_tag :li, :class => 'info_wrapper' do %>
-      <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :parent_data => @subdivision.id, :class => 'info_link' %>
+      <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :parent_data => resource.parent.id, :class => 'info_link' %>
       <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
     <% end if can?(:modify_dossier, resource) %>
     <div class="show_info_path" style='clear: both;'>

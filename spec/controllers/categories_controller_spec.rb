@@ -13,7 +13,7 @@ describe CategoriesController do
   def store_data
     @store_data ||= subdivision.tap do |subdivision|
       Fabricate(:phone, :phoneable => subdivision)
-      Fabricate(:item, :subdivision => subdivision, :person_attributes => Fabricate.attributes_for(:person))
+      Fabricate(:item, :itemable => subdivision, :person_attributes => Fabricate.attributes_for(:person))
     end
 
     another_child_subdivision

@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 class Item < ActiveRecord::Base
-  belongs_to :subdivision
+  belongs_to :itemable, :polymorphic => true
 
   has_many :emails,   :as => :emailable,   :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
@@ -24,7 +24,6 @@ class Item < ActiveRecord::Base
   after_update  :send_messages_on_update, :if => -> { (changes.keys - ['updated_at']).any? }
   after_destroy  :send_messages_on_destroy
 
-
   accepts_nested_attributes_for :address
   accepts_nested_attributes_for :person, :reject_if => :all_blank
 
@@ -43,13 +42,13 @@ class Item < ActiveRecord::Base
 
   delegate :full_name, :surname, :name, :patronymic, :to => :person, :allow_nil => true
 
-  delegate :weight, :to => :subdivision, :prefix => true
+  delegate :weight, :to => :itemable, :prefix => true
 
-  delegate :ancestors_for_tree, :to => :subdivision
+  delegate :ancestors_for_tree, :to => :itemable
 
   default_scope order('weight')
 
-  alias :parent :subdivision
+  alias :parent :itemable
 
   normalize_attribute :image_url
 
@@ -112,11 +111,11 @@ class Item < ActiveRecord::Base
     end
 
     def set_address_attributes
-      self.build_address(subdivision.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if subdivision && !address
+      self.build_address(itemable.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if itemable && !address
     end
 
     def set_position
-      self.position = subdivision.items.last.try(:position).to_i + 1
+      self.position = itemable.items.last.try(:position).to_i + 1
     end
 
     def decrement
@@ -128,19 +127,19 @@ class Item < ActiveRecord::Base
     end
 
     def weights
-      [subdivision_weight, sprintf('%02d', position)].join('/').split('/')
+      [itemable_weight, sprintf('%02d', position)].join('/').split('/')
     end
 
     def send_messages_on_create
-      subdivision.send_update_message
+      itemable.send_update_message
     end
 
     def send_messages_on_update
-      subdivision.send_update_message
+      itemable.send_update_message
     end
 
     def send_messages_on_destroy
-      subdivision.send_update_message
+      itemable.send_update_message
     end
 end
 
@@ -149,7 +148,7 @@ end
 # Table name: items
 #
 #  id             :integer         not null, primary key
-#  subdivision_id :integer
+#  itemable_id :integer
 #  title          :text(255)
 #  position       :integer
 #  weight         :string(255)

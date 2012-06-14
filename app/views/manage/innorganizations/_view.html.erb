@@ -1,0 +1,28 @@
+<div class="subdivision">
+  <%= show_for resource do | s | %>
+    <%= s.association :address, :if_blank => "Не указан" %>
+    <%= s.association :phones, :if_blank => "Не указаны" %>
+    <%= s.association :emails, :if_blank => "Не указаны" do | email | %>
+      <li><%= mail_to email %></li>
+    <% end %>
+    <%= s.attribute :url do %>
+      <%= resource.url.blank? ? "Не указан" : link_to(resource.url, resource.url, :target => "_blank") %>
+    <% end %>
+
+    <% if resource.info_path %>
+      <h2>Дополнительная информация</h2>
+      <%= raw resource.dossier %>
+    <% end %>
+  <% end %>
+
+  <div class="items">
+    <h3>Сотрудники</h3>
+    <div class="actions">
+      <%= link_to t('manage.sort'), sort_manage_innorgaization_items_path(resource), :class => 'sort_link off button icon loop' if resource.items.many? %>
+      <%= link_to t('manage.new_item'), new_manage_innorganization_item_path(resource), :class => 'button icon add' %>
+    </div>
+    <%= render :partial => "manage/items/items", :locals => { :items => resource.items } %>
+  </div>
+</div>
+
+

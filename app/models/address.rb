@@ -34,7 +34,7 @@ class Address < ActiveRecord::Base
 
   def to_s
     result = []
-    unless addressable.is_a?(Item) && building_same_as?(addressable.subdivision.address)
+    unless addressable.is_a?(Item) && building_same_as?(addressable.itemable.address)
       result = significant_values[0..-2].uniq
       result << "стр.#{building}" unless building.blank?
     end

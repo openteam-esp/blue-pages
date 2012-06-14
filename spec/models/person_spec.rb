@@ -6,7 +6,7 @@ describe Person do
   it { should normalize_attribute(:info_path).from('').to(nil) }
 
   let(:subdivision) { Fabricate :subdivision }
-  let(:item)        { Fabricate :item, :subdivision => subdivision }
+  let(:item)        { Fabricate :item, :itemable => subdivision }
   let(:person)      { Fabricate :person, :item => item }
 
   def expect_receive(message)

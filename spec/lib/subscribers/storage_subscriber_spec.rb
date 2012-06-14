@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe StorageSubscriber do
   let(:subdivision) { Fabricate :subdivision, :info_path => '/tel_sprav/ololo/pish-pish' }
-  let(:item) { Fabricate :item, :subdivision => subdivision }
+  let(:item) { Fabricate :item, :itemable => subdivision }
   let(:person) { Fabricate :person, :item => item, :info_path => '/tel_sprav/ololo/chief' }
 
   before { person }

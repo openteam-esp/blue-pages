@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120613050455) do
+ActiveRecord::Schema.define(:version => 20120613100451) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20120613050455) do
     t.text     "title"
     t.string   "abbr"
     t.text     "url"
-    t.text     "info_path"
+    t.text     "info_path",      :limit => 255
     t.integer  "position"
     t.string   "weight"
     t.string   "ancestry"
@@ -60,17 +60,18 @@ ActiveRecord::Schema.define(:version => 20120613050455) do
   add_index "emails", ["emailable_id"], :name => "index_emails_on_emailable_id"
 
   create_table "items", :force => true do |t|
-    t.integer  "subdivision_id"
-    t.text     "title"
+    t.integer  "itemable_id"
+    t.text     "title",         :limit => 255
     t.integer  "position"
     t.string   "weight"
-    t.datetime "created_at",                    :null => false
-    t.datetime "updated_at",                    :null => false
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
     t.string   "image_url"
+    t.string   "itemable_type"
   end
 
+  add_index "items", ["itemable_id"], :name => "index_items_on_subdivision_id"
   add_index "items", ["position"], :name => "index_items_on_position"
-  add_index "items", ["subdivision_id"], :name => "index_items_on_subdivision_id"
   add_index "items", ["weight"], :name => "index_items_on_weight"
 
   create_table "people", :force => true do |t|
@@ -79,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20120613050455) do
     t.string   "name"
     t.string   "patronymic"
     t.date     "birthdate"
-    t.text     "info_path"
+    t.text     "info_path",  :limit => 255
     t.datetime "created_at",                :null => false
     t.datetime "updated_at",                :null => false
   end

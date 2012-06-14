@@ -13,7 +13,8 @@ class Person < ActiveRecord::Base
 
   normalize_attribute :info_path
 
-  delegate :subdivision, :to => :item
+  delegate :itemable, :to => :item
+  alias :subdivision :itemable
 
   def full_name=(full_name)
     self.surname, self.name, self.patronymic = full_name.split

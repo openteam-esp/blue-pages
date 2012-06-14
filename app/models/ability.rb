@@ -42,15 +42,15 @@ class Ability
     end
 
     can :manage, Item do | item |
-      user.manager_of? item.subdivision
+      user.manager_of? item.itemable
     end
 
     can :manage, Item do | item |
-      user.editor_of? item.subdivision
+      user.editor_of? item.itemable
     end
 
     can :modify, Item do | item |
-      user.operator_of? item.subdivision
+      user.operator_of? item.itemable
     end
   end
 end

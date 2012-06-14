@@ -1,5 +1,6 @@
 class Manage::ItemsController < Manage::ApplicationController
-  belongs_to :subdivision
+  belongs_to :subdivision, :polymorphic => true, :optional => true
+  belongs_to :innorganization, :polymorphic => true, :optional => true
 
   def destroy
     destroy! { manage_subdivision_path(@subdivision) }

@@ -34,7 +34,7 @@ module ApplicationHelper
   def expanded_ancestors(ancestors, options={})
     result = ""
     if ancestors.empty?
-      obj = resource.is_a?(Item) ? resource.subdivision : resource
+      obj = resource.is_a?(Item) ? resource.itemable : resource
       obj.children.each do |child|
         li_options = { :id => child.id }
         li_options.merge!(:class => 'hasChildren') if child.has_children?
