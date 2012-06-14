@@ -91,13 +91,14 @@ end
 #
 # Table name: items
 #
-#  id             :integer         not null, primary key
-#  subdivision_id :integer
-#  title          :text(255)
-#  position       :integer
-#  weight         :string(255)
-#  created_at     :datetime        not null
-#  updated_at     :datetime        not null
-#  image_url      :string(255)
+#  id            :integer         not null, primary key
+#  itemable_id   :integer
+#  title         :text
+#  position      :integer
+#  weight        :string(255)
+#  created_at    :datetime        not null
+#  updated_at    :datetime        not null
+#  image_url     :string(255)
+#  itemable_type :string(255)
 #
 

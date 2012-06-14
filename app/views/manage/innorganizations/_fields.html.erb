@@ -13,6 +13,11 @@
   <div class="show_info_path" style='clear: both;'>
     <%= raw form.object.dossier if form.object.info_path %>
   </div>
+
+  <%= form.input :status, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:status) %>
+  <%= form.input :sphere, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:sphere) %>
+  <%= form.input :university %>
+  <%= form.input :production %>
 <% end %>
 
 <%= form.inputs :class => "inputs bordered", :for => :address do | address_form | %>

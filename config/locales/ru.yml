@@ -74,6 +74,19 @@ ru:
         phones:                 Телефоны
         title:                  Название
         url:                    Сайт
+        university:             Принадлежность ВУЗу
+        production:             Продукция
+        status:                 Статус
+        status_enum:
+          sez:                  Резидент ОЭЗ
+          skolkovo:             Резидент Сколково
+          business-incubator:   Бизнес-инкубатор
+          innovation_company:   Инновационная компания
+        sphere:                 Направления деятельности
+        sphere_enum:
+          it:                   ИТ и электроника
+          medicine:             Медицина и биотехнологии
+          energy:               Энергетика
 
       phone:
         _destroy:               Удалить

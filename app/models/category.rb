@@ -19,7 +19,7 @@ class Category < ActiveRecord::Base
 
   validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
 
-  has_enums
+  has_enum :kind, %w[subdivisions innorganizations]
 
   searchable do
     boost :boost
@@ -221,5 +221,8 @@ end
 #  ancestry_depth :integer
 #  created_at     :datetime        not null
 #  updated_at     :datetime        not null
+#  kind           :string(255)
+#  status         :text
+#  sphere         :text
 #
 

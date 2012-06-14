@@ -13,7 +13,13 @@
       <h2>Дополнительная информация</h2>
       <%= raw resource.dossier %>
     <% end %>
+
+    <%= s.attribute :status %>
+    <%= s.attribute :sphere %>
+    <%= s.attribute :university %>
+    <%= s.attribute :production %>
   <% end %>
+
 
   <div class="items">
     <h3>Сотрудники</h3>

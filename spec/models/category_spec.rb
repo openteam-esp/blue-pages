@@ -63,5 +63,8 @@ end
 #  ancestry_depth :integer
 #  created_at     :datetime        not null
 #  updated_at     :datetime        not null
+#  kind           :string(255)
+#  status         :text
+#  sphere         :text
 #
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120613100451) do
+ActiveRecord::Schema.define(:version => 20120614083058) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -43,6 +43,10 @@ ActiveRecord::Schema.define(:version => 20120613100451) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.string   "kind"
+    t.text     "status"
+    t.text     "sphere"
+    t.text     "university"
+    t.text     "production"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
