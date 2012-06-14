@@ -1,8 +1,6 @@
 source :rubygems
 
 group :assets do
-  gem 'compass-rails'
-  gem 'sass-rails'
   gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
   gem 'uglifier'
 end
@@ -10,6 +8,7 @@ end
 group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
+  gem 'compass-rails'
   gem 'curb'
   gem 'el_vfs_client'
   gem 'email_validator'
@@ -24,6 +23,7 @@ group :default do
   gem 'prawn',                '>= 1.0.0.rc1',       :require => false
   gem 'rails',                                      :require => false
   gem 'sanitize',                                   :require => false
+  gem 'sass-rails'
   gem 'show_for'
   gem 'sunspot_rails',      '>= 2.0.0.pre.120417',  :require => false
 end
