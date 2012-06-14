@@ -139,7 +139,21 @@ class Category < ActiveRecord::Base
     send_messages_on_update
   end
 
+  def dossier
+    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
+    JSON.parse(c.body_str)['content']
+  end
+
+
   protected
+    def str_to_hash(str)
+      Base64.urlsafe_encode64(str).strip.tr('=', '')
+    end
+
+    def remote_url
+      "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
+    end
+
     def set_position
       self.position = siblings.last.try(:position).to_i + 1 unless self.position
     end

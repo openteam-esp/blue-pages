@@ -18,7 +18,6 @@
   <div class="items">
     <h3>Сотрудники</h3>
     <div class="actions">
-      <%= link_to t('manage.sort'), sort_manage_innorgaization_items_path(resource), :class => 'sort_link off button icon loop' if resource.items.many? %>
       <%= link_to t('manage.new_item'), new_manage_innorganization_item_path(resource), :class => 'button icon add' %>
     </div>
     <%= render :partial => "manage/items/items", :locals => { :items => resource.items } %>

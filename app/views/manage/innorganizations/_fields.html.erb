@@ -1,6 +1,18 @@
+<%= javascript_include_tag 'esp-ckeditor/application' %>
+<%= javascript_include_tag 'info_plugin' %>
+
 <%= form.inputs :class => "inputs bordered" do %>
   <%= form.input :title, :as => :text, :input_html => { :autofocus => true, :class => 'for_info_path' } %>
   <%= form.input :url, :as => :string %>
+  <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @innorganization.id %>
+  <%= form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
+  <%= content_tag :li, :class => 'info_wrapper' do %>
+    <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :parent_data => resource.parent.id, :class => 'info_link' %>
+    <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
+  <% end if can?(:modify_dossier, resource) %>
+  <div class="show_info_path" style='clear: both;'>
+    <%= raw form.object.dossier if form.object.info_path %>
+  </div>
 <% end %>
 
 <%= form.inputs :class => "inputs bordered", :for => :address do | address_form | %>

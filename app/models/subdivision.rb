@@ -64,11 +64,6 @@ class Subdivision < Category
     text  :term,    :boost => 0.5
   end
 
-  def dossier
-    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
-    JSON.parse(c.body_str)['content']
-  end
-
   private
     def change_item_weights
       items.each do |item|
@@ -79,14 +74,6 @@ class Subdivision < Category
 
     def term
      "#{abbr} #{title} #{address} #{url} #{phones.join(' ')} #{emails.join(' ')}"
-    end
-
-    def str_to_hash(str)
-      Base64.urlsafe_encode64(str).strip.tr('=', '')
-    end
-
-    def remote_url
-      "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
     end
 end
 

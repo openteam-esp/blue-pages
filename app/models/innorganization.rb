@@ -12,4 +12,5 @@ class Innorganization < Category
            :to => :address,
            :prefix => true,
            :allow_nil => true
+
 end
