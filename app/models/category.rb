@@ -112,7 +112,7 @@ class Category < ActiveRecord::Base
           'image_url' => item.image_url
         }
 
-        hash.merge!('link' => Rails.application.routes.url_helpers.category_item_path(item.subdivision, item)) if item.try(:person).try(:info_path?)
+        hash.merge!('link' => Rails.application.routes.url_helpers.category_item_path(item.itemable, item)) if item.try(:person).try(:info_path?)
 
         hash.merge!('phones' => Phone.present_as_str(item.phones.select{|a| !a.kind_internal? })) if item.phones.any?
         hash.merge!('emails' => item.emails.map(&:address)) if item.emails.any?
