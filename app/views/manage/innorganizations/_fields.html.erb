@@ -16,7 +16,6 @@
 
   <%= form.input :status, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:status) %>
   <%= form.input :sphere, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:sphere) %>
-  <%= form.input :university %>
   <%= form.input :production %>
 <% end %>
 

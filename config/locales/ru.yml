@@ -78,10 +78,10 @@ ru:
         production:             Продукция
         status:                 Статус
         status_enum:
-          sez:                  Резидент ОЭЗ
-          skolkovo:             Резидент Сколково
-          business-incubator:   Бизнес-инкубатор
-          innovation_company:   Инновационная компания
+          sez:                  Резидент особой экономической зоны "Томск"
+          skolkovo:             Резидент инновационного центра "Сколково"
+          business-incubator:   Резидент бизнес-инкубатора
+          innovation_company:   Малое инновационное предприятие при вузе
         sphere:                 Направления деятельности
         sphere_enum:
           it:                   ИТ и электроника

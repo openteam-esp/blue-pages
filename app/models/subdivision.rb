@@ -96,5 +96,6 @@ end
 #  kind           :string(255)
 #  status         :text
 #  sphere         :text
+#  production     :text
 #
 

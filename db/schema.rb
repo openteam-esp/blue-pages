@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120614083058) do
+ActiveRecord::Schema.define(:version => 20120615014010) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(:version => 20120614083058) do
     t.string   "kind"
     t.text     "status"
     t.text     "sphere"
-    t.text     "university"
     t.text     "production"
   end
 
