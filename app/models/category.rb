@@ -79,7 +79,7 @@ class Category < ActiveRecord::Base
       'person' => chief.person.to_s,
       'title' => chief.title,
       'image_url' => chief.image_url
-    } ] if chief
+    } ] if respond_to?(:chief) && chief
 
     expand = [expand, 2].min
     result['subdivisions'] = subdivisions.map { |child| child.json_cms_lite(expand - 1) } if expand > 0 && subdivisions.any?
