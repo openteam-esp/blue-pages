@@ -122,7 +122,7 @@ class Category < ActiveRecord::Base
     end
 
     result['subdivisions'] = subdivisions.map { |child| child.json_cms(expand - 1) } if expand > 0 && subdivisions.any?
-    result['innorganization'] = innorganization.map { |child| child.json_cms(expand - 1) } if expand > 0 && innorganization.any?
+    result['innorganizations'] = innorganizations.map { |child| child.json_cms(expand - 1) } if expand > 0 && innorganizations.any?
 
     result
   end
