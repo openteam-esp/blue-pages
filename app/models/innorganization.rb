@@ -4,6 +4,7 @@ class Innorganization < Category
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
 
   has_one :address,   :as => :addressable, :dependent => :destroy
+  has_one :chief, :class_name => 'Item', :as => :itemable
 
   after_initialize :set_address_attributes
 
