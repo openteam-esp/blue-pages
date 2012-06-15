@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120615014010) do
+ActiveRecord::Schema.define(:version => 20120615034858) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(:version => 20120615014010) do
     t.text     "status"
     t.text     "sphere"
     t.text     "production"
+    t.text     "image_url"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"

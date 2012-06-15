@@ -229,5 +229,6 @@ end
 #  status         :text
 #  sphere         :text
 #  production     :text
+#  image_url      :text
 #
 
