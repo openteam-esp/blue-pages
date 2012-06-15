@@ -100,6 +100,9 @@ class Category < ActiveRecord::Base
     result['emails'] = emails.map(&:address)                                       if respond_to?(:emails) && emails.any?
     result['url']    = url                                                         if url?
     result['dossier'] = dossier                                                    if respond_to?(:dossier) && info_path
+    result['production'] = production                                              if Innorganization === self
+    result['status'] = human_status                                                if Innorganization === self
+    result['sphere'] = human_sphere                                                if Innorganization === self
 
     if respond_to?(:items)
       result['items'] = [] if items.any?
