@@ -102,9 +102,6 @@ class Category < ActiveRecord::Base
     result['emails'] = emails.map(&:address)                                       if respond_to?(:emails) && emails.any?
     result['url']    = url                                                         if url?
     result['dossier'] = dossier                                                    if respond_to?(:dossier) && info_path
-    result['production'] = production                                              if Innorganization === self
-    result['status'] = human_status                                                if Innorganization === self
-    result['sphere'] = human_sphere                                                if Innorganization === self
 
     if respond_to?(:items)
       result['items'] = [] if items.any?
@@ -127,7 +124,6 @@ class Category < ActiveRecord::Base
     end
 
     result['subdivisions'] = subdivisions.map { |child| child.json_cms(expand - 1) } if expand > 0 && subdivisions.any?
-    result['innorganizations'] = innorganizations.map { |child| child.json_cms(expand - 1) } if expand > 0 && innorganizations.any?
 
     result
   end
@@ -149,7 +145,6 @@ class Category < ActiveRecord::Base
     c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
     JSON.parse(c.body_str)['content']
   end
-
 
   protected
     def str_to_hash(str)

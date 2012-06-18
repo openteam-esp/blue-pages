@@ -18,6 +18,43 @@ class Innorganization < Category
            :allow_nil => true
 
   has_enums
+
+  searchable do
+    text  :title,   :boost => 1.5
+    text  :address, :boost => 0.7
+    text  :url,     :boost => 0.7
+  end
+
+  def as_json(options)
+    {}.tap do |result|
+      result['title'] = title
+      result['address'] = address.to_s
+      result['phones'] = Phone.present_as_str(phones.select{|a| !a.kind_internal? })
+      result['emails'] = emails.map(&:address)
+      result['url']    = url
+      result['dossier'] = dossier
+      result['image_url'] = image_url
+      result['production'] = production
+      result['status'] = human_status
+      result['sphere'] = human_sphere
+      result['items'] = [] if items.any?
+      items.each do |item|
+        hash = {
+          'person' => item.person.to_s,
+          'title' => item.title,
+          'address' => item.address.to_s,
+          'image_url' => item.image_url
+        }
+
+        hash.merge!('link' => Rails.application.routes.url_helpers.category_item_path(item.itemable, item)) if item.try(:person).try(:info_path?)
+
+        hash.merge!('phones' => Phone.present_as_str(item.phones.select{|a| !a.kind_internal? })) if item.phones.any?
+        hash.merge!('emails' => item.emails.map(&:address)) if item.emails.any?
+
+        result['items'] << hash
+      end
+    end
+  end
 end
 
 # == Schema Information

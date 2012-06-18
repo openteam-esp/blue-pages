@@ -30,6 +30,7 @@ BluePages::Application.routes.draw do
     resources :items, :only => :show
   end
 
+  resources :innorganizations, :only => [:index]
 
   match "/search" => "main#search", :via => [:get]
   match "/build_info_path" => 'service#build_info_path'
