@@ -28,6 +28,8 @@ class Category < ActiveRecord::Base
 
   normalize_attribute :info_path
 
+  audited
+
   alias_attribute :absolute_depth, :depth
 
   def display_name

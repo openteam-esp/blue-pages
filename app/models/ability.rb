@@ -29,6 +29,10 @@ class Ability
       user.manager?
     end
 
+    can :manage, :audits do
+      user.manager_of? Category.first
+    end
+
     ## app specific
 
     alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
