@@ -20,9 +20,13 @@ class Innorganization < Category
   has_enums
 
   searchable do
-    text  :title,   :boost => 1.5
-    text  :address, :boost => 0.7
-    text  :url,     :boost => 0.7
+    string  :sphere,      :multiple => true
+    string  :status,      :multiple => true
+    text    :address,     :boost => 0.7
+    text    :dossier
+    text    :production
+    text    :title,       :boost => 1.5
+    text    :url,         :boost => 0.7
   end
 
   def json_cms(expand, expand_categories=true)
@@ -55,6 +59,22 @@ class Innorganization < Category
         result['items'] << hash
       end
     end
+  end
+
+  def self.sunspot_results(params, paginate_options)
+    search {
+      keywords(params[:q])
+      with(:sphere, params[:sphere]) if params[:sphere]
+      with(:status, params[:status]) if params[:status]
+      paginate paginate_options
+    }.results
+  end
+
+  def self.filters
+    {
+      'sphere' => Hash[human_enums['sphere'].map { |k,v| [k, [:value => v]].flatten }],
+      'status' => Hash[human_enums['status'].map { |k,v| [k, [:value => v]].flatten }]
+    }
   end
 end
 
