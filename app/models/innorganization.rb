@@ -76,6 +76,17 @@ class Innorganization < Category
       'status' => Hash[human_enums['status'].map { |k,v| [k, [:value => v]].flatten }]
     }
   end
+
+  private
+    def send_messages_on_create
+      MessageMaker.make_message 'esp.blue-pages.cms', :index_organization, id
+    end
+
+    alias :send_messages_on_update :send_messages_on_create
+
+    def send_messages_on_destroy
+      MessageMaker.make_message 'esp.blue-pages.cms', :remove_organization, id
+    end
 end
 
 # == Schema Information
