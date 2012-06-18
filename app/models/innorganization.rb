@@ -25,8 +25,9 @@ class Innorganization < Category
     text  :url,     :boost => 0.7
   end
 
-  def as_json(options)
+  def json_cms(expand, expand_categories=true)
     {}.tap do |result|
+      result['id'] = id
       result['title'] = title
       result['address'] = address.to_s
       result['phones'] = Phone.present_as_str(phones.select{|a| !a.kind_internal? })

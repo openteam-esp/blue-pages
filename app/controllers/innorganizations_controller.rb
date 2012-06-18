@@ -1,7 +1,15 @@
 class InnorganizationsController < ApplicationController
+  inherit_resources
+
+  action :index, :show
+
   respond_to :json
 
-  inherit_resources
+  def show
+    show! do |success|
+      success.json { render :json => resource.to_json(params[:expand], params[:sync]) }
+    end
+  end
 
   protected
     def collection
