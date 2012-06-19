@@ -16,11 +16,11 @@ group :default do
   gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-gems'
+  gem 'formtastic',         '< 2.2.0'
   gem 'jquery-rails'
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
-  gem 'openteam-commons'
-  gem 'prawn',                '>= 1.0.0.rc1',       :require => false
+  gem 'prawn',              '>= 1.0.0.rc1',         :require => false
   gem 'rails',                                      :require => false
   gem 'sanitize',                                   :require => false
   gem 'sass-rails'
