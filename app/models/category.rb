@@ -137,13 +137,11 @@ class Category < ActiveRecord::Base
     send_messages_on_update
   end
 
-  def send_update_message
-    send_messages_on_update
-  end
-
   def dossier
-    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
-    JSON.parse(c.body_str)['content']
+    if info_path?
+      c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
+      return JSON.parse(c.body_str)['content']
+    end
   end
 
   protected
