@@ -64,9 +64,10 @@ class Innorganization < Category
   def self.sunspot_results(params, paginate_options)
     search {
       keywords(params[:q])
+      order_by(:title) if params[:q].blank?
+      paginate paginate_options
       with(:sphere, params[:sphere]) if params[:sphere]
       with(:status, params[:status]) if params[:status]
-      paginate paginate_options
     }.results
   end
 
