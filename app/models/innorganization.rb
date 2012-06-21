@@ -40,8 +40,8 @@ class Innorganization < Category
       result['dossier'] = dossier
       result['image_url'] = image_url
       result['production'] = production
-      result['status'] = human_status
-      result['sphere'] = human_sphere
+      result['status'] = status
+      result['sphere'] = sphere
       result['items'] = [] if items.any?
       items.each do |item|
         hash = {
