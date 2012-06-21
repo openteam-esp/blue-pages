@@ -9,7 +9,7 @@ class InnorganizationsController < ApplicationController
     index! do |success|
       success.json {
         render :json => {
-          :organizations => collection.as_json,
+          :organizations => collection.map { |o| o.json_cms(false) },
           :filters => Innorganization.filters
         }
       }
