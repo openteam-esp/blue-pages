@@ -22,6 +22,7 @@ class Innorganization < Category
   searchable do
     string  :sphere,      :multiple => true
     string  :status,      :multiple => true
+    string  :title
     text    :address,     :boost => 0.7
     text    :dossier
     text    :production
