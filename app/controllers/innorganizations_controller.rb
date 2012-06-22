@@ -9,7 +9,7 @@ class InnorganizationsController < ApplicationController
     index! do |success|
       success.json {
         render :json => {
-          :organizations => collection.map { |o| o.json_cms(false) },
+          :organizations => collection.map { |o| o.to_json(false) },
           :filters => Innorganization.filters
         }
       }
@@ -18,7 +18,11 @@ class InnorganizationsController < ApplicationController
 
   def show
     show! do |success|
-      success.json { render :json => resource.to_json(params[:expand], params[:sync]) }
+      success.json { render :json => {
+          :organization => resource.to_json(false),
+          :filters => Innorganization.filters
+        }
+      }
     end
   end
 
