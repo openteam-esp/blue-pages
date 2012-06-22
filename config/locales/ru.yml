@@ -117,6 +117,7 @@ ru:
   download:                     Скачать в формате pdf
   go_to_manage:                 Управление
   personal_info:                Создать/редактировать описание
+  remove_info_path:             Удалить описание
   choose_link:                  выбрать уже существующее описание
   choose_file:                  Выбрать файл
   file_not_selected:            Файл не выбран

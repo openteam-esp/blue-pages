@@ -184,6 +184,15 @@ function delete_file(){
   });
 };
 
+function remove_info_path(){
+  $('.remove_info_path').live('click', function(){
+    $('#info_path').val('');
+    $('.show_info_path').remove();
+    return false;
+  });
+}
+
+
 $(function() {
   init_datepicker();
   init_sort();
@@ -204,4 +213,5 @@ $(function() {
 
   choose_file();
   delete_file();
+  remove_info_path();
 });
