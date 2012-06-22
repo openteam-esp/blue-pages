@@ -9,8 +9,8 @@ class Innorganization < Category
   after_initialize :set_address_attributes
 
   accepts_nested_attributes_for :address
-  accepts_nested_attributes_for :emails
-  accepts_nested_attributes_for :phones
+  accepts_nested_attributes_for :emails, :allow_destroy => true
+  accepts_nested_attributes_for :phones, :allow_destroy => true
 
   delegate :attributes, :postcode, :region, :district, :locality, :street, :house, :building,
            :to => :address,
