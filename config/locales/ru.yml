@@ -87,6 +87,12 @@ ru:
           it:                   ИТ и электроника
           medicine:             Медицина и биотехнологии
           energy:               Энергетика
+          chemistry:            Химия
+          nanotechnologies:     Нанотехнологии и новые материалы
+          building:             Строительство
+          ecology:              Экология
+          safety:               Безопасность
+          other:                Другое
 
       phone:
         _destroy:               Удалить
