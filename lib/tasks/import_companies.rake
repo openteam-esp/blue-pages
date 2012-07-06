@@ -3,7 +3,7 @@ require 'csv'
 
 class CompanyImporter
   def get_records
-    csv_data = CSV.read(Rails.root.join('stuff/companies.csv'))
+    csv_data = CSV.read(Rails.root.join('stuff/companies.csv'), :encoding => 'UTF-8')
     headers = csv_data.shift.map {|i| i.to_s }
     string_data = csv_data.map {|row| row.map {|cell| cell.to_s } }
     string_data.map {|row| Hash[*headers.zip(row).flatten] }
