@@ -2,6 +2,7 @@
 require 'csv'
 
 class CompanyImporter
+  include ActionView::Helpers::TextHelper
   def get_records
     csv_data = CSV.read(Rails.root.join('stuff/companies.csv'), :encoding => 'UTF-8')
     headers = csv_data.shift.map {|i| i.to_s }
@@ -114,6 +115,24 @@ class CompanyImporter
           desc = ''
           desc << record['description']
           desc << record['more']
+          desc = simple_format desc
+          fs_title = ActiveSupport::Inflector.transliterate(innorganization.title).downcase.gsub(/[^[:alnum:]\/]+/, '_').gsub(/_$/, '').gsub(/^_/, '')
+          innorganization.info_path = "/telefonnyy_spravochnik/predpriyatiya/innovatsionnye_predpriyatiya/#{fs_title}/description.xhtml"
+          base_url = "#{Settings['storage.url']}/api/el_finder/v2/telefonnyy_spravochnik/predpriyatiya/innovatsionnye_predpriyatiya/#{fs_title}/"
+          open_command = JSON.parse(Curl::Easy.perform("#{base_url}?cmd=open&init=true").body_str)
+          if open_command['files'].empty?
+            Dir.mktmpdir do |dir|
+              target = open_command['cwd']['hash']
+              curl = Curl::Easy.new("#{base_url}?cmd=upload&target=#{target}") do |curl|
+                curl.headers['Accept'] = 'application/json'
+                curl.multipart_form_post = true
+              end
+              open("#{dir}/description.xhtml", "w") {|f| f.write(desc) }
+              curl.http_post(Curl::PostField.file('upload[]',"#{dir}/description.xhtml"))
+              curl
+            end
+          end
+          innorganization.save!
         end
 
         p title
