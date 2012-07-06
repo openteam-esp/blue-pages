@@ -17,7 +17,7 @@ class Category < ActiveRecord::Base
   after_update  :send_messages_on_update, :unless => :ancestry_changed?
   after_destroy  :send_messages_on_destroy
 
-  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]–\-\(\)«"»,\.]+$/i}
+  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]\+–\-\(\)«"»,\.]+$/i}, :unless => ->(p){ Innorganization === self }
 
   has_enum :kind, %w[subdivisions innorganizations]
 
