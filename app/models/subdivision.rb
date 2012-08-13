@@ -13,7 +13,7 @@ class Subdivision < Category
   validates :address, :parent, :presence => true
 
   validates :abbr, :allow_blank => true,
-                   :format => { :with => /^[а-яё[:space:]–\-\(\)«"»,]+$/i }
+                   :format => { :with => VALID_TITLE }
 
   validates :url,  :allow_blank => true,
                    :format => { :with => %r{^

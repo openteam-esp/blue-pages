@@ -2,6 +2,8 @@
 
 class Category < ActiveRecord::Base
 
+  VALID_TITLE = /^[а-яёА-ЯЁIVXCM[:space:]0-9\+–\-\(\)«"»,\.№]+$/
+
   default_scope order('weight')
 
   has_many :permissions, :as => :context
@@ -17,7 +19,9 @@ class Category < ActiveRecord::Base
   after_update  :send_messages_on_update, :unless => :ancestry_changed?
   after_destroy  :send_messages_on_destroy
 
-  validates :title, :presence => true, :format => {:with => /^[а-яё[:space:]\+–\-\(\)«"»,\.]+$/i}, :unless => ->(p){ Innorganization === self }
+  validates :title, :presence => true,
+                    :format => {:with => VALID_TITLE},
+                    :unless => ->(p){ Innorganization === self }
 
   has_enum :kind, %w[subdivisions innorganizations]
 

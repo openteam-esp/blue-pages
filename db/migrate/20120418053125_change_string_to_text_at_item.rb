@@ -1,6 +1,6 @@
 class ChangeStringToTextAtItem < ActiveRecord::Migration
   def up
-    change_column :items, :title, :text
+    change_column :items, :title, :text, :length => nil
   end
 
   def down

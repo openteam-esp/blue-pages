@@ -117,6 +117,15 @@ ru:
       phone:                    Телефон
       subdivision:              Подразделения
 
+    errors:
+      models:
+        category:
+          attributes:
+            title:
+              invalid:          Только русские буквы, цифры, скобки, кавычки и римские цифры
+            abbr:
+              invalid:          Только русские буквы, цифры, скобки, кавычки и римские цифры
+
   application:                  Телефонный справочник
   "Are you sure?":              Вы уверены?
   blue_pages_system:            Телефонный справочник
