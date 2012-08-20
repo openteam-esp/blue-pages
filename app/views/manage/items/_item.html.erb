@@ -3,6 +3,10 @@
   <%= link_to item.title, [:manage, resource, item] %><%= ", #{item.person}" if item.person %>
 </div>
 <div class="details">
+  <% if Settings['app.academical_attributes'] %>
+    <%= content_tag :p, item.person.academic_degree %>
+    <%= content_tag :p, item.person.academic_rank %>
+  <% end %>
   <%= content_tag :p, item.address %>
   <%= content_tag :p, Phone.present_as_str(item.phones) if item.phones.any? %>
   <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>

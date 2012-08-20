@@ -6,6 +6,8 @@
     <%= person_form.input :name %>
     <%= person_form.input :patronymic %>
     <%= form.input :title, :as => :text %>
+    <%= person_form.input :academic_degree, :as => :string if Settings['app.academical_attributes'] %>
+    <%= person_form.input :academic_rank, :as => :string if Settings['app.academical_attributes'] %>
     <%= person_form.input :birthdate, :as => :date_picker %>
     <%= person_form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
     <%= content_tag :li, :class => 'info_wrapper' do %>

@@ -54,6 +54,8 @@ ru:
         name:                   Имя
         patronymic:             Отчество
         surname:                Фамилия
+        academic_degree:        Учёная степень
+        academic_rank:          Учёное звание
 
       subdivision:
         users:                  Менеджеры подразделения
