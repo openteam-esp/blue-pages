@@ -118,6 +118,11 @@ class Category < ActiveRecord::Base
           'image_url' => item.image_url
         }
 
+        if Settings['app.academical_attributes'] && item.person
+          hash.merge! 'academic_degree' => item.person.academic_degree
+          hash.merge! 'academic_rank' => item.person.academic_rank
+        end
+
         hash.merge!('link' => Rails.application.routes.url_helpers.category_item_path(item.itemable, item)) if item.try(:person).try(:info_path?)
 
         hash.merge!('phones' => Phone.present_as_str(item.phones.select{|a| !a.kind_internal? })) if item.phones.any?
