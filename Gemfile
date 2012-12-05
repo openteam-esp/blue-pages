@@ -31,6 +31,7 @@ end
 group :development do
   gem 'annotate',           '>= 2.4.1.beta1',       :require => false
   gem 'hirb',                                       :require => false
+  gem 'rvm-capistrano'
   gem 'sunspot_solr',       '>= 2.0.0.pre.120417',  :require => false
 end
 
