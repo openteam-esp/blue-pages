@@ -96,7 +96,7 @@ class Category < ActiveRecord::Base
   def json_cms(expand, expand_categories=true)
     expand = expand.to_i
 
-    return json_cms_lite(expand) if expand > 1
+    return json_cms_lite(expand) if expand > 2
 
     result = {}
     result['title'] = title
