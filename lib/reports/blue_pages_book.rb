@@ -1,25 +1,37 @@
 # encoding: utf-8
 
 class BluePagesBook < Prawn::Document
-  def title_page
+  attr_accessor :category
+
+  def title
+    'Справочник телефонов органов государственной власти и органов местного самоуправления Томской области'
+  end
+
+  def initialize(options={})
+    self.category = options.delete(:category) || Category.root.children.first
+    super(options.reverse_merge(:page_size => 'A4', :margin => [50,38,25,50]))
+  end
+
+  def first_title_page
     text 'Администрация Томской области', :align => :center, :size => 9
     move_down 200
-    text 'Справочник телефонов органов государственной власти и органов местного самоуправления Томской области', :align => :center, :size => 16
+    text title, :align => :center, :size => 16
     creation_date = I18n.l(Date.today, :format => :long)
     text creation_date, :align => :center, :size => 9, :valign => :bottom
     start_new_page
   end
 
-  def root_categories
-    category = Category.root.children.first
+  def second_title_page
     text category.title, :size => 18, :valign => :center, :align => :center
     outline.section category.title
-    start_new_page
-    @pages_arr = []
-    render_subdivision(category)
-    pages_arr = @pages_arr
+  end
 
-    repeat(lambda { |pg| pages_arr.include? pg}) do
+  def root_categories
+    render_subdivision(category)
+  end
+
+  def set_page_headers
+    repeat(lambda { |pg| pg > 2}) do
       bounding_box([0, 800], :width => bounds.right) do
         text category.title, :size => 8, :align => :right
         move_down 5
@@ -37,7 +49,6 @@ class BluePagesBook < Prawn::Document
       text subdivision.title, :size => font_size, :style => :bold
       move_down 15
 
-      @pages_arr << page_number
       outline.add_subsection_to(subdivision.parent.title) do
         outline.section subdivision.title, :destination => page_number
       end
@@ -89,8 +100,13 @@ class BluePagesBook < Prawn::Document
     end
     font "Verdana", :size => 10
 
-    title_page
+    first_title_page
+    second_title_page
+
     root_categories
+
+    set_page_headers
+
     render
   end
 end

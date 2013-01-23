@@ -10,6 +10,8 @@ class Category < ActiveRecord::Base
 
   has_ancestry :cache_depth => true
 
+  has_many :items, :as => :itemable
+
   after_update :set_subtree_weights, :if => :weight_changed?
   before_create :set_position, :set_weight
   before_update :set_weight
