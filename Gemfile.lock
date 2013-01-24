@@ -378,6 +378,7 @@ DEPENDENCIES
   nested_form
   nokogiri
   prawn (>= 1.0.0.rc1)
+  progress_bar
   rails
   rb-inotify
   rspec-rails

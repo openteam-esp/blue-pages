@@ -1,14 +1,14 @@
 # encoding: utf-8
 
-class BluePagesBook < Prawn::Document
-  attr_accessor :category
+require 'prawn'
+require 'progress_bar'
 
-  def title
-    'Справочник телефонов органов государственной власти и органов местного самоуправления Томской области'
-  end
+class BluePagesBook < Prawn::Document
+  attr_accessor :root, :title
 
   def initialize(options={})
-    self.category = options.delete(:category) || Category.root.children.first
+    self.root = options.delete(:root) || Category.root.children.first
+    self.title = options.delete(:title) || "Телефонный справочник"
     super(options.reverse_merge(:page_size => 'A4', :margin => [50,38,25,50]))
   end
 
@@ -18,47 +18,67 @@ class BluePagesBook < Prawn::Document
     text title, :align => :center, :size => 16
     creation_date = I18n.l(Date.today, :format => :long)
     text creation_date, :align => :center, :size => 9, :valign => :bottom
-    start_new_page
   end
 
   def second_title_page
-    text category.title, :size => 18, :valign => :center, :align => :center
-    outline.section category.title
-  end
-
-  def root_categories
-    render_subdivision(category)
+    start_new_page
+    text root.title, :size => 18, :valign => :center, :align => :center
+    outline.section root.title
   end
 
   def set_page_headers
-    repeat(lambda { |pg| pg > 2}) do
+    repeat(->(page){page > 2}) do
       bounding_box([0, 800], :width => bounds.right) do
-        text category.title, :size => 8, :align => :right
+        text root.title, :size => 8, :align => :right
         move_down 5
         stroke_horizontal_rule
       end
     end
   end
 
-  def render_subdivision(category)
-    category.children.each do |subdivision|
-      font_size = 10
-      font_size = 14 if subdivision.depth == 2
-      font_size = 12 if subdivision.depth == 3
+  def categories
+    @categories ||= root.subtree
+  end
 
-      text subdivision.title, :size => font_size, :style => :bold
-      move_down 15
+  def bar
+    @bar ||= ProgressBar.new(categories.count)
+  end
 
-      outline.add_subsection_to(subdivision.parent.title) do
-        outline.section subdivision.title, :destination => page_number
+  def render_categories
+    categories.each do |child|
+      depth = child.depth - root.depth
+
+      if (child.category? && child.children.any?) || child.subdivision?
+        start_new_page if ((depth == 1) || (depth == 0 && root.subdivision?))
+
+        add_outline(child) if depth > 0
+
+        depth -= 1 if root.category?
+
+        render_subdivision child, depth unless child == root && root.category?
       end
-
-      render_contacts subdivision
-      render_items subdivision
-      render_subdivision subdivision
-      start_new_page if subdivision.depth == 3
+      bar.increment!
     end
   end
+
+  def render_subdivision(subdivision, depth)
+    font_size = 10
+    font_size = 14 if depth == 0
+    font_size = 12 if depth == 1
+
+    text subdivision.title, :size => font_size, :style => :bold
+    move_down 15
+
+    render_contacts subdivision
+    render_items subdivision
+  end
+
+  def add_outline(category)
+    outline.add_subsection_to(category.parent.title) do
+      outline.section category.title, :destination => page_number
+    end
+  end
+
 
   def render_items(object)
     object.items.each do |item|
@@ -84,7 +104,7 @@ class BluePagesBook < Prawn::Document
     end
   end
 
-  def to_pdf
+  def generate_pdf
     if RUBY_PLATFORM =~ /freebsd/
       font_families.update(
         "Verdana" => {
@@ -103,10 +123,14 @@ class BluePagesBook < Prawn::Document
     first_title_page
     second_title_page
 
-    root_categories
+    render_categories
 
     set_page_headers
 
-    render
+    render_file pdf_path
+  end
+
+  def pdf_path
+    "#{Rails.root}/public/#{root.slug}.pdf"
   end
 end

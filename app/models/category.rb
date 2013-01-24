@@ -10,8 +10,6 @@ class Category < ActiveRecord::Base
 
   has_ancestry :cache_depth => true
 
-  has_many :items, :as => :itemable
-
   after_update :set_subtree_weights, :if => :weight_changed?
   before_create :set_position, :set_weight
   before_update :set_weight
@@ -153,6 +151,14 @@ class Category < ActiveRecord::Base
       c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
       return JSON.parse(c.body_str)['content']
     end
+  end
+
+  def category?
+    instance_of?(Category)
+  end
+
+  def subdivision?
+    !category?
   end
 
   protected
