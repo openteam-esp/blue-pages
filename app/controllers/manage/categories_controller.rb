@@ -6,7 +6,7 @@ class Manage::CategoriesController < Manage::ApplicationController
 
   def index
     index! {
-      @categories = current_user.contexts
+      @categories = current_user.contexts.compact
       render :index, :layout => 'manage' and return
     }
   end
