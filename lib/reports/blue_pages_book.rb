@@ -51,11 +51,12 @@ class BluePagesBook < Prawn::Document
       if (child.category? && child.children.any?) || child.subdivision?
         start_new_page if ((depth == 1) || (depth == 0 && root.subdivision?))
 
-        add_outline(child) if depth > 0
 
         depth -= 1 if root.category?
 
-        render_subdivision child, depth unless child == root && root.category?
+        unless child == root && root.category?
+          render_subdivision child, depth
+        end
       end
       bar.increment!
     end
@@ -66,41 +67,51 @@ class BluePagesBook < Prawn::Document
     font_size = 14 if depth == 0
     font_size = 12 if depth == 1
 
-    text subdivision.title, :size => font_size, :style => :bold
-    move_down 15
+    move_down 16
 
-    render_contacts subdivision
-    render_items subdivision
+    group do
+      text subdivision.title, :size => font_size, :style => :bold
+      move_down 4
+      render_contacts subdivision
+    end
+
+    add_outline(subdivision)
+
+    render_items subdivision if subdivision.subdivision?
   end
 
   def add_outline(category)
     outline.add_subsection_to(category.parent.title) do
       outline.section category.title, :destination => page_number
-    end
+    end rescue nil
   end
 
 
   def render_items(object)
     object.items.each do |item|
-      move_down 8
-      text item.title, :size => 8, :style => :bold, :leading => 2
-      outline.add_subsection_to(object.title) do
-        outline.section item.title, :destination => page_number
+      group do
+        move_down 8
+        text item.title, :size => 8, :style => :bold, :leading => 2
+        outline.add_subsection_to(object.title) do
+          outline.section item.title, :destination => page_number
+        end
+        text item.full_name, :size => 8, :style => :italic, :indent_paragraphs => 10, :leading => 1 if item.full_name.present?
+        outline.add_subsection_to(item.title) do
+          outline.section item.full_name, :destination => page_number
+        end if item.full_name.present?
+        render_contacts(item, 8)
       end
-      text item.full_name, :size => 8, :style => :italic, :indent_paragraphs => 10, :leading => 1 if item.full_name.present?
-      outline.add_subsection_to(item.title) do
-        outline.section item.full_name, :destination => page_number
-      end if item.full_name.present?
-      render_contacts(item, 8)
-    end if object.is_a? Subdivision
+    end
   end
 
   def render_contacts(object, font_size = 10)
     if object.is_a?(Subdivision) || object.is_a?(Item)
-      text object.emails.map(&:to_s).join(', '), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
-      text Phone.present_as_str(object.phones), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
-      text object.url.to_s, :url => object.url,  :size => font_size-1, :indent_paragraphs => 10, :leading => 2 if object.is_a? Subdivision
-      text object.address.to_s, :size => font_size-1, :indent_paragraphs => 10, :leading => 2 if object.address.present?
+      group do
+        text object.emails.map(&:to_s).join(', '), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
+        text Phone.present_as_str(object.phones), :size => font_size-1, :indent_paragraphs => 10, :leading => 2
+        text object.url.to_s, :url => object.url,  :size => font_size-1, :indent_paragraphs => 10, :leading => 2 if object.is_a? Subdivision
+        text object.address.to_s, :size => font_size-1, :indent_paragraphs => 10, :leading => 2 if object.address.present?
+      end
     end
   end
 
