@@ -3,9 +3,9 @@
 autoload :BluePagesBook, File.expand_path('../../reports/blue_pages_book', __FILE__)
 
 desc "Генерация всех PDF"
-task :generate_pdfs => ['generate_pdfs:government', 'generate_pdfs:family_department']
+task :generate_pdfs => ['generate_pdf:government', 'generate_pdf:family_department']
 
-namespace :generate_pdfs do
+namespace :generate_pdf do
   desc "Генерация справочника АТО"
   task :government => :environment do
     BluePagesBook.new(:title => 'Справочник телефонов органов государственной власти и органов местного самоуправления Томской области').generate_pdf

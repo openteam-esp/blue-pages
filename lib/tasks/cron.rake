@@ -1,3 +1,3 @@
 desc 'Execute periodical tasks'
-task :cron => 'generate_books'
+task :cron => 'generate_pdfs'
 
