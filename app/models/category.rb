@@ -30,7 +30,7 @@ class Category < ActiveRecord::Base
     text  :title, :boost => 1.5
   end
 
-  normalize_attribute :info_path
+  normalize_attribute :dossier
 
   audited
 
@@ -123,7 +123,7 @@ class Category < ActiveRecord::Base
           hash.merge! 'academic_rank' => item.person.academic_rank
         end
 
-        hash.merge!('link' => Rails.application.routes.url_helpers.category_item_path(item.itemable, item)) if item.try(:person).try(:info_path?)
+        hash.merge!('link' => Rails.application.routes.url_helpers.category_item_path(item.itemable, item)) if item.try(:person).try(:dossier?)
 
         hash.merge!('phones' => Phone.present_as_str(item.phones.select{|a| !a.kind_internal? })) if item.phones.any?
         hash.merge!('emails' => item.emails.map(&:address)) if item.emails.any?

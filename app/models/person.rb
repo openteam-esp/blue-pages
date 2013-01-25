@@ -7,11 +7,11 @@ class Person < ActiveRecord::Base
 
   after_update :send_messages_on_update
 
-  after_save :update_info_path, :if => [:info_path_changed?, :info_path?]
+  after_save :update_dossier, :if => [:dossier_changed?, :dossier?]
 
-  after_update :remove_info_path, :if => :info_path_changed?, :unless => :info_path?
+  after_update :remove_dossier, :if => :dossier_changed?, :unless => :dossier?
 
-  normalize_attribute :info_path
+  normalize_attribute :dossier
 
   delegate :itemable, :to => :item
   alias :subdivision :itemable
@@ -26,7 +26,7 @@ class Person < ActiveRecord::Base
 
   alias :to_s :full_name
 
-  def update_info_path
+  def update_dossier
     MessageMaker.make_message 'esp.blue-pages.cms', 'add_person', item.id, 'subdivision' => { 'id' => subdivision.id, 'parent_ids' => subdivision.ancestor_ids }
   end
 
@@ -41,7 +41,7 @@ class Person < ActiveRecord::Base
 
     delegate :send_messages_on_update, :to => :item
 
-    def remove_info_path
+    def remove_dossier
       MessageMaker.make_message 'esp.blue-pages.cms', 'remove_person', item.id, 'subdivision' => { 'id' => subdivision.id, 'parent_ids' => subdivision.ancestor_ids }
     end
 end
