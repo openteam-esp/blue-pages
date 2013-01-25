@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130123015853) do
+ActiveRecord::Schema.define(:version => 20130125050328) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130123015853) do
     t.text     "production"
     t.text     "image_url"
     t.string   "slug"
+    t.text     "dossier"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20130123015853) do
     t.datetime "updated_at",      :null => false
     t.text     "academic_degree"
     t.text     "academic_rank"
+    t.text     "dossier"
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"

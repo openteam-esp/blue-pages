@@ -105,7 +105,7 @@ class Category < ActiveRecord::Base
     result['phones'] = Phone.present_as_str(phones.select{|a| !a.kind_internal? }) if respond_to?(:phones) && phones.any?
     result['emails'] = emails.map(&:address)                                       if respond_to?(:emails) && emails.any?
     result['url']    = url                                                         if url?
-    result['dossier'] = dossier                                                    if respond_to?(:dossier) && info_path
+    result['dossier'] = dossier
 
     if respond_to?(:items)
       result['items'] = [] if items.any?
