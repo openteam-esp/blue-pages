@@ -15,8 +15,8 @@
       <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
     <% end if can?(:modify_dossier, resource) %>
     <div class="show_info_path" style='clear: both;'>
-      <%= raw person_form.object.dossier if person_form.object.info_path %>
-      <p><%= link_to t('remove_info_path'), '#', :class => 'remove_info_path' if can?(:modify_dossier, resource) && person_form.object.info_path? %></p>
+      <%= raw person_form.object.dossier if person_form.object.dossier? %>
+      <p><%= link_to t('remove_info_path'), '#', :class => 'remove_info_path' if can?(:modify_dossier, resource) && person_form.object.dossier? %></p>
     </div>
   <% end %>
 

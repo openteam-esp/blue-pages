@@ -11,7 +11,7 @@
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
   <% end if can?(:modify_dossier, resource) %>
   <div class="show_info_path" style='clear: both;'>
-    <%= raw form.object.dossier if form.object.info_path %>
+    <%= raw form.object.dossier if form.object.dossier? %>
   </div>
 
   <%= form.input :status, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:status) %>

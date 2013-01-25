@@ -12,7 +12,7 @@
     <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
   <% end if can?(:modify_dossier, resource) %>
   <div class="show_info_path" style='clear: both;'>
-    <%= raw form.object.dossier if form.object.info_path %>
+    <%= raw form.object.dossier if form.object.dossier? %>
   </div>
 <% end %>
 
