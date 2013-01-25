@@ -105,7 +105,7 @@ class Category < ActiveRecord::Base
     result['phones'] = Phone.present_as_str(phones.select{|a| !a.kind_internal? }) if respond_to?(:phones) && phones.any?
     result['emails'] = emails.map(&:address)                                       if respond_to?(:emails) && emails.any?
     result['url']    = url                                                         if url?
-    result['dossier'] = dossier
+    result['dossier'] = dossier                                                    if dossier?
 
     if respond_to?(:items)
       result['items'] = [] if items.any?
@@ -144,13 +144,6 @@ class Category < ActiveRecord::Base
 
   def send_update_message
     send_messages_on_update
-  end
-
-  def dossier
-    if info_path?
-      c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
-      return JSON.parse(c.body_str)['content']
-    end
   end
 
   def category?

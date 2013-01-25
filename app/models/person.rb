@@ -26,11 +26,6 @@ class Person < ActiveRecord::Base
 
   alias :to_s :full_name
 
-  def dossier
-    c = Curl::Easy.perform("#{remote_url}&target=r1_#{str_to_hash(info_path.gsub(/^\//,''))}")
-    JSON.parse(c.body_str)['content']
-  end
-
   def update_info_path
     MessageMaker.make_message 'esp.blue-pages.cms', 'add_person', item.id, 'subdivision' => { 'id' => subdivision.id, 'parent_ids' => subdivision.ancestor_ids }
   end

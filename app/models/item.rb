@@ -88,7 +88,7 @@ class Item < ActiveRecord::Base
     result['patronymic'] = person.patronymic
     result['academic_degree'] = person.academic_degree                             if Settings['app.academical_attributes']
     result['academic_rank'] = person.academic_rank                                 if Settings['app.academical_attributes']
-    result['dossier'] = person.dossier                                             if person.info_path
+    result['dossier'] = person.dossier                                             if person.dossier?
     result['image_url'] = image_url                                                if image_url.present?
 
     result
