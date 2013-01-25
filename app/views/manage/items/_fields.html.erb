@@ -1,23 +1,14 @@
 <%= javascript_include_tag 'esp-ckeditor/application' %>
-<%= javascript_include_tag 'info_plugin' %>
 
   <%= form.inputs "Сотрудник", :class => "inputs bordered", :for => [:person, @item.person || @item.build_person] do |person_form| %>
-    <%= person_form.input :surname, :input_html => {:class => 'for_info_path'} %>
+    <%= person_form.input :surname, :input_html => {:autofocus => true} %>
     <%= person_form.input :name %>
     <%= person_form.input :patronymic %>
     <%= form.input :title, :as => :text %>
     <%= person_form.input :academic_degree, :as => :string if Settings['app.academical_attributes'] %>
     <%= person_form.input :academic_rank, :as => :string if Settings['app.academical_attributes'] %>
     <%= person_form.input :birthdate, :as => :date_picker %>
-    <%= person_form.input :info_path, :as => :hidden, :input_html => {:id => 'info_path'} %>
-    <%= content_tag :li, :class => 'info_wrapper' do %>
-      <%= link_to content_tag(:span, t('personal_info'), :class => 'link'), '#', :parent_data => resource.parent.id, :class => 'info_link' %>
-      <%= link_to "(#{t('choose_link')})", '#', :class => 'choose_link' %>
-    <% end if can?(:modify_dossier, resource) %>
-    <div class="show_info_path" style='clear: both;'>
-      <%= raw person_form.object.dossier if person_form.object.dossier? %>
-      <p><%= link_to t('remove_info_path'), '#', :class => 'remove_info_path' if can?(:modify_dossier, resource) && person_form.object.dossier? %></p>
-    </div>
+    <%= person_form.input :dossier, :as => :ckeditor if can?(:modify_dossier, resource) %>
   <% end %>
 
   <%= render :partial => 'attached_image', :locals => { :form => form } %>

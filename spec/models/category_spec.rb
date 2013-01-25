@@ -14,7 +14,8 @@ describe Category do
   it { should_not allow_value('English title').for(:title) }
   it { should allow_value('Название с цифрами 123').for(:title) }
 
-  it { should normalize_attribute(:info_path).from('').to(nil) }
+  it { should normalize_attribute(:dossier).from('').to(nil) }
+  it { should normalize_attribute(:dossier).from("<p></p>\n<p></p><p>content</p>").to('<p>content</p>') }
 
   context 'sending messages' do
     describe '#create' do
