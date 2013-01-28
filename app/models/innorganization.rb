@@ -19,6 +19,8 @@ class Innorganization < Category
 
   has_enums
 
+  has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+
   searchable do
     string  :sphere,      :multiple => true
     string  :status,      :multiple => true

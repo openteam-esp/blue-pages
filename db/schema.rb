@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130125050328) do
+ActiveRecord::Schema.define(:version => 20130128063111) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -61,8 +61,8 @@ ActiveRecord::Schema.define(:version => 20130125050328) do
     t.string   "weight"
     t.string   "ancestry"
     t.integer  "ancestry_depth"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "kind"
     t.text     "status"
     t.text     "sphere"
@@ -70,6 +70,10 @@ ActiveRecord::Schema.define(:version => 20130125050328) do
     t.text     "image_url"
     t.string   "slug"
     t.text     "dossier"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "categories", ["ancestry"], :name => "index_categories_on_ancestry"
@@ -91,10 +95,14 @@ ActiveRecord::Schema.define(:version => 20130125050328) do
     t.text     "title"
     t.integer  "position"
     t.string   "weight"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
     t.string   "image_url"
     t.string   "itemable_type"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "items", ["itemable_id"], :name => "index_items_on_subdivision_id"

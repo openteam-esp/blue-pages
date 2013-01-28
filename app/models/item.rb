@@ -52,6 +52,8 @@ class Item < ActiveRecord::Base
 
   normalize_attribute :image_url
 
+  has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
+
   searchable do
     boost :boost
 

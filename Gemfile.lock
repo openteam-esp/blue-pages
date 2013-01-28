@@ -65,6 +65,7 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     chronic (0.6.7)
     chunky_png (1.2.5)
+    cocaine (0.4.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -232,6 +233,15 @@ GEM
     options (2.3.0)
       fattr
     orm_adapter (0.1.0)
+    paperclip (3.4.0)
+      activemodel (>= 3.0.0)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.4.0)
+      mime-types
+    paperclip-elvfs (0.0.5.1)
+      curb
+      paperclip
     pdf-reader (1.1.1)
       Ascii85 (~> 1.0.0)
       ruby-rc4
@@ -355,7 +365,6 @@ DEPENDENCIES
   annotate (>= 2.4.1.beta1)
   attribute_normalizer
   compass-rails
-  curb
   debugger
   email_validator
   esp-auth
@@ -372,6 +381,7 @@ DEPENDENCIES
   libnotify
   nested_form
   nokogiri
+  paperclip-elvfs
   prawn (>= 1.0.0.rc1)
   progress_bar
   rails
