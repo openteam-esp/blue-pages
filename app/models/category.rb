@@ -30,7 +30,7 @@ class Category < ActiveRecord::Base
     text  :title, :boost => 1.5
   end
 
-  normalize_attribute :dossier
+  normalize_attribute :dossier, :with => [:strip_empty_html, :strip, :blank]
 
   audited
 

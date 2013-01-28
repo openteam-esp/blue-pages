@@ -11,7 +11,7 @@ class Person < ActiveRecord::Base
 
   after_update :remove_dossier, :if => :dossier_changed?, :unless => :dossier?
 
-  normalize_attribute :dossier
+  normalize_attribute :dossier, :with => [:strip_empty_html, :strip, :blank]
 
   delegate :itemable, :to => :item
   alias :subdivision :itemable
