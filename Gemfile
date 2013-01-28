@@ -10,7 +10,6 @@ group :default do
   gem 'attribute_normalizer'
   gem 'compass-rails'
   gem 'curb'
-  gem 'el_vfs_client'
   gem 'email_validator'
   gem 'esp-auth'
   gem 'esp-ckeditor'

@@ -1,6 +1,4 @@
 BluePages::Application.routes.draw do
-  mount ElVfsClient::Engine => '/'
-
   namespace :manage do
     resources :categories do
       resources :categories, :only => [:create, :new]
