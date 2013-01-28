@@ -10,8 +10,6 @@
   <%= form.input :production %>
 <% end %>
 
-<%= render :partial => 'attached_image', :locals => { :form => form } %>
-
 <%= form.inputs :class => "inputs bordered", :for => :address do | address_form | %>
   <%= address_form.input :postcode %>
   <%= address_form.input :region %>
