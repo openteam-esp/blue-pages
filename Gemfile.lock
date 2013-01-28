@@ -399,4 +399,5 @@ DEPENDENCIES
   sunspot_rails (>= 2.0.0.pre.120417)
   sunspot_solr (>= 2.0.0.pre.120417)
   therubyracer
+  timecop
   uglifier

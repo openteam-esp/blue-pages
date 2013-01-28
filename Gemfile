@@ -10,7 +10,6 @@ group :default do
   gem 'attribute_normalizer'
   gem 'compass-rails'
   gem 'email_validator'
-  gem 'paperclip-elvfs'
   gem 'esp-auth'
   gem 'esp-ckeditor'
   gem 'esp-commons'
@@ -19,6 +18,7 @@ group :default do
   gem 'jquery-rails'
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
+  gem 'paperclip-elvfs'
   gem 'prawn',              '>= 1.0.0.rc1',         :require => false
   gem 'progress_bar',                               :require => false
   gem 'rails',                                      :require => false
@@ -26,6 +26,7 @@ group :default do
   gem 'sass-rails'
   gem 'show_for'
   gem 'sunspot_rails',      '>= 2.0.0.pre.120417',  :require => false
+  gem 'timecop',                                    :require => false
 end
 
 group :development do
