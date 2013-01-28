@@ -1,19 +1,10 @@
 <div class="fields">
   <%= form.inputs t('image_file'), :class => 'inputs photo bordered' do %>
-    <%= form.input :image_url, :as => :hidden, :input_html => {:id => 'image_url'} %>
-    <li class='attached_file'>
-      <div class='wrapper'>
-        <% if form.object.image_url? %>
-          <%= link_to image_for(form.object.image_url, :width => '100'), form.object.image_url, :target => '_blank' %>
-        <% else %>
-          <%= t('file_not_selected') %>
-        <% end %>
-      </div>
-      <%= form.semantic_errors :image_url %>
-    </li>
-    <li class="actions">
-      <%= link_to t('choose_file'), '#', :class => 'choose_file button icon settings', :id => Time.now.to_i %>
-      <%= link_to t('commons.delete'), '#', :class => 'button icon remove danger delete_file' if form.object.image_url? %>
-    </li>
+    <% if resource.image_url? %>
+      <li><%= link_to image_for(form.object.image_url, :width => '100'), form.object.image_url, :target => '_blank' %></li>
+      <li><%= link_to t('commons.delete'), '#', :class => 'button icon remove danger delete_file' %></li>
+    <% else %>
+      <%= form.input :image, :label => false %>
+    <% end %>
   <% end %>
 </div>

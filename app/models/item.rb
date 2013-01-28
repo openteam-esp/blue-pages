@@ -54,6 +54,12 @@ class Item < ActiveRecord::Base
 
   has_attached_file :image, :storage => :elvfs, :elvfs_url => Settings['storage.url']
 
+  delegate :clear, :to => :image, :allow_nil => true, :prefix => true
+
+  attr_accessor :delete_image
+
+  before_update :image_clear, :if => :delete_image
+
   searchable do
     boost :boost
 
