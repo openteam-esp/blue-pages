@@ -155,14 +155,6 @@ class Category < ActiveRecord::Base
   end
 
   protected
-    def str_to_hash(str)
-      Base64.urlsafe_encode64(str).strip.tr('=', '')
-    end
-
-    def remote_url
-      "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
-    end
-
     def set_position
       self.position = siblings.last.try(:position).to_i + 1 unless self.position
     end

@@ -24,20 +24,20 @@ ru:
 
       user:
         email:                  Адрес электронной почты
-        name:                   Имя
-        subdivisions:           Подразделения
         last_sign_in_at:        Последняя авторизация
         last_sign_in_ip:        Последний IP-адрес
+        name:                   Имя
+        subdivisions:           Подразделения
 
       category:
-        title:                  Название
-        users:                  Менеджеры раздела
-        parent_id:              Родительский раздел
-        updated_at:             Обновлено
         kind:                   Тип дочерних элементов
         kind_enum:
           subdivisions:         Подразделения
           innorganizations:     Инновационные предприятия
+        parent_id:              Родительский раздел
+        title:                  Название
+        updated_at:             Обновлено
+        users:                  Менеджеры раздела
 
       item:
         address:                Адрес
@@ -50,35 +50,38 @@ ru:
         updated_at:             Обновлено
 
       person:
+        academic_degree:        Учёная степень
+        academic_rank:          Учёное звание
         birthdate:              День рождения
+        dossier:                Описание
         name:                   Имя
         patronymic:             Отчество
         surname:                Фамилия
-        academic_degree:        Учёная степень
-        academic_rank:          Учёное звание
 
       subdivision:
-        users:                  Менеджеры подразделения
-        parent_id:              Родительский раздел
         abbr:                   Аббревиатура
         address:                Адрес
         created_at:             Создано
+        dossier:                Описание
         emails:                 Адреса электронной почты
+        parent_id:              Родительский раздел
         phones:                 Телефоны
         title:                  Название
         updated_at:             Обновлено
         url:                    Сайт
+        users:                  Менеджеры подразделения
 
       innorganization:
-        parent_id:              Родительский раздел
         address:                Адрес
+        dossier:                Описание
         emails:                 Адреса электронной почты
+        parent_id:              Родительский раздел
         phones:                 Телефоны
-        title:                  Название
-        url:                    Сайт
-        university:             Принадлежность ВУЗу
         production:             Продукция
         status:                 Статус
+        title:                  Название
+        university:             Принадлежность ВУЗу
+        url:                    Сайт
         status_enum:
           sez:                  Резидент особой экономической зоны «Томск»
           skolkovo:             Резидент инновационного центра «Сколково»

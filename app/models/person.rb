@@ -31,14 +31,6 @@ class Person < ActiveRecord::Base
   end
 
   private
-    def str_to_hash(str)
-      Base64.urlsafe_encode64(str).strip.tr('=', '')
-    end
-
-    def remote_url
-      "#{Settings['storage.url']}/api/el_finder/v2?format=json&cmd=get"
-    end
-
     delegate :send_messages_on_update, :to => :item
 
     def remove_dossier
