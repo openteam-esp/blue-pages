@@ -239,7 +239,7 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.4.0)
       mime-types
-    paperclip-elvfs (0.0.5.1)
+    paperclip-elvfs (0.0.5.2)
       curb
       paperclip
     pdf-reader (1.1.1)

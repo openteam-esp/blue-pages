@@ -9,7 +9,7 @@ class ItemsMigrator
     objects.each do |object|
       Timecop.freeze(object.updated_at) do
         object.image = open(object.image_url)
-        object.image_file_name = File.basename(object.image_url)
+        object.image_file_name = URI.decode File.basename(object.image_url)
         object.save!
       end
       bar.increment!
