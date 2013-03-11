@@ -1,29 +1,28 @@
-source :rubygems
+source 'http://rubygems.org'
 
 group :assets do
-  gem 'therubyracer'                                                        unless RUBY_PLATFORM =~ /freebsd/
+  gem 'compass-rails'
+  gem 'jquery-rails'
+  gem 'sass-rails'
   gem 'uglifier'
 end
 
 group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
-  gem 'compass-rails'
   gem 'email_validator'
   gem 'esp-auth'
   gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-gems'
   gem 'formtastic',         '< 2.2.0'
-  gem 'jquery-rails'
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
   gem 'paperclip-elvfs'
   gem 'prawn',              '>= 1.0.0.rc1',         :require => false
   gem 'progress_bar',                               :require => false
-  gem 'rails',                                      :require => false
+  gem 'rails', '~> 3.2.12',                         :require => false
   gem 'sanitize',                                   :require => false
-  gem 'sass-rails'
   gem 'show_for'
   gem 'sunspot_rails',      '>= 2.0.0.pre.120417',  :require => false
   gem 'timecop',                                    :require => false
