@@ -142,6 +142,6 @@ class BluePagesBook < Prawn::Document
   end
 
   def pdf_path
-    "#{Rails.root}/public/#{root.slug}.pdf"
+    "#{Rails.root}/shared/pdf/#{root.slug}.pdf"
   end
 end
