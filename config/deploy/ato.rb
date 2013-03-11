@@ -102,35 +102,14 @@ namespace :unicorn do
   end
 end
 
-namespace :subscriber do
-  desc "Start rabbitmq subscriber"
-  task :start do
-    run "/usr/local/etc/rc.d/blue-pages-subscriber.sh start"
-  end
-
-  desc "Stop rabbitmq subscriber"
-  task :stop do
-    run "/usr/local/etc/rc.d/blue-pages-subscriber.sh stop"
-  end
-
-  desc "Restart rabbitmq subscriber"
-  task :restart do
-    run "/usr/local/etc/rc.d/blue-pages-subscriber.sh restart"
-  end
-end
-
-# stop subscribers
-before "deploy", "subscriber:stop"
-
 # deploy
 after "deploy:finalize_update", "deploy:config_app"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:copy_unicorn_config"
 after "deploy", "unicorn:reload"
-after "deploy", "subscriber:restart"
+after "deploy", "subscriber:start"
 after "deploy:restart", "deploy:cleanup"
 after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "unicorn:restart"
-after "deploy:rollback", "subscriber:restart"
