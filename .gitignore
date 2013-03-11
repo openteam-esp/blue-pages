@@ -5,6 +5,7 @@
 .sass-cache/
 bin/
 config/database.yml
+config/deploy.yml
 config/settings.yml
 config/sunspot.yml
 db/*.sqlite3

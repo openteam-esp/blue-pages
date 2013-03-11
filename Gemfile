@@ -33,6 +33,7 @@ group :development do
   gem 'debugger'
   gem 'hirb',                                       :require => false
   gem 'rvm-capistrano'
+  gem 'capistrano-ext'
   gem 'sunspot_solr',       '>= 2.0.0.pre.120417',  :require => false
 end
 
