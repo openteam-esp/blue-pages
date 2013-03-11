@@ -76,8 +76,8 @@ namespace :deploy do
 
   desc "Symlink pdf files"
   task :symlink_pdf do
-    run "ln -s #{deploy_to}/shared/pdfs/government.pdf #{deploy_to}/current/public/blue_pages.pdf"
-    run "ln -s #{deploy_to}/shared/pdfs/family_department.pdf #{deploy_to}/current/public/family_department.pdf"
+    run "ln -s #{deploy_to}/shared/pdf/government.pdf #{deploy_to}/current/public/blue_pages.pdf"
+    run "ln -s #{deploy_to}/shared/pdf/family_department.pdf #{deploy_to}/current/public/family_department.pdf"
   end
 
   desc "Update crontab tasks"
@@ -125,3 +125,5 @@ after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "unicorn:restart"
+after "deploy:rollback", "deploy:crontab"
+after "deploy:rollback", "deploy:symlink_pdf"
