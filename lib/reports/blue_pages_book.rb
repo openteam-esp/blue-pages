@@ -141,7 +141,11 @@ class BluePagesBook < Prawn::Document
     render_file pdf_path
   end
 
+  def current_dir
+    File.expand_path('../../../../..', __FILE__)
+  end
+
   def pdf_path
-    "#{Rails.root.join('..', '..' 'shared', 'pdf', root.slug)}.pdf"
+    "#{current_dir}/shared/pdf/#{root.slug}.pdf"
   end
 end
