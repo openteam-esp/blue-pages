@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: people
+#
+#  academic_degree :text
+#  academic_rank   :text
+#  birthdate       :date
+#  created_at      :datetime         not null
+#  dossier         :text
+#  id              :integer          not null, primary key
+#  info_path       :text
+#  item_id         :integer
+#  name            :string(255)
+#  patronymic      :string(255)
+#  surname         :string(255)
+#  updated_at      :datetime         not null
+#
+
 require 'base64'
 
 class Person < ActiveRecord::Base
@@ -37,19 +55,3 @@ class Person < ActiveRecord::Base
       MessageMaker.make_message 'esp.blue-pages.cms', 'remove_person', item.id, 'subdivision' => { 'id' => subdivision.id, 'parent_ids' => subdivision.ancestor_ids }
     end
 end
-
-# == Schema Information
-#
-# Table name: people
-#
-#  id         :integer         not null, primary key
-#  item_id    :integer
-#  surname    :string(255)
-#  name       :string(255)
-#  patronymic :string(255)
-#  birthdate  :date
-#  info_path  :text
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#
-

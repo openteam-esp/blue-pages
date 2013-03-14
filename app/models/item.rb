@@ -1,4 +1,23 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: items
+#
+#  created_at         :datetime         not null
+#  id                 :integer          not null, primary key
+#  image_content_type :string(255)
+#  image_file_name    :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  image_url          :string(255)
+#  itemable_id        :integer
+#  itemable_type      :string(255)
+#  position           :integer
+#  title              :text
+#  updated_at         :datetime         not null
+#  weight             :string(255)
+#
+
 
 class Item < ActiveRecord::Base
   belongs_to :itemable, :polymorphic => true
@@ -152,19 +171,3 @@ class Item < ActiveRecord::Base
       itemable.send_update_message
     end
 end
-
-# == Schema Information
-#
-# Table name: items
-#
-#  id            :integer         not null, primary key
-#  itemable_id   :integer
-#  title         :text
-#  position      :integer
-#  weight        :string(255)
-#  created_at    :datetime        not null
-#  updated_at    :datetime        not null
-#  image_url     :string(255)
-#  itemable_type :string(255)
-#
-

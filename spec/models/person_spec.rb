@@ -1,4 +1,22 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: people
+#
+#  academic_degree :text
+#  academic_rank   :text
+#  birthdate       :date
+#  created_at      :datetime         not null
+#  dossier         :text
+#  id              :integer          not null, primary key
+#  info_path       :text
+#  item_id         :integer
+#  name            :string(255)
+#  patronymic      :string(255)
+#  surname         :string(255)
+#  updated_at      :datetime         not null
+#
+
 
 require 'spec_helper'
 
@@ -53,19 +71,3 @@ describe Person do
     end
   end
 end
-
-# == Schema Information
-#
-# Table name: people
-#
-#  id         :integer         not null, primary key
-#  item_id    :integer
-#  surname    :string(255)
-#  name       :string(255)
-#  patronymic :string(255)
-#  birthdate  :date
-#  info_path  :text
-#  created_at :datetime        not null
-#  updated_at :datetime        not null
-#
-

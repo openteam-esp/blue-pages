@@ -1,4 +1,19 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: phones
+#
+#  additional_number :string(255)
+#  code              :string(255)
+#  created_at        :datetime         not null
+#  id                :integer          not null, primary key
+#  kind              :string(255)
+#  number            :string(255)
+#  phoneable_id      :integer
+#  phoneable_type    :string(255)
+#  updated_at        :datetime         not null
+#
+
 
 class Phone < ActiveRecord::Base
   VALID_NUMBER = /\A\d[\d-]*\d\z/
@@ -47,19 +62,3 @@ class Phone < ActiveRecord::Base
       self.additional_number = nil
     end
 end
-
-# == Schema Information
-#
-# Table name: phones
-#
-#  id                :integer         not null, primary key
-#  code              :string(255)
-#  number            :string(255)
-#  phoneable_id      :integer
-#  phoneable_type    :string(255)
-#  created_at        :datetime
-#  updated_at        :datetime
-#  kind              :string(255)
-#  additional_number :string(255)
-#
-

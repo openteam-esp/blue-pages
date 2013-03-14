@@ -1,4 +1,23 @@
 # encoding: utf-8
+# == Schema Information
+#
+# Table name: addresses
+#
+#  addressable_id   :integer
+#  addressable_type :string(255)
+#  building         :string(255)
+#  created_at       :datetime         not null
+#  district         :string(255)
+#  house            :string(255)
+#  id               :integer          not null, primary key
+#  locality         :string(255)
+#  office           :string(255)
+#  postcode         :string(255)
+#  region           :string(255)
+#  street           :string(255)
+#  updated_at       :datetime         not null
+#
+
 
 class Address < ActiveRecord::Base
   belongs_to :addressable, :polymorphic => true
@@ -45,23 +64,3 @@ class Address < ActiveRecord::Base
   private
     delegate :send_messages_on_update, :to => :addressable
 end
-
-# == Schema Information
-#
-# Table name: addresses
-#
-#  id               :integer         not null, primary key
-#  postcode         :string(255)
-#  region           :string(255)
-#  district         :string(255)
-#  locality         :string(255)
-#  street           :string(255)
-#  house            :string(255)
-#  building         :string(255)
-#  addressable_id   :integer
-#  addressable_type :string(255)
-#  created_at       :datetime
-#  updated_at       :datetime
-#  office           :string(255)
-#
-

@@ -1,3 +1,15 @@
+# == Schema Information
+#
+# Table name: emails
+#
+#  address        :string(255)
+#  created_at     :datetime         not null
+#  emailable_id   :integer
+#  emailable_type :string(255)
+#  id             :integer          not null, primary key
+#  updated_at     :datetime         not null
+#
+
 class Email < ActiveRecord::Base
   belongs_to :emailable, :polymorphic => true
 
@@ -14,16 +26,3 @@ class Email < ActiveRecord::Base
   private
     delegate :send_messages_on_create, :send_messages_on_update, :send_messages_on_destroy, :to => :emailable
 end
-
-# == Schema Information
-#
-# Table name: emails
-#
-#  id             :integer         not null, primary key
-#  address        :string(255)
-#  emailable_id   :integer
-#  emailable_type :string(255)
-#  created_at     :datetime
-#  updated_at     :datetime
-#
-

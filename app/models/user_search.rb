@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: searches
+#
+#  order_by             :string
+#  permissions_count_gt :integer
+#  term                 :text
+#
+
 class UserSearch < Search
   attr_accessible :term
 
@@ -5,11 +14,3 @@ class UserSearch < Search
   column :term, :text
   column :permissions_count_gt, :integer
 end
-
-# == Schema Information
-#
-# Table name: searches
-#
-#  keywords :text
-#
-
