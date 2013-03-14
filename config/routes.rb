@@ -2,8 +2,6 @@ BluePages::Application.routes.draw do
   namespace :manage do
     resources :users, :only => :index do
       resources :permissions, :only => [:new, :create, :destroy]
-
-      get :search, on: :collection
     end
 
     resources :categories do

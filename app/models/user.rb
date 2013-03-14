@@ -1,6 +1,13 @@
 class User < ActiveRecord::Base
   sso_auth_user
 
+  searchable do
+    integer :uid
+    integer(:permissions_count) { permissions.count }
+
+    text(:term) { [name, email, nickname].join(' ') }
+  end
+
   def contexts
     permissions.map(&:context).uniq
   end
