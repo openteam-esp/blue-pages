@@ -20,6 +20,8 @@
 
 
 class Address < ActiveRecord::Base
+  attr_accessible :building, :district, :house, :locality, :office, :postcode, :region, :street
+
   belongs_to :addressable, :polymorphic => true
 
   validates :region, :district, :locality, :street, :house, :presence => true

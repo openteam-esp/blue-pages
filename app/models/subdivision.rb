@@ -45,6 +45,9 @@ class Subdivision < Category
                    \z
                 }x
 
+  attr_accessible :dossier, :image, :url
+  attr_accessible :address_attributes, :emails_attributes, :phones_attributes
+
   has_many :emails,   :as => :emailable,   :dependent => :destroy
   has_many :items,    :as => :itemable,    :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
