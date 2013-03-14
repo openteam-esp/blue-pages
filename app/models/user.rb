@@ -1,5 +1,19 @@
 class User < ActiveRecord::Base
   sso_auth_user
+
+  def contexts
+    permissions.map(&:context).uniq
+  end
+
+  def context_tree
+    @context_tree ||= contexts
+    .flat_map{|c| c.respond_to?(:subtree) ? c.subtree : c}
+    .uniq
+  end
+
+  def context_tree_of(klass)
+    context_tree.select{|node| node.is_a?(klass)}
+  end
 end
 
 # == Schema Information

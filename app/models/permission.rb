@@ -1,5 +1,8 @@
 class Permission < ActiveRecord::Base
-  sso_auth_permission roles: [:manager]
+  sso_auth_permission roles: [:manager, :operator, :editor]
+
+  extend Enumerize
+  enumerize :role, in: [:manager, :operator, :editor]
 end
 
 # == Schema Information

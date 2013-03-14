@@ -1,6 +1,7 @@
 source 'http://rubygems.org'
 
 group :assets do
+  gem 'coffee-rails'
   gem 'compass-rails'
   gem 'jquery-rails'
   gem 'sass-rails'
@@ -11,6 +12,7 @@ group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'email_validator'
+  gem 'enumerize'
   gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-gems'

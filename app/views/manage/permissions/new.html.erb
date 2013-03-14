@@ -1,0 +1,22 @@
+<h3>
+  <%= "#{t('permissions.You are adding role to')}  #{@user.try(:name)}" %>
+</h3>
+
+<%= semantic_form_for resource, :url => manage_user_permissions_path(@user) do |form| %>
+  <%= form.inputs do  %>
+    <%= form.input :context_id,
+      as: :select,
+      collection: current_user.context_tree,
+      :member_label => ->(c) { ('&nbsp;' * 2 * c.depth + (c.respond_to?(:esp_title) ? c.esp_title : c.title)).html_safe },
+      :include_blank => t('commons.not_selected'),
+      :required => true,
+      :disabled => form.object.respond_to?(:disabled_contexts) ? form.object.disabled_contexts : [] %>
+
+    <%= form.input :role, :as => :select, :include_blank => t('commons.not_selected') %>
+  <% end %>
+
+  <%= form.actions :class => 'button-group' do %>
+    <li><%= button_tag t('permissions.create'), :class => 'button icon approve' %></li>
+    <li><%= link_to t('permissions.cancel'), manage_users_path, :class => 'button icon arrowleft'  %></li>
+  <% end %>
+<% end %>

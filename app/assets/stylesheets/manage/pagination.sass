@@ -1,0 +1,29 @@
+@import 'compass/utilities'
+@import 'compass/css3'
+
+body .main_wrapper .main
+  .pagination
+    text-align: center
+    a
+      text-decoration: none
+    span, a
+      +inline-block
+      line-height: 1.6
+      font-size: 0.9em
+      color: #666
+      border: 1px solid #ccc
+      +border-radius(2px)
+      padding: 1px 7px
+      margin-right: 2px
+      background-color: #ebebeb
+      +background-image(linear-gradient(#fff, #e0e0e0))
+    span
+      cursor: default
+    span.prev,
+    span.next,
+    span.gap
+      color: #b0b0b0
+    span.current,
+    a:hover
+      color: #333
+      border-color: #999

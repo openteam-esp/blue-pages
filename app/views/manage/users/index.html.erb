@@ -1,0 +1,49 @@
+<%= semantic_search_form_for :user, :url => manage_users_path do |form| %>
+  <%= form.inputs do %>
+    <%= form.input :term, :as => :string, :label => false %>
+  <% end %>
+  <%= form.actions do %>
+    <li><%= button_tag t('permissions.search'), :class => 'button icon search' %></li>
+  <% end %>
+<% end %>
+
+<ul class='collection_list'>
+  <% collection.each do |user| %>
+    <li class='user'>
+      <div class="name">
+        <%= user.name %>
+      </div>
+      <div class="email">
+        &lt;<%= mail_to user.email, user.email %>&gt;
+      </div>
+
+      <div class="links">
+        <%= link_to "&darr;&nbsp;#{t('permissions.show_permissions')}".html_safe, '#', :class => 'show_permissions' %>
+        <%= link_to "&#43;#{t('permissions.new')}".html_safe, new_manage_user_permission_path(user), :class => 'add' %>
+      </div>
+
+      <ul class='permission_list'>
+        <% user.permissions.group_by(&:role).each do |role, permissions| %>
+          <li>
+            <h4><%= (Permission.role.values[Permission.role.values.index(role)]).text %></h4>
+            <ul>
+              <% permissions.each do |permission| %>
+                <li>
+                  <%= permission.context.respond_to?(:esp_to_s) ? permission.context.esp_to_s : permission.context %>
+                  <%= link_to t('commons.delete'),
+                    manage_user_permission_path(permission.user, permission),
+                    :method => :delete,
+                    :confirm => t('commons.confirm'),
+                    :class => 'buttton icon remove danger' if can?(:destroy, permission) %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+
+    </li>
+  <% end %>
+</ul>
+
+<%= paginate collection %>

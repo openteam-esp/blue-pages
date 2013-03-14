@@ -4,6 +4,20 @@ ru:
     new:                        Добавление
     edit:                       Изменение
     destroy:                    Удаление
+
+  permissions:
+    'You are adding role to': Вы добавляете роль для
+    back_to_manage:           Назад в раздел управления контентом
+    cancel:                   Отмена
+    create:                   Создать
+    create_permission:        Создать право доступа
+    delete:                   Удалить
+    new:                      Добавить право доступа
+    search:                   Поиск
+    show_permissions:         Показать права доступа
+    sign_out:                 Выход
+    title:                    Управление правами доступа
+
   activerecord:
     attributes:
       email:
@@ -113,6 +127,9 @@ ru:
           internal:             Внутр.
           mobile:               Мобильный
 
+      permission:
+        context_id:             Категория
+
     models:
       address:                  Адрес
       user:                     Пользователи
@@ -169,3 +186,9 @@ ru:
   toolbar:
     categories:                 Разделы и подразделения
     logout:                     Выход
+
+  enumerize:
+    role:
+      manager: Менеджер
+      operator: Оператор
+      editor: Редактор

@@ -8,6 +8,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <%= content_for(:esp_views_manage_links) do %>
+    <%= link_to 'Система управления', manage_root_path %>
+    <%= link_to 'Права доступа', manage_users_path %>
+  <% end %>
   <%= render :partial => 'esp/views/header' %>
   <div id="title_wrapper">
     <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
