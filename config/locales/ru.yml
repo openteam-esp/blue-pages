@@ -129,6 +129,7 @@ ru:
 
       permission:
         context_id:             Категория
+        context_string:         Категория
 
     models:
       address:                  Адрес
