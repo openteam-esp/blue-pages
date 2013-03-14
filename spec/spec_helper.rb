@@ -12,7 +12,7 @@ Spork.prefork do
   require 'cancan/matchers'
   require 'shoulda-matchers'
   require 'sunspot_matchers'
-  require 'esp_auth/spec_helper'
+  require 'sso_auth/spec_helper'
 
   Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 

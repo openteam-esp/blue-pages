@@ -13,6 +13,5 @@
  *= require content
  *= require error
  *= require pagination
- *= require esp_auth/shared
- *= require esp_auth
+ *= require esp/views
  */

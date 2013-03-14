@@ -72,8 +72,6 @@ class Item < ActiveRecord::Base
     text  :term,      :boost => 0.5
   end
 
-  audited
-
   def display_name
     title
   end

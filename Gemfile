@@ -11,10 +11,10 @@ group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'email_validator'
-  gem 'esp-auth'
   gem 'esp-ckeditor'
   gem 'esp-commons'
   gem 'esp-gems'
+  gem 'esp-views'
   gem 'formtastic',         '< 2.2.0'
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
@@ -24,7 +24,8 @@ group :default do
   gem 'rails', '~> 3.2.12',                         :require => false
   gem 'sanitize',                                   :require => false
   gem 'show_for'
-  gem 'sunspot_rails',      '>= 2.0.0.pre.120417',  :require => false
+  gem 'sso-auth'
+  gem 'sunspot_rails',      '>= 2.0.0.pre.120417'
   gem 'timecop',                                    :require => false
 end
 

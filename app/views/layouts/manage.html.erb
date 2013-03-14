@@ -8,7 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= render :partial => "esp_auth/shared/header" %>
+  <%= render :partial => 'esp/views/header' %>
   <div id="title_wrapper">
     <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
     <h1><%= title %></h1>
@@ -16,6 +16,6 @@
   <div id="content_wrapper">
     <%= content_for?(:content) ? yield(:content) : yield %>
   </div>
-  <%= render :partial => "esp_auth/shared/footer" %>
+  <%= render :partial => 'esp/views/footer' %>
 </body>
 </html>

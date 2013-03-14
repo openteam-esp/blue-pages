@@ -32,8 +32,6 @@ class Category < ActiveRecord::Base
 
   normalize_attribute :dossier, :with => [:strip_empty_html, :strip, :blank]
 
-  audited
-
   alias_attribute :absolute_depth, :depth
 
   def display_name

@@ -15,5 +15,5 @@
  *= require manage/layout
  *= require manage/title
  *= require manage/content
- *= require esp_auth/shared
+ *= require esp/views
  */
