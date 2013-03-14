@@ -2,7 +2,7 @@
 
 class Category < ActiveRecord::Base
 
-  VALID_TITLE = /^[а-яёА-ЯЁIVXCM[:space:]0-9\+–\-\(\)«"»,\.№]+$/
+  VALID_TITLE = /\A[а-яёА-ЯЁIVXCM[:space:]0-9\+–\-\(\)«"»,\.№]+\z/
 
   default_scope order('weight')
 

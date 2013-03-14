@@ -1,12 +1,15 @@
 # encoding: utf-8
 
 class Phone < ActiveRecord::Base
+  VALID_NUMBER = /\A\d[\d-]*\d\z/
+  VALID_MOBILE_NUMBER = /\A\+?\d[\d-]*\d\z/
+
   belongs_to :phoneable, :polymorphic => true
 
   validates :code, :numericality => true, :unless => :kind_internal?
   validates :kind, :number, :presence => true
-  validates :number, :format => { :with => /^\d[\d-]*\d$/}, :unless => :kind_mobile?
-  validates :number, :format => { :with => /^+?\d[\d-]*\d$/}, :if => :kind_mobile?
+  validates :number, :format => {:with => VALID_NUMBER}, :unless => :kind_mobile?
+  validates :number, :format => {:with => VALID_MOBILE_NUMBER}, :if => :kind_mobile?
 
   before_save :reset_code_and_additional_number, :if => :kind_internal_or_mobile?
 

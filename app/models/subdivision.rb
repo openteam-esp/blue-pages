@@ -3,6 +3,19 @@
 require 'base64'
 
 class Subdivision < Category
+  VALID_URL = %r{
+                  \A
+                      (http|https)://                                 # scheme
+                      (
+                        [a-z0-9]+([-\.][a-z0-9]+)*\.[a-z]{2,5} |      # latin domain
+                        [а-яё0-9]+([-\.][а-яё0-9]+)*\.рф              # cyrillic domain
+                      )
+                      (/[[:alnum:] -]+)*                              # path
+                      /?
+                      (\?.*)?                                         # query params
+                   \z
+                }x
+
   has_many :emails,   :as => :emailable,   :dependent => :destroy
   has_many :items,    :as => :itemable,    :dependent => :destroy
   has_many :phones,   :as => :phoneable,   :dependent => :destroy
@@ -11,21 +24,8 @@ class Subdivision < Category
   has_one :address,  :as => :addressable, :dependent => :destroy
 
   validates :address, :parent, :presence => true
-
-  validates :abbr, :allow_blank => true,
-                   :format => { :with => VALID_TITLE }
-
-  validates :url,  :allow_blank => true,
-                   :format => { :with => %r{^
-                                  (http|https)://                                 # scheme
-                                  (
-                                   [a-z0-9]+([-.][a-z0-9]+)*\.[a-z]{2,5} |        # latin domain
-                                   [а-яё0-9]+([-.][а-яё0-9]+)*\.рф                # cyrillic domain
-                                  )
-                                  (/[[:alnum:] -]+)*                              # path
-                                  /?
-                                  (\?.*)?                                         # query params
-                                $}ix }
+  validates :abbr,    :allow_blank => true, :format => { :with => VALID_TITLE }
+  validates :url,     :allow_blank => true, :format => { :with => VALID_URL }
 
   after_initialize :set_address_attributes
 
