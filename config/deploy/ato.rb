@@ -79,14 +79,24 @@ namespace :deploy do
     run "ln -s #{shared_path}/pdf/family_department.pdf #{release_path}/public/family_department.pdf"
   end
 
-  desc "Update crontab tasks"
-  task :crontab do
-    run "cd #{release_path} && exec bundle exec whenever --update-crontab"
-  end
-
   desc "Airbrake notify"
   task :airbrake do
     run "cd #{release_path} && RAILS_ENV=production TO=production bundle exec rake airbrake:deploy"
+  end
+end
+
+namespace :crontab do
+  desc "Write crontab tasks"
+  task :write do
+    run "cd #{release_path} && exec bundle exec whenever --write-crontab"
+  end
+  desc "Clear crontab tasks"
+  task :clear do
+    run "cd #{current_path} && exec bundle exec whenever --clear-crontab"
+  end
+  desc "Update crontab tasks"
+  task :update do
+    run "cd #{current_path} && exec bundle exec whenever --update-crontab"
   end
 end
 
@@ -107,17 +117,20 @@ namespace :unicorn do
   end
 end
 
+# before deploy
+before "deploy", "crontab:clear"
+
 # deploy
 after "deploy:finalize_update", "deploy:config_app"
 after "deploy", "deploy:migrate"
 after "deploy", "deploy:copy_unicorn_config"
 after "deploy", "unicorn:restart"
 after "deploy:restart", "deploy:cleanup"
-after "deploy", "deploy:crontab"
+after "deploy", "crontab:write"
 after "deploy", "deploy:symlink_pdf"
 after "deploy", "deploy:airbrake"
 
 # deploy:rollback
 after "deploy:rollback", "unicorn:restart"
-after "deploy:rollback", "deploy:crontab"
+after "deploy:rollback", "crontab:update"
 after "deploy:rollback", "deploy:symlink_pdf"
