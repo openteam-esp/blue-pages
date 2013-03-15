@@ -12,24 +12,22 @@
 #
 
 class Permission < ActiveRecord::Base
-  attr_accessible :context_string, :role, :context_id
-  attr_accessor :context_string
+  attr_accessible :role, :context_id
 
-  validates_presence_of :context_string
+  belongs_to :context, :polymorphic => true
+
+  validates_presence_of :context
 
   sso_auth_permission roles: [:manager, :operator, :editor]
 
   extend Enumerize
   enumerize :role, in: [:manager, :operator, :editor]
 
-  before_create :set_context_type_and_id
+  before_validation :set_context, :on => :create
 
   private
 
-  def set_context_type_and_id
-    context_type, context_id = context_string.split('_')
-
-    self.context_type = context_type.classify
-    self.context_id = context_id
+  def set_context
+    self.context = Category.find(context_id)
   end
 end

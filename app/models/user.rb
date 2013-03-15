@@ -34,14 +34,33 @@ class User < ActiveRecord::Base
     text(:term) { [name, email, nickname].join(' ') }
   end
 
-  def contexts
-    permissions.map(&:context).uniq
+  has_many :permissions
+
+  has_many :contexts, :through => :permissions, :source => :context, :source_type => 'Category', :uniq => true, :order => 'categories.weight'
+
+  def permissions_for(context)
+    permissions.where(:context_id => context.path_ids)
+  end
+
+  def roles_for(context)
+    permissions_for(context).map(&:role)
+  end
+
+  Permission.role.values.each do |role|
+    define_method "#{role}_of?" do |context|
+      roles_for(context).include?(role)
+    end
   end
 
   def context_tree
-    @context_tree ||= contexts
-    .flat_map{|c| c.respond_to?(:subtree) ? c.subtree : c}
-    .uniq
+    if contexts.length > 0
+      descendants_conditions = contexts.map{|c| "(categories.ancestry LIKE '#{c.child_ancestry}/%')"}.join(' OR ')
+      Category
+        .where("(categories.id IN (?)) OR (categories.ancestry IN (?)) OR #{descendants_conditions}", contexts.map(&:id), contexts.map(&:child_ancestry))
+        .uniq
+    else
+      Category.where(:id => nil)
+    end
   end
 
   def context_tree_of(klass)
