@@ -5,6 +5,7 @@ group :assets do
   gem 'compass-rails'
   gem 'jquery-rails'
   gem 'sass-rails'
+  gem 'turbo-sprockets-rails3'
   gem 'uglifier'
 end
 
@@ -27,31 +28,26 @@ group :default do
   gem 'sanitize',                                   :require => false
   gem 'show_for'
   gem 'sso-auth'
-  gem 'sunspot_rails',      '>= 2.0.0.pre.120417'
+  gem 'sunspot_rails'
   gem 'timecop',                                    :require => false
 end
 
 group :development do
-  gem 'annotate',           '>= 2.4.1.beta1',       :require => false
+  gem 'annotate',                                   :require => false
   gem 'brakeman'
   gem 'capistrano-ext'
   gem 'debugger'
   gem 'hirb',                                       :require => false
   gem 'rvm-capistrano'
-  gem 'sunspot_solr',       '>= 2.0.0.pre.120417',  :require => false
+  gem 'sunspot_solr'
 end
 
 group :test do
   gem 'fabrication',        '< 2.0.0'
-  gem 'forgery',                                    :require => false
-  gem 'guard-rspec'
-  gem 'guard-spork'
-  gem 'libnotify'
-  gem 'rb-inotify'
+  gem 'forgery',                                   :require => false
   gem 'rspec-rails',                               :require => false
   gem 'ryba',                                      :require => false
   gem 'shoulda-matchers',                          :require => false
-  gem 'spork',              '>= 1.0.0.rc2',        :require => false
   gem 'sqlite3',                                   :require => false
   gem 'sunspot_matchers',                          :require => false
 end
