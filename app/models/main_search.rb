@@ -1,4 +1,6 @@
 class MainSearch < Search
+  attr_accessible :keywords
+
   column :keywords, :text
 
   private
