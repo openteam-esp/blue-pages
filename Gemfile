@@ -22,7 +22,7 @@ group :default do
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
   gem 'paperclip-elvfs'
-  gem 'prawn',              '>= 1.0.0.rc1',         :require => false
+  gem 'prawn',              '>= 1.0.0.rc2',         :require => false
   gem 'progress_bar',                               :require => false
   gem 'rails', '~> 3.2.12',                         :require => false
   gem 'sanitize',                                   :require => false
