@@ -227,9 +227,12 @@ class Category < ActiveRecord::Base
     end
 
     def set_address_attributes
-      if self.new_record?
-        self.build_address(parent.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) and return if self.parent && (self.parent.is_a?(Innorganization) || self.parent.is_a?(Subdivision)) && !self.address
-        self.build_address unless self.address
+      if new_record? && !address
+        if parent.nil? || parent.instance_of?(Category)
+          build_address
+        else
+          build_address(parent.address_attributes.merge('id' => nil, 'office' => nil), :without_protection => true)
+        end
       end
     end
 end

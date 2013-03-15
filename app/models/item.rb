@@ -20,6 +20,8 @@
 
 
 class Item < ActiveRecord::Base
+  attr_accessible :title, :image, :person_attributes, :address_attributes, :emails_attributes, :phones_attribues
+
   belongs_to :itemable, :polymorphic => true
 
   has_many :emails,   :as => :emailable,   :dependent => :destroy
@@ -140,7 +142,7 @@ class Item < ActiveRecord::Base
     end
 
     def set_address_attributes
-      self.build_address(itemable.address_attributes.symbolize_keys.merge(:id => nil, :office => nil)) if itemable && !address
+      self.build_address(itemable.address_attributes.symbolize_keys.merge(:id => nil, :office => nil), :without_protection => true) if itemable && !address
     end
 
     def set_position

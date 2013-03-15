@@ -19,6 +19,8 @@
 require 'base64'
 
 class Person < ActiveRecord::Base
+  attr_accessible :name, :patronymic, :surname, :birthdate, :dossier, :academic_degree, :academic_rank
+
   belongs_to :item
 
   validates_presence_of :surname, :name, :patronymic
