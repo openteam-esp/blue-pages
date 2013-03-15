@@ -46,6 +46,10 @@ describe Category do
   it { should normalize_attribute(:dossier).from('').to(nil) }
   it { should normalize_attribute(:dossier).from("<p></p>\n<p></p><p>content</p>").to('<p>content</p>') }
 
+  let(:child_1) { Fabricate :category, :parent => root }
+  let(:child_2) { Fabricate :subdivision, :parent => root }
+  let(:child_1_1) { Fabricate :subdivision, :parent => child_1 }
+
   context 'sending messages' do
     describe '#create' do
       before { child_1 }
@@ -65,7 +69,7 @@ describe Category do
         before { child_2 }
         before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :remove_category, 2, :parent_ids => [1]) }
         before { MessageMaker.should_receive(:make_message).with('esp.blue-pages.cms', :add_category, 2, :parent_ids => [3, 1]) }
-        specify { child_1.update_attributes! :parent => child_2 }
+        specify { child_1.update_attributes! :parent_id => child_2.id }
       end
     end
 

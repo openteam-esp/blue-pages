@@ -3,6 +3,9 @@
 require 'spec_helper'
 
 describe Ability do
+  let(:child_1) { Fabricate :subdivision, :parent => root }
+  let(:child_1_1) { Fabricate :subdivision, :parent => child_1 }
+  let(:child_2) { Fabricate :subdivision, :parent => root }
 
   shared_examples_for 'может управлять подразделениями' do
     it { should     be_able_to(:manage, root) }

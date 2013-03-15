@@ -6,9 +6,9 @@ describe CategoriesController do
   render_views
 
   let(:category) { Fabricate(:category) }
-    let(:subdivision) { Fabricate(:subdivision, :parent => category, :title => 'Подразделение') }
-      let(:child_subdivision) { Fabricate(:subdivision, :parent => subdivision, :title => 'Вложенное подразеделение') }
-        let(:another_child_subdivision) { Fabricate(:subdivision, :parent => child_subdivision, :title => 'Ещё одно вложенное подразеделение') }
+  let(:subdivision) { Fabricate(:subdivision, :parent => category, :title => 'Подразделение') }
+  let(:child_subdivision) { Fabricate(:subdivision, :parent => subdivision, :title => 'Вложенное подразеделение') }
+  let(:another_child_subdivision) { Fabricate(:subdivision, :parent => child_subdivision, :title => 'Ещё одно вложенное подразеделение') }
 
   def store_data
     @store_data ||= subdivision.tap do |subdivision|
@@ -77,7 +77,7 @@ describe CategoriesController do
     end
 
     it 'GET show with expand' do
-      get :show, :id => subdivision.id, :expand => '2', :format => :json
+      get :show, :id => subdivision.id, :expand => '3', :format => :json
 
       expected_hash = {
         'title' => 'Подразделение',

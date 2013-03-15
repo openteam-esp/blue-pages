@@ -73,7 +73,7 @@ describe Item do
     end
 
     def item(subdivision, attributes={})
-      subdivision.items.create!(attributes.merge :title => 'прачка')
+      subdivision.items.create!(attributes.merge(:title => 'прачка'), :without_protection => true)
     end
 
     it { item(subdivision).boost.should < subdivision.boost }
@@ -85,22 +85,22 @@ describe Item do
   end
 
   context 'sending messages' do
-    let(:item) { Fabricate :item, :itemable => child_1 }
+    let(:item) { Fabricate :item, :itemable => child }
     describe '#create' do
-      before { child_1 }
-      before { child_1.should_receive(:send_update_message) }
+      before { child }
+      before { child.should_receive(:send_update_message) }
       specify { item }
     end
 
     describe '#update' do
       before { item }
-      before { child_1.should_receive(:send_update_message) }
+      before { child.should_receive(:send_update_message) }
       specify { item.update_attributes! :title => 'Новая должность' }
     end
 
     describe '#destroy' do
       before { item }
-      before { child_1.should_receive(:send_update_message) }
+      before { child.should_receive(:send_update_message) }
       specify { item.destroy }
     end
   end

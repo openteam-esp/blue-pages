@@ -6,8 +6,4 @@ module BluePages::SpecHelper
   def root
     @root ||= Category.root
   end
-
-  def create_context(parent=nil)
-    Fabricate :subdivision, :parent => parent
-  end
 end
