@@ -35,18 +35,10 @@ BluePages::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = false
 
-  # Rails generate
-  config.generators do |generators|
-    generators.test_framework       :rspec, :fixture => true
-    generators.fixture_replacement  :fabrication
-    generators.stylesheet_engine    :sass
-  end
-
   # Load Category hierarcy (for right sql queries)
   config.to_prepare do
-    %w[subdivision category].each do |model|
+    %w[subdivision category innorganization].each do |model|
       require_dependency Rails.root.join("app/models/#{model}.rb").to_s
     end
   end
-
 end

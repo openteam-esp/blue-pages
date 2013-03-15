@@ -21,6 +21,7 @@ module BluePages
                                 #{config.root}/lib/subscribers
                                ]
 
+
     # Only load the plugins named here, in the order given (default is alphabetical).
     # :all can be used as a placeholder for all plugins not explicitly named.
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
@@ -41,6 +42,9 @@ module BluePages
 
     # Configure sensitive parameters which will be filtered from the log file.
     config.filter_parameters += [:password]
+
+    # Enable escaping HTML in JSON.
+    config.active_support.escape_html_entities_in_json = true
 
     # Use SQL instead of Active Record's schema dumper when creating the database.
     # This is necessary if your schema can't be completely dumped by the schema dumper,
