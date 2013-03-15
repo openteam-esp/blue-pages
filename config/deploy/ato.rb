@@ -70,23 +70,23 @@ namespace :deploy do
 
   desc "Copy unicorn.rb file"
   task :copy_unicorn_config do
-    run "ln -s #{deploy_to}/shared/config/unicorn.rb #{deploy_to}/current/config/unicorn.rb"
+    run "ln -s #{deploy_to}/shared/config/unicorn.rb #{release_path}/config/unicorn.rb"
   end
 
   desc "Symlink pdf files"
   task :symlink_pdf do
-    run "ln -s #{deploy_to}/shared/pdf/government.pdf #{deploy_to}/current/public/blue_pages.pdf"
-    run "ln -s #{deploy_to}/shared/pdf/family_department.pdf #{deploy_to}/current/public/family_department.pdf"
+    run "ln -s #{deploy_to}/shared/pdf/government.pdf #{release_path}/public/blue_pages.pdf"
+    run "ln -s #{deploy_to}/shared/pdf/family_department.pdf #{release_path}/public/family_department.pdf"
   end
 
   desc "Update crontab tasks"
   task :crontab do
-    run "cd #{deploy_to}/current && exec bundle exec whenever --update-crontab --load-file #{deploy_to}/current/config/schedule.rb"
+    run "cd #{release_path} && exec bundle exec whenever --update-crontab"
   end
 
   desc "Airbrake notify"
   task :airbrake do
-    run "cd #{deploy_to}/current && RAILS_ENV=production TO=production bin/rake airbrake:deploy"
+    run "cd #{release_path} && RAILS_ENV=production TO=production bundle exec rake airbrake:deploy"
   end
 end
 
