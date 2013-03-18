@@ -20,7 +20,7 @@
 
 
 class Item < ActiveRecord::Base
-  attr_accessible :title, :image, :person_attributes, :address_attributes, :emails_attributes, :phones_attribues
+  attr_accessible :title, :image, :person_attributes, :address_attributes, :emails_attributes, :phones_attributes
 
   belongs_to :itemable, :polymorphic => true
 
