@@ -13,10 +13,12 @@ class Ability
     can :read, User if user.manager?
 
     can :manage, Permission do |permission|
-      user.manager_of?(permission.context)
+      permission.context && user.manager_of?(permission.context)
     end
 
-    can :create, Permission if user.manager?
+    can :create, Permission do |permission|
+      !permission.context && user.manager?
+    end
 
     alias_action :create, :read, :update, :destroy, :treeview, :sort, :to => :modify
 
