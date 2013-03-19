@@ -53,17 +53,11 @@ class User < ActiveRecord::Base
   end
 
   def context_tree
-    if contexts.length > 0
-      descendants_conditions = contexts.map{|c| "(categories.ancestry LIKE '#{c.child_ancestry}/%')"}.join(' OR ')
-      Category
-        .where("(categories.id IN (?)) OR (categories.ancestry IN (?)) OR #{descendants_conditions}", contexts.map(&:id), contexts.map(&:child_ancestry))
-        .uniq
-    else
-      Category.where(:id => nil)
-    end
-  end
-
-  def context_tree_of(klass)
-    context_tree.select{|node| node.is_a?(klass)}
+    conditions = ["categories.id IN (?)", "categories.ancestry IN (?)"]
+    conditions += contexts.map{"categories.ancestry ILIKE ?"}
+    Category.where(conditions.join(' OR '),
+      contexts.map(&:id),
+      contexts.map(&:child_ancestry),
+      *contexts.map(&:subtree_condition))
   end
 end

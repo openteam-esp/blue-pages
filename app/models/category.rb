@@ -94,6 +94,10 @@ class Category < ActiveRecord::Base
     sync ? json_sync : json_cms(expand)
   end
 
+  def subtree_condition
+    "#{child_ancestry}/%"
+  end
+
   def json_sync
     subtree.map do |category|
       {
