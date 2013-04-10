@@ -1,15 +1,8 @@
 GIT
-  remote: git://github.com/openteam/capistrano-db-tasks
-  revision: b6b81df2d6965c456e8ca4cf3aa325c95a542b36
+  remote: git://github.com/sgruhier/capistrano-db-tasks
+  revision: 229c2a63ebb43a61ed2aa1f042d4d447ee186037
   specs:
     capistrano-db-tasks (0.2)
-
-GIT
-  remote: git://github.com/sosedoff/capistrano-unicorn
-  revision: dc49187df68e92bc04b7b0fa42da1e24f70d69f5
-  specs:
-    capistrano-unicorn (0.1.7)
-      capistrano
 
 GEM
   remote: http://rubygems.org/
@@ -87,6 +80,8 @@ GEM
       net-ssh-gateway (>= 1.1.0)
     capistrano-ext (1.2.1)
       capistrano (>= 1.0.0)
+    capistrano-unicorn (0.1.7)
+      capistrano
     chronic (0.6.7)
     chunky_png (1.2.5)
     cocaine (0.4.2)
@@ -192,7 +187,7 @@ GEM
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
-    kgio (2.7.4)
+    kgio (2.8.0)
     mail (2.5.3)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -283,7 +278,7 @@ GEM
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.9.0)
+    raindrops (0.10.0)
     rake (10.0.4)
     rdoc (3.12.2)
       json (~> 1.4)
@@ -367,7 +362,7 @@ GEM
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
-    unicorn (4.3.1)
+    unicorn (4.6.2)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
@@ -386,7 +381,7 @@ DEPENDENCIES
   attribute_normalizer
   brakeman
   capistrano-db-tasks!
-  capistrano-unicorn!
+  capistrano-unicorn
   coffee-rails
   compass-rails
   debugger (~> 1.4)
