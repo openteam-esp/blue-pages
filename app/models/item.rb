@@ -81,7 +81,7 @@ class Item < ActiveRecord::Base
 
   attr_accessor :delete_image
 
-  before_update :image_clear, :if => :delete_image
+  before_update :image_destroy, :if => :delete_image
 
   searchable do
     boost :boost
@@ -173,5 +173,10 @@ class Item < ActiveRecord::Base
 
     def send_messages_on_destroy
       itemable.send_update_message
+    end
+
+    def image_destroy
+      self.image.destroy
+      self.image_url = nil
     end
 end
