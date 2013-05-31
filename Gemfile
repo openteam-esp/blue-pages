@@ -12,6 +12,7 @@ end
 group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
+  gem 'el_vfs_client'
   gem 'email_validator'
   gem 'enumerize'
   gem 'esp-ckeditor'
