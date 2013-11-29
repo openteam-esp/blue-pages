@@ -51,4 +51,12 @@
   <requestHandler name="/update" class="solr.XmlUpdateRequestHandler"/>
   <requestHandler name="/admin/" class="org.apache.solr.handler.admin.AdminHandlers"/>
   <requestHandler name="/mlt" class="solr.MoreLikeThisHandler"/>
+
+  <requestHandler name="/replication" class="solr.ReplicationHandler">
+    <lst name="master">
+      <str name="replicateAfter">commit</str>
+      <str name="replicateAfter">startup</str>
+      <str name="replicateAfter">optimize</str>
+    </lst>
+  </requestHandler>
 </config>
