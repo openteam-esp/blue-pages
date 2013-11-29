@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 group :assets do
   gem 'coffee-rails'
@@ -19,13 +19,13 @@ group :default do
   gem 'esp-commons'
   gem 'esp-gems'
   gem 'esp-views'
-  gem 'formtastic',         '< 2.2.0'
+  gem 'formtastic',           '< 2.2.0'
   gem 'nested_form'
   gem 'nokogiri',                                   :require => false
   gem 'paperclip-elvfs'
-  gem 'prawn',              '>= 1.0.0.rc2',         :require => false
+  gem 'prawn',                '>= 1.0.0.rc2',       :require => false
   gem 'progress_bar',                               :require => false
-  gem 'rails', '~> 3.2.12',                         :require => false
+  gem 'rails',                '~> 3.2.12',          :require => false
   gem 'sanitize',                                   :require => false
   gem 'show_for'
   gem 'sso-auth'
@@ -36,16 +36,17 @@ end
 group :development do
   gem 'annotate',                                   :require => false
   gem 'brakeman'
-  gem 'capistrano-db-tasks', :git => 'git://github.com/sgruhier/capistrano-db-tasks'
-  gem 'capistrano-unicorn'
-  gem 'debugger',           '~> 1.4'
+  gem 'capistrano',           '~> 2.14.2'
+  gem 'capistrano-db-tasks',  :git => 'git://github.com/sgruhier/capistrano-db-tasks'
+  gem 'capistrano-unicorn',   '~> 0.1.10'
+  gem 'debugger',             '~> 1.4'
   gem 'hirb',                                       :require => false
   gem 'openteam-capistrano'
   gem 'sunspot_solr'
 end
 
 group :test do
-  gem 'fabrication',        '< 2.0.0'
+  gem 'fabrication',          '< 2.0.0'
   gem 'forgery',                                   :require => false
   gem 'rspec-rails',                               :require => false
   gem 'ryba',                                      :require => false
@@ -53,4 +54,3 @@ group :test do
   gem 'sqlite3',                                   :require => false
   gem 'sunspot_matchers',                          :require => false
 end
-
