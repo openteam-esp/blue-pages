@@ -14,7 +14,7 @@
     <%= render @item %>
   </div>
 </div>
-<% if resource.person.dossier? %>
+<% if resource.person && resource.person.dossier? %>
   <h2>Дополнительная информация</h2>
   <%= raw resource.person.dossier %>
 <% end %>
