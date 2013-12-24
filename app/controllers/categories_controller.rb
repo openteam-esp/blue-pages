@@ -16,6 +16,7 @@ class CategoriesController < ApplicationController
   def index
     index! do | success |
       success.json { render :json => {:categories => @categories.map{|c| {:id => c.id, :title => ['-' * c.depth, c.title].join(' ')}}} }
+      success.html { redirect_to root_path, :status => 301 }
     end
   end
 end
