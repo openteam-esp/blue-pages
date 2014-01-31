@@ -25,6 +25,7 @@ group :default do
   gem 'paperclip-elvfs'
   gem 'prawn',                '>= 1.0.0.rc2',       :require => false
   gem 'progress_bar',                               :require => false
+  gem 'rack-utf8_sanitizer'
   gem 'rails',                '~> 3.2.12',          :require => false
   gem 'sanitize',                                   :require => false
   gem 'show_for'
