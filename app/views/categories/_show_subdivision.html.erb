@@ -24,6 +24,10 @@
     <%= content_tag :dt, "Сайт:", :class => "label" %>
     <%= content_tag :dd, link_to(resource.url, resource.url, :target => "_blank") %>
   <% end if resource.url.presence %>
+  <%= content_tag :dl, :class => "wrapper subdivision_mode" do %>
+    <%= content_tag :dt, "Режим работы:", :class => "label" %>
+    <%= content_tag :dd, resource.mode %>
+  <% end if resource.mode.presence %>
 </div>
 
 <% if resource.dossier? %>

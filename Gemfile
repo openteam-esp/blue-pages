@@ -36,7 +36,7 @@ end
 
 group :development do
   gem 'annotate',                                   :require => false
-  gem 'brakeman'
+  gem 'brakeman',                                   :require => false
   gem 'capistrano',           '~> 2.14.2'
   gem 'capistrano-db-tasks',  :git => 'git://github.com/sgruhier/capistrano-db-tasks'
   gem 'capistrano-unicorn',   '~> 0.1.10'

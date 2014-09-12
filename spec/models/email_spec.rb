@@ -1,15 +1,3 @@
-# == Schema Information
-#
-# Table name: emails
-#
-#  address        :string(255)
-#  created_at     :datetime         not null
-#  emailable_id   :integer
-#  emailable_type :string(255)
-#  id             :integer          not null, primary key
-#  updated_at     :datetime         not null
-#
-
 require 'spec_helper'
 
 describe Email do
@@ -43,3 +31,15 @@ describe Email do
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: emails
+#
+#  id             :integer          not null, primary key
+#  emailable_id   :integer
+#  emailable_type :string(255)
+#  address        :string(255)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#

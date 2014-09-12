@@ -74,6 +74,7 @@ ru:
 
       subdivision:
         abbr:                   Аббревиатура
+        mode:                   Режим работы
         address:                Адрес
         created_at:             Создано
         dossier:                Описание

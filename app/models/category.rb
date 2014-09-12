@@ -1,34 +1,4 @@
 # encoding: utf-8
-# == Schema Information
-#
-# Table name: categories
-#
-#  abbr               :string(255)
-#  ancestry           :string(255)
-#  ancestry_depth     :integer
-#  created_at         :datetime         not null
-#  dossier            :text
-#  id                 :integer          not null, primary key
-#  image_content_type :string(255)
-#  image_file_name    :string(255)
-#  image_file_size    :integer
-#  image_updated_at   :datetime
-#  image_url          :text
-#  info_path          :text
-#  kind               :string(255)
-#  position           :integer
-#  production         :text
-#  slug               :string(255)
-#  sphere             :text
-#  status             :text
-#  title              :text
-#  type               :string(255)
-#  updated_at         :datetime         not null
-#  url                :text
-#  weight             :string(255)
-#
-
-
 class Category < ActiveRecord::Base
   VALID_TITLE = /\A[а-яёА-ЯЁIVXCM[:space:]0-9\+–\-\(\)«"»,\.№]+\z/
 
@@ -217,17 +187,17 @@ class Category < ActiveRecord::Base
     delegate :weight, :to => :parent, :prefix => true, :allow_nil => true
 
     def send_messages_on_move
-      MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestry_was.split('/').reverse.map(&:to_i))
+      MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestry_was.split('/').reverse.map(&:to_i)) if Rails.env.production?
     end
 
     def send_messages_on_create
-      MessageMaker.make_message('esp.blue-pages.cms', :add_category, id, :parent_ids => ancestor_ids.reverse)
+      MessageMaker.make_message('esp.blue-pages.cms', :add_category, id, :parent_ids => ancestor_ids.reverse) if Rails.env.production?
     end
 
     alias_method :send_messages_on_update, :send_messages_on_create
 
     def send_messages_on_destroy
-      MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestor_ids.reverse)
+      MessageMaker.make_message('esp.blue-pages.cms', :remove_category, id, :parent_ids => ancestor_ids.reverse) if Rails.env.production?
     end
 
     def set_address_attributes
@@ -240,3 +210,33 @@ class Category < ActiveRecord::Base
       end
     end
 end
+
+# == Schema Information
+#
+# Table name: categories
+#
+#  id                 :integer          not null, primary key
+#  type               :string(255)
+#  title              :text
+#  abbr               :string(255)
+#  url                :text
+#  info_path          :text
+#  position           :integer
+#  weight             :string(255)
+#  ancestry           :string(255)
+#  ancestry_depth     :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  kind               :string(255)
+#  status             :text
+#  sphere             :text
+#  production         :text
+#  image_url          :text
+#  slug               :string(255)
+#  dossier            :text
+#  image_file_name    :string(255)
+#  image_content_type :string(255)
+#  image_file_size    :integer
+#  image_updated_at   :datetime
+#  mode               :text
+#

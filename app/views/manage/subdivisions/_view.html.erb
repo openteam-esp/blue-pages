@@ -8,6 +8,7 @@
     <%= s.attribute :url do %>
       <%= resource.url.blank? ? "Не указан" : link_to(resource.url, resource.url, :target => "_blank") %>
     <% end %>
+    <%= s.attribute :mode, :if_blank => "Не указан" %>
 
     <% if resource.dossier? %>
       <h2>Дополнительная информация</h2>
@@ -42,4 +43,3 @@
     <%= render :partial => "manage/categories/children", :locals => { :children => resource.categories } %>
   </div>
 </div>
-
