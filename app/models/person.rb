@@ -1,7 +1,8 @@
 require 'base64'
 
 class Person < ActiveRecord::Base
-  attr_accessible :name, :patronymic, :surname, :birthdate, :dossier, :academic_degree, :academic_rank
+  attr_accessible :name, :patronymic, :surname, :birthdate, :reception, :appointments
+  attr_accessible :dossier, :academic_degree, :academic_rank
 
   belongs_to :item
 
@@ -56,4 +57,6 @@ end
 #  academic_degree :text
 #  academic_rank   :text
 #  dossier         :text
+#  reception       :text
+#  appointments    :text
 #

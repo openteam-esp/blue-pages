@@ -118,7 +118,9 @@ class Category < ActiveRecord::Base
           'person' => item.person.to_s,
           'title' => item.title,
           'address' => item.address.to_s,
-          'image_url' => item.image_url
+          'image_url' => item.image_url,
+          'reception' => "#{I18n.t('activerecord.attributes.person.reception')} #{item.person.reception}",
+          'appointments' => "#{I18n.t('activerecord.attributes.person.appointments')} #{item.person.appointments}"
         }
 
         if Settings['app.academical_attributes'] && item.person

@@ -21,4 +21,6 @@ end
 #  academic_degree :text
 #  academic_rank   :text
 #  dossier         :text
+#  reception       :text
+#  appointments    :text
 #

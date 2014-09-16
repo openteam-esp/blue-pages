@@ -8,6 +8,8 @@
     <%= person_form.input :academic_degree, :as => :string if Settings['app.academical_attributes'] %>
     <%= person_form.input :academic_rank, :as => :string if Settings['app.academical_attributes'] %>
     <%= person_form.input :birthdate, :as => :date_picker %>
+    <%= person_form.input :reception, :as => :string %>
+    <%= person_form.input :appointments, :as => :string %>
     <%= person_form.input :dossier, :as => :ckeditor if can?(:modify_dossier, resource) %>
   <% end %>
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140912055819) do
+ActiveRecord::Schema.define(:version => 20140916094111) do
 
   create_table "addresses", :force => true do |t|
     t.integer  "addressable_id"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(:version => 20140912055819) do
     t.text     "academic_degree"
     t.text     "academic_rank"
     t.text     "dossier"
+    t.text     "reception"
+    t.text     "appointments"
   end
 
   add_index "people", ["item_id"], :name => "index_people_on_item_id"

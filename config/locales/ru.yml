@@ -71,6 +71,8 @@ ru:
         name:                   Имя
         patronymic:             Отчество
         surname:                Фамилия
+        reception:              Прием по личным вопросам
+        appointments:           Запись на прием
 
       subdivision:
         abbr:                   Аббревиатура
