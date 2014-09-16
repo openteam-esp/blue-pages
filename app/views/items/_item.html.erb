@@ -9,3 +9,5 @@
 <% end %>
 <%= content_tag :p, Phone.present_as_str(item.phones), :class => "phones" if item.phones.any? %>
 <%= content_tag :p, item.emails.map{|email| mail_to(email)}.join(', ').html_safe if item.emails.any? %>
+<%= content_tag :p, "#{I18n.t('activerecord.attributes.person.reception')} #{item.person.reception}" if item.person.reception.present? %>
+<%= content_tag :p, "#{I18n.t('activerecord.attributes.person.appointments')} #{item.person.appointments}" if item.person.appointments.present? %>
