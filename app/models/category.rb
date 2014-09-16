@@ -118,10 +118,15 @@ class Category < ActiveRecord::Base
           'person' => item.person.to_s,
           'title' => item.title,
           'address' => item.address.to_s,
-          'image_url' => item.image_url,
-          'reception' => "#{I18n.t('activerecord.attributes.person.reception')} #{item.person.reception}",
-          'appointments' => "#{I18n.t('activerecord.attributes.person.appointments')} #{item.person.appointments}"
+          'image_url' => item.image_url
         }
+
+        if item.person.present? && item.person.reception.present?
+          hash.merge! 'reception' => "#{I18n.t('activerecord.attributes.person.reception')} #{item.person.reception}"
+        end
+        if item.person.present? && item.person.appointments.present?
+          hash.merge! 'appointments' => "#{I18n.t('activerecord.attributes.person.appointments')} #{item.person.appointments}"
+        end
 
         if Settings['app.academical_attributes'] && item.person
           hash.merge! 'academic_degree' => item.person.academic_degree
