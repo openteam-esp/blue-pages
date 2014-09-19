@@ -1,5 +1,8 @@
 <div class="subdivision">
   <%= show_for resource do | s | %>
+    <%= s.attribute :parent_id do %>
+      <%= resource.parent %>
+    <% end %>
     <%= s.association :address, :if_blank => "Не указан" %>
     <%= s.association :phones, :if_blank => "Не указаны" %>
     <%= s.association :emails, :if_blank => "Не указаны" do | email | %>
