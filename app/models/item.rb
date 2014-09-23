@@ -98,6 +98,8 @@ class Item < ActiveRecord::Base
     result['academic_degree'] = person.academic_degree                             if Settings['app.academical_attributes']
     result['academic_rank'] = person.academic_rank                                 if Settings['app.academical_attributes']
     result['dossier'] = person.dossier                                             if person.dossier?
+    result['reception'] = "#{I18n.t('activerecord.attributes.person.reception')} #{person.reception}" if person.reception?
+    result['appointments'] = "#{I18n.t('activerecord.attributes.person.appointments')} #{person.appointments}" if person.appointments?
     result['image_url'] = image_url                                                if image_url.present?
 
     result
