@@ -18,7 +18,7 @@
   <%= show_for resource.person do |person| %>
     <%= person.attribute :reception %>
     <%= person.attribute :appointments %>
-  <% end %>
+  <% end if resource.person %>
 </div>
 
 <% if resource.person.try(:dossier?) %>
