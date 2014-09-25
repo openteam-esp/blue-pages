@@ -4,6 +4,8 @@ class Item < ActiveRecord::Base
   attr_accessible :title, :image, :person_attributes, :address_attributes,
                   :emails_attributes, :phones_attributes, :delete_image
 
+  normalize_attribute :title
+
   belongs_to :itemable, :polymorphic => true
 
   has_many :emails,   :as => :emailable,   :dependent => :destroy
