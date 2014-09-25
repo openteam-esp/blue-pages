@@ -5,6 +5,8 @@ class Email < ActiveRecord::Base
 
   validates :address, :presence => true, :email => true
 
+  normalize_attribute :address
+
   after_create  :send_messages_on_create
   after_update  :send_messages_on_update
   after_destroy :send_messages_on_destroy

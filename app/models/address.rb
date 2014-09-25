@@ -14,7 +14,7 @@ class Address < ActiveRecord::Base
                  :district => 'г. Томск',
                  :locality => 'г. Томск'
 
-  normalize_attribute :building
+  normalize_attributes :building, :district, :house, :locality, :office, :postcode, :region, :street
 
   SIGNIFICANT_ATTRIBUTES = %w[postcode region district locality street house building]
 

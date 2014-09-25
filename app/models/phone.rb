@@ -20,6 +20,8 @@ class Phone < ActiveRecord::Base
 
   default_value_for :code, "3822"
 
+  normalize_attributes :additional_number, :code, :number
+
   has_enums
 
   def to_s
