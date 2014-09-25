@@ -28,6 +28,10 @@
     <%= content_tag :dt, "Режим работы:", :class => "label" %>
     <%= content_tag :dd, resource.mode %>
   <% end if resource.mode.presence %>
+  <%= content_tag :dl, :class => 'wrapper subdivision_appointments' do %>
+    <%= content_tag :dt, 'Запись на прием:', :class => 'label' %>
+    <%= content_tag :dd, resource.appointments.scan(/https?/).any? ? link_to(resource.appointments, resource.appointments, :target => '_blank') : resource.appointments %>
+  <% end if resource.appointments.presence %>
 </div>
 
 <% if resource.dossier? %>

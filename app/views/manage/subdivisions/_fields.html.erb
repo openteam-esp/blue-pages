@@ -6,6 +6,7 @@
   <%= form.input :url, :as => :string %>
   <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @subdivision.id %>
   <%= form.input :mode, :as => :string %>
+  <%= form.input :appointments, :as => :string %>
   <%= form.input :dossier, :as => :ckeditor if can?(:modify_dossier, resource) %>
 <% end %>
 

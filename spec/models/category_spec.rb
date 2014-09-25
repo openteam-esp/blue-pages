@@ -79,4 +79,5 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  mode               :text
+#  appointments       :text
 #

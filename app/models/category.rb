@@ -108,6 +108,7 @@ class Category < ActiveRecord::Base
     result['emails'] = emails.map(&:address) if respond_to?(:emails) && emails.any?
     result['url'] = url if url?
     result['mode'] = mode if mode?
+    result['appointments'] = appointments if appointments?
     result['dossier'] = dossier if dossier?
 
     if respond_to?(:items)
@@ -247,4 +248,5 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  mode               :text
+#  appointments       :text
 #

@@ -15,7 +15,7 @@ class Subdivision < Category
                    \z
                 }x
 
-  attr_accessible :dossier, :image, :url, :mode
+  attr_accessible :dossier, :image, :url, :mode, :appointments
   attr_accessible :address_attributes, :emails_attributes, :phones_attributes
 
   has_many :emails,   :as => :emailable,   :dependent => :destroy
@@ -107,4 +107,5 @@ end
 #  image_file_size    :integer
 #  image_updated_at   :datetime
 #  mode               :text
+#  appointments       :text
 #

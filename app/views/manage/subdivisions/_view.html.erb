@@ -12,6 +12,13 @@
       <%= resource.url.blank? ? "Не указан" : link_to(resource.url, resource.url, :target => "_blank") %>
     <% end %>
     <%= s.attribute :mode, :if_blank => "Не указан" %>
+    <%= s.attribute :appointments do %>
+      <% if resource.appointments.blank? %>
+        Не указано
+      <% else %>
+        <%= resource.appointments.scan(/https?/).any? ? link_to(resource.appointments, resource.appointments, :target => '_blank') : resource.appointments %>
+      <% end %>
+    <% end %>
 
     <% if resource.dossier? %>
       <h2>Дополнительная информация</h2>
