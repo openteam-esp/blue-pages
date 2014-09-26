@@ -30,6 +30,8 @@ class Category < ActiveRecord::Base
     text  :title, :boost => 1.5
   end
 
+  normalize_attributes :abbr, :title
+
   normalize_attribute :dossier, :with => [:strip_empty_html, :strip, :blank]
 
   alias_attribute :absolute_depth, :depth
