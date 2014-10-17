@@ -1,5 +1,6 @@
 <% content_for :header do %>
   <h1><%= link_to t("blue_pages_system"), root_path %></h1>
+  <%= link_to t('download'), "government.pdf?#{Time.now.to_i}", :class => 'download' %>
 <% end %>
 
 <%= content_for :content do %>
