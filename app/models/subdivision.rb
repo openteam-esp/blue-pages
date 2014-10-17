@@ -2,18 +2,6 @@
 require 'base64'
 
 class Subdivision < Category
-  VALID_URL = %r{
-                  \A
-                      (http|https)://                                 # scheme
-                      (
-                        [a-z0-9]+([-\.][a-z0-9]+)*\.[a-z]{2,5} |      # latin domain
-                        [а-яё0-9]+([-\.][а-яё0-9]+)*\.рф              # cyrillic domain
-                      )
-                      (/[[:alnum:] -]+)*                              # path
-                      /?
-                      (\?.*)?                                         # query params
-                   \z
-                }x
 
   attr_accessible :dossier, :image, :url, :mode, :appointments
   attr_accessible :address_attributes, :emails_attributes, :phones_attributes
@@ -27,7 +15,7 @@ class Subdivision < Category
 
   validates :address, :parent, :presence => true
   validates :abbr,    :allow_blank => true, :format => { :with => VALID_TITLE }
-  validates :url,     :allow_blank => true, :format => { :with => VALID_URL }
+  validate :valid_url?
 
   after_initialize :set_address_attributes
 
@@ -76,6 +64,14 @@ class Subdivision < Category
 
     def term
      "#{abbr} #{title} #{address} #{url} #{phones.join(' ')} #{emails.join(' ')}"
+    end
+
+    def valid_url?
+      begin
+        uri = URI.parse(URI.encode(url))
+      rescue URI::InvalidURIError
+        errors.add(:url, 'имеет неверное значение')
+      end
     end
 end
 
