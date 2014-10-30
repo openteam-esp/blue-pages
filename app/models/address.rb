@@ -40,7 +40,7 @@ class Address < ActiveRecord::Base
       result << "стр.#{building}" unless building.blank?
     end
     result << "кабинет #{office}" unless office.blank?
-    result.join(", ")
+    result.delete_if{ |item| item.blank? }.join(', ')
   end
 
   private
