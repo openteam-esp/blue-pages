@@ -2,7 +2,7 @@
   <div class="subdivisions">
     <div class="actions">
       <%= link_to t('manage.sort'),
-                  sort_manage_categories_path,
+                  sort_manage_category_path(resource),
                   :class => 'sort_link off button icon loop' if children.many? %>
 
       <%= link_to t('manage.new_category'),

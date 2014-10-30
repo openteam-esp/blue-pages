@@ -15,7 +15,7 @@ class Subdivision < Category
 
   validates :address, :parent, :presence => true
   validates :abbr,    :allow_blank => true, :format => { :with => VALID_TITLE }
-  validate :valid_url?
+  validate :valid_url?, :allow_blank => true, :if => :url?
 
   after_initialize :set_address_attributes
 
