@@ -10,7 +10,7 @@ BluePages::Application.routes.draw do
       resources :categories, :only => [:create, :new]
       resources :subdivisions, :only => [:create, :new]
       resources :innorganizations, :only => [:create, :new]
-      post :sort, :on => :collection
+      post :sort, :on => :member
     end
 
     resources :innorganizations, :except => :index do

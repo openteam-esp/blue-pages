@@ -22,7 +22,7 @@
   <div class="subdivisions">
     <h3>Разделы</h3>
     <div class="actions">
-      <%= link_to t('manage.sort'), sort_manage_categories_path(resource), :class => 'sort_link off button icon loop' if children.many? %>
+      <%= link_to t('manage.sort'), sort_manage_category_path(resource), :class => 'sort_link off button icon loop' if resource.categories.many? %>
       <%= link_to t('manage.new_category'), new_manage_category_category_path(resource), :class => 'button icon add'%>
     </div>
     <%= render :partial => "children", :locals => { :children => resource.categories } %>
@@ -31,7 +31,7 @@
   <div class="subdivisions">
     <h3>Подразделения</h3>
     <div class="actions">
-      <%= link_to t('manage.sort'), sort_manage_categories_path(resource), :class => 'sort_link off button icon loop' if children.many? %>
+      <%= link_to t('manage.sort'), sort_manage_category_path(resource), :class => 'sort_link off button icon loop' if resource.subdivisions.many? %>
       <%= link_to t('manage.new_subdivision'), new_manage_category_subdivision_path(resource), :class => 'button icon add' %>
     </div>
     <%= render :partial => "children", :locals => { :children => resource.subdivisions } %>
