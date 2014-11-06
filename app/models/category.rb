@@ -1,6 +1,6 @@
 # encoding: utf-8
 class Category < ActiveRecord::Base
-  VALID_TITLE = /\A[а-яёА-ЯЁIVXCM[:space:]0-9\+–\-\(\)«"»,\.№]+\z/
+  VALID_TITLE = /\A[а-яёА-ЯЁIVXCMa-zA-Z[:space:]0-9\+–\-\(\)«"»,\.№]+\z/
 
   attr_accessible :abbr, :title, :parent_id, :kind
 
