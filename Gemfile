@@ -12,6 +12,7 @@ end
 group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
+  gem 'audited-activerecord'
   gem 'el_vfs_client'
   gem 'email_validator'
   gem 'enumerize'
@@ -42,6 +43,7 @@ group :development do
   gem 'capistrano-unicorn',   '~> 0.1.10'
   gem 'hirb',                                       :require => false
   gem 'openteam-capistrano'
+  gem 'rails-erd',                                  :require => false
   gem 'sunspot_solr'
 end
 
