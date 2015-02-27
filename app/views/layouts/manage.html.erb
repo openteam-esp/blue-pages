@@ -14,7 +14,7 @@
   <% end %>
   <%= render :partial => 'esp/views/header' %>
   <div id="title_wrapper">
-    <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) %>
+    <%= content_tag :div, yield(:actions), :class => "actions" if content_for?(:actions) && !current_page?(manage_root_path) %>
     <h1><%= title %></h1>
   </div>
   <div id="content_wrapper">
