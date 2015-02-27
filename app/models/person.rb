@@ -1,6 +1,9 @@
 require 'base64'
 
 class Person < ActiveRecord::Base
+
+  audited
+
   attr_accessible :name, :patronymic, :surname, :birthdate, :reception, :appointments
   attr_accessible :dossier, :academic_degree, :academic_rank
 

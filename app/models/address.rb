@@ -1,5 +1,8 @@
 # encoding: utf-8
 class Address < ActiveRecord::Base
+
+  audited
+
   attr_accessible :building, :district, :house, :locality, :office, :postcode, :region, :street
 
   belongs_to :addressable, :polymorphic => true

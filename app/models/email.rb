@@ -1,4 +1,7 @@
 class Email < ActiveRecord::Base
+
+  audited
+
   attr_accessible :address
 
   belongs_to :emailable, :polymorphic => true

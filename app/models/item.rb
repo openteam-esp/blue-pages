@@ -1,6 +1,8 @@
 # encoding: utf-8
 class Item < ActiveRecord::Base
 
+  audited
+
   attr_accessible :title, :image, :person_attributes, :address_attributes,
                   :emails_attributes, :phones_attributes, :delete_image
 

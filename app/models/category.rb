@@ -2,6 +2,8 @@
 class Category < ActiveRecord::Base
   VALID_TITLE = /\A[а-яёА-ЯЁIVXCMa-zA-Z[:space:]0-9\+–\-\(\)«"»,\.№]+\z/
 
+  audited
+
   attr_accessible :abbr, :title, :parent_id, :kind
 
   default_scope order('weight')

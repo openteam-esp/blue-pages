@@ -3,6 +3,8 @@ class Phone < ActiveRecord::Base
   VALID_NUMBER = /\A\d[\d-]*\d\z/
   VALID_MOBILE_NUMBER = /\A\+?\d[\d-]*\d\z/
 
+  audited
+
   attr_accessible :additional_number, :code, :kind, :number
 
   belongs_to :phoneable, :polymorphic => true
