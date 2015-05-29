@@ -133,6 +133,7 @@ ru:
 
       permission:
         context_id:             Категория
+        context_autocomplete:   Контекст
         context_string:         Категория
 
     models:

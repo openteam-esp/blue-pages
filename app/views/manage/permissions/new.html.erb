@@ -4,9 +4,11 @@
   <%= form.inputs do  %>
     <%= form.input :context,  :as => :select,
       :collection => current_user.context_tree,
-      :member_label => ->(c) { ('&nbsp;' * 2 * c.absolute_depth + (c.respond_to?(:esp_title) ? c.esp_title : c.title)).html_safe },
-      :include_blank => t('commons.not_selected')
-     %>
+      :include_blank => false,
+      :wrapper_html => { :class => :hidden }
+    %>
+    <%= form.input :context_autocomplete, :required => true,
+      :input_html => { :class => :context_autocomplete, :placeholder => 'Начните вводить название органа власти' } %>
 
     <%= form.input :role, :as => :select, :include_blank => t('commons.not_selected') %>
   <% end %>

@@ -1,5 +1,7 @@
 class Permission < ActiveRecord::Base
-  attr_accessible :role, :context_id
+  attr_accessor :context_autocomplete
+
+  attr_accessible :role, :context_id, :context_autocomplete
 
   belongs_to :context, :polymorphic => true
 
