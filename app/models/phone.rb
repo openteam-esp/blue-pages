@@ -11,8 +11,8 @@ class Phone < ActiveRecord::Base
 
   validates :code, :numericality => true, :unless => :kind_internal?
   validates :kind, :number, :presence => true
-  validates :number, :format => {:with => VALID_NUMBER}, :unless => :kind_mobile?
-  validates :number, :format => {:with => VALID_MOBILE_NUMBER}, :if => :kind_mobile?
+  #validates :number, :format => {:with => VALID_NUMBER}, :unless => :kind_mobile?
+  #validates :number, :format => {:with => VALID_MOBILE_NUMBER}, :if => :kind_mobile?
 
   before_save :reset_code_and_additional_number, :if => :kind_internal_or_mobile?
 
