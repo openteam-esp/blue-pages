@@ -1,6 +1,6 @@
 require 'openteam/capistrano/deploy'
 
-set :linked_files, %w[
+append :linked_files, %w[
   config/sunspot.yml
   public/government.pdf
   public/blue_pages.pdf

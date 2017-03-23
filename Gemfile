@@ -13,6 +13,7 @@ group :default do
   gem 'ancestry'
   gem 'attribute_normalizer'
   gem 'audited-activerecord'
+  gem 'awesome_print'
   gem 'ckeditor', '4.1.3'
   gem 'el_vfs_client'
   gem 'email_validator'
