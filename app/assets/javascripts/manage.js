@@ -3,13 +3,12 @@
  *= require jquery-ui.js
  *= require jquery.ui.datepicker-ru.js
  *= require jquery_ujs.js
+ *= require ckeditor/init
  *= require nested_form.js
  *= require treeview/jquery.treeview.js
  *= require treeview/jquery.treeview.edit.js
  *= require treeview/jquery.treeview.async.js
  */
-
-var CKEDITOR_BASEPATH = '/assets/ckeditor/';
 
 function init_datepicker() {
   if ($.fn.datepicker) {

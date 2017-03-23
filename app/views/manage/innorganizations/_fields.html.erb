@@ -1,10 +1,8 @@
-<%= javascript_include_tag 'esp-ckeditor/application' %>
-
 <%= form.inputs :class => "inputs bordered" do %>
   <%= form.input :title, :as => :text, :input_html => {:autofocus => true} %>
   <%= form.input :url, :as => :string %>
   <%= form.input :parent_id, :as => :select, :collection => Category.all.map { |c| ["-"*c.depth + " " + c.title, c.id] } if @innorganization.id %>
-  <%= form.input :dossier, :as => :ckeditor if can?(:modify_dossier, resource) %>
+  <%= form.input :dossier, as: :ckeditor if can?(:modify_dossier, resource) %>
   <%= form.input :status, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:status) %>
   <%= form.input :sphere, :as => :check_boxes, :collection => Innorganization.values_for_select_tag(:sphere) %>
   <%= form.input :production %>

@@ -1,20 +1,13 @@
-GIT
-  remote: git://github.com/sgruhier/capistrano-db-tasks
-  revision: 396cbbfe0aa4bfe48c8edf2718f2af6163af42bf
-  ref: 396cbbf
-  specs:
-    capistrano-db-tasks (0.2)
-
 GEM
   remote: https://rubygems.org/
   specs:
     Ascii85 (1.0.2)
-    actionmailer (3.2.22)
-      actionpack (= 3.2.22)
+    actionmailer (3.2.22.5)
+      actionpack (= 3.2.22.5)
       mail (~> 2.5.4)
-    actionpack (3.2.22)
-      activemodel (= 3.2.22)
-      activesupport (= 3.2.22)
+    actionpack (3.2.22.5)
+      activemodel (= 3.2.22.5)
+      activesupport (= 3.2.22.5)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       journey (~> 1.0.4)
@@ -25,24 +18,26 @@ GEM
     active_attr (0.8.5)
       activemodel (>= 3.0.2, < 5.0)
       activesupport (>= 3.0.2, < 5.0)
-    activemodel (3.2.22)
-      activesupport (= 3.2.22)
+    activemodel (3.2.22.5)
+      activesupport (= 3.2.22.5)
       builder (~> 3.0.0)
-    activerecord (3.2.22)
-      activemodel (= 3.2.22)
-      activesupport (= 3.2.22)
+    activerecord (3.2.22.5)
+      activemodel (= 3.2.22.5)
+      activesupport (= 3.2.22.5)
       arel (~> 3.0.2)
       tzinfo (~> 0.3.29)
-    activeresource (3.2.22)
-      activemodel (= 3.2.22)
-      activesupport (= 3.2.22)
-    activesupport (3.2.22)
+    activeresource (3.2.22.5)
+      activemodel (= 3.2.22.5)
+      activesupport (= 3.2.22.5)
+    activesupport (3.2.22.5)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
     afm (0.2.0)
-    airbrake (4.3.4)
-      builder
-      multi_json
+    airbrake (5.6.1)
+      airbrake-ruby (~> 1.6)
+    airbrake-ruby (1.8.0)
+    airbrussh (1.1.2)
+      sshkit (>= 1.6.1, != 1.7.0)
     amq-client (0.9.12)
       amq-protocol (>= 1.2.0)
       eventmachine
@@ -77,19 +72,37 @@ GEM
     builder (3.0.4)
     bunny (0.8.0)
     cancan (1.6.9)
-    capistrano (2.14.2)
-      highline
-      net-scp (>= 1.0.0)
-      net-sftp (>= 2.0.0)
-      net-ssh (>= 2.0.14)
-      net-ssh-gateway (>= 1.1.0)
-    capistrano-ext (1.2.1)
-      capistrano (>= 1.0.0)
-    capistrano-unicorn (0.1.10)
+    capistrano (3.5.0)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-db-tasks (0.4)
+      capistrano (>= 3.0.0)
+    capistrano-faster-assets (1.0.2)
+      capistrano (>= 3.1)
+    capistrano-harrow (0.5.3)
+    capistrano-rails (1.2.3)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
+    capistrano-sidekiq (0.10.0)
       capistrano
+      sidekiq (>= 3.4)
+    capistrano3-unicorn (0.2.1)
+      capistrano (~> 3.1, >= 3.1.0)
     choice (0.1.6)
     chronic (0.10.2)
     chunky_png (1.2.8)
+    ckeditor (4.1.3)
+      cocaine
+      orm_adapter (~> 0.5.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.1)
@@ -107,9 +120,11 @@ GEM
       sass (~> 3.1)
     compass-rails (1.0.3)
       compass (>= 0.12.2, < 0.14)
+    concurrent-ruby (1.0.5)
     configliere (0.4.18)
       highline (>= 1.5.2)
       multi_json (>= 1.1)
+    connection_pool (2.2.1)
     curb (0.8.8)
     daemons (1.1.9)
     default_value_for (3.0.0.1)
@@ -131,9 +146,6 @@ GEM
     enumerize (0.5.1)
       activesupport (>= 3.2)
     erubis (2.7.0)
-    esp-ckeditor (0.1.3)
-      formtastic
-      rails
     esp-commons (0.5.8)
       active_attr
       amqp (~> 0.9.8)
@@ -166,8 +178,8 @@ GEM
     fastercsv (1.5.5)
     fattr (2.2.1)
     forgery (0.5.0)
-    formtastic (2.1.1)
-      actionpack (~> 3.0)
+    formtastic (3.1.5)
+      actionpack (>= 3.2.13)
     fssm (0.2.10)
     haml (4.0.5)
       tilt
@@ -184,7 +196,7 @@ GEM
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     httpauth (0.2.0)
-    i18n (0.7.0)
+    i18n (0.8.1)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
       responders (~> 0.6)
@@ -192,28 +204,24 @@ GEM
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
-    json (1.8.3)
+    json (1.8.6)
     jwt (0.1.5)
       multi_json (>= 1.0)
     kaminari (0.13.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
       railties (>= 3.0.0)
-    kgio (2.10.0)
+    kgio (2.11.0)
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
-    multi_json (1.11.2)
+    multi_json (1.12.1)
     multipart-post (1.2.0)
     nested_form (0.2.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-sftp (2.1.2)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
-    net-ssh-gateway (1.2.0)
-      net-ssh (>= 2.6.5)
+    net-ssh (4.1.0)
     netrc (0.11.0)
     nokogiri (1.5.11)
     oauth2 (0.8.1)
@@ -228,20 +236,25 @@ GEM
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    openteam-capistrano (0.0.14)
-      capistrano-db-tasks
-      capistrano-ext
-      capistrano-unicorn
-      rvm-capistrano
-    openteam-commons (0.2.4)
+    openteam-capistrano (1.0.17)
       airbrake
+      capistrano (~> 3.5.0)
+      capistrano-db-tasks
+      capistrano-faster-assets
+      capistrano-rails
+      capistrano-rvm
+      capistrano-sidekiq
+      capistrano3-unicorn
+      slackistrano (~> 3.1.0)
+    openteam-commons (0.3.3.5)
+      airbrake (~> 5.6.1)
       configliere
       rails
       unicorn
       whenever
     options (2.3.0)
       fattr
-    orm_adapter (0.4.0)
+    orm_adapter (0.5.0)
     paperclip (3.4.1)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -269,38 +282,41 @@ GEM
       highline (~> 1.6.1)
       options (~> 2.3.0)
     rack (1.4.7)
-    rack-cache (1.5.1)
+    rack-cache (1.7.0)
       rack (>= 0.4)
+    rack-protection (1.5.3)
+      rack
     rack-ssl (1.3.4)
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rack-utf8_sanitizer (1.1.0)
       rack (~> 1.0)
-    rails (3.2.22)
-      actionmailer (= 3.2.22)
-      actionpack (= 3.2.22)
-      activerecord (= 3.2.22)
-      activeresource (= 3.2.22)
-      activesupport (= 3.2.22)
+    rails (3.2.22.5)
+      actionmailer (= 3.2.22.5)
+      actionpack (= 3.2.22.5)
+      activerecord (= 3.2.22.5)
+      activeresource (= 3.2.22.5)
+      activesupport (= 3.2.22.5)
       bundler (~> 1.0)
-      railties (= 3.2.22)
+      railties (= 3.2.22.5)
     rails-erd (1.1.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
       choice (~> 0.1.6)
       ruby-graphviz (~> 1.0.4)
-    railties (3.2.22)
-      actionpack (= 3.2.22)
-      activesupport (= 3.2.22)
+    railties (3.2.22.5)
+      actionpack (= 3.2.22.5)
+      activesupport (= 3.2.22.5)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
       thor (>= 0.14.6, < 2.0)
-    raindrops (0.15.0)
-    rake (10.4.2)
+    raindrops (0.18.0)
+    rake (12.0.0)
     rdoc (3.12.2)
       json (~> 1.4)
+    redis (3.3.3)
     responders (0.9.1)
       railties (~> 3.1)
     rest-client (1.8.0)
@@ -331,8 +347,6 @@ GEM
       sexp_processor (~> 4.1)
     russian (0.6.0)
       i18n (>= 0.5.0)
-    rvm-capistrano (1.4.1)
-      capistrano (>= 2.0.0)
     ryba (0.1.2)
     sanitize (2.0.3)
       nokogiri (>= 1.4.4, < 1.6)
@@ -347,6 +361,13 @@ GEM
     show_for (0.2.5)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    sidekiq (4.2.10)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (~> 3.2, >= 3.2.1)
+    slackistrano (3.1.0)
+      capistrano (>= 3.5.0)
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -356,6 +377,9 @@ GEM
       rack (~> 1.0)
       tilt (~> 1.1, != 1.3.0)
     sqlite3 (1.3.6)
+    sshkit (1.12.0)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     sso-auth (0.0.6)
       cancan
       configliere
@@ -373,7 +397,7 @@ GEM
     sunspot_solr (2.0.0)
     temple (0.6.7)
     terminal-table (1.4.5)
-    thor (0.19.1)
+    thor (0.19.4)
     tilt (1.4.1)
     timecop (0.3.5)
     treetop (1.4.15)
@@ -383,20 +407,19 @@ GEM
     turbo-sprockets-rails3 (0.3.6)
       railties (> 3.2.8, < 4.0.0)
       sprockets (>= 2.0.0)
-    tzinfo (0.3.46)
+    tzinfo (0.3.52)
     uglifier (1.2.4)
       execjs (>= 0.3.0)
       multi_json (>= 1.0.2)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
-    unicorn (5.0.1)
+    unicorn (5.2.0)
       kgio (~> 2.6)
-      rack
       raindrops (~> 0.7)
     warden (1.2.1)
       rack (>= 1.0)
-    whenever (0.9.4)
+    whenever (0.9.7)
       chronic (>= 0.6.3)
 
 PLATFORMS
@@ -408,21 +431,19 @@ DEPENDENCIES
   attribute_normalizer
   audited-activerecord
   brakeman
-  capistrano (~> 2.14.2)
-  capistrano-db-tasks!
-  capistrano-unicorn (~> 0.1.10)
+  capistrano-db-tasks (= 0.4)
+  ckeditor (= 4.1.3)
   coffee-rails
   compass-rails
   el_vfs_client
   email_validator
   enumerize
-  esp-ckeditor
   esp-commons
   esp-gems
   esp-views
   fabrication (< 2.0.0)
   forgery
-  formtastic (< 2.2.0)
+  formtastic
   hirb
   jquery-rails
   nested_form
@@ -448,3 +469,6 @@ DEPENDENCIES
   timecop
   turbo-sprockets-rails3
   uglifier
+
+BUNDLED WITH
+   1.14.6

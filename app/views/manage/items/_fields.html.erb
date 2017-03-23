@@ -1,52 +1,50 @@
-<%= javascript_include_tag 'esp-ckeditor/application' %>
+<%= form.inputs "Сотрудник", :class => "inputs bordered", :for => [:person, @item.person || @item.build_person] do |person_form| %>
+  <%= person_form.input :surname, :input_html => {:autofocus => true} %>
+  <%= person_form.input :name %>
+  <%= person_form.input :patronymic %>
+  <%= form.input :title, :as => :text %>
+  <%= person_form.input :academic_degree, :as => :string if Settings['app.academical_attributes'] %>
+  <%= person_form.input :academic_rank, :as => :string if Settings['app.academical_attributes'] %>
+  <%= person_form.input :birthdate, :as => :date_picker %>
+  <%= person_form.input :reception, :as => :string %>
+  <%= person_form.input :appointments, :as => :string %>
+  <%= person_form.input :dossier, as: :ckeditor if can?(:modify_dossier, resource) %>
+<% end %>
 
-  <%= form.inputs "Сотрудник", :class => "inputs bordered", :for => [:person, @item.person || @item.build_person] do |person_form| %>
-    <%= person_form.input :surname, :input_html => {:autofocus => true} %>
-    <%= person_form.input :name %>
-    <%= person_form.input :patronymic %>
-    <%= form.input :title, :as => :text %>
-    <%= person_form.input :academic_degree, :as => :string if Settings['app.academical_attributes'] %>
-    <%= person_form.input :academic_rank, :as => :string if Settings['app.academical_attributes'] %>
-    <%= person_form.input :birthdate, :as => :date_picker %>
-    <%= person_form.input :reception, :as => :string %>
-    <%= person_form.input :appointments, :as => :string %>
-    <%= person_form.input :dossier, :as => :ckeditor if can?(:modify_dossier, resource) %>
+<%= render :partial => 'attached_image', :locals => { :form => form } %>
+
+<%= form.inputs "Адрес", :class => "inputs bordered", :for => :address do |address_form| %>
+  <%= address_form.input :postcode %>
+  <%= address_form.input :region %>
+  <%= address_form.input :district %>
+  <%= address_form.input :locality %>
+  <%= address_form.input :street %>
+  <%= address_form.input :house %>
+  <%= address_form.input :building %>
+  <%= address_form.input :office %>
+<% end %>
+
+<%= form.semantic_fields_for :phones do |phone_form| %>
+  <%= phone_form.inputs :class => "inputs bordered phone" do %>
+    <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind), :input_html => { :class => 'phone_kind'} %>
+    <%= phone_form.input :code, :input_html => { :class => "code" } %>
+    <%= phone_form.input :number, :input_html => { :class => "number" } %>
+    <%= phone_form.input :additional_number, :input_html => { :class => "additional_number" } %>
+    <li class="destroy_action"><%= phone_form.link_to_remove t('manage.delete_phone'), :class => 'button icon trash danger' %></li>
   <% end %>
+<% end %>
 
-  <%= render :partial => 'attached_image', :locals => { :form => form } %>
+<div class="phones_fieldset">
+  <%= form.link_to_add t('manage.new_phone'), :phones, :class => 'button icon add' %>
+</div>
 
-  <%= form.inputs "Адрес", :class => "inputs bordered", :for => :address do |address_form| %>
-    <%= address_form.input :postcode %>
-    <%= address_form.input :region %>
-    <%= address_form.input :district %>
-    <%= address_form.input :locality %>
-    <%= address_form.input :street %>
-    <%= address_form.input :house %>
-    <%= address_form.input :building %>
-    <%= address_form.input :office %>
+<%= form.fields_for :emails do |email_form| %>
+  <%= email_form.inputs :class => "inputs bordered email" do %>
+    <%= email_form.input :address %>
+    <li class="destroy_action"><%= email_form.link_to_remove t('manage.delete_email'), :class => 'button icon trash danger' %></li>
   <% end %>
+<% end %>
 
-  <%= form.semantic_fields_for :phones do |phone_form| %>
-    <%= phone_form.inputs :class => "inputs bordered phone" do %>
-      <%= phone_form.input :kind, :as => :select, :collection => Phone.values_for_select_tag(:kind), :input_html => { :class => 'phone_kind'} %>
-      <%= phone_form.input :code, :input_html => { :class => "code" } %>
-      <%= phone_form.input :number, :input_html => { :class => "number" } %>
-      <%= phone_form.input :additional_number, :input_html => { :class => "additional_number" } %>
-      <li class="destroy_action"><%= phone_form.link_to_remove t('manage.delete_phone'), :class => 'button icon trash danger' %></li>
-    <% end %>
-  <% end %>
-
-  <div class="phones_fieldset">
-    <%= form.link_to_add t('manage.new_phone'), :phones, :class => 'button icon add' %>
-  </div>
-
-  <%= form.fields_for :emails do |email_form| %>
-    <%= email_form.inputs :class => "inputs bordered email" do %>
-      <%= email_form.input :address %>
-      <li class="destroy_action"><%= email_form.link_to_remove t('manage.delete_email'), :class => 'button icon trash danger' %></li>
-    <% end %>
-  <% end %>
-
-  <div class="emails_fieldset">
-    <%= form.link_to_add t('manage.new_email'), :emails, :class => 'button icon add' %>
-  </div>
+<div class="emails_fieldset">
+  <%= form.link_to_add t('manage.new_email'), :emails, :class => 'button icon add' %>
+</div>

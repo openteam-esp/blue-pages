@@ -1,6 +1,13 @@
-set :default_stage, :ato
+require 'openteam/capistrano/deploy'
 
-require 'openteam/capistrano/recipes'
-require 'whenever/capistrano'
+set :linked_files, %w[
+  config/sunspot.yml
+  public/government.pdf
+  public/blue_pages.pdf
+  public/family_department.pdf
+  public/zdrav_department.pdf
+]
 
-set :shared_children, fetch(:shared_children) + %w[config/sunspot.yml public/government.pdf public/blue_pages.pdf public/family_department.pdf public/zdrav_department.pdf]
+set :slackistrano,
+  channel: (Settings['slack.channel'] rescue ''),
+  webhook: (Settings['slack.webhook'] rescue '')
