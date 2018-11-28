@@ -20,6 +20,17 @@
     <%= yield :main %>
   </div>
   <%= yield :sidebar %>
-  <%= render :partial => 'esp/views/footer' %>
+  <%#= render :partial => 'esp/views/footer' %>
+  <div class="esp_views_footer_wrapper">
+  <div class="esp_views_footer">
+    <div class="info">
+    </div>
+    <div class="developer">
+      <span class="range">2011–<%= Date.today.year %></span>
+      <a href="https://infpol.tomsk.gov.ru/" target="_blank">Департамент информационной политики Администрации
+Томской области</a>
+    </div>
+  </div>
+</div>
 </body>
 </html>
