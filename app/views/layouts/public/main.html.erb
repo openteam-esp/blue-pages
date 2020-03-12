@@ -5,6 +5,13 @@
 
 <%= content_for :content do %>
   <div class='content_wrapper'>
+    <div class='panel panel-danger text-center'>
+      <h3>
+        <strong>Внимание!</strong>
+        Данные в телефонном справочнике
+        <strong>не обновляются с 01.01.2020г.</strong>
+      </h3>
+    </div>
     <%= semantic_search_form_for :main, :url => "/search"  do |form| %>
       <%= form.inputs do %>
         <%= form.input :keywords, :as => :string, :label => false %>
