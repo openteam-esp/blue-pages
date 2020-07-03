@@ -27,7 +27,7 @@ class Phone < ActiveRecord::Base
   has_enums
 
   def to_s
-    res = ""
+    res = "+7 "
     res << "(#{code}) " if code.present?
     res << number
     res << " добавочный #{additional_number}" if additional_number.present?
